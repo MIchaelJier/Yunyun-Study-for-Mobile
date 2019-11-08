@@ -1,0 +1,60 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/Mycourse/Mycourse",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/center/center",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "芸云课堂",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color":"#bfbfbf",
+		"selectedColor":"#515151",
+		"borderStyle":"black",
+		"backgroundColor":"#fffff",
+		"list":[
+			{
+				"pagePath":"pages/index/index",
+				"text":"首页",
+				"iconPath":"static/icon/home.png",
+				"selectedIconPath":"static/icon/home-active.png"
+			},
+			{
+				"pagePath":"pages/Mycourse/Mycourse",
+				"text":"我的课程",
+				"iconPath":"static/icon/myStudy.png",
+				"selectedIconPath":"static/icon/myStudy-active.png"
+			},
+			{
+				"pagePath":"pages/center/center",
+				"text":"账号",
+				"iconPath":"static/icon/account.png",
+				"selectedIconPath":"static/icon/account-active.png"
+			}
+		]
+	}
+}

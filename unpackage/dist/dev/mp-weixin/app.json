@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/Mycourse/Mycourse",
+    "pages/center/center"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "芸云课堂",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#515151",
+    "borderStyle": "black",
+    "backgroundColor": "#fffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/icon/home.png",
+        "selectedIconPath": "static/icon/home-active.png"
+      },
+      {
+        "pagePath": "pages/Mycourse/Mycourse",
+        "text": "我的课程",
+        "iconPath": "static/icon/myStudy.png",
+        "selectedIconPath": "static/icon/myStudy-active.png"
+      },
+      {
+        "pagePath": "pages/center/center",
+        "text": "账号",
+        "iconPath": "static/icon/account.png",
+        "selectedIconPath": "static/icon/account-active.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
