@@ -16,3 +16,12 @@ const app = new Vue({
     ...App
 })
 app.$mount()
+
+// const path = require('path')
+// const files = require.context('./uniUI//components', false, /\.vue$/)
+// const modules = {}
+// files.keys().forEach(key => {
+//   const name = path.basename(key, '.vue')
+//   modules[name] = files(key).default || files(key)
+// })
+// console.log(module)

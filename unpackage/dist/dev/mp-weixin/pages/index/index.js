@@ -145,6 +145,40 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _request = __webpack_require__(/*! ../../request/request.js */ 21); //
 //
 //
@@ -158,13 +192,41 @@ var _request = __webpack_require__(/*! ../../request/request.js */ 21); //
 //
 //
 //
-var _default = { data: function data() {return { swiperList: [] };}, onLoad: function onLoad() {var that = this;(0, _request.request)({ url: '/getSwiperPic', method: 'GET' }).then(function (res) {if (res.data.status === '200') {
-        console.log(res.data);
-        that.swiperList = res.data.data;
-      }
-    });
-  },
-  methods: {} };exports.default = _default;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { swiperList: [], classList: [], themeList: [] };}, onLoad: function onLoad() {var that = this;that.firstRequest(that, '/getSwiperPic', 'swiperList');that.firstRequest(that, '/getClassList', 'classList');that.firstRequest(that, '/getTheme', 'themeList');}, methods: { firstRequest: function firstRequest(that, u, d) {(0, _request.request)({ url: u, method: 'GET' }).then(function (res) {if (res.data.status === '200') {console.log(res.data);that.$data[d] = res.data.data;}});} } };exports.default = _default;
 
 /***/ }),
 /* 21 */,

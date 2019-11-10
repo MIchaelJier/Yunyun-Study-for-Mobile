@@ -5,13 +5,14 @@
 			<text>登录/注册</text>
 		</view>
 		<uni-list>
-		    <uni-list-item title="我的订单" :show-arrow="false"></uni-list-item>
-		    <uni-list-item title="我的优惠券" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
-			<uni-list-item title="我的购物车" :show-arrow="false"></uni-list-item>
-			<uni-list-item title="我的学习卡" :show-arrow="false"></uni-list-item>
+		    <uni-list-item title="我的订单" font-icon="ux-ykt-icon-cash" ></uni-list-item>
+		    <uni-list-item title="我的优惠券" font-icon="ux-ykt-icon-coupon" font-icon-size="12"></uni-list-item>
+			<uni-list-item title="我的购物车" font-icon="ux-ykt-icon-cart" ></uni-list-item>
+			<uni-list-item title="我的学习卡" font-icon="ux-ykt-icon-xuexiqia" font-icon-size="12"></uni-list-item>
 		</uni-list>
+		<view class="blackMargin"></view>
 		<uni-list>
-			<uni-list-item title="我的订单" :show-arrow="false"></uni-list-item>
+			<uni-list-item title="分享赚学费" font-icon="ux-ykt-icon-notice"></uni-list-item>
 		</uni-list>
 	</view>
 </template>

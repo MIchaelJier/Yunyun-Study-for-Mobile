@@ -9,9 +9,16 @@
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 4);__webpack_require__(/*! @dcloudio/uni-stat */ 5);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var yunHeader = function yunHeader() {return __webpack_require__.e(/*! import() | components/yunHeader */ "components/yunHeader").then(__webpack_require__.bind(null, /*! ./components/yunHeader.vue */ 38));};var uniList = function uniList() {return __webpack_require__.e(/*! import() | uniUI/components/uni-list/uni-list */ "uniUI/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-list/uni-list.vue */ 45));};var uniListItem = function uniListItem() {return __webpack_require__.e(/*! import() | uniUI/components/uni-list-item/uni-list-item */ "uniUI/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-list-item/uni-list-item.vue */ 52));};
+
+
+
 
 _vue.default.config.productionTip = false;
+
+_vue.default.component('yunHeader', yunHeader);
+_vue.default.component('uniList', uniList);
+_vue.default.component('uniListItem', uniListItem);
 
 _App.default.mpType = 'app';
 
@@ -19,6 +26,15 @@ var app = new _vue.default(_objectSpread({},
 _App.default));
 
 createApp(app).$mount();
+
+// const path = require('path')
+// const files = require.context('./uniUI//components', false, /\.vue$/)
+// const modules = {}
+// files.keys().forEach(key => {
+//   const name = path.basename(key, '.vue')
+//   modules[name] = files(key).default || files(key)
+// })
+// console.log(module)
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),

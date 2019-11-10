@@ -14,3 +14,6 @@
 	.userInfo text {
 		font-size: 16px;
 	}
+	.blackMargin {
+		margin-top: 15rpx;
+	}

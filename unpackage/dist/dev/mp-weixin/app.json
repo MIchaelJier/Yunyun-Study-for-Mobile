@@ -15,7 +15,7 @@
     "color": "#bfbfbf",
     "selectedColor": "#515151",
     "borderStyle": "black",
-    "backgroundColor": "#fffff",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -37,6 +37,10 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {
+    "yun-header": "/components/yunHeader",
+    "uni-list": "/uniUI/components/uni-list/uni-list",
+    "uni-list-item": "/uniUI/components/uni-list-item/uni-list-item"
+  },
+  "sitemapLocation": "sitemap11.json"
 }

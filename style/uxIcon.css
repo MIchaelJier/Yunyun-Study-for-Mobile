@@ -1,0 +1,465 @@
+@font-face {
+    font-family:  "ux-ykt-icon";
+    src:  url('./static/font/2bbd8eea2e5571f9a0065dd3345bf031.eot');
+    src:  url('./static/font/2bbd8eea2e5571f9a0065dd3345bf031.eot') format('embedded-opentype'),
+    url('./static/font/4755b67cdb5c842c0a85378d845deed1.ttf') format('truetype'),
+    url('./static/font/ca3a564ac72643d1e666b335f577a2b6.woff') format('woff'),
+    url('./static/font/f50af57c435f09b2667b25f06beddc11.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="ux-ykt-icon-"], [class*=" ux-ykt-icon-"]{
+    font-family: "ux-ykt-icon" !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-transform: none;
+    line-height: 1;
+}
+
+
+.ux-ykt-icon-0:before {
+    content: "\EA01";
+}
+
+.ux-ykt-icon-1:before {
+    content: "\EA02";
+}
+
+.ux-ykt-icon-2:before {
+    content: "\EA03";
+}
+
+.ux-ykt-icon-3:before {
+    content: "\EA04";
+}
+
+.ux-ykt-icon-4:before {
+    content: "\EA05";
+}
+
+.ux-ykt-icon-5:before {
+    content: "\EA06";
+}
+
+.ux-ykt-icon-6:before {
+    content: "\EA07";
+}
+
+.ux-ykt-icon-7:before {
+    content: "\EA08";
+}
+
+.ux-ykt-icon-8:before {
+    content: "\EA09";
+}
+
+.ux-ykt-icon-9:before {
+    content: "\EA0A";
+}
+
+.ux-ykt-icon-QQ-:before {
+    content: "\EA0B";
+}
+
+.ux-ykt-icon-account-fill:before {
+    content: "\EA0C";
+}
+
+.ux-ykt-icon-account:before {
+    content: "\EA0D";
+}
+
+.ux-ykt-icon-address:before {
+    content: "\EA0E";
+}
+
+.ux-ykt-icon-book:before {
+    content: "\EA0F";
+}
+
+.ux-ykt-icon-card:before {
+    content: "\EA10";
+}
+
+.ux-ykt-icon-cart:before {
+    content: "\EA11";
+}
+
+.ux-ykt-icon-cart2:before {
+    content: "\EA12";
+}
+
+.ux-ykt-icon-cash:before {
+    content: "\EA13";
+}
+
+.ux-ykt-icon-circle:before {
+    content: "\EA14";
+}
+
+.ux-ykt-icon-coupon:before {
+    content: "\EA15";
+}
+
+.ux-ykt-icon-cp-school:before {
+    content: "\EA16";
+}
+
+.ux-ykt-icon-gear:before {
+    content: "\EA17";
+}
+
+.ux-ykt-icon-home-fill:before {
+    content: "\EA18";
+}
+
+.ux-ykt-icon-home:before {
+    content: "\EA19";
+}
+
+.ux-ykt-icon-huangguan:before {
+    content: "\EA1A";
+}
+
+.ux-ykt-icon-huodong:before {
+    content: "\EA1B";
+}
+
+.ux-ykt-icon-lingquan:before {
+    content: "\EA1C";
+}
+
+.ux-ykt-icon-menu:before {
+    content: "\EA1D";
+}
+
+.ux-ykt-icon-micro-consult:before {
+    content: "\EA1E";
+}
+
+.ux-ykt-icon-micro-logo:before {
+    content: "\EA1F";
+}
+
+.ux-ykt-icon-micro_live:before {
+    content: "\EA20";
+}
+
+.ux-ykt-icon-my-class-fill:before {
+    content: "\EA21";
+}
+
+.ux-ykt-icon-my-class:before {
+    content: "\EA22";
+}
+
+.ux-ykt-icon-new-cart:before {
+    content: "\EA23";
+}
+
+.ux-ykt-icon-new-collection:before {
+    content: "\EA24";
+}
+
+.ux-ykt-icon-new-consult:before {
+    content: "\EA25";
+}
+
+.ux-ykt-icon-notice:before {
+    content: "\EA26";
+}
+
+.ux-ykt-icon-person:before {
+    content: "\EA27";
+}
+
+.ux-ykt-icon-point:before {
+    content: "\EA28";
+}
+
+.ux-ykt-icon-privacy:before {
+    content: "\EA29";
+}
+
+.ux-ykt-icon-qrcode:before {
+    content: "\EA2A";
+}
+
+.ux-ykt-icon-refresh:before {
+    content: "\EA2B";
+}
+
+.ux-ykt-icon-right-arrow:before {
+    content: "\EA2C";
+}
+
+.ux-ykt-icon-thin-arrow-right:before {
+    content: "\EA2D";
+}
+
+.ux-ykt-icon-user:before {
+    content: "\EA2E";
+}
+
+.ux-ykt-icon-wap-ms-tag:before {
+    content: "\EA2F";
+}
+
+.ux-ykt-icon-warning:before {
+    content: "\EA30";
+}
+
+.ux-ykt-icon-web-ms-tag:before {
+    content: "\EA31";
+}
+
+.ux-ykt-icon-wechat:before {
+    content: "\EA32";
+}
+
+.ux-ykt-icon-wechat2:before {
+    content: "\EA33";
+}
+
+.ux-ykt-icon-xuexiqia:before {
+    content: "\EA34";
+}
+
+.ux-ykt-icon-youhui:before {
+    content: "\EA35";
+}
+
+.ux-ykt-icon-zengpin:before {
+    content: "\EA36";
+}
+
+.ux-ykt-icon-zixun:before {
+    content: "\EA37";
+}
+
+
+
+.ux-ykt-icon-0-after:after {
+    content: "\EA01";
+}
+
+.ux-ykt-icon-1-after:after {
+    content: "\EA02";
+}
+
+.ux-ykt-icon-2-after:after {
+    content: "\EA03";
+}
+
+.ux-ykt-icon-3-after:after {
+    content: "\EA04";
+}
+
+.ux-ykt-icon-4-after:after {
+    content: "\EA05";
+}
+
+.ux-ykt-icon-5-after:after {
+    content: "\EA06";
+}
+
+.ux-ykt-icon-6-after:after {
+    content: "\EA07";
+}
+
+.ux-ykt-icon-7-after:after {
+    content: "\EA08";
+}
+
+.ux-ykt-icon-8-after:after {
+    content: "\EA09";
+}
+
+.ux-ykt-icon-9-after:after {
+    content: "\EA0A";
+}
+
+.ux-ykt-icon-QQ--after:after {
+    content: "\EA0B";
+}
+
+.ux-ykt-icon-account-fill-after:after {
+    content: "\EA0C";
+}
+
+.ux-ykt-icon-account-after:after {
+    content: "\EA0D";
+}
+
+.ux-ykt-icon-address-after:after {
+    content: "\EA0E";
+}
+
+.ux-ykt-icon-book-after:after {
+    content: "\EA0F";
+}
+
+.ux-ykt-icon-card-after:after {
+    content: "\EA10";
+}
+
+.ux-ykt-icon-cart-after:after {
+    content: "\EA11";
+}
+
+.ux-ykt-icon-cart2-after:after {
+    content: "\EA12";
+}
+
+.ux-ykt-icon-cash-after:after {
+    content: "\EA13";
+}
+
+.ux-ykt-icon-circle-after:after {
+    content: "\EA14";
+}
+
+.ux-ykt-icon-coupon-after:after {
+    content: "\EA15";
+}
+
+.ux-ykt-icon-cp-school-after:after {
+    content: "\EA16";
+}
+
+.ux-ykt-icon-gear-after:after {
+    content: "\EA17";
+}
+
+.ux-ykt-icon-home-fill-after:after {
+    content: "\EA18";
+}
+
+.ux-ykt-icon-home-after:after {
+    content: "\EA19";
+}
+
+.ux-ykt-icon-huangguan-after:after {
+    content: "\EA1A";
+}
+
+.ux-ykt-icon-huodong-after:after {
+    content: "\EA1B";
+}
+
+.ux-ykt-icon-lingquan-after:after {
+    content: "\EA1C";
+}
+
+.ux-ykt-icon-menu-after:after {
+    content: "\EA1D";
+}
+
+.ux-ykt-icon-micro-consult-after:after {
+    content: "\EA1E";
+}
+
+.ux-ykt-icon-micro-logo-after:after {
+    content: "\EA1F";
+}
+
+.ux-ykt-icon-micro_live-after:after {
+    content: "\EA20";
+}
+
+.ux-ykt-icon-my-class-fill-after:after {
+    content: "\EA21";
+}
+
+.ux-ykt-icon-my-class-after:after {
+    content: "\EA22";
+}
+
+.ux-ykt-icon-new-cart-after:after {
+    content: "\EA23";
+}
+
+.ux-ykt-icon-new-collection-after:after {
+    content: "\EA24";
+}
+
+.ux-ykt-icon-new-consult-after:after {
+    content: "\EA25";
+}
+
+.ux-ykt-icon-notice-after:after {
+    content: "\EA26";
+}
+
+.ux-ykt-icon-person-after:after {
+    content: "\EA27";
+}
+
+.ux-ykt-icon-point-after:after {
+    content: "\EA28";
+}
+
+.ux-ykt-icon-privacy-after:after {
+    content: "\EA29";
+}
+
+.ux-ykt-icon-qrcode-after:after {
+    content: "\EA2A";
+}
+
+.ux-ykt-icon-refresh-after:after {
+    content: "\EA2B";
+}
+
+.ux-ykt-icon-right-arrow-after:after {
+    content: "\EA2C";
+}
+
+.ux-ykt-icon-thin-arrow-right-after:after {
+    content: "\EA2D";
+}
+
+.ux-ykt-icon-user-after:after {
+    content: "\EA2E";
+}
+
+.ux-ykt-icon-wap-ms-tag-after:after {
+    content: "\EA2F";
+}
+
+.ux-ykt-icon-warning-after:after {
+    content: "\EA30";
+}
+
+.ux-ykt-icon-web-ms-tag-after:after {
+    content: "\EA31";
+}
+
+.ux-ykt-icon-wechat-after:after {
+    content: "\EA32";
+}
+
+.ux-ykt-icon-wechat2-after:after {
+    content: "\EA33";
+}
+
+.ux-ykt-icon-xuexiqia-after:after {
+    content: "\EA34";
+}
+
+.ux-ykt-icon-youhui-after:after {
+    content: "\EA35";
+}
+
+.ux-ykt-icon-zengpin-after:after {
+    content: "\EA36";
+}
+
+.ux-ykt-icon-zixun-after:after {
+    content: "\EA37";
+}

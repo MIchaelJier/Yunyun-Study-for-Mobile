@@ -10,6 +10,10 @@
         class="uni-list-item__icon"><image
           :src="thumb"
           class="uni-list-item__icon-img" /></view>
+	  <view
+		v-if="fontIcon" :style="{ fontSize: fontIconSize + 'px'}"
+		class="uni-list-item__icon"><view
+		:class="fontIcon" class="uni-list-item__icon-font"></view></view>
       <view
         v-else-if="showExtraIcon"
         class="uni-list-item__icon">
@@ -106,6 +110,16 @@ export default {
       type: String,
       default: ''
     },
+	fontIcon: {
+      // 字体图标
+      type: String,
+      default: ''
+    },
+	fontIconSize: {
+	  // 字体图标大小
+	 type: String,
+	 default: '15'
+	},
     showExtraIcon: {
       // 是否显示扩展图标
       type: [Boolean, String],
@@ -135,7 +149,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
 @mixin list-hover {
 	background-color: $uni-bg-color-hover;
@@ -145,7 +158,8 @@ export default {
 	opacity: 0.3;
 }
 
-$list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
+// $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
+$list-item-pd: $uni-spacing-row-lg;
 
 .uni-list-item {
 	font-size: $uni-font-size-lg;
@@ -179,7 +193,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 			z-index: 3;
 			right: 0;
 			bottom: 0;
-			left: 30upx;
+			left: 80upx;
 			height: 1px;
 			content: '';
 			-webkit-transform: scaleY(0.5);
@@ -195,7 +209,8 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 		flex-direction: column;
 		color: #3b4144;
 		&-title {
-			font-size: $uni-font-size-lg;
+			// font-size: $uni-font-size-lg;
+			font-size: 15px;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			color: inherit;
@@ -233,6 +248,10 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 		&-img {
 			height: $uni-img-size-base;
 			width: $uni-img-size-base;
+		}
+		&-font {
+			color: #999;
+			margin-right: 10rpx;
 		}
 	}
 }

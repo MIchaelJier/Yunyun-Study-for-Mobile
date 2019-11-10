@@ -1,14 +1,130 @@
 
-.pageHead {
-	width: 100%;
-	height: 100rpx;
-	background: #fff;
-}
+	/* 轮播图 */
 .swiperBox {
-	height: 350rpx;
+		height: 350rpx;
 }
 .swiperImage{
-	width: 100%;
-	height: 100%;
+		width: 100%;
+		height: 100%;
+}
+	/* 分类入口 */
+.classify {
+		width: 100%;
+		background: #fff;
+}
+.classify-content {
+		padding: 20rpx;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		        flex-wrap: wrap;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+}
+.class {
+		width: calc( (100vw - 40rpx)/ 4 );
+		height: 160rpx;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+}
+.class image {
+		margin-top: 20rpx;
+		width: 80rpx;
+		height: 80rpx;
+		border-radius: 50%;
+		background: #000;
+}
+.class text {
+		margin-top: 10rpx;
+		font-size: 14px;
+}
+	/* 主题分类 */
+.themes {
+		background: #f7f7f7;
+		margin-bottom: 60rpx;
+}
+.themes-item {
+		padding: 30rpx;
+		background: #fff;
+		margin: 30rpx 0 0 0 ;
+		overflow: hidden;
+}
+.themes-item-title {
+		font-size: 17px;
+		font-weight: bold;
+}
+.themes-item-contents {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		        flex-wrap: wrap;
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+}
+.themes-item-content {
+		display: inline-block;
+}
+.themes-item-content-main {
+		margin: 20rpx 0 0 0;
+		line-height: 22px;
+		color: #3c4a55;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		        flex-wrap: wrap;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+}
+.themes-item-content-big {
+		width: calc(100vw - 60rpx);
+		height: 300rpx;
+}
+.themes-item-content-small {
+		width: calc(50vw - 40rpx);
+		height: 190rpx;
+}
+.themes-item-content-name {
+		font-size: 16px;
+		margin-top: 10rpx;
+		word-wrap:break-word;
+}
+.themes-item-content-price {
+		font-size: 14px;
+		margin-top: 10rpx;
+}
+.price-red {
+		color: red;
+}
+.price-grey {
+		color: #999;
+		text-decoration: line-through;
+		margin-left: 10rpx;
 }
 
