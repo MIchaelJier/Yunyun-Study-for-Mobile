@@ -1,0 +1,16 @@
+	
+	.userInfo {
+		height: 110rpx;
+		background: #FFF;
+		padding: 25rpx;
+		display: flex;
+		align-items: center;
+	}
+	.userInfo  image {
+		width: 100rpx;
+		height: 100rpx;
+		margin-right: 30rpx;
+	}
+	.userInfo text {
+		font-size: 16px;
+	}

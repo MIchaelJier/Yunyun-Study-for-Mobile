@@ -7492,9 +7492,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!***************************************************!*\
-  !*** D:/软件/HBuilderX/lib/Yunyun-study/pages.json ***!
-  \***************************************************/
+/*!**********************************************************!*\
+  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/pages.json ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8399,9 +8399,9 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 
 /***/ }),
 /* 7 */
-/*!********************************************************************!*\
-  !*** D:/软件/HBuilderX/lib/Yunyun-study/pages.json?{"type":"style"} ***!
-  \********************************************************************/
+/*!***************************************************************************!*\
+  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/pages.json?{"type":"style"} ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8410,9 +8410,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 8 */
-/*!*******************************************************************!*\
-  !*** D:/软件/HBuilderX/lib/Yunyun-study/pages.json?{"type":"stat"} ***!
-  \*******************************************************************/
+/*!**************************************************************************!*\
+  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/pages.json?{"type":"stat"} ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8538,9 +8538,9 @@ function normalizeComponent (
 /* 19 */,
 /* 20 */,
 /* 21 */
-/*!***********************************************************!*\
-  !*** D:/软件/HBuilderX/lib/Yunyun-study/request/request.js ***!
-  \***********************************************************/
+/*!******************************************************************!*\
+  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/request/request.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
