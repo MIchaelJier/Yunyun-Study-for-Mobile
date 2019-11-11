@@ -75,3 +75,35 @@
     font-size: 24rpx;
     color: #99a4bf;
 }
+/* 进度条 */
+.yunBoxProg {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.yunBoxProgText {
+	color: #2cc17b;
+	font-size: 13px;
+	margin-bottom: 15rpx;
+}
+.yunBoxProgBar {
+	height: 3px;
+	width: 444rpx;
+	background: #d3d8e6;
+}
+.yunBoxProgBarOver {
+	background:  #2cc17b;
+	height: 3px;
+}
+.yunBoxBtn {
+	    height: 48rpx;
+	    width: 200rpx;
+	    color: #2cc17b;
+	    text-decoration: none;
+	    font-size: 14px;
+	    display: inline-block;
+	    border: 1rpx solid #2cc17b;
+	    border-radius: 200rpx;
+	    text-align: center;
+	    line-height: 48rpx;
+}
