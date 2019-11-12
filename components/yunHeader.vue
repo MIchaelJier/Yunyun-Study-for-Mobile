@@ -6,7 +6,9 @@
 				<text>App查看</text>
 			</view>
 		</view>
-		<view class="header-search"></view>
+		<navigator url="../../pages/search/search" hover-class="none">
+			<view class="header-search"></view>
+		</navigator>
 	</view>
 </template>
 

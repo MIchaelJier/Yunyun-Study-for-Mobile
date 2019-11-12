@@ -7492,9 +7492,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!**********************************************************!*\
-  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/pages.json ***!
-  \**********************************************************/
+/*!***************************************************!*\
+  !*** D:/软件/HBuilderX/lib/Yunyun-study/pages.json ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8399,20 +8399,20 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 
 /***/ }),
 /* 7 */
-/*!***************************************************************************!*\
-  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/pages.json?{"type":"style"} ***!
-  \***************************************************************************/
+/*!********************************************************************!*\
+  !*** D:/软件/HBuilderX/lib/Yunyun-study/pages.json?{"type":"style"} ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "usingComponents": {} }, "pages/Mycourse/Mycourse": { "usingComponents": {} }, "pages/center/center": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "芸云课堂", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "usingComponents": {} }, "pages/Mycourse/Mycourse": { "usingComponents": {} }, "pages/center/center": { "usingComponents": {} }, "pages/search/search": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "芸云课堂", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
-/*!**************************************************************************!*\
-  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/pages.json?{"type":"stat"} ***!
-  \**************************************************************************/
+/*!*******************************************************************!*\
+  !*** D:/软件/HBuilderX/lib/Yunyun-study/pages.json?{"type":"stat"} ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8531,16 +8531,10 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */
-/*!******************************************************************!*\
-  !*** D:/code/Uni-app/Yunyun-Study-for-Mobile/request/request.js ***!
-  \******************************************************************/
+/* 15 */
+/*!***********************************************************!*\
+  !*** D:/软件/HBuilderX/lib/Yunyun-study/request/request.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8556,7 +8550,7 @@ function normalizeComponent (
     header["Authorization"] = uni.getStorageSync("token");
     params.url = params.url.substr(3);
   }
-  var baseUrl = "http://yapi.demo.qunar.com/mock/31070";
+  var baseUrl = "http://yapi.demo.qunar.com/mock/31070"; //测试环境
 
   if (params.showLoading) {
     uni.showLoading({

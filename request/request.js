@@ -9,7 +9,7 @@ export const request = (params) => {
 		header["Authorization"] = uni.getStorageSync("token");
 		params.url = params.url.substr(3,);
 	}
-	const baseUrl = "http://yapi.demo.qunar.com/mock/31070";
+	const baseUrl = "http://yapi.demo.qunar.com/mock/31070"; //测试环境
 
 	if (params.showLoading){
 	 	uni.showLoading({

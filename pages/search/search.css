@@ -1,0 +1,100 @@
+	/* 搜索栏 */
+	.page {
+		background: #fff;
+		font-size: 14px;
+	}
+	.searchBar {
+		height: 68rpx;
+		background: #f6f6f6;
+		display: flex;
+		padding: 10rpx 0 10rpx 30rpx;
+	}
+	.searchBar-searchIcon {
+		position: absolute;
+		left: 50rpx;
+		top: calc( 10rpx + 68rpx / 2 - 30rpx / 2 );
+		width: 30rpx;
+		height: 30rpx;
+		background-image: url(../../static/searchIcon.png);
+		background-size: cover;
+	}
+	.searchBar-delIcon {
+		position: absolute;
+		left: 580rpx;
+		top: calc( 10rpx + 68rpx / 2 - 30rpx / 2 );
+		width: 30rpx;
+		height: 30rpx;
+		border-radius: 50%;
+		background: #ced1da;
+	}
+	.searchBar-delIcon::before,
+	.searchBar-delIcon::after{
+		content: '';
+		position: absolute;
+		height: 1.5px;
+		width: 18rpx;
+		top: 16rpx;
+		left: 6rpx;
+		margin-top: -1px;
+		background: #fff;
+	}
+	.searchBar-delIcon::before {
+	    transform: rotate(45deg);
+	}
+	.searchBar-delIcon::after {
+	    transform: rotate(-45deg);
+	}
+	.searchBar input{
+		display: block;
+		width: 600rpx;
+	    background: #fff;
+		border: 1rpx solid #E6EAF2;
+		border-radius: 30rpx;
+		outline: none;
+		box-sizing: border-box;
+		height: 68rpx;
+		font-size: 14px;
+		padding-left: 60rpx;
+	}
+	.searchBar text {
+		font-size: 30rpx;
+		color: #2CC17B;
+		display: block;
+		height: 68rpx;
+		line-height: 68rpx;
+		text-align: center;
+		flex: 1;
+	}
+	/*热门搜索*/
+	.hotSearch {
+		/* height: calc( 100% - 88rpx ); */
+		padding: 30rpx;
+	}
+	.hotSearch-content {
+		
+	}
+	.hotSearch-content-tip {
+		display: inline-block;
+		color: #8891a7;
+		border: 1px solid #E6EAF2;
+		border-radius: 30rpx;
+		line-height: 25rpx;
+		padding: 20rpx 25rpx;
+		margin: 30rpx 25rpx 0 0;
+	}
+	/*搜索联想*/
+	.searchAss {
+		padding: 0 30rpx;
+		display: flex;
+		flex-direction: column;
+	}
+	.searchAss-tip {
+		border-bottom: 1px solid #E6EAF2;
+		height: 30rpx;
+		padding: 25rpx 0;
+		color: #3c4a55;
+		width: calc( 100vw - 60rpx );
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+	}

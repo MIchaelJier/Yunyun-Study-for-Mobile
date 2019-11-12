@@ -1,9 +1,9 @@
 <template>
 	<view class="box">
 		<view class="box-main">
-			<image :src="image" class="boxPost"></image>
-			<view class="boxRight">
-				<text class="boxRight-title">{{ title }}</text>
+			<image :src="image" class="boxPost" v-if="image"></image>
+			<view class="boxRight" :style="{ height: image ? '137rpx':'' }">
+				<text class="boxRight-title" v-if="title">{{ title }}</text>
 				<slot></slot>
 			</view>
 		</view>
@@ -53,7 +53,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 137rpx;
 }
 .boxRight .boxRight-title{
 	font-size: 16px;

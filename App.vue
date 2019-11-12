@@ -20,5 +20,10 @@
 		height: 100%;
 		background-color: #f7f7f7;
 		position: absolute;
-	}
+		/* #ifdef  APP-PLUS */
+		margin-top: 10vw;
+		/* #endif */
+	} 
+	
+	
 </style>

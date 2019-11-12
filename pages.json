@@ -27,6 +27,15 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/search/search",
+			"navigationBarTitleText": "搜索",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+					}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
