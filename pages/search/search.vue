@@ -5,13 +5,15 @@
 			<input type="text" 
 				   value="" 
 				   focus
+				   @input="showResult ? searchText = '搜索' : ''"
 				   v-model="inputValue"
 				   placeholder-style="color:#ADB9D2"
 				   placeholder="行家专业亲授，直击就业痛点"/>
-			<text>搜索</text>
+			<text @click="showSearchResult" :style="{color: searchText !== '搜索' ? '#000' : '#2CC17B'}">{{ searchText }}</text>
 			<view class="searchBar-delIcon" @click="clearInput" v-show="inputValue !== ''"></view>
 		</view>
-		<view class="hotSearch" v-if="inputValue === ''">
+		<!-- 热门搜索 -->
+		<view class="hotSearch" v-if="inputValue === '' && !showResult">
 			<text>热门搜索</text>
 			<view class="hotSearch-content">
 				<block v-for="tip in hotSearchArr" :key="tip.id">
@@ -19,10 +21,26 @@
 				</block>
 			</view>
 		</view>
-		<view class="searchAss" v-else>
+		<!-- 搜索联想 -->
+		<view class="searchAss" v-else-if="inputValue !== '' && !showResult">
 			<block v-for="tip in searchAssArr" :key="tip.id">
 				<view class="searchAss-tip">{{ tip.title }}</view>
 			</block>
+		</view>
+		<!-- 搜索结果 -->
+		<view class="searchResult" v-else>
+			<view class="conditionBar">
+				<text class="conditionBar-sum">共 1 门相关课程</text>
+				<view class="conditionBar-right">
+					筛选：
+					<view class="green">
+						全部
+						<view class="chooseBtn"></view>
+					</view>
+					<view class="ux-ykt-icon-right-arrow"></view>
+				</view>
+			</view>
+			{{ inputValue }}
 		</view>
 	</view>
 </template>
@@ -33,7 +51,9 @@
 			return {
 				inputValue:'',
 				hotSearchArr:'',
-				searchAssArr:''
+				searchAssArr:'',
+				showResult:false,
+				searchText:'搜索'
 			}
 		},
 		onLoad() {
@@ -43,6 +63,20 @@
 		methods: {
 			clearInput:function() {
 				this.inputValue = '';
+				this.searchText = '搜索';
+				this.showResult = false;
+			},
+			showSearchResult:function() {
+				if( this.inputValue === '' ) return;
+				if( this.searchText === '取消' ){
+					uni.navigateBack({
+					    delta: 1
+					});
+				}
+				if(!this.showResult) {
+					this.showResult = true;
+					this.searchText = '取消';
+				}
 			},
 			firstRequest:function(that,u,d){
 					that.$request({

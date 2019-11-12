@@ -58,7 +58,6 @@
 	}
 	.searchBar text {
 		font-size: 30rpx;
-		color: #2CC17B;
 		display: block;
 		height: 68rpx;
 		line-height: 68rpx;
@@ -98,3 +97,27 @@
 		text-overflow:ellipsis;
 		white-space: nowrap;
 	}
+	/*搜索结果*
+		/* 筛选栏 */
+		.green {
+			color: #36b378
+		}
+		.conditionBar {
+			height: 87rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: #999;
+		}
+		.conditionBar-sum {
+			margin-left: 30rpx;
+		}
+		.conditionBar-right {
+			margin-right:30rpx;
+		}
+		.conditionBar-right .chooseBtn {
+			display: inline-block;
+			width: 30rpx;
+			height: 30rpx;
+			background: #2CC17B;
+		}
