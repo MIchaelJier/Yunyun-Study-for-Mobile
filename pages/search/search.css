@@ -54,7 +54,7 @@
 		box-sizing: border-box;
 		height: 68rpx;
 		font-size: 14px;
-		padding-left: 60rpx;
+		padding: 0 60rpx;
 	}
 	.searchBar text {
 		font-size: 30rpx;
@@ -68,9 +68,6 @@
 	.hotSearch {
 		/* height: calc( 100% - 88rpx ); */
 		padding: 30rpx;
-	}
-	.hotSearch-content {
-		
 	}
 	.hotSearch-content-tip {
 		display: inline-block;
@@ -100,7 +97,8 @@
 	/*搜索结果*
 		/* 筛选栏 */
 		.green {
-			color: #36b378
+			color: #36b378;
+			white-space: pre-wrap;
 		}
 		.conditionBar {
 			height: 87rpx;
@@ -112,12 +110,18 @@
 		.conditionBar-sum {
 			margin-left: 30rpx;
 		}
-		.conditionBar-right {
-			margin-right:30rpx;
+		.conditionBar-right,
+		.conditionBar-right-select {
+			margin-right:20rpx;
+			display: flex;
+			flex-wrap: nowrap;
+		}
+		.conditionBar-right-select {
+			margin: 0 15rpx;
 		}
 		.conditionBar-right .chooseBtn {
 			display: inline-block;
-			width: 30rpx;
-			height: 30rpx;
-			background: #2CC17B;
+			font-size: 12px;
+			margin-left: 15rpx;
+			transform: rotate(90deg);
 		}

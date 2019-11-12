@@ -10,7 +10,7 @@
 				   placeholder-style="color:#ADB9D2"
 				   placeholder="行家专业亲授，直击就业痛点"/>
 			<text @click="showSearchResult" :style="{color: searchText !== '搜索' ? '#000' : '#2CC17B'}">{{ searchText }}</text>
-			<view class="searchBar-delIcon" @click="clearInput" v-show="inputValue !== ''"></view>
+			<view class="searchBar-delIcon" @click.stop="clearInput" v-show="inputValue !== ''"></view>
 		</view>
 		<!-- 热门搜索 -->
 		<view class="hotSearch" v-if="inputValue === '' && !showResult">
@@ -32,12 +32,20 @@
 			<view class="conditionBar">
 				<text class="conditionBar-sum">共 1 门相关课程</text>
 				<view class="conditionBar-right">
-					筛选：
-					<view class="green">
-						全部
-						<view class="chooseBtn"></view>
+					<view class="conditionBar-right-select">
+						筛选：
+						<view class="green">
+							<text  :decode="true">&nbsp;全部</text>
+							<text class="ux-ykt-icon-right-arrow chooseBtn"></text>
+						</view>
 					</view>
-					<view class="ux-ykt-icon-right-arrow"></view>
+					<view class="conditionBar-right-select">
+						排序：
+						<view class="green">
+							<text :decode="true">&nbsp;好评</text>
+							<text class="ux-ykt-icon-right-arrow chooseBtn"></text>
+						</view>
+					</view>
 				</view>
 			</view>
 			{{ inputValue }}

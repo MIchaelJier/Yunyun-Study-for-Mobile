@@ -1,49 +1,48 @@
 {
-	"pages": [
-		"pages/index/index",
-		"pages/Mycourse/Mycourse",
-		"pages/center/center",
-		"pages/search/search"
-	],
-	"subPackages": [],
-	"window": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "芸云课堂",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-		"color": "#bfbfbf",
-		"selectedColor": "#515151",
-		"borderStyle": "black",
-		"backgroundColor": "#fff",
-		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"text": "首页",
-				"iconPath": "static/icon/home.png",
-				"selectedIconPath": "static/icon/home-active.png"
-			},
-			{
-				"pagePath": "pages/Mycourse/Mycourse",
-				"text": "我的课程",
-				"iconPath": "static/icon/myStudy.png",
-				"selectedIconPath": "static/icon/myStudy-active.png"
-			},
-			{
-				"pagePath": "pages/center/center",
-				"text": "账号",
-				"iconPath": "static/icon/account.png",
-				"selectedIconPath": "static/icon/account-active.png"
-			}
-		]
-	},
-	"usingComponents": {
-		"yun-box": "/components/yunBox",
-		"yun-header": "/components/yunHeader",
-		"yun-themes": "/components/yunThemes",
-		"uni-list": "/uniUI/components/uni-list/uni-list",
-		"uni-list-item": "/uniUI/components/uni-list-item/uni-list-item"
-	},
-	"sitemapLocation": "sitemap13.json"
+  "pages": [
+    "pages/index/index",
+    "pages/Mycourse/Mycourse",
+    "pages/center/center",
+    "pages/search/search"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "芸云课堂",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#515151",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/icon/home.png",
+        "selectedIconPath": "static/icon/home-active.png"
+      },
+      {
+        "pagePath": "pages/Mycourse/Mycourse",
+        "text": "我的课程",
+        "iconPath": "static/icon/myStudy.png",
+        "selectedIconPath": "static/icon/myStudy-active.png"
+      },
+      {
+        "pagePath": "pages/center/center",
+        "text": "账号",
+        "iconPath": "static/icon/account.png",
+        "selectedIconPath": "static/icon/account-active.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "yun-box": "/components/yunBox",
+    "yun-header": "/components/yunHeader",
+    "yun-themes": "/components/yunThemes",
+    "uni-list": "/uniUI/components/uni-list/uni-list",
+    "uni-list-item": "/uniUI/components/uni-list-item/uni-list-item"
+  }
 }
