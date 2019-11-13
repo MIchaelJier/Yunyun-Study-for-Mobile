@@ -5,11 +5,15 @@ import { request } from "./request/request.js"
 import yunBox from "./components/yunBox.vue"
 import yunHeader from "./components/yunHeader.vue"
 import yunThemes from "./components/yunThemes.vue"
+import yunSelect from "./components/yunSelect.vue"
+import betterSticky from "./components/betterSticky.vue"
 import uniList from "./uniUI//components/uni-list/uni-list.vue"
 import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
 Vue.component('yunBox',yunBox);
 Vue.component('yunHeader',yunHeader);
 Vue.component('yunThemes',yunThemes);
+Vue.component('yunSelect',yunSelect);
+Vue.component('betterSticky',betterSticky);
 Vue.component('uniList',uniList);
 Vue.component('uniListItem',uniListItem);
 

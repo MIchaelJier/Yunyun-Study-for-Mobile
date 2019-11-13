@@ -8,6 +8,7 @@
 		background: #f6f6f6;
 		display: flex;
 		padding: 10rpx 0 10rpx 30rpx;
+		position: relative;
 	}
 	.searchBar-searchIcon {
 		position: absolute;
@@ -78,7 +79,7 @@
 		padding: 20rpx 25rpx;
 		margin: 30rpx 25rpx 0 0;
 	}
-	/*搜索联想*/
+	/*搜索联想*/ 
 	.searchAss {
 		padding: 0 30rpx;
 		display: flex;
@@ -98,14 +99,20 @@
 		/* 筛选栏 */
 		.green {
 			color: #36b378;
-			white-space: pre-wrap;
 		}
 		.conditionBar {
+			width: 100%;
+			color: #999;
+			background: #fff;
+			border-bottom: 1px solid #E6EAF2;
+			z-index: 1;
+		}
+		.conditionBar-main {
 			height: 87rpx;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			color: #999;
+			flex-wrap: nowrap;
 		}
 		.conditionBar-sum {
 			margin-left: 30rpx;
@@ -117,7 +124,12 @@
 			flex-wrap: nowrap;
 		}
 		.conditionBar-right-select {
-			margin: 0 15rpx;
+			margin: 0;
+			padding: 0 15rpx;
+			line-height: 30rpx;
+		}
+		.conditionBar-right-select:first-child {
+			border-right: 1px solid #D3D8E6;
 		}
 		.conditionBar-right .chooseBtn {
 			display: inline-block;
@@ -125,3 +137,12 @@
 			margin-left: 15rpx;
 			transform: rotate(90deg);
 		}
+		.conditionBar-bottom-select,
+		.conditionBar-bottom-sort {
+			width: 100vw;
+/* 			position: absolute; */
+			z-index: 11;
+		}
+	.searchResult-result {
+		z-index: 0;
+	}

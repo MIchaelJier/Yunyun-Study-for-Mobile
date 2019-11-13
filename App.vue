@@ -20,9 +20,8 @@
 		height: 100%;
 		background-color: #f7f7f7;
 		position: absolute;
-		/* #ifdef  APP-PLUS */
-		margin-top: 10vw;
-		/* #endif */
+		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
+		padding-bottom: env(safe-area-inset-bottom);
 	} 
 	
 	

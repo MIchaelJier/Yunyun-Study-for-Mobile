@@ -42,6 +42,7 @@
 	border-bottom: 1px solid rgba(221, 221, 221, 0.4);
 	display: flex;
 	align-items: center;
+	background: #fff;
 }
 .boxPost {
 	height: 137rpx;

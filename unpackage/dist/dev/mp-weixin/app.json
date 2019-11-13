@@ -42,6 +42,8 @@
     "yun-box": "/components/yunBox",
     "yun-header": "/components/yunHeader",
     "yun-themes": "/components/yunThemes",
+    "yun-select": "/components/yunSelect",
+    "better-sticky": "/components/betterSticky",
     "uni-list": "/uniUI/components/uni-list/uni-list",
     "uni-list-item": "/uniUI/components/uni-list-item/uni-list-item"
   }
