@@ -38,26 +38,22 @@
 							<view class="conditionBar-right">
 								<view class="conditionBar-right-select">
 									筛选：
-									<view class="green" @click="showSelect = !showSelect;showSort = false">
-										<text>全部</text>
-										<text class="ux-ykt-icon-right-arrow chooseBtn"></text>
-									</view>
+									<yun-select :items="selectItems"  
+												:show="showSelect" 
+												:func="showSelectF"
+												ref="select" 
+												@func="requestNew('selectItems','select')"></yun-select>
 								</view>
 								<view class="conditionBar-right-select">
 									排序：
-									<view class="green" @click="showSort =! showSort;showSelect = false">
-										<text>好评</text>
-										<text class="ux-ykt-icon-right-arrow chooseBtn"></text>
-									</view>
+									<yun-select :items="sortItems"
+												:show="showSort" 
+												:func="showSortF"
+												ref="sort" 
+												@func="requestNew('sortItems','sort')"></yun-select>
 								</view>
 							</view>
 						</view>
-					</view>
-					<view class="conditionBar-bottom-select" v-show="showSelect">
-						<yun-select :items="selectItems"  ref="select" @func="requestNew('selectItems','select')"></yun-select>
-					</view>
-					<view class="conditionBar-bottom-sort" v-show="showSort">
-						<yun-select :items="sortItems" ref="sort" @func="requestNew('sortItems','sort')"></yun-select>
 					</view>
 				</template>
 				<template v-slot:content>
@@ -99,6 +95,16 @@
 			this.scrollTop= e.scrollTop
 		},
 		methods: {
+			showSelectF:function() {
+				console.log('展开筛选列表');
+				this.showSelect = !this.showSelect;
+				this.showSort = false
+			},
+			showSortF:function() {
+				console.log('展开排序列表');
+				this.showSort =! this.showSort;
+				this.showSelect = false
+			},
 			clearInput:function() {
 				this.inputValue = '';
 				this.searchResultArr = '';
@@ -158,6 +164,7 @@
 					   input:inputData
 				   }
 				  }).then(res => {
+						that.showSort = that.showSelect  = false;
 						if(res.data.status === '200'){
 							console.log(res.data)
 							that.searchResultArr = res.data.data;
@@ -176,7 +183,9 @@
 		watch: {
 			'inputValue':function(){
 				// console.log(this.inputValue);
+				this.showResult = false;
 				this.searchAssArr = [];
+				this.searchResultArr = '';
 				// 用户输入停止0.5s进行联想
 				if(this.inputValue !== '') {
 					this.debounce(()=> {

@@ -18,7 +18,7 @@
 	.page {
 		width: 100%;
 		height: 100%;
-		background-color: #f7f7f7;
+		background: #f7f7f7;
 		position: absolute;
 		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
 		padding-bottom: env(safe-area-inset-bottom);

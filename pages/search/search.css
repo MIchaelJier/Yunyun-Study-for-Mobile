@@ -1,7 +1,7 @@
 	/* 搜索栏 */
 	.page {
-		background: #fff;
 		font-size: 14px;
+		background: none;
 	}
 	.searchBar {
 		height: 68rpx;
@@ -97,15 +97,13 @@
 	}
 	/*搜索结果*
 		/* 筛选栏 */
-		.green {
-			color: #36b378;
-		}
 		.conditionBar {
 			width: 100%;
 			color: #999;
 			background: #fff;
 			border-bottom: 1px solid #E6EAF2;
-			z-index: 1;
+			position: relative;
+	
 		}
 		.conditionBar-main {
 			height: 87rpx;
@@ -131,18 +129,7 @@
 		.conditionBar-right-select:first-child {
 			border-right: 1px solid #D3D8E6;
 		}
-		.conditionBar-right .chooseBtn {
-			display: inline-block;
-			font-size: 12px;
-			margin-left: 15rpx;
-			transform: rotate(90deg);
-		}
-		.conditionBar-bottom-select,
-		.conditionBar-bottom-sort {
-			width: 100vw;
-/* 			position: absolute; */
-			z-index: 11;
-		}
 	.searchResult-result {
-		z-index: 0;
+		z-index: -1;
+		position: relative;
 	}
