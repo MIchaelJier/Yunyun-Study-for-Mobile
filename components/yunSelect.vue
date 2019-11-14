@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="green" @click.stop="func">
+		<view class="green" @click.stop="Click">
 			<text>{{ items[nowSelect].name }}</text>
 			<text class="ux-ykt-icon-right-arrow chooseBtn"
 				   :style="{transform:show ? 'rotate(270deg)' : ''}"></text>
@@ -45,6 +45,9 @@
 		methods: {
 			selectIt:function(item) {
 				this.nowSelect = item.id
+			},
+			Click:function() {
+				this.$emit('yunClick')
 			}
 		},
 		watch: {
@@ -73,10 +76,11 @@
 		}
 		.conditionBar-bottom {
 			width: 100vw;
+			height: 100vh;
 			position: absolute;
 			top:87rpx;
 			left:0;
-			z-index: 111;
+			background-color:rgba(0,0,0,0.5)
 		}
 		.chooseBtn {
 			display: inline-block;

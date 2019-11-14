@@ -1,8 +1,10 @@
 <template>
 	<view class="box">
-		<view class="box-main">
-			<image :src="image" class="boxPost" v-if="image"></image>
-			<view class="boxRight" :style="{ height: image ? '137rpx':'' }">
+		<view class="box-main"  @click="enter()">
+			<view  class="boxPost">
+				<image :src="image"  v-if="image" mode="scaleToFill" lazy-load></image>
+			</view>
+			<view class="boxRight" :style="{ height: image&&fitImage ? '137rpx':'' }"> <!-- :style="{ height: image ? '137rpx':'' }" -->
 				<text class="boxRight-title" v-if="title">{{ title }}</text>
 				<slot></slot>
 			</view>
@@ -26,8 +28,20 @@
 			  type: String,
 			  default: ''
 			}, 
+			url: {  // 列表跳转
+			  type: String,
+			  default: ''
+			}, 
+			fitImage: {
+				type: Boolean,
+				default:false
+			}
+		},
+		methods: {
+			enter:function() {
+				console.log('enter')
+			}
 		}
-		
 	}
 </script>
 
@@ -49,6 +63,12 @@
 	width: 220rpx;
 	border-radius: 5rpx;
 	padding-right: 20rpx;
+	flex: 0 0 220rpx;
+}
+.boxPost image {
+	width: 100%;
+	height: 100%;
+	border-radius: 10rpx;
 }
 .boxRight {
 	display: flex;

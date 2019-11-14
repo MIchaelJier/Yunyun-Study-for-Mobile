@@ -40,28 +40,49 @@
 									筛选：
 									<yun-select :items="selectItems"  
 												:show="showSelect" 
-												:func="showSelectF"
 												ref="select" 
+												@yunClick="showSelectF()"
 												@func="requestNew('selectItems','select')"></yun-select>
 								</view>
 								<view class="conditionBar-right-select">
 									排序：
 									<yun-select :items="sortItems"
 												:show="showSort" 
-												:func="showSortF"
 												ref="sort" 
+												@yunClick="showSortF()"
 												@func="requestNew('sortItems','sort')"></yun-select>
 								</view>
 							</view>
 						</view>
 					</view>
 				</template>
-				<template v-slot:content>
-					<view class="searchResult-result" :style="{height: searchResultArr === '' ? '100vh':''}">
-						<block v-for="item in searchResultArr" :key="item.id">
-							<yun-box :image="item.picsrc" :title="item.title"></yun-box>
-						</block>
-					</view>
+				<template v-slot:content style="z-index: 1;">
+						<view class="searchResult-result" 
+						:style="[{height: searchResultArr === '' ? '100vh':''},{'z-index': showSelect || showSort ? '-1':''}]">
+							<block v-for="item in searchResultArr" :key="item.id">
+								<yun-box :image="item.picsrc" :title="item.title"  >				
+									<view class="item-up">
+										<view class="item-up-u">
+											<uni-rate :value="item.star" size="10" disabled="true"></uni-rate>
+										</view>
+										<view class="item-up-s">{{ item.star }}</view>
+										<view class="item-up-l">{{ item.learned }}人学过</view>
+									</view>
+									<view class="item-down">
+										<view class="item-down-o" v-if="item.oprice">
+											<view v-if="item.oprice == 0">免费</view>
+											<view v-else>¥{{ item.oprice }}</view>
+										</view>
+										<view class="item-down-n" v-if="item.oprice != 0">¥{{ item.nprice }}</view>
+									</view>
+									<view class="item-vip" v-if="item.vipprice">
+										<view class="item-vip-icon">vip会员</view>
+										<view v-if="item.vipprice == 0">免费</view>
+										<view v-else>¥{{ item.vipprice }}</view>
+									</view>
+								</yun-box>
+							</block>
+						</view>
 				</template>
 			</better-sticky>
 		</view>
@@ -106,8 +127,7 @@
 				this.showSelect = false
 			},
 			clearInput:function() {
-				this.inputValue = '';
-				this.searchResultArr = '';
+				this.inputValue = this.searchResultArr = '';
 				this.searchText = '搜索';
 				this.showResult = false;
 			},
@@ -128,7 +148,7 @@
 					   url: '/getSearchResult',
 					   method: 'GET',
 					   data:{
-						
+							
 						   input:inputData
 					   }
 					  }).then(res => {

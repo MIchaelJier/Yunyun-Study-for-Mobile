@@ -129,7 +129,53 @@
 		.conditionBar-right-select:first-child {
 			border-right: 1px solid #D3D8E6;
 		}
+	/*结果*/
 	.searchResult-result {
-		z-index: -1;
 		position: relative;
 	}
+	.item-up,
+	.item-down,
+	.item-vip{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		color: #999;
+		font-size: 12px;
+	}
+	.item-up-u {
+		margin-top: 4rpx;
+	}
+	.item-up-s {
+		padding: 0 20rpx 0 10rpx;
+	}
+	.item-up-l{
+		
+	}
+	.item-down-o {
+		color: #333;
+		font-size: 15px;
+	}
+	.item-down-n {
+		padding-left: 20rpx;
+		text-decoration:line-through;
+	}
+	.item-vip-icon {
+		width: 110rpx;
+		height: 34rpx;
+		line-height: 30rpx;
+		font-size: 12px;
+		color: #fff;
+		background: #FF2D3D;
+		background-image: linear-gradient(78deg, #FF2D3D 0%, #FF7544 96%);
+		margin-right: 10rpx;
+		text-align: center;
+		border-radius: 5rpx;
+		padding-top: 5rpx;
+		box-sizing: border-box;
+	}
+	.item-vip {
+		color: #FF2D3D;
+		font-size: 15px;
+	}
+	

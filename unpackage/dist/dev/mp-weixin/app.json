@@ -45,7 +45,7 @@
     "yun-select": "/components/yunSelect",
     "better-sticky": "/components/betterSticky",
     "uni-list": "/uniUI/components/uni-list/uni-list",
+    "uni-rate": "/uniUI/components/uni-rate/uni-rate",
     "uni-list-item": "/uniUI/components/uni-list-item/uni-list-item"
-  },
-  "sitemapLocation": "sitemap31.json"
+  }
 }
