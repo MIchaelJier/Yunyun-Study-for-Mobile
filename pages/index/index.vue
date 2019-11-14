@@ -3,19 +3,15 @@
 		<!-- header -->
 		<yun-header></yun-header>
 		<!-- swiper -->
-		<swiper :indicator-dots="true" :autoplay="true" :circular="true" :interval="3000" :duration="1000" class="swiperBox">
-			<swiper-item v-for="sw in swiperList" :key="sw.id">
-				<image :src="sw.picsrc" class="swiperImage"></image>
-			</swiper-item>
-		</swiper>
+		<yun-swiper :list=" swiperList"></yun-swiper>
 		<!-- classify -->
 		<view class="classify">
 			<view class="classify-content">
 					<block v-for="cl in classList" :key="cl.id">
-						<view class="class">
+						 <navigator :url="'/pages/classification/classification?class='+cl.url" hover-class="none" class="class">
 							<image  :src="cl.picsrc"></image>
 							<text>{{ cl.titile }}</text>
-						</view>
+						</navigator>
 					</block>
 			</view>
 		</view>
@@ -50,7 +46,7 @@
 							that.$data[d] = res.data.data;
 						}
 				});
-			}
+			},
 		}
 	}
 </script>

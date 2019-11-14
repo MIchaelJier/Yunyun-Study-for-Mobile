@@ -36,6 +36,15 @@
 					}
 			}
         }
+        ,{
+            "path" : "pages/classification/classification",
+			"navigationBarTitleText": "分类",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+					}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

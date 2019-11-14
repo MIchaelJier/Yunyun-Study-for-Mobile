@@ -7,10 +7,9 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 4);__webpack_require__(/*! @dcloudio/uni-stat */ 5);
+/* WEBPACK VAR INJECTION */(function(uni, createApp) {__webpack_require__(/*! uni-pages */ 4);__webpack_require__(/*! @dcloudio/uni-stat */ 5);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 9));
-var _request = __webpack_require__(/*! ./request/request.js */ 15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var yunBox = function yunBox() {return __webpack_require__.e(/*! import() | components/yunBox */ "components/yunBox").then(__webpack_require__.bind(null, /*! ./components/yunBox.vue */ 48));};var yunHeader = function yunHeader() {return __webpack_require__.e(/*! import() | components/yunHeader */ "components/yunHeader").then(__webpack_require__.bind(null, /*! ./components/yunHeader.vue */ 55));};var yunThemes = function yunThemes() {return __webpack_require__.e(/*! import() | components/yunThemes */ "components/yunThemes").then(__webpack_require__.bind(null, /*! ./components/yunThemes.vue */ 62));};var yunSelect = function yunSelect() {return __webpack_require__.e(/*! import() | components/yunSelect */ "components/yunSelect").then(__webpack_require__.bind(null, /*! ./components/yunSelect.vue */ 69));};var betterSticky = function betterSticky() {return __webpack_require__.e(/*! import() | components/betterSticky */ "components/betterSticky").then(__webpack_require__.bind(null, /*! ./components/betterSticky.vue */ 76));};var uniRate = function uniRate() {return __webpack_require__.e(/*! import() | uniUI/components/uni-rate/uni-rate */ "uniUI/components/uni-rate/uni-rate").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-rate/uni-rate.vue */ 125));};var uniList = function uniList() {return __webpack_require__.e(/*! import() | uniUI/components/uni-list/uni-list */ "uniUI/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-list/uni-list.vue */ 83));};var uniListItem = function uniListItem() {return __webpack_require__.e(/*! import() | uniUI/components/uni-list-item/uni-list-item */ "uniUI/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-list-item/uni-list-item.vue */ 90));};
 
 
 
@@ -20,19 +19,29 @@ var _request = __webpack_require__(/*! ./request/request.js */ 15);function _int
 
 
 
-_vue.default.component('yunBox', yunBox);
-_vue.default.component('yunHeader', yunHeader);
-_vue.default.component('yunThemes', yunThemes);
-_vue.default.component('yunSelect', yunSelect);
-_vue.default.component('betterSticky', betterSticky);
 
-_vue.default.component('uniList', uniList);
-_vue.default.component('uniRate', uniRate);
-_vue.default.component('uniListItem', uniListItem);
 
-_vue.default.config.productionTip = false;
 
+
+
+
+
+
+
+
+
+
+
+
+
+var _request = __webpack_require__(/*! ./request/request.js */ 15);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var yunBox = function yunBox() {return __webpack_require__.e(/*! import() | components/yunBox */ "components/yunBox").then(__webpack_require__.bind(null, /*! ./components/yunBox.vue */ 48));};var yunSwiper = function yunSwiper() {return __webpack_require__.e(/*! import() | components/yunSwiper */ "components/yunSwiper").then(__webpack_require__.bind(null, /*! ./components/yunSwiper.vue */ 143));};var yunHeader = function yunHeader() {return __webpack_require__.e(/*! import() | components/yunHeader */ "components/yunHeader").then(__webpack_require__.bind(null, /*! ./components/yunHeader.vue */ 55));};var yunThemes = function yunThemes() {return __webpack_require__.e(/*! import() | components/yunThemes */ "components/yunThemes").then(__webpack_require__.bind(null, /*! ./components/yunThemes.vue */ 62));};var yunSelect = function yunSelect() {return __webpack_require__.e(/*! import() | components/yunSelect */ "components/yunSelect").then(__webpack_require__.bind(null, /*! ./components/yunSelect.vue */ 69));};var betterSticky = function betterSticky() {return __webpack_require__.e(/*! import() | components/betterSticky */ "components/betterSticky").then(__webpack_require__.bind(null, /*! ./components/betterSticky.vue */ 76));};_vue.default.component('yunBox', yunBox);_vue.default.component('yunSwiper', yunSwiper);_vue.default.component('yunHeader', yunHeader);_vue.default.component('yunThemes', yunThemes);_vue.default.component('yunSelect', yunSelect);_vue.default.component('betterSticky', betterSticky); // uniUI组件
+var uniRate = function uniRate() {return __webpack_require__.e(/*! import() | uniUI/components/uni-rate/uni-rate */ "uniUI/components/uni-rate/uni-rate").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-rate/uni-rate.vue */ 125));};var uniList = function uniList() {return __webpack_require__.e(/*! import() | uniUI/components/uni-list/uni-list */ "uniUI/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-list/uni-list.vue */ 83));};var uniListItem = function uniListItem() {return __webpack_require__.e(/*! import() | uniUI/components/uni-list-item/uni-list-item */ "uniUI/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! ./uniUI//components/uni-list-item/uni-list-item.vue */ 90));};_vue.default.component('uniList', uniList);_vue.default.component('uniRate', uniRate);_vue.default.component('uniListItem', uniListItem);_vue.default.config.productionTip = false; //uni.request $request
 _vue.default.prototype.$request = _request.request;
+//屏幕宽高 $ww $wh
+var _uni$getSystemInfoSyn = uni.getSystemInfoSync(),windowWidth = _uni$getSystemInfoSyn.windowWidth,windowHeight = _uni$getSystemInfoSyn.windowHeight;
+_vue.default.prototype.$ww = windowWidth;
+_vue.default.prototype.$wh = windowHeight;
+
 _App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread({},
 _App.default));
@@ -46,7 +55,7 @@ createApp(app).$mount();
 //   const reqComName = fileName.split('/')[1];
 //   Vue.component(reqComName.substring(0 , reqComName.length - 4), reqCom.default || reqCom)
 // })
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),
 /* 1 */,

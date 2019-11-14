@@ -1,0 +1,27 @@
+	/deep/.uni-scroll-view::-webkit-scrollbar {
+			/* 隐藏滚动条，但依旧具备可以滚动的功能 */
+			display: none
+		}
+	.tab-items {
+		border-top: 1px solid #E6EAF2;
+		height: 90rpx;
+		white-space: nowrap;
+		width: auto;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	.tab-item {
+	    padding: 0 30rpx;
+	    font-size: 15px;
+	    color: #3c4a55;
+	    position: relative;
+	    display: inline-block;
+	    height: 90rpx;
+	    line-height: 90rpx;
+		background: #fff;
+	}
+	.tab-item .tab-item-active {
+		padding-bottom: 5rpx;
+		border-bottom: 3px solid #2CC17B;
+	}

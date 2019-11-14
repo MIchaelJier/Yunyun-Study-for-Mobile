@@ -1,28 +1,37 @@
 import Vue from 'vue'
 import App from './App'
-import { request } from "./request/request.js"
-
+// 自定义组件
 import yunBox from "./components/yunBox.vue"
+import yunSwiper from "./components/yunSwiper.vue"
 import yunHeader from "./components/yunHeader.vue"
 import yunThemes from "./components/yunThemes.vue"
 import yunSelect from "./components/yunSelect.vue"
 import betterSticky from "./components/betterSticky.vue"
-import uniRate from "./uniUI//components/uni-rate/uni-rate.vue"
-import uniList from "./uniUI//components/uni-list/uni-list.vue"
-import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
 Vue.component('yunBox',yunBox);
+Vue.component('yunSwiper',yunSwiper);
 Vue.component('yunHeader',yunHeader);
 Vue.component('yunThemes',yunThemes);
 Vue.component('yunSelect',yunSelect);
 Vue.component('betterSticky',betterSticky);
-
+// uniUI组件
+import uniRate from "./uniUI//components/uni-rate/uni-rate.vue"
+import uniList from "./uniUI//components/uni-list/uni-list.vue"
+import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
 Vue.component('uniList',uniList);
 Vue.component('uniRate',uniRate);
 Vue.component('uniListItem',uniListItem);
 
 Vue.config.productionTip = false;
 
+//uni.request $request
+import { request } from "./request/request.js"
 Vue.prototype.$request = request;
+
+//屏幕宽高 $ww $wh
+const { windowWidth, windowHeight } = uni.getSystemInfoSync();	
+Vue.prototype.$ww = windowWidth;
+Vue.prototype.$wh = windowHeight;
+
 App.mpType = 'app'
 const app = new Vue({
     ...App

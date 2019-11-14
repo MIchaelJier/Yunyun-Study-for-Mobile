@@ -60,7 +60,7 @@
 						<view class="searchResult-result" 
 						:style="[{height: searchResultArr === '' ? '100vh':''},{'z-index': showSelect || showSort ? '-1':''}]">
 							<block v-for="item in searchResultArr" :key="item.id">
-								<yun-box :image="item.picsrc" :title="item.title"  >				
+								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :fitImage="!item.vipprice">				
 									<view class="item-up">
 										<view class="item-up-u">
 											<uni-rate :value="item.star" size="10" disabled="true"></uni-rate>
@@ -69,13 +69,13 @@
 										<view class="item-up-l">{{ item.learned }}人学过</view>
 									</view>
 									<view class="item-down">
-										<view class="item-down-o" v-if="item.oprice">
+										<view class="item-down-o" v-if="item.oprice && item.oprice != ''">
 											<view v-if="item.oprice == 0">免费</view>
 											<view v-else>¥{{ item.oprice }}</view>
 										</view>
 										<view class="item-down-n" v-if="item.oprice != 0">¥{{ item.nprice }}</view>
 									</view>
-									<view class="item-vip" v-if="item.vipprice">
+									<view class="item-vip" v-if="item.vipprice && item.vipprice != ''">
 										<view class="item-vip-icon">vip会员</view>
 										<view v-if="item.vipprice == 0">免费</view>
 										<view v-else>¥{{ item.vipprice }}</view>

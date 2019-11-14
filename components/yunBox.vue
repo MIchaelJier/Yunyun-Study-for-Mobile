@@ -39,7 +39,7 @@
 		},
 		methods: {
 			enter:function() {
-				console.log('enter')
+				console.log(this.url)
 			}
 		}
 	}

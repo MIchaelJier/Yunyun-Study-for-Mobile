@@ -47,8 +47,8 @@
 		background-size: cover;
 	}
 	.header-span {
-		width: 100rpx;
-		height: 33rpx;
+		width: 110rpx;
+		height: 35rpx;
 		margin-left: 10rpx;
 		justify-content: center;
 		border: 1px solid #2CC17B;
