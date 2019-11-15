@@ -25,3 +25,18 @@
 		padding-bottom: 5rpx;
 		border-bottom: 3px solid #2CC17B;
 	}
+	/*tips*/
+	.content-tips {
+		background: #fff;
+		width: 100%;
+		padding: 44rpx 0 0 30rpx;
+		font-size: 14px;
+	}
+	.content-tip {
+		display: inline-block;
+		color: #8891a7;
+		border: 1px solid #D3D8E6;
+		border-radius: 30rpx;
+		padding: 14rpx 16rpx;
+		margin: 0 24rpx 28rpx 0;
+	}
