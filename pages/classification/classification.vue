@@ -19,13 +19,18 @@
 			<!-- 内容 -->
 			<template v-slot:content>
 				<!-- 轮播图 -->
-				<!-- tips-->
-				<view class="content-tips">
-						<block v-for="tip in tabClass[nowSelect].children" :key="tip.id">
-							<view class="content-tip">{{ tip.name }}</view>
-						</block>
+				<view :style="{height: bodyClass === '' ? '10000px':''}">
+					<yun-swiper :list="bodyClass.swiper"></yun-swiper>
+					<!-- tips-->
+					<view class="content-tips">
+							<block v-for="tip in tabClass[nowSelect].children" :key="tip.id">
+								<view class="content-tip">{{ tip.name }}</view>
+							</block>
+					</view>
+					<!-- 分类 -->
+					<yunThemes :themeList="bodyClass.classList"></yunThemes>
 				</view>
-				<!-- 分类 -->
+				
 			</template>
 		</better-sticky>
 	</view>
@@ -110,6 +115,7 @@
 						]
 					}
 				],
+				bodyClass:'',
 				nowSelect:0,
 				scrollLeft:0,
 				
@@ -121,6 +127,7 @@
 				let id = parseInt(options.class);
 				this.nowSelect = id;
 			}
+			this.firstRequest(this,'/getClassification','bodyClass');
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
@@ -132,6 +139,7 @@
 			},
 			firstRequest:function(that,u,d){
 					let nowSelect = that.nowSelect;
+					console.log(nowSelect)
 					that.$request({
 					   url: u,
 					   method: 'GET',
@@ -175,6 +183,7 @@
 		watch:{
 			'nowSelect':function(){
 				this.tabMid(this.nowSelect);
+				this.firstRequest(this,'/getClassification','bodyClass');
 			}
 		}
 	}

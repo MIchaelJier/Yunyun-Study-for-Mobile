@@ -3,7 +3,7 @@
 		<!-- header -->
 		<yun-header></yun-header>
 		<!-- swiper -->
-		<yun-swiper :list=" swiperList"></yun-swiper>
+		<yun-swiper :list="swiperList"></yun-swiper>
 		<!-- classify -->
 		<view class="classify">
 			<view class="classify-content">
