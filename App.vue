@@ -22,6 +22,10 @@
 		position: absolute;
 		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
 		padding-bottom: env(safe-area-inset-bottom);
+		/*刘海屏*/
+		/* #ifdef APP-PLUS */
+		padding-top:var(--status-bar-height)
+		/* #endif */
 	} 
 	
 	

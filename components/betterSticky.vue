@@ -95,8 +95,8 @@
 		width: 100%;
 		position: fixed;
 		top: 0;
-		/* #ifdef H5 */
-		/* top: 44px; */
+		/* #ifdef APP-PLUS */
+		top: var(--status-bar-height);
 		/* #endif */
 		z-index: 1;
 	}

@@ -28,7 +28,7 @@
 	/*tips*/
 	.content-tips {
 		background: #fff;
-		width: 100%;
+		width: calc(100% - 30rpx);
 		padding: 44rpx 0 0 30rpx;
 		font-size: 14px;
 	}
