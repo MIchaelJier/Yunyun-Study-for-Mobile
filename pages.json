@@ -45,6 +45,14 @@
 					}
 			}
         }
+        ,{
+            "path" : "pages/Coursedetails/Coursedetails",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+					}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
