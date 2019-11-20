@@ -21,7 +21,8 @@
 		background: #f7f7f7;
 		position: absolute;
 		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
-		padding-bottom: env(safe-area-inset-bottom);
+
+		padding-bottom: var(--window-bottom);
 		/*刘海屏*/
 		/* #ifdef APP-PLUS */
 		padding-top:var(--status-bar-height)

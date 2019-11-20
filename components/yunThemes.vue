@@ -46,7 +46,9 @@
 	/* 主题分类 */
 	.themes {
 		background: #f7f7f7;
-		margin-bottom: 60rpx;
+		/* #ifdef H5 */
+		padding-bottom: 50px;
+		/* #endif */
 	}
 	.themes-item {
 		padding: 30rpx;

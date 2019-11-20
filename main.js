@@ -6,8 +6,10 @@ import yunSwiper from "./components/yunSwiper.vue"
 import yunHeader from "./components/yunHeader.vue"
 import yunThemes from "./components/yunThemes.vue"
 import yunSelect from "./components/yunSelect.vue"
+import yunTab from "./components/yunTab.vue"
 import betterSticky from "./components/betterSticky.vue"
 Vue.component('yunBox',yunBox);
+Vue.component('yunTab',yunTab);
 Vue.component('yunSwiper',yunSwiper);
 Vue.component('yunHeader',yunHeader);
 Vue.component('yunThemes',yunThemes);

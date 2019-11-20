@@ -246,7 +246,7 @@ $list-item-pd: $uni-spacing-row-lg;
 		align-items: center;
 
 		&-img {
-			height: $uni-img-size-base;
+			height: $uni-img-size-base; 
 			width: $uni-img-size-base;
 		}
 		&-font {
