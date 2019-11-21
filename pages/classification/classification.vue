@@ -127,17 +127,19 @@
 				let id = parseInt(options.class);
 				this.nowSelect = id;
 			}
-			this.firstRequest(this,'/getClassification','bodyClass');
+			this.firstRequest('/getClassification','bodyClass');
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
 		},
 		methods: {
 			//点击tab选中项目
-			chooseItem:function(id){
+			chooseItem(id){
 				this.nowSelect = id;
 			},
-			firstRequest:function(that,u,d){
+			//二次封装request
+			firstRequest(u,d){
+				let that = this;
 					let nowSelect = that.nowSelect;
 					console.log(nowSelect)
 					that.$request({

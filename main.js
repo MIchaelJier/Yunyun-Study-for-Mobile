@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import App from './App'
+//引入并挂载vuex
+import store from './store'  
+Vue.prototype.$store = store  
 // 自定义组件
 import yunBox from "./components/yunBox.vue"
 import yunSwiper from "./components/yunSwiper.vue"

@@ -55,16 +55,13 @@
 		},
 		onLoad() {
 			let that = this;
-			that.firstRequest(that,'/getMyCourses','my_courses');
+			that.firstRequest('/getMyCourses','my_courses');
 			// that.firstRequest(that,'/getMyCourses','my_microSpecialty');
 		},
 		methods: {		
-			 showStatus: function(e){
-			    let status = e.currentTarget.dataset.status;
-				this.status = status
-			  },
-			  
-			 firstRequest:function(that,u,d){
+			  //二次封装request
+			 firstRequest(u,d){
+				let that = this;
 			  	that.$request({
 			  	   url: u,
 			  	   method: 'GET',

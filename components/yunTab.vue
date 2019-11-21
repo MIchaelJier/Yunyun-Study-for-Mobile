@@ -50,7 +50,7 @@
 			},
 		},
 		methods:{
-			showStatus: function(e){
+			showStatus(e){
 			   let status = e.currentTarget.dataset.status;
 							this.status = status
 			 },

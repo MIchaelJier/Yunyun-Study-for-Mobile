@@ -43,10 +43,10 @@
 			}
 		},
 		methods: {
-			selectIt:function(item) {
+			selectIt(item) {
 				this.nowSelect = item.id
 			},
-			Click:function() {
+			Click() {
 				this.$emit('yunClick')
 			}
 		},

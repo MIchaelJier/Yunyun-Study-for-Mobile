@@ -31,12 +31,14 @@
 		},
 		onLoad() {
 			let that = this;
-			that.firstRequest(that,'/getSwiperPic','swiperList');
-			that.firstRequest(that,'/getClassList','classList');
-			that.firstRequest(that,'/getTheme','themeList');
+			that.firstRequest('/getSwiperPic','swiperList');
+			that.firstRequest('/getClassList','classList');
+			that.firstRequest('/getTheme','themeList');
 		},
 		methods: {
-			firstRequest:function(that,u,d){
+			//二次封装request
+			firstRequest(u,d){
+				let that = this;
 				that.$request({
 				   url: u,
 				   method: 'GET',
