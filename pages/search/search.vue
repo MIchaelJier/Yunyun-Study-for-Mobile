@@ -30,7 +30,7 @@
 		</view>
 		<!-- 搜索结果 -->
 		<view class="searchResult" v-else>
-			<better-sticky :scrollTop="scrollTop">
+			<better-sticky :scrollTop="scrollTop" :initDone="initDone">
 				<template v-slot:header>
 					<view class="conditionBar">
 						<view class="conditionBar-main">
@@ -58,7 +58,7 @@
 				</template>
 				<template v-slot:content style="z-index: 1;">
 						<view class="searchResult-result" 
-						:style="[{height: searchResultArr === '' ? '100vh':''},{'z-index': showSelect || showSort ? '-1':''}]">
+						:style="[{'z-index': showSelect || showSort ? '-1':''}]"> <!-- {height: searchResultArr === '' ? '100vh':''}, -->
 							<block v-for="item in searchResultArr" :key="item.id">
 								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :fitImage="!item.vipprice">				
 									<view class="item-up">
@@ -106,32 +106,32 @@
 				searchResultArr:'',
 				
 				scrollTop:0,
+				initDone:false,
 			}
 		},
 		onLoad() {
-			let that = this;
-			that.firstRequest(that,'/getHotSearch','hotSearchArr');
+			this.firstRequest('/getHotSearch','hotSearchArr')
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
 		},
 		methods: {
-			showSelectF:function() {
+			showSelectF() {
 				console.log('展开筛选列表');
 				this.showSelect = !this.showSelect;
 				this.showSort = false
 			},
-			showSortF:function() {
+			showSortF() {
 				console.log('展开排序列表');
 				this.showSort =! this.showSort;
 				this.showSelect = false
 			},
-			clearInput:function() {
+			clearInput() {
 				this.inputValue = this.searchResultArr = '';
 				this.searchText = '搜索';
 				this.showResult = false;
 			},
-			showSearchResult:function() {
+			showSearchResult() {
 				if( this.inputValue === '' ) return;
 				if( this.searchText === '取消' ){
 					uni.navigateBack({
@@ -155,11 +155,14 @@
 							if(res.data.status === '200'){
 								console.log(res.data)
 								that.searchResultArr = res.data.data;
+								that.initDone = true
 							}
 					});
 				}
 			},
-			firstRequest:function(that,u,d){
+			firstRequest(u,d){
+				let that = this;
+				return new Promise((resolve, reject) => {
 					that.$request({
 					   url: u,
 					   method: 'GET',
@@ -167,10 +170,12 @@
 							if(res.data.status === '200'){
 								console.log(res.data)
 								that.$data[d] = res.data.data;
+								resolve();
 							}
 					});
+				});
 			},
-			requestNew:function(items,ref){
+			requestNew(items,ref){
 				let that = this,
 					selectData = that[items][that.$refs[ref].nowSelect],
 					inputData = that.inputValue;
@@ -193,7 +198,7 @@
 			},
 			
 			// 防抖
-			debounce: function (fn, wait) {
+			debounce(fn, wait) {
 				if (this.fun !== null) {
 					clearTimeout(this.fun)
 				}
@@ -209,7 +214,7 @@
 				// 用户输入停止0.5s进行联想
 				if(this.inputValue !== '') {
 					this.debounce(()=> {
-						this.firstRequest(this,'/getHotSearch','searchAssArr');
+						this.firstRequest('/getHotSearch','searchAssArr');
 					},500)
 				}
 			}

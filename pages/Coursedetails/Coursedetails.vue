@@ -5,76 +5,81 @@
 			<video 
 				src="" 
 				poster="https://edu-image.nosdn.127.net/a12090ea-6978-4e7a-bb7c-f7294094ab94.png?imageView&quality=100&crop=0_0_879_495&thumbnail=336y190"
-				controls></video>
+				controls
+				id="video"></video>
 		</view>
 		<!-- 视频 结束 -->
-		<yun-tab :tabs="tabs" :scrollTop="scrollTop">
+		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :initTop="initTop">
 			<template v-slot:0>
-				<view class="courseintrohead">
-					<view class="courseintrohead-title">
-						<view class="title-name text-balck">
-							来自福布斯精英的25节金融思维课
-						</view>
-						<view class="title-other">
-							<view class="title-other-star">
-								<uni-rate :value="4.7" :size="17" disabled="true"></uni-rate>
+				<view>
+					<view class="courseintrohead">
+						<view class="courseintrohead-title">
+							<view class="title-name text-balck">
+								来自福布斯精英的25节金融思维课
 							</view>
-							<text class="text-grey">4.7分</text>
-							<text class="text-grey title-other-full">3515人在学</text>
-							<view class="title-other-tip">独家</view>
-						</view>
-					</view>
-					<view class="courseintrohead-price">
-						<view class="priceMain">
-							<view class="nprice">
-								<text class="yuan">¥</text>
-								99.00
+							<view class="title-other">
+								<view class="title-other-star">
+									<uni-rate :value="4.7" :size="17" disabled="true"></uni-rate>
+								</view>
+								<text class="text-grey">4.7分</text>
+								<text class="text-grey title-other-full">3515人在学</text>
+								<view class="title-other-tip">独家</view>
 							</view>
-							<view class="nprice-tip">特价仅剩10天9小时31分钟</view>
 						</view>
-						<view class="oprice text-grey">¥199.00</view>
-					</view>
-				</view>
-				<view class="contentbox">
-					<view class="youhuicontent">
-						<view class="ux-ykt-icon-youhui youhui-tip"></view>
-						<text class="youhui-full">减￥20</text>
-						<view class="ux-ykt-icon-right-arrow youhui-arrow"></view>
-					</view>
-				</view>
-				<view class="courseintro contentbox">
-					<view class="courseintrobody">
-						<view class="courseintrobody-title">课程介绍</view>
-						<view class="courseintrobody-main text-grey">
-							<!-- 富文本 nnodes属性为String -->
-							<rich-text :nodes="intro"></rich-text>
-						</view>
-					</view>
-					<view class="courseprovider">
-						<uni-list>
-						    <uni-list-item title="文豪金融" 
-										   note="3512位学员"
-										   thumb="https://edu-image.nosdn.127.net/f397a3c1-bb3c-43f6-a49b-c5527b061c59.png?imageView&quality=100&thumbnail=80y80" 
-										   :show-badge="true"
-										   badgeType="default"
-										   badge-text="进入网校"
-										   ></uni-list-item>
-									
-						</uni-list>
-					</view>
-					<view class="courseteacher">
-						<view class="courseintrobody-title">讲师</view>
-						<view class="courseteacher-main">
-								<view class="courseteacher-main-top">
-									<image class="top-headpic" src="https://edu-image.nosdn.127.net/eed99132-996e-4c26-b839-02d6220ae50d.jpg?imageView&quality=100&thumbnail=48x48&type=webp"></image>
-									<text class="top-name">Michael</text>
+						<view class="courseintrohead-price">
+							<view class="priceMain">
+								<view class="nprice">
+									<text class="yuan">¥</text>
+									99.00
 								</view>
-								<view class="courseteacher-main-detail">
-									<text class="text-grey">2017年福布斯精英（30岁以下创业精英榜），纽约大学商学院毕业，剑桥大学商学院MBA，华尔街投行分析师，文豪金融创始人。希望将通俗易懂的金融和理财知识带给大家！</text>
-								</view>
+								<view class="nprice-tip">特价仅剩10天9小时31分钟</view>
+							</view>
+							<view class="oprice text-grey">¥199.00</view>
+						</view>
+					</view>
+					<view class="contentbox">
+						<view class="youhuicontent">
+							<view class="ux-ykt-icon-youhui youhui-tip"></view>
+							<text class="youhui-full">减￥20</text>
+							<view class="ux-ykt-icon-right-arrow youhui-arrow"></view>
+						</view>
+					</view>
+					<view class="courseintro contentbox">
+						<view class="courseintrobody">
+							<view class="courseintrobody-title">课程介绍</view>
+							<view class="courseintrobody-main text-grey">
+								<!-- 富文本 nnodes属性为String -->
+								<rich-text :nodes="intro"></rich-text>
+							</view>
+						</view>
+						<view class="courseprovider">
+							<uni-list>
+							    <uni-list-item title="文豪金融" 
+											   note="3512位学员"
+											   thumb="https://edu-image.nosdn.127.net/f397a3c1-bb3c-43f6-a49b-c5527b061c59.png?imageView&quality=100&thumbnail=80y80" 
+											   :show-badge="true"
+											   badgeType="default"
+											   badge-text="进入网校"
+											   ></uni-list-item>
+										
+							</uni-list>
+						</view>
+						<view class="courseteacher">
+							<view class="courseintrobody-title">讲师</view>
+							<view class="courseteacher-main">
+									<view class="courseteacher-main-top">
+										<image class="top-headpic" src="https://edu-image.nosdn.127.net/eed99132-996e-4c26-b839-02d6220ae50d.jpg?imageView&quality=100&thumbnail=48x48&type=webp"></image>
+										<text class="top-name">Michael</text>
+									</view>
+									<view class="courseteacher-main-detail">
+										<text class="text-grey">2017年福布斯精英（30岁以下创业精英榜），纽约大学商学院毕业，剑桥大学商学院MBA，华尔街投行分析师，文豪金融创始人。希望将通俗易懂的金融和理财知识带给大家！</text>
+									</view>
+							</view>
 						</view>
 					</view>
 				</view>
+				
+				
 			</template>
 			<template v-slot:1>1</template>
 			<template v-slot:2>2</template>
@@ -87,6 +92,7 @@
 		data() {
 			return {
 				scrollTop:0,
+				initTop:0,
 				
 				tabs:['简介','目录','评价'],
 				intro:`25节听得懂的金融思维课 ，零基础，人人用得上！<br/>
@@ -122,8 +128,18 @@
 		methods: {
 			
 		},
+		onLoad(options) {
+			console.log(options.id);
+			this.$nextTick(() => {
+				uni.createSelectorQuery().in(this).select('.player').boundingClientRect((res) => {
+					if (res) {
+						this.initTop = res.height
+					}
+				}).exec()
+			})
+		},
 		onPageScroll(e) {
-			this.scrollTop= e.scrollTop
+				this.scrollTop = e.scrollTop
 		},
 	}
 </script>

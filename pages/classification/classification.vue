@@ -2,8 +2,10 @@
 <template>
 	<view class="page">
 		<!-- header -->
-		<yun-header></yun-header>
-		<better-sticky :scrollTop="scrollTop">
+		<view class="header">
+			<yun-header></yun-header>
+		</view>
+		<better-sticky :scrollTop="scrollTop" :initTop="initTop" :initDone="initDone">
 			<!-- tab -->
 			<template v-slot:header>
 				<scroll-view scroll-x="true" show-scrollbar="false" :scroll-left="scrollLeft">
@@ -19,7 +21,7 @@
 			<!-- 内容 -->
 			<template v-slot:content>
 				<!-- 轮播图 -->
-				<view :style="{height: bodyClass === '' ? '10000px':''}">
+				<view > <!-- :style="{height: bodyClass === '' ? '100000px':''}" -->
 					<yun-swiper :list="bodyClass.swiper"></yun-swiper>
 					<!-- tips-->
 					<view class="content-tips">
@@ -119,7 +121,9 @@
 				nowSelect:0,
 				scrollLeft:0,
 				
-				scrollTop:0
+				scrollTop:0,
+				initTop:0,
+				initDone:false,
 			}
 		},
 		onLoad(options) {
@@ -127,7 +131,18 @@
 				let id = parseInt(options.class);
 				this.nowSelect = id;
 			}
-			this.firstRequest('/getClassification','bodyClass');
+			this.firstRequest('/getClassification','bodyClass').then(() => {
+				this.initDone = true
+			})
+			this.$nextTick(() => {
+				uni.createSelectorQuery().in(this).select('.header').boundingClientRect((res) => {
+					if (res) {
+						this.initTop = res.height
+						console.log(this.initTop)
+					}
+				}).exec()
+			})
+			
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
@@ -140,20 +155,23 @@
 			//二次封装request
 			firstRequest(u,d){
 				let that = this;
-					let nowSelect = that.nowSelect;
-					console.log(nowSelect)
-					that.$request({
-					   url: u,
-					   method: 'GET',
-					   data:{
-						   select: nowSelect,
-					   }
-					  }).then(res => {
-							if(res.data.status === '200'){
-								console.log(res.data)
-								that.$data[d] = res.data.data;
-							}
-					});
+				return new Promise((resolve, reject) => {
+						let nowSelect = that.nowSelect;
+						console.log(nowSelect)
+						that.$request({
+						   url: u,
+						   method: 'GET',
+						   data:{
+							   select: nowSelect,
+						   }
+						  }).then(res => {
+								if(res.data.status === '200'){
+									console.log(res.data)
+									that.$data[d] = res.data.data;
+									resolve();
+								}
+						});
+				})
 			},
 			//tab条选中居中
 			tabMid:function(id){
@@ -185,7 +203,7 @@
 		watch:{
 			'nowSelect':function(){
 				this.tabMid(this.nowSelect);
-				this.firstRequest(this,'/getClassification','bodyClass');
+				this.firstRequest('/getClassification','bodyClass');
 			}
 		}
 	}

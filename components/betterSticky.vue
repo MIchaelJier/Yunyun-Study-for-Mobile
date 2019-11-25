@@ -7,17 +7,44 @@
 		<view :style="{height:holderHeight + 'px'}" v-if="isFixed"></view>
 		<!--sticky 容器-->
 		<!--内容-->
-		<slot name="content"></slot>
+		<view :style="{height: initDone?'':'10000px'}">
+			<slot name="content"></slot>
+		</view>
 	</view>
 </template>
 
 <script>
+	/**initDone
+	 * scrollTop
+	 * initTop
+	 * 引用页需要加的：
+	 * onLoad(options) {
+	 *	 this.$nextTick(() => {
+	 *		uni.createSelectorQuery().in(this).select('.class').boundingClientRect((res) => {
+	 *			if (res) {
+	 *				this.initTop = res.height
+	 *			}
+	 *		}).exec()
+	 *	 })
+	 * },
+	 * onPageScroll(e) {
+	 *	 this.scrollTop= e.scrollTop
+	 * },
+	 * **/
 	export default {
 		name: "tuiSticky",
 		props: {
 			scrollTop: {
-				type: Number
-			}
+				type: [String, Number],
+			},
+			initTop: {
+				type: [String, Number],
+				default: 0
+			},
+			initDone: {
+				type: Boolean,
+				default: true
+			},
 		},
 		watch: {
 			scrollTop(newValue, oldValue) {
@@ -49,26 +76,29 @@
 		},
 		methods: {
 			init(){
-				this.updateScrollChange();
-				uni.createSelectorQuery().in(this).select('.tui-sticky-header').boundingClientRect((res) => {
-					if (res) {
-						console.log(res,5555)
-						this.holderHeight = res.height
-					}
-				}).exec()
+				this.$nextTick(() => {
+					this.updateScrollChange();
+					uni.createSelectorQuery().in(this).select('.tui-sticky-header').boundingClientRect((res) => {
+						if (res) {
+							console.log(res,5555)
+							this.holderHeight = res.height
+						}
+					}).exec()
+				})
 			},
 			updateStickyChange() {
 				const top = this.top;
 				const height = this.height;
 				const scrollTop = this.scrollTop
-
+					
 				const delY = scrollTop - (top + height)
 				this.isFixed = (scrollTop >= top && delY <= 0) ? true : false
-
+					
 				this.translateY = 0
 				if (delY < 0 && -delY < this.holderHeight) {
 					this.translateY = -this.holderHeight - delY
-				}
+				}	
+				
 			},
 			updateScrollChange() {
 				if (this.timer) {
@@ -80,8 +110,11 @@
 					const query = uni.createSelectorQuery().in(this);
 					query.select(className).boundingClientRect((res) => {
 						if (res) {
-							this.top = res.top;
-							this.height = res.height
+							this.top > 0 || this.initTop === 0 ?
+								this.top = res.top
+								: this.top = this.initTop
+							
+							this.height = res.height;
 						}
 					}).exec()
 				}, 0)

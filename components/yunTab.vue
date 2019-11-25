@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<better-sticky :scrollTop="scrollTop">
+		<better-sticky :scrollTop="scrollTop" :initTop="initTop">
 			<template v-slot:header>
 				<view class="titleBar">
 				  <ul class="status">
@@ -48,6 +48,10 @@
 				type: [String, Number],
 				default: 0
 			},
+			initTop: {  //tab到顶部初始值
+				type: [String, Number],
+				default: 0
+			}
 		},
 		methods:{
 			showStatus(e){

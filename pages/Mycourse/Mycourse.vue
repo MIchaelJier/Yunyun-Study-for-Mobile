@@ -50,7 +50,7 @@
 				 my_microSpecialty:[],
 				 
 				 tabs:['我的课程','我的微专业'],
-				 scrollTop:0,
+				 scrollTop:211,
 			}
 		},
 		onLoad() {
@@ -62,15 +62,18 @@
 			  //二次封装request
 			 firstRequest(u,d){
 				let that = this;
-			  	that.$request({
-			  	   url: u,
-			  	   method: 'GET',
-			  	  }).then(res => {
-			  			if(res.data.status === '200'){
-			  				console.log(res.data)
-			  				that.$data[d] = res.data.data;
-			  			}
-			  	});
+				return new Promise((resolve, reject) => {
+					that.$request({
+					   url: u,
+					   method: 'GET',
+					  }).then(res => {
+							if(res.data.status === '200'){
+								console.log(res.data)
+								that.$data[d] = res.data.data;
+								resolve();
+							}
+					});
+				})
 			  }
 		},
 		onPageScroll(e) {

@@ -5,6 +5,7 @@ export const request = (params) => {
 	* 其他参数参考uni.request
 	*/
 	let header = {...params.header};
+	// console.log(params.url);
 	if(params.url.includes("/my/")){
 		header["Authorization"] = uni.getStorageSync("token");
 		params.url = params.url.substr(3,);
