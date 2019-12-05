@@ -10,6 +10,7 @@
 		</view>
 		<!-- 视频 结束 -->
 		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :initTop="initTop">
+			<!-- 简介 开始 -->
 			<template v-slot:0>
 				<view>
 					<view class="courseintrohead">
@@ -81,9 +82,39 @@
 				
 				
 			</template>
-			<template v-slot:1>1</template>
-			<template v-slot:2>2</template>
+			<!-- 简介 结束-->
+			<!-- 目录 开始 -->			
+			<template v-slot:1>
+				<view class="listTitile">课程已完更（含视频、音频版课件，内容相同）</view>
+				<view class="dirList">
+					<view class="dirList-content">
+						<view class="dirList-content-icon">视频</view>
+						<text class="dirList-content-title">3.【视频版】导读：来自文豪老师的课程介绍以及学习指南</text>
+						<text class="dirList-content-add">可试看</text>
+					</view>
+				</view>
+			</template>
+			<!-- 目录 结束 -->			
+			<!-- 评价 开始 -->			
+			<template v-slot:2>
+				<view class="commentTotal">
+					<view class="commentCount">
+						<text class="commentCount-left">全部评价</text>
+						<text class="commentCount-right">共213个评价</text>
+					</view>
+				</view>
+			</template>
+			<!-- 评价 结束 -->
 		</yun-tab>
+		<view class="underBar">
+			<view class="underBar-left">
+				<view class="ux-icon ux-ykt-icon-new-cart"></view>
+				<text>加入购物车</text>
+			</view>
+			<view class="underBar-right">
+				<text>加入学习</text>
+			</view>
+		</view>
 	</view>
 </template>
 

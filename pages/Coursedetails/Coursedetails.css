@@ -161,3 +161,101 @@
 	font-size: 14px;
 }
 /* 老师 和 网校 结束 */
+
+/* 目录 开始 */
+.listTitile {
+	padding: 16px 4%;
+    background-color: #f7f9fc;
+	font-size: 15px;
+	color: #333;
+}
+.dirList {
+	padding: 0 4%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ebeff7;
+	background: #fff;
+}
+.dirList-content {
+	padding: 17px 0;
+	color: #333333;
+	display: flex;
+}
+.dirList-content-icon {
+	border: 1px solid #3C4A55;
+	width: 56rpx;
+	height: 32rpx;
+	margin-right: 18rpx;
+	line-height: 32rpx;
+	border-radius: 5rpx;
+}
+.dirList-content-title {
+	font-size: 15px;
+	flex: 1;
+}
+.dirList-content-add {
+	color: #2cc17b;
+	font-size: 12px;
+	margin-left: 10rpx;
+}
+
+/* 目录 结束 */
+
+/* 评价 开始 */
+.commentTotal {
+    padding: 15px 10px 5px;
+	background: #fff;
+	font-size: 15px;
+}
+.commentCount {
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	color: #333740;
+}
+.commentCount-right {
+	color: #a4a9b2;
+	font-size: 14px;
+}
+/* 评价 结束 */
+
+/* 底部固定栏 */
+.underBar {
+	position: fixed;
+	bottom: 0;
+	height: 97rpx;
+	width: 100%;
+	background: #fff;
+	padding: 14rpx 16rpx;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	/* justify-content: space-between; */
+	border-top: 1px solid rgba(221, 221, 221, 0.4);
+}
+.underBar-left {
+	width: 160rpx;
+	height: 100%;
+	font-size: 18px;
+	color: #3C4A55;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	padding-top: 10rpx;
+}
+.underBar-left text {
+	font-size: 12px;
+	padding-bottom: 10rpx;
+}
+.underBar-right {
+	width: calc(100% - 160rpx - 32rpx);
+	height: 100%;
+	border-radius: 400rpx;
+	background: #FF632A;
+	font-size: 15px;
+	color: #fff;
+	display: flex;
+	/* flex: 1; */
+	justify-content: center;
+	align-items: center;
+}
