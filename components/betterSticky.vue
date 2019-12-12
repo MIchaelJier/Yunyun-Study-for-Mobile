@@ -1,7 +1,9 @@
 <template name="betterSticky">
 	<view class="tui-sticky-class">
 		<!--sticky 容器-->
-		<view class="tui-sticky-header" :class="[isFixed === true ? 'tui-sticky-fixed' : '']" :style="{transform:transform,webkitTransform:transform}">
+		<view class="tui-sticky-header" 
+			 :class="[isFixed === true ? 'tui-sticky-fixed' : '']" 
+			 :style="{transform:transform,webkitTransform:transform}">
 			<slot name="header"></slot>
 		</view>
 		<view :style="{height:holderHeight + 'px'}" v-if="isFixed"></view>
@@ -80,8 +82,8 @@
 					this.updateScrollChange();
 					uni.createSelectorQuery().in(this).select('.tui-sticky-header').boundingClientRect((res) => {
 						if (res) {
-							console.log(res,5555)
-							this.holderHeight = res.height
+							console.log(res,`tui-sticky-header's msg`)
+							this.holderHeight = res.height 
 						}
 					}).exec()
 				})
@@ -117,7 +119,7 @@
 							this.height = res.height;
 						}
 					}).exec()
-				}, 0)
+				}, 300)
 			}
 		}
 	}
