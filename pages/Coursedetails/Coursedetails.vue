@@ -169,9 +169,11 @@
 								<view class="reply-break"></view>
 								<view>
 									<text class="reply-title">[课程团队回复]</text>
-									<text class="text-grey">2018-10-19</text>
+									<text class="text-grey reply-time">2018-10-19</text>
 								</view>
-								<text class="text-grey">听得懂，用得上，这也是我们理想中课程的样子！谢谢你的学习感受，给了老师和课程团队极大动力，努力用心做好内容！</text>
+								<view class="reply-body">
+									<text class="text-grey ">听得懂，用得上，这也是我们理想中课程的样子！谢谢你的学习感受，给了老师和课程团队极大动力，努力用心做好内容！</text>
+								</view>
 							</view>
 						</view>
 					</view>

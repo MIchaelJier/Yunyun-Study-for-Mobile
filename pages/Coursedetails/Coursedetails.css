@@ -328,8 +328,10 @@
 	}
 	.reply-time {
 		font-size: 12px;
+		margin-left: 14rpx;
 	}
 	.reply-body {
+		margin-top: 12rpx;
 		color: #70788C;
 	}
 /* 评价 结束 */
