@@ -22,7 +22,7 @@
 			<template v-slot:content>
 				<!-- 轮播图 -->
 				<view > <!-- :style="{height: bodyClass === '' ? '100000px':''}" -->
-					<yun-swiper :list="bodyClass.swiper"></yun-swiper>
+					<yun-swiper :list="bodyClass.swipe"></yun-swiper>
 					<!-- tips-->
 					<view class="content-tips">
 							<block v-for="tip in tabClass[nowSelect].children" :key="tip.id">

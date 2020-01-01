@@ -10,7 +10,12 @@ export const request = (params) => {
 		header["Authorization"] = uni.getStorageSync("token");
 		params.url = params.url.substr(3,);
 	}
-	const baseUrl = "http://yapi.demo.qunar.com/mock/31070"; //测试环境
+	// 个人服务器上的模拟接口
+	const baseUrl = "http://47.101.132.224:9000/mock/11"; 
+	// 测试接口
+	const testUrl = "" ;
+	// 正式接口
+	const formalUrl = "" ;
 
 	if (params.showLoading){
 	 	uni.showLoading({
