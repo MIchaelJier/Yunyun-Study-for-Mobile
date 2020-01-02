@@ -22,9 +22,11 @@ Vue.component('betterSticky',betterSticky);
 import uniRate from "./uniUI//components/uni-rate/uni-rate.vue"
 import uniList from "./uniUI//components/uni-list/uni-list.vue"
 import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
+import uniIcons from "./uniUI//components/uni-icons/uni-icons.vue"
 Vue.component('uniList',uniList);
 Vue.component('uniRate',uniRate);
 Vue.component('uniListItem',uniListItem);
+Vue.component('uniIcons',uniIcons);
 
 Vue.config.productionTip = false;
 

@@ -1,6 +1,14 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+		    "path" : "pages/chooseLogin/chooseLogin",
+		    "style" : {
+		    	"app-plus":{
+		    		"titleNView":false
+		    		}
+		    }
+		},
+		{
 			"path": "pages/index/index",
 			"navigationBarTitleText": "芸云课堂",
 			"style": {
@@ -53,6 +61,7 @@
 					}
 			}
         }
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
