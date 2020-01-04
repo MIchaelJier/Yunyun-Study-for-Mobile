@@ -4,29 +4,31 @@ import App from './App'
 import store from './store'  
 Vue.prototype.$store = store  
 // 自定义组件
-import yunBox from "./components/yunBox.vue"
-import yunSwiper from "./components/yunSwiper.vue"
-import yunHeader from "./components/yunHeader.vue"
-import yunThemes from "./components/yunThemes.vue"
-import yunSelect from "./components/yunSelect.vue"
-import yunTab from "./components/yunTab.vue"
-import betterSticky from "./components/betterSticky.vue"
-Vue.component('yunBox',yunBox);
-Vue.component('yunTab',yunTab);
-Vue.component('yunSwiper',yunSwiper);
-Vue.component('yunHeader',yunHeader);
-Vue.component('yunThemes',yunThemes);
-Vue.component('yunSelect',yunSelect);
-Vue.component('betterSticky',betterSticky);
+	import yunBox from "./components/yunBox.vue"
+	import yunSwiper from "./components/yunSwiper.vue"
+	import yunHeader from "./components/yunHeader.vue"
+	import yunThemes from "./components/yunThemes.vue"
+	import yunSelect from "./components/yunSelect.vue"
+	import yunTab from "./components/yunTab.vue"
+	import yunInput from "./components/yunInput.vue"
+	import betterSticky from "./components/betterSticky.vue"
+	Vue.component('yunBox',yunBox);
+	Vue.component('yunTab',yunTab);
+	Vue.component('yunSwiper',yunSwiper);
+	Vue.component('yunHeader',yunHeader);
+	Vue.component('yunThemes',yunThemes);
+	Vue.component('yunSelect',yunSelect);
+	Vue.component('yunInput',yunInput);
+	Vue.component('betterSticky',betterSticky);
 // uniUI组件
-import uniRate from "./uniUI//components/uni-rate/uni-rate.vue"
-import uniList from "./uniUI//components/uni-list/uni-list.vue"
-import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
-import uniIcons from "./uniUI//components/uni-icons/uni-icons.vue"
-Vue.component('uniList',uniList);
-Vue.component('uniRate',uniRate);
-Vue.component('uniListItem',uniListItem);
-Vue.component('uniIcons',uniIcons);
+	import uniRate from "./uniUI//components/uni-rate/uni-rate.vue"
+	import uniList from "./uniUI//components/uni-list/uni-list.vue"
+	import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
+	import uniIcons from "./uniUI//components/uni-icons/uni-icons.vue"
+	Vue.component('uniList',uniList);
+	Vue.component('uniRate',uniRate);
+	Vue.component('uniListItem',uniListItem);
+	Vue.component('uniIcons',uniIcons);
 
 Vue.config.productionTip = false;
 
@@ -39,8 +41,12 @@ const { windowWidth, windowHeight } = uni.getSystemInfoSync();
 Vue.prototype.$ww = windowWidth;
 Vue.prototype.$wh = windowHeight;
 
+//从缓存中获取用户信息,存入store中
+store.commit('getUserInfo');
+
 App.mpType = 'app'
 const app = new Vue({
+	store,
     ...App
 })
 app.$mount()

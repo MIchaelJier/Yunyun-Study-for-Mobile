@@ -1,27 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex)
+Vue.use(Vuex);
+import { monthDayDiff,formatTime } from "../utils/timeFormat.js"
 const store = new Vuex.Store({  
     state: {  
-        login: false,  
-        token: '',  
-        avatarUrl: '',  
-        userName: ''  
+        userInfo:{}
     },  
     mutations: {  
-        login(state, provider) {  
-            console.log(state)  
-            console.log(provider)  
-            state.login = true;  
-            state.token = provider.token;  
-            state.userName = provider.userName;  
-            state.avatarUrl = provider.avatarUrl;  
-        },  
-        logout(state) {  
-            state.login = false;  
-            state.token = '';  
-            state.userName = '';  
-            state.avatarUrl = '';  
-        }  
+		getUserInfo(state){
+			let u = uni.getStorageSync('userInfo');
+			if(u !== '' ? u.loginTime !== '': false){
+				let gap = monthDayDiff(u.loginTime,new Date());
+				gap.year === 0 && gap.month === 0 && gap.day <= 10 
+					? state.userInfo = u
+					: ''
+			}
+		},
+		changeUserInfo(state, value){
+			state.userInfo = value
+		}
     }  
 })  
+export default store;

@@ -51,7 +51,7 @@
 			}
 		},
 		watch: {
-			'nowSelect':function() {
+			'nowSelect'() {
 				this.$emit('func')
 			},
 		}
