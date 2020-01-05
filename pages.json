@@ -1,6 +1,15 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/index/index",
+			"navigationBarTitleText": "芸云课堂",
+			"style": {
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		},
+		{
             "path" : "pages/phoneLogin/phoneLogin",
             "style" : {
             	"app-plus":{
@@ -16,15 +25,6 @@
 		    }
 		},
 		{
-			"path": "pages/index/index",
-			"navigationBarTitleText": "芸云课堂",
-			"style": {
-				"app-plus":{
-					"titleNView":false
-				}
-			}
-		}
-	    ,{
             "path" : "pages/Mycourse/Mycourse",
 			"navigationBarTitleText": "我的课程",
             "style" : {

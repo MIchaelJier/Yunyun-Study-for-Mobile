@@ -1,15 +1,17 @@
 <template>
-	<view>
-		<view class="inputbox" :style="'border: 1px solid '+ color">
-			<view class="box-icon" >
+	<view :style=" 'display:inline-block;width:'+inputWidth">
+		<view class="inputbox" :style="{border:'1px solid'+color}">
+			<view class="box-icon" v-if="icon !== ''">
 				<uni-icons :type="icon" size="25" color="#bdbdbd"></uni-icons>
 			</view>
 			<input :type="inputType" value="" v-model="text" 
 				   :placeholder="inputPlaceholder" 
 				   :maxlength="maxLen"
+				   @focus="focusColor" @blur="blurColor"
 				   class="box-input"  placeholder-class="box-input-placeholder"
+				   :style="{width:inputWidth}"
 				   />
-			<view class="box-tip" v-show="text !== ''">
+			<view class="box-tip" v-show="text !== '' && icon !== ''">
 				<uni-icons type="clear" size="20" @click="clearInput"></uni-icons>
 				<!-- color="#c5ccd8" -->
 			</view>
@@ -28,7 +30,7 @@
 		props: {
 			icon: {
 			   type: String,
-			   default: 'help-filled'
+			   default: ''
 			},
 			inputType: {
 			   type: String,
@@ -41,11 +43,21 @@
 			maxLen: {
 				type: String || Number,
 				default: '140'
+			},
+			inputWidth: {
+				type: String,
+				default: '100%'
 			}
 		},
 		methods:{
 			clearInput() {
 				this.text = '';
+			},
+			focusColor() {
+				this.color = '#2CC17B'
+			},
+			blurColor() {
+				this.color = '#c5cddb'
 			},
 			emptyWarn() {
 				if(this.text === ''){
@@ -59,7 +71,7 @@
 			'text'(text){	
 				// #ifdef H5
 				if(this.text.length > parseInt(this.maxLen)){
-					this.text = text.slice(0,11)
+					this.text = text.slice(0,this.maxLen)
 				}
 				// #endif
 			}
@@ -69,7 +81,6 @@
 
 <style>
 	.inputbox {
-		width: 100%;
 	    border-radius: 2px;
 	    height: 88rpx;
 	    line-height: 88rpx;

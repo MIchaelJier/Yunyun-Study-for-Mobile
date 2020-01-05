@@ -1,9 +1,15 @@
 <template>
 	<view class="page">
-		<view class="userInfo">
-			<image src="../../static/unLogin.png" mode=""></image>
-			<text>登录/注册</text>
-		</view>
+		<navigator :url="Object.keys(userInfo).length === 0 ? '/pages/chooseLogin/chooseLogin' : ''" hover-class="none">
+			<view class="userInfo" v-if="Object.keys(userInfo).length === 0">
+				<image src="../../static/unLogin.png" mode="" class="userInfo-img"></image>
+				<text>登录/注册</text>
+			</view>
+			<view class="userInfo" v-else>
+				<image :src="userInfo.haedImage" mode="" class="userInfo-img"></image>
+				<text>{{ userInfo.nikename }}</text>
+			</view>
+		</navigator>
 		<uni-list>
 		    <uni-list-item title="我的订单" font-icon="ux-ykt-icon-cash" ></uni-list-item>
 		    <uni-list-item title="我的优惠券" font-icon="ux-ykt-icon-coupon" font-icon-size="12"></uni-list-item>
@@ -22,8 +28,11 @@
 	export default {
 		data() {
 			return {
-				
+				userInfo:{}
 			}
+		},
+		onShow() {
+			this.userInfo = this.$store.getters.basicInfo
 		},
 		methods: {
 			

@@ -6,10 +6,11 @@
 		display: flex;
 		align-items: center;
 	}
-	.userInfo  image {
+	.userInfo-img {
 		width: 100rpx;
 		height: 100rpx;
 		margin-right: 30rpx;
+		border-radius: 50%;
 	}
 	.userInfo text {
 		font-size: 16px;

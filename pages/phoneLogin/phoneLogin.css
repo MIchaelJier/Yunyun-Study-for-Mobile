@@ -60,3 +60,23 @@
 .tipBox-text {
 	margin-left: 10rpx;
 }
+.getsmscode {
+	float: right;
+	width: 35%;
+	height: 88rpx;
+	background: #fff;
+	border: 1px solid #2CC17B;
+	display: inline-block;
+	color: #2CC17B;
+	font-size: 14px;
+	line-height: 88rpx;
+	border-radius: 2px;
+	text-align: center;
+}
+.getsmscode-hover {
+	background: #ade1f5
+}
+.getsmscode-disable {
+	border: 1px solid #c5cddb;
+	color: #C5CDDB;
+}

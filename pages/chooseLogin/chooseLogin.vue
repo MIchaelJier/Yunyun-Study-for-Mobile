@@ -4,7 +4,9 @@
 			<view class="set-wap-top">
 				<view class="set-wap-top-main">
 					<image src="../../static/APPIcon.png" mode="" class="main-image"></image>
-					<view class="main-btn btn-green" hover-class="btn-hover">手机号登录</view>
+					<navigator url="/pages/phoneLogin/phoneLogin" hover-class="none">
+						<view class="main-btn btn-green" hover-class="btn-hover">手机号登录</view>
+					</navigator>
 					<view class="main-btn btn-white" hover-class="btn-hover">手机号快捷注册</view>
 				</view>
 			</view>
@@ -51,7 +53,7 @@
 			}
 		},
 		methods: {
-		
+			
 		}
 	}
 </script>
