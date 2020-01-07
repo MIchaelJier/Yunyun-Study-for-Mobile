@@ -26,7 +26,7 @@ const store = new Vuex.Store({
 	getters: {
 		basicInfo(state) {
 			let u = state.userInfo;
-			return Object.keys(u).length === 0 ? {}:{ nikename:u.nikename ,haedImage:u.haedImage}
+			return Object.keys(u).length === 0 ? {}:{ nikename:u.nikename ,haedImage:u.haedImage, loginWay:u.loginWay}
 		}
 	}
 })  

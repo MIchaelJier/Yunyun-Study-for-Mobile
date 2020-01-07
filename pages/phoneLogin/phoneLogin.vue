@@ -197,6 +197,9 @@
 										//一次性登录
 										that.$store.commit('changeUserInfo',userInfo)
 									}
+									uni.switchTab({
+										url: '/pages/index/index'
+									});
 								}else{
 									that.tipText = '账号或密码错误'
 								}
@@ -255,6 +258,9 @@
 										//一次性登录
 										that.$store.commit('changeUserInfo',userInfo)
 									}
+									uni.switchTab({
+										url: '/pages/index/index'
+									});
 								}else{
 									that.tipText = '账号或密码错误'
 								}

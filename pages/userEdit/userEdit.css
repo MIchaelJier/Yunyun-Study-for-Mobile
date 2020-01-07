@@ -1,0 +1,37 @@
+.page{
+	background: #f4f4f4;
+}
+.editAccount-box{
+	
+}
+.box-acount{
+	height: 80rpx;
+	padding: 40rpx 30rpx;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	color: #333740;
+	background: #fff;
+}
+.account-img {
+	width: 100rpx;
+	height: 100rpx;
+	margin-right: 30rpx;
+	border-radius: 50%;
+}
+.box-edit {
+	font-size: 13px;
+	color: #36B378;
+}
+.quitBtn {
+	position: fixed;
+	bottom: 55rpx;
+	left: 7%;
+	border: 1px solid #FF4400;
+	color: #FF4400;
+	width: 86%;
+	height: 86rpx;
+	text-align: center;
+	line-height: 86rpx;
+	font-size: 16px;
+}

@@ -1,13 +1,17 @@
 <template>
 	<view class="page">
-		<navigator :url="Object.keys(userInfo).length === 0 ? '/pages/chooseLogin/chooseLogin' : ''" hover-class="none">
-			<view class="userInfo" v-if="Object.keys(userInfo).length === 0">
+		<navigator :url="Object.keys(userInfo).length === 0 ? '/pages/chooseLogin/chooseLogin' : '/pages/userEdit/userEdit'" hover-class="none">
+			<view class="userInfo" hover-class="userInfo-active" v-if="Object.keys(userInfo).length === 0">
 				<image src="../../static/unLogin.png" mode="" class="userInfo-img"></image>
 				<text>登录/注册</text>
 			</view>
-			<view class="userInfo" v-else>
+			<view class="userInfo" hover-class="userInfo-active" v-else>
 				<image :src="userInfo.haedImage" mode="" class="userInfo-img"></image>
-				<text>{{ userInfo.nikename }}</text>
+				<view class="userInfo-msg">
+					<text>{{ userInfo.nikename }}</text>
+					<text class="msg-way">正在使用{{ loginWay }}账号登陆</text>
+				</view>
+				<uni-icons type="arrowright" size="20" color="#999"></uni-icons>
 			</view>
 		</navigator>
 		<uni-list>
@@ -28,11 +32,25 @@
 	export default {
 		data() {
 			return {
-				userInfo:{}
+				userInfo:{},
+				loginWay:''
 			}
 		},
 		onShow() {
-			this.userInfo = this.$store.getters.basicInfo
+			this.userInfo = this.$store.getters.basicInfo;
+			if(Object.keys(this.userInfo).length !== 0) {
+				 switch (this.userInfo.loginWay){
+				 	case 1:
+						this.loginWay = '手机'
+				 		break;
+				 	case 2:
+				 		this.loginWay = 'QQ'
+				 		break;
+					case 3:
+						this.loginWay = '微信'
+						break;
+				 }
+			}
 		},
 		methods: {
 			

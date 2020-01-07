@@ -28,7 +28,7 @@
 			  type: String,
 			  default: ''
 			}, 
-			url: {  // 列表跳转
+			url: {   // 列表跳转
 			  type: String,
 			  default: ''
 			}, 

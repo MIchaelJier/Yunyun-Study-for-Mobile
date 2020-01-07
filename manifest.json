@@ -16,7 +16,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "OAuth" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -49,7 +51,13 @@
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "oauth" : {
+                    "qq" : {
+                        "appid" : "101825637"
+                    }
+                }
+            }
         }
     },
     /* 快应用特有相关 */
@@ -75,6 +83,9 @@
     "h5" : {
         "devServer" : {
             "https" : false
+        },
+        "router" : {
+            "mode" : "hash"
         }
     }
 }
