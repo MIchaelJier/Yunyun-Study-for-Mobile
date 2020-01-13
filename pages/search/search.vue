@@ -153,7 +153,6 @@
 					   }
 					  }).then(res => {
 							if(res.data.status === '200'){
-								console.log(res.data)
 								that.searchResultArr = res.data.data;
 								that.initDone = true
 							}
@@ -168,7 +167,6 @@
 					   method: 'GET',
 					  }).then(res => {
 							if(res.data.status === '200'){
-								console.log(res.data)
 								that.$data[d] = res.data.data;
 								resolve();
 							}
@@ -191,7 +189,6 @@
 				  }).then(res => {
 						that.showSort = that.showSelect  = false;
 						if(res.data.status === '200'){
-							console.log(res.data)
 							that.searchResultArr = res.data.data;
 						}
 				});

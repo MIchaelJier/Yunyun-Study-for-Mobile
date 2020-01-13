@@ -181,7 +181,6 @@
 					   }
 					  }).then(res => {
 							if(res.data.status === '200'){
-								console.log(res.data)
 								if(res.data.data['truepass']){
 									let userInfo = res.data.data;
 									that.tipText = ''
@@ -242,7 +241,6 @@
 					   }
 					  }).then(res => {
 							if(res.data.status === '200'){
-								console.log(res.data)
 								if(res.data.data['truepass']){
 									let userInfo = res.data.data;
 									that.tipText = ''

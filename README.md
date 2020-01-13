@@ -9,6 +9,7 @@
 │  ├─yunBox.vue                 // 图片+文字说明 的特殊盒子
 │  ├─yunHeader.vue              // 页面导航栏
 │  ├─yunInput.vue               // 页面输入框
+│  ├─yunModal.vue		        // 拟态框
 │  ├─yunMoveVerify.vue          // 滑动验证组件
 │  ├─yunSelect.vue              // (搜索页)下拉选择卡组件
 │  ├─yunSwiper.vue              // 轮播图组件

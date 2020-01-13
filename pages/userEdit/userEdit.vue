@@ -4,11 +4,13 @@
 			<view class="box-acount">
 				<image :src="userInfo.haedImage" mode="" class="account-img"></image>
 				<text style="flex:1">{{ userInfo.nikename }}</text>
-				<text class="box-edit">编辑</text>
+				<text class="box-edit" @tap="tapEdit('input')">编辑</text>
 			</view>
 		</view>
 		<!-- 退出登录按钮 -->
-		<view class="quitBtn" @click="quit">退出登录</view>
+		<view class="quitBtn" @tap="tapEdit('default')">退出登录</view>
+		<!-- 拟态框 -->
+		<yun-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask></yun-modal>
 	</view>
 </template>
 
@@ -17,25 +19,52 @@
 		data() {
 			return {
 				userInfo:{},
+				value:false,
+				type:'default',
+				data:{},
+				defaultData:{title:'提示',content:'确认退出登录？',cancelText:'取消',confirmColor:'#f00'},
+				inputData:{
+					title:'修改昵称',
+					content:[
+						{content:'',type:'text',placeholder:'请输入新昵称',borderColor:'#ddd',focus:true},
+					],
+					tip:{main:'',color:'red'}
+				}
 			}
 		},
 		methods: {
-			quit(){
-				let that = this;
-				uni.showModal({
-				    title: '提示',
-				    content: '确定退出登录？',
-				    success: function (res) {
-				        if (res.confirm) {
-				            that.$store.commit('changeUserInfo',{});
-							uni.removeStorageSync('userInfo');
-							uni.switchTab({
-								url: '/pages/index/index'
-							});
-				        } 
-				    }
-				});
-			}
+			tapEdit(type) {
+				this.type = type
+				this.value = !this.value;
+				// this.data = this.inputData;
+				switch(this.type){
+					case 'default':
+						this.data = this.defaultData;
+						break;
+					case 'input':
+						this.data = this.inputData;
+						this.inputData.content[0].content = this.userInfo.nikename
+						break;
+						}
+			},
+			onConfirm() {
+				switch(this.type){
+					case 'default':
+						//退出登录
+						this.$store.commit('changeUserInfo',{});
+						uni.removeStorageSync('userInfo');
+						uni.switchTab({
+							url: '/pages/index/index'
+						});
+						break;
+					case 'input':
+						//传给后台更改数据
+						break;
+				}
+			},
+			cancel(){
+				console.log('用户点击取消');
+			},
 		},
 		onShow() {
 			this.userInfo = this.$store.getters.basicInfo;
@@ -44,7 +73,7 @@
 					url:'/pages/chooseLogin/chooseLogin'
 				})
 			}
-		}
+		},
 	}
 </script>
 	

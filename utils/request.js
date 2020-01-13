@@ -29,7 +29,8 @@ export const request = (params) => {
 			header:header,
 			url:baseUrl + params.url,
 			success:(res) => {
-				resolve(res)
+				console.log(res.data);
+				resolve(res);
 			},
 			fail:(err) => {
 				reject(err)

@@ -1,7 +1,7 @@
 <template>
 	<view class="page">
-		<navigator :url="Object.keys(userInfo).length === 0 ? '/pages/chooseLogin/chooseLogin' : '/pages/userEdit/userEdit'" hover-class="none">
-			<view class="userInfo" hover-class="userInfo-active" v-if="Object.keys(userInfo).length === 0">
+		<navigator :url="JSON.stringify(userInfo) === '{}' ? '/pages/chooseLogin/chooseLogin' : '/pages/userEdit/userEdit'" hover-class="none">
+			<view class="userInfo" hover-class="userInfo-active" v-if="JSON.stringify(userInfo) === '{}'">
 				<image src="../../static/unLogin.png" mode="" class="userInfo-img"></image>
 				<text>登录/注册</text>
 			</view>
