@@ -81,6 +81,15 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/order/order",
+            "navigationBarTitleText": "我的订单",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

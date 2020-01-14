@@ -69,7 +69,12 @@
 								   newNikename,
 							   }
 							  }).then(res => {
-								  uni.showToast({title:res.data.data.tip,icon:'none',duration:1000})
+								  //更改页面 、缓存 和 vuex的保存值
+								  this.userInfo.nikename = newNikename;
+								  this.$store.commit('changeUserInfoAttr',{value:newNikename,key:'nikename'}); 
+								  uni.setStorageSync('userInfo', this.$store.state.userInfo);
+								  //更改成功 toast提示
+								  uni.showToast({title:res.data.data.tip,icon:'none',duration:1000});
 							  })
 						}
 						break;

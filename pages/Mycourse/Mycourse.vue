@@ -50,7 +50,7 @@
 				 my_microSpecialty:[],
 				 
 				 tabs:['我的课程','我的微专业'],
-				 scrollTop:211,
+				 scrollTop:0,
 			}
 		},
 		onLoad() {

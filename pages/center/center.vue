@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<navigator :url="JSON.stringify(userInfo) === '{}' ? '/pages/chooseLogin/chooseLogin' : '/pages/userEdit/userEdit'" hover-class="none">
+		<view @click="jumpto(0)">
 			<view class="userInfo" hover-class="userInfo-active" v-if="JSON.stringify(userInfo) === '{}'">
 				<image src="../../static/unLogin.png" mode="" class="userInfo-img"></image>
 				<text>登录/注册</text>
@@ -13,12 +13,12 @@
 				</view>
 				<uni-icons type="arrowright" size="20" color="#999"></uni-icons>
 			</view>
-		</navigator>
+		</view>
 		<uni-list>
-		    <uni-list-item title="我的订单" font-icon="ux-ykt-icon-cash" ></uni-list-item>
-		    <uni-list-item title="我的优惠券" font-icon="ux-ykt-icon-coupon" font-icon-size="12"></uni-list-item>
-			<uni-list-item title="我的购物车" font-icon="ux-ykt-icon-cart" ></uni-list-item>
-			<uni-list-item title="我的学习卡" font-icon="ux-ykt-icon-xuexiqia" font-icon-size="12"></uni-list-item>
+		    <uni-list-item title="我的订单" font-icon="ux-ykt-icon-cash" @click="jumpto(1)"></uni-list-item>
+		    <uni-list-item title="我的优惠券" font-icon="ux-ykt-icon-coupon" font-icon-size="12" @click="jumpto(2)"></uni-list-item>
+			<uni-list-item title="我的购物车" font-icon="ux-ykt-icon-cart"  @click="jumpto(3)"></uni-list-item>
+			<uni-list-item title="我的学习卡" font-icon="ux-ykt-icon-xuexiqia" font-icon-size="12" @click="jumpto(4)"></uni-list-item>
 		</uni-list>
 		<view class="blackMargin"></view>
 		<uni-list>
@@ -28,12 +28,30 @@
 </template>
 
 <script>
-	
 	export default {
 		data() {
 			return {
 				userInfo:{},
 				loginWay:''
+			}
+		},
+		methods:{
+			jumpto(id){
+				let url = '';
+				const actions = new Map([
+				  [0, ()=>{url='/pages/userEdit/userEdit'}],
+				  [1, ()=>{url='/pages/order/order'}],
+				  [2, ()=>{console.log('开发中')}],
+				  [3, ()=>{console.log('开发中')}],
+				  [4, ()=>{console.log('开发中')}],
+				  [false, ()=>{url='/pages/chooseLogin/chooseLogin'}],
+				]);
+				//执行
+				(actions.get(JSON.stringify(this.userInfo) !== '{}' && id) || actions.get('default')).call(this);
+				
+				uni.navigateTo({
+					url,
+				})
 			}
 		},
 		onShow() {
@@ -51,9 +69,6 @@
 						break;
 				 }
 			}
-		},
-		methods: {
-			
 		},
 	}
 </script>
