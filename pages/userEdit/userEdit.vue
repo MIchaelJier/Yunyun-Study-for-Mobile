@@ -10,7 +10,7 @@
 		<!-- 退出登录按钮 -->
 		<view class="quitBtn" @tap="tapEdit('default')">退出登录</view>
 		<!-- 拟态框 -->
-		<yun-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask></yun-modal>
+		<yun-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" ref="myModel"></yun-modal>
 	</view>
 </template>
 
@@ -59,6 +59,19 @@
 						break;
 					case 'input':
 						//传给后台更改数据
+						if(this.$refs.myModel.mData.tip.main === ''){
+							let newNikename = this.$refs.myModel.mData.content[0].content;
+							console.log(newNikename);
+							this.$request({
+							   url: '/changeNike',
+							   method: 'POST',
+							   data:{
+								   newNikename,
+							   }
+							  }).then(res => {
+								  uni.showToast({title:res.data.data.tip,icon:'none',duration:1000})
+							  })
+						}
 						break;
 				}
 			},
@@ -74,6 +87,37 @@
 				})
 			}
 		},
+		mounted() { //this.$refs.myModel获取值必须在mounted及之后
+			//复杂对象监视
+			this.$watch(
+				function(){ //监听的属性
+					// H5有效
+					// return this.data.hasOwnProperty('content') ? this.data.content[0].content : '';
+					return this.$refs.myModel.mData.hasOwnProperty('content') ? this.$refs.myModel.mData.content[0].content : ''
+				},
+				function(old,oldval){
+					switch (old){
+						case '':
+							this.inputData.content[0].borderColor = '#f00';
+							this.inputData.content[0].content = '';
+							this.inputData.tip.main = '昵称不能为空';
+							break;
+						case this.userInfo.nikename:
+							this.inputData.content[0].borderColor = '#f00';
+							this.inputData.tip.main = '昵称不能相同';
+							break;
+						default:
+							this.inputData.content[0].borderColor = '#ddd';
+							this.inputData.content[0].content = old
+							this.inputData.tip.main = '';
+					}
+				},
+				// function(){
+				// 	deep: true
+				// }
+			)
+		}
+
 	}
 </script>
 	

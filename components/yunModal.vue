@@ -96,9 +96,11 @@
 		methods:{
 			//键盘事件
 			inputFocus(e){
+				//#ifdef H5 || MP-WEIXIN
 				if(e.detail.hasOwnProperty('height')){
 					this.bottom = e.detail.height
 				}
+				//#endif
 			},
 			inputBlur(){
 				this.bottom = 0
@@ -294,7 +296,7 @@
 		background-color: #fff;
 		border-radius: 6rpx;
 		margin-bottom: 0;
-		transition: all .5s;
+		transition: margin-bottom .5s;
 		.title{
 			height: 100rpx;
 			display: flex;
