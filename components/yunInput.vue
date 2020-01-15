@@ -41,7 +41,7 @@
 				default: ''
 			},
 			maxLen: {
-				type: String || Number,
+				type: [String, Number],
 				default: '140'
 			},
 			inputWidth: {

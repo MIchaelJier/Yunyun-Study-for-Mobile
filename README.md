@@ -20,9 +20,11 @@
 │  ├─center                     // 个人中心
 │  ├─chooseLogin                // 选择登陆方式页
 │  ├─classification             // 分类页
-│  ├─Coursedetails              // 课程详情页
+│  ├─classification             // 分类页
+│  ├─coupon                     // 优惠券页
 │  ├─index                      // 主页
 │  ├─Mycourse                   // 我的课程页
+│  ├─order                      // 订单页
 │  ├─phoneLogin                 // 账号密码登陆页
 │  ├─search                     // 搜索页
 │  └─userEdit	                // 用户信息页
@@ -63,4 +65,6 @@ yapi（模拟接口管理）：服务器9000端口.
  7. 选择登录页（第三方登陆 x）
  8. 账号密码登录页
  9. 用户信息页
+ 10. 我的订单
+ 11. 我的优惠券
  

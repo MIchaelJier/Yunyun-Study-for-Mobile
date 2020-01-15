@@ -1,0 +1,35 @@
+.page {
+	background: #FFF;
+}
+.exchange {
+	height: 80rpx;
+	width: clac(100% - 40rpx);
+	background: #F6F6F6;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 4rpx 10rpx 4rpx 30rpx;
+}
+	.exchange-input {
+		padding: 0 0 0 40rpx;
+		width: calc(100% - 140rpx);
+		height: 60rpx;
+		border-radius: 50rpx;
+		border: 1px solid #ddd;
+		background: #fff;
+	}
+		.exchange-input-placeholder {
+			font-size: 14px;
+			color: #bbb;
+		}
+	.exchange-btn {
+		width: 100rpx;
+		height: 80rpx;
+		line-height: 80rpx;
+		font-size: 15px;
+		color: #70788c;
+		text-align: center;
+	}
+
+
+

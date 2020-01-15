@@ -90,6 +90,15 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/coupon/coupon",
+            "navigationBarTitleText": "我的优惠券",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

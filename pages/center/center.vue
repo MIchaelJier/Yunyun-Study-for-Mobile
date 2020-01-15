@@ -41,7 +41,7 @@
 				const actions = new Map([
 				  [0, ()=>{url='/pages/userEdit/userEdit'}],
 				  [1, ()=>{url='/pages/order/order'}],
-				  [2, ()=>{console.log('开发中')}],
+				  [2, ()=>{url='/pages/coupon/coupon'}],
 				  [3, ()=>{console.log('开发中')}],
 				  [4, ()=>{console.log('开发中')}],
 				  [false, ()=>{url='/pages/chooseLogin/chooseLogin'}],
