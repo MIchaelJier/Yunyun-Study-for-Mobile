@@ -42,7 +42,7 @@
 				  [0, ()=>{url='/pages/userEdit/userEdit'}],
 				  [1, ()=>{url='/pages/order/order'}],
 				  [2, ()=>{url='/pages/coupon/coupon'}],
-				  [3, ()=>{console.log('开发中')}],
+				  [3, ()=>{url='/pages/cart/cart'}],
 				  [4, ()=>{console.log('开发中')}],
 				  [false, ()=>{url='/pages/chooseLogin/chooseLogin'}],
 				]);

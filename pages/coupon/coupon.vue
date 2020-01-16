@@ -14,10 +14,11 @@
 				</template>
 				<template v-slot:1>
 					<!-- 已使用 -->
-					<coupon-item :couponList="usedlist" :name="tabs[0]"></coupon-item>
+					<coupon-item :couponList="usedlist" :name="tabs[1]"></coupon-item>
 				</template>
 				<template v-slot:2>
 					<!-- 已过期 -->
+					<coupon-item :couponList="Expiredlist" :name="tabs[2]"></coupon-item>
 				</template>
 			</yun-tab>
 		</view>
@@ -36,9 +37,9 @@
 			}
 		},
 		computed:{
-			 uselist(){return this.couponList.filter((item) => !item.used&&TimeDiff(item.endTime)  )},
-			 usedlist(){return this.couponList.filter((item) => item.used )},
-			 Expiredlist(){return this.couponList.filter((item) => !item.used&&!TimeDiff(item.endTime) )},
+			 uselist(){  return this.couponList.filter(  (item) => !item.used&&TimeDiff(item.endTime)  )},
+			 usedlist(){  return this.couponList.filter(  (item) => item.used )},
+			 Expiredlist(){  return this.couponList.filter(  (item) => !item.used&&!TimeDiff(item.endTime) )},
 		},
 		components: {
 			couponItem

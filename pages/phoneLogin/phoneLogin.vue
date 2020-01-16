@@ -46,7 +46,7 @@
 			<!-- 选择框 开始 -->
 			<checkbox-group class="unloginBtn"  @change="changeFlag">
 			    <label>
-			        <checkbox style="transform:scale(0.7)" checked="true">
+			        <checkbox style="transform:scale(0.7)" checked="true" color="#2CC17B">
 						<text class="checkbox-first">十天内免登录</text>
 						<text>忘记密码?</text>
 				    </checkbox>

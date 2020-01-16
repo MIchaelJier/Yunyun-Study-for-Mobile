@@ -46,7 +46,7 @@ Vue.prototype.$ww = windowWidth;
 Vue.prototype.$wh = windowHeight;
 
 //从缓存中获取用户信息,存入store中
-store.commit('getUserInfo');
+// store.commit('getUserInfo');
 
 App.mpType = 'app'
 const app = new Vue({

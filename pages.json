@@ -99,6 +99,15 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/cart/cart",
+            "navigationBarTitleText": "我的购物车",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

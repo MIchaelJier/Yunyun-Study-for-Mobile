@@ -1,0 +1,11 @@
+.page {
+	background: #EDEFF2;
+}
+.total {
+	padding: 0 20rpx;
+    height: 68rpx;
+    line-height: 68rpx;
+    font-size: 12px;
+	background: #fff;
+}
+

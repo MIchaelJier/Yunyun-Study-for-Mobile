@@ -36,10 +36,10 @@ export const monthDayDiff = (startDate, endDate) => {
 
 /*
 *	判断时间是否大于当前时间
-* 	@param time 格式:xxxx-xx-xx xx:xx
+* 	@param time 格式:xxxx-xx-xx xx:xx || xxxx.xx.xx xx:xx
 * */
 export const TimeDiff = time => {
-	  let otime=new Date(Date.parse(time .replace(/-/g,"/")+':00')),
+	  let otime=new Date(Date.parse(time.replace(/-|\./g,"/")+':00')),
 		  curtime=new Date();
 	  if(otime > curtime) return true
 	  else return false

@@ -1,14 +1,14 @@
 <script>
 	export default {
-		// onLaunch: function() {
-		// 	console.log('App Launch')
-		// },
+		onLaunch: function() {
+			this.$store.commit('getUserInfo')
+		},
 		// onShow: function() {
-		// 	console.log('App Show')
+		// 	this.$store.commit('getUserInfo')
 		// },
-		// onHide: function() {
-		// 	console.log('App Hide')
-		// }
+		onHide: function() {
+			console.log('同步')
+		}
 	}
 </script>
 
@@ -28,6 +28,5 @@
 		padding-top:var(--status-bar-height)
 		/* #endif */
 	} 
-	
 	
 </style>
