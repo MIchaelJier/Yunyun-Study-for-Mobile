@@ -8,4 +8,57 @@
     font-size: 12px;
 	background: #fff;
 }
+.count {
+	height: 96rpx;
+	width: 100%;
+	background: #FFF;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+}
+	.count-checkbox {
+		transform:scale(0.6);
+		height: 100%;
+		padding-left: 15rpx;
+	}
+	.count-msg {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		text-align: right;
+		font-size: 12px;
+		padding: 10rpx 20rpx;
+		line-height: 36rpx;
+		color: #3C4A55;
+	}
+	.count-btn {
+		border: 1px solid #ccc;
+		width: 180rpx;
+		height: 96rpx;
+		color: #fff;
+		font-size: 14px;
+		line-height:96rpx;
+		text-align: center;
+	}
+.none {
+	height: 50vh;
+	width: 100%;
+	display: flex;
+	flex-direction:column;
+	justify-content: flex-end;
+	align-items: center;
+}
+	.noimg {
+		width: 200rpx;
+		height: 136rpx;
+	}
+	.nodata {
+		width: 80%;
+		text-align: center;
+		line-height: 2;
+		font-size: 15px;
+		color: #99a4bf;
+		margin: 20rpx auto;
+		margin-bottom: 0;
+	}
 

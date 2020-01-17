@@ -1,13 +1,16 @@
 <template>
 	<view>
 		<view class="cart-item">
-			<view class="item-title">
-				<checkbox value="cb" checked="true" color="#ff632a" style="transform:scale(0.6)"/>
+			<checkbox-group class="item-title" :data-id="ownerMsg.ownerId" @change="allCheck">
+				<checkbox :value="ownerMsg.ownerId" :checked="allChecked" color="#ff632a" style="transform:scale(0.6)"/>
 				<text>{{ ownerMsg.ownername }}</text>
-			</view>
-			<checkbox-group class="item-courses">
+			</checkbox-group>
+			<checkbox-group class="item-courses" :data-id="ownerMsg.ownerId" @change="courseCheck">
 				<label class="course" v-for="course in cartList" :key="course.productId">
-					<checkbox :value="course.discountPrice" checked="true" color="#ff632a" class="course-checkbox"/>
+					<checkbox :value="course.productId" :data-id="course.productId"
+					:checked="course.checked" 
+					color="#ff632a" class="course-checkbox"
+					/>
 					<view class="course-body">
 						<image :src="course.photoUrl" mode="scaleToFill" class="course-img"></image>
 						<view class="course-msg">
@@ -21,7 +24,7 @@
 				<view class="item-courses-bottom">
 					<view class="bottom-main">
 						<text>该机构小结：</text>
-						<text style="color: #FF4400;font-size: 14px;">￥99.00</text>
+						<text style="color: #FF4400;font-size: 14px;">￥{{ totalCount }}</text>
 					</view>
 				</view>
 			</checkbox-group>
@@ -30,11 +33,21 @@
 </template>
 
 <script>
+	import { toDecimal } from '../../utils/myMath.js'
 	export default {
 		data() {
 			return {
 				
 			};
+		},
+		computed:{
+			totalCount(){
+				let total = 0;
+				this.cartList.forEach( course => {
+					if(course.checked) total += parseFloat(course.discountPrice)
+				})
+				return toDecimal(total)
+			}
 		},
 		props:{
 			cartList: {
@@ -49,7 +62,23 @@
 			    	return {};
 			    }
 			},
+			allChecked: {
+			    type: Boolean,
+				default:false,
+			},
 		},
+		methods:{
+			allCheck(e){
+				this.$emit('itemCheck',e.currentTarget.dataset.id)
+			},
+			courseCheck(e){
+				let detail = {
+					key:e.currentTarget.dataset.id,
+					value:e.detail.value
+				}
+				this.$emit('courseCheck',detail)
+			},
+		}
 	}
 </script>
 
