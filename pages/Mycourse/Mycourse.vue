@@ -3,7 +3,7 @@
 		<yun-tab :tabs="tabs" :scrollTop="scrollTop">
 			<template v-slot:0>
 				<view class="none" v-if="my_courses.length < 1">
-				  <image src="../../static/newBlank.png" alt="空结果" mode="widthFix"/>
+				  <image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix"/>
 				  <text class="nodata">未开始学习哦~</text>
 				  <button type="primary" class="none-btn" >去发现值得学习的课程</button>
 				</view>
@@ -24,7 +24,7 @@
 			</template>
 			<template v-slot:1>
 				<view class="none" v-if="my_microSpecialty.length<1">
-				  <image src="../../static/newBlank.png" alt="空结果" mode="widthFix"/>
+				  <image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix"/>
 				  <text class="nodata">未学习微专业哦~</text>
 				  <button type="primary" class="none-btn" >去发现精彩微专业</button>
 				</view>	  

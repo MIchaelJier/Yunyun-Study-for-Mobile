@@ -2,7 +2,7 @@
 	<view class="page">
 		<view @click="jumpto(0)">
 			<view class="userInfo" hover-class="userInfo-active" v-if="JSON.stringify(userInfo) === '{}'">
-				<image src="../../static/unLogin.png" mode="" class="userInfo-img"></image>
+				<image src="../../static/images/unLogin.png" mode="" class="userInfo-img"></image>
 				<text>登录/注册</text>
 			</view>
 			<view class="userInfo" hover-class="userInfo-active" v-else>

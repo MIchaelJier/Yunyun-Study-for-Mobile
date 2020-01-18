@@ -38,7 +38,7 @@
 	.header-logo {
 		width: 240rpx;
 		height: 60rpx;
-		background-image: url(../static/headerIcon.png);
+		background-image: url(../static/images/headerIcon.png);
 		margin-left: 20rpx;
 	}
 	.header-search ,
@@ -60,6 +60,6 @@
 		width: 30rpx;
 		height: 30rpx;
 		margin-right: 50rpx;
-		background-image: url(../static/searchIcon.png);
+		background-image: url(../static/images/searchIcon.png);
 	}
 </style>

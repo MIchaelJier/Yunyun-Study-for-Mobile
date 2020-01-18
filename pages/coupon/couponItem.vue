@@ -27,7 +27,7 @@
 			</block>
 		</view>
 		<view class="none" v-else>
-			<image src="../../static/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
+			<image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
 			<text class="nodata">您还没有{{ name }}的优惠券</text>
 		</view>
 	</view>

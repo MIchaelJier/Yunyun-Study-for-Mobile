@@ -108,6 +108,15 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/payConfirm/payConfirm",
+            "navigationBarTitleText": "确认订单",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

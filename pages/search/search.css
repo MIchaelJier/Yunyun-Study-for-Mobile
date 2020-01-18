@@ -16,7 +16,7 @@
 		top: calc( 10rpx + 68rpx / 2 - 30rpx / 2 );
 		width: 30rpx;
 		height: 30rpx;
-		background-image: url(../../static/searchIcon.png);
+		background-image: url(../../static/images/searchIcon.png);
 		background-size: cover;
 	}
 	.searchBar-delIcon {

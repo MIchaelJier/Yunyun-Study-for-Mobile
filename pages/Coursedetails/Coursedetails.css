@@ -239,7 +239,7 @@
 	.totalStar-right-star {
 		height: 42px;
 		width: 40px;
-		background-image: url(../../static/starRate.png);
+		background-image: url(../../static/images/starRate.png);
 		background-size: 100% 100%;
 		display: inline-block;
 		float: left;

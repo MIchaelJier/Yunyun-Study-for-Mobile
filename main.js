@@ -29,10 +29,14 @@ Vue.prototype.$store = store
 	import uniList from "./uniUI//components/uni-list/uni-list.vue"
 	import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
 	import uniIcons from "./uniUI//components/uni-icons/uni-icons.vue"
+	import uniCollapse from './uniUI//components/uni-collapse/uni-collapse.vue'
+	import uniCollapseItem from './uniUI//components/uni-collapse-item/uni-collapse-item.vue'
 	Vue.component('uniList',uniList);
 	Vue.component('uniRate',uniRate);
 	Vue.component('uniListItem',uniListItem);
 	Vue.component('uniIcons',uniIcons);
+	Vue.component('uniCollapse',uniCollapse);
+	Vue.component('uniCollapseItem',uniCollapseItem);
 
 Vue.config.productionTip = false;
 

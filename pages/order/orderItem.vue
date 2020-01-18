@@ -29,7 +29,7 @@
 			</block>
 		</view>
 		<view v-else class="none">
-			<image src="../../static/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
+			<image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
 			<text class="nodata">您还没有{{ name }}订单</text>
 		</view>
 	</view>

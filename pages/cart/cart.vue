@@ -11,16 +11,18 @@
 			</block>
 		</view>
 		<view v-else class="none">
-			<image src="../../static/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
+			<image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
 			<text class="nodata">您的购物车空空如也</text>
 		</view>
-		<checkbox-group class="count" @change="allCheck">
+		<checkbox-group class="count xBottom" @change="allCheck">
 			<label><checkbox value="all" :checked="allcheckedFlag" color="#ff632a" class="count-checkbox"/></label>
 			<view class="count-msg">
 				<view><text>合计：</text><text style="color: #FF4400;">￥{{ totalCount }}</text></view>
 				<text>若有优惠, 将在订单结算页面减扣</text>
 			</view>
-			<view class="count-btn" :style="{background:totalCount == 0 ?'#CED1DA':'#FF632A'}">去结算</view>
+			<view class="count-btn" 
+			:style="{background:totalCount == 0 ?'#CED1DA':'#FF632A'}"
+			@click="gotoPay">去结算</view>
 		</checkbox-group>
 	</view>
 </template>
@@ -51,6 +53,12 @@
 			cartItem
 		},
 		methods: {
+			gotoPay(){
+				if(this.totalCount != 0)
+				uni.navigateTo({
+					url:'/pages/payConfirm/payConfirm'
+				})
+			},
 			courseCheck(ids){
 				this.cartList.forEach(item => {
 					if(item.ownerDto.ownerId === ids.key){

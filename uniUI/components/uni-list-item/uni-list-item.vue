@@ -7,9 +7,11 @@
     <view class="uni-list-item__container">
       <view
         v-if="thumb"
-        class="uni-list-item__icon"><image
+        class="uni-list-item__icon">
+		<image
           :src="thumb"
-          class="uni-list-item__icon-img" /></view>
+          class="uni-list-item__icon-img" 
+		  :style="thumbStyle"/></view>
 	  <view
 		v-if="fontIcon" :style="{ fontSize: fontIconSize + 'px'}"
 		class="uni-list-item__icon"><view
@@ -17,14 +19,17 @@
       <view
         v-else-if="showExtraIcon"
         class="uni-list-item__icon">
-        <uni-icons
-          :color="extraIcon.color"
-          :size="extraIcon.size"
-          :type="extraIcon.type"
-          class="uni-icon-wrapper" />
+		<view :style="extraIconStyle">
+			<uni-icons
+			  :color="extraIconColor"
+			  :size="extraIconSize"
+			  :type="extraIconType"
+			  class="uni-icon-wrapper" />
+		</view>
       </view>
       <view class="uni-list-item__content">
-        <view class="uni-list-item__content-title">{{ title }}</view>
+        <view class="uni-list-item__content-title" 
+		:style="{fontSize:titleSize + 'px'}">{{ title }}</view>
         <view
           v-if="note"
           class="uni-list-item__content-note">{{ note }}</view>
@@ -66,6 +71,10 @@ export default {
       type: String,
       default: ''
     }, // 列表标题
+	titleSize: {
+	  type: [Number, String],
+	  default: '15'
+	},//标题字体大小
     note: {
       type: String,
       default: ''
@@ -110,6 +119,10 @@ export default {
       type: String,
       default: ''
     },
+	thumbStyle: {
+	  type: String,
+	  default: ''
+	},
 	fontIcon: {
       // 字体图标
       type: String,
@@ -125,16 +138,23 @@ export default {
       type: [Boolean, String],
       default: false
     },
-    extraIcon: {
-      type: Object,
-      default () {
-        return {
-          type: 'contact',
-          color: '#000000',
-          size: 20
-        }
-      }
-    }
+	//extra-icon Object
+		 extraIconType: {
+			type: String,
+			default: 'contact' 
+		 },
+		 extraIconColor: {
+			type: String,
+			default: '#000' 
+		 },
+		 extraIconSize: {
+			type: [Number,String],
+			default: 20
+		 },
+		 extraIconStyle: {
+			type: String,
+			default: ''
+		 },
   },
   data () {
     return {}
