@@ -1,7 +1,25 @@
 <script>
 	export default {
 		onLaunch: function() {
-			this.$store.commit('getUserInfo')
+			this.$store.commit('getUserInfo');
+			if(this.$store.getters.IsLogin){
+				this.$request({
+				   url: '/getCart',
+				   method: 'GET',
+				  }).then(res => {
+						if(res.data.status === '200'){
+							let list = res.data.data.list;
+							list.forEach(item => {
+								item.checked = false;
+								item.list.forEach(course => {
+									course.checked = false;
+								})
+							});
+							this.$store.commit('changeCartList',list);
+							this.$store.commit('changeCartflag',true);
+						}
+				})
+			};
 		},
 		// onShow: function() {
 		// 	this.$store.commit('getUserInfo')

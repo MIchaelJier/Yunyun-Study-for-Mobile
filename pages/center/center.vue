@@ -47,7 +47,7 @@
 				  [false, ()=>{url='/pages/chooseLogin/chooseLogin'}],
 				]);
 				//执行
-				(actions.get(JSON.stringify(this.userInfo) !== '{}' && id) || actions.get('default')).call(this);
+				(actions.get(this.$store.getters.IsLogin && id) || actions.get('default')).call(this);
 				
 				uni.navigateTo({
 					url,
@@ -56,7 +56,7 @@
 		},
 		onShow() {
 			this.userInfo = this.$store.getters.basicInfo;
-			if(Object.keys(this.userInfo).length !== 0) {
+			if(this.$store.getters.IsLogin) {
 				 switch (this.userInfo.loginWay){
 				 	case 1:
 						this.loginWay = '手机'

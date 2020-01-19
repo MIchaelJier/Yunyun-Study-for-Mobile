@@ -4,6 +4,10 @@
 		<view class="uni-collapse-cell__title" @click="onClick">
 			<image v-if="thumb" :src="thumb" class="uni-collapse-cell__title-img" />
 			<text class="uni-collapse-cell__title-text">{{ title }}</text>
+			<view class="uni-collapse-cell__title-addtext" v-if="showadd">
+				<image :src="addthumb" class="uni-collapse-cell__title-addtext-addimg" />
+				<text>{{ addtext }}</text>
+			</view>
 			<!-- #ifdef MP-ALIPAY -->
 			<view :class="{ 'uni-collapse-cell__title-arrow-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
 			 class="uni-collapse-cell__title-arrow">
@@ -60,6 +64,21 @@
 				// 缩略图
 				type: String,
 				default: ''
+			},
+			showadd: {
+				// 是否显示增加内容
+				type: Boolean,
+				default: false
+			},
+			addthumb: {
+				//追加缩略图
+				type: String,
+				default: ''
+			},
+			addtext: {
+				//增加文字
+				type: String,
+				default: ''
 			}
 		},
 		data() {
@@ -112,9 +131,9 @@
 
 	.uni-collapse-cell {
 		flex-direction: column;
-		border-color: $uni-border-color;
-		border-bottom-width: 1px;
-		border-bottom-style: solid;
+		// border-color: $uni-border-color;
+		// border-bottom-width: 1px;
+		// border-bottom-style: solid;
 	}
 
 
@@ -180,7 +199,7 @@
 		transform: rotate(180deg);
 	}
 
-	.uni-collapse-cell__title-text {
+	.uni-collapse-cell__title-text{
 		flex: 1;
 		font-size: $uni-font-size-base;
 		/* #ifndef APP-NVUE */
@@ -191,9 +210,21 @@
 		lines: 1;
 		/* #endif */
 		overflow: hidden;
-		text-overflow: ellipsis;
+		text-overflow: ellipsis;	
 	}
-
+	.uni-collapse-cell__title-addtext {
+		font-size: $uni-font-size-base;
+		float: right;
+		display: flex;
+		align-items: center;
+		margin-right: 5px;
+		&-addimg {
+			height: $uni-img-size-sm;
+			width: $uni-img-size-sm;
+			margin-right: 5px;
+		}
+	}
+	
 	.uni-collapse-cell__content {
 		overflow: hidden;
 	}

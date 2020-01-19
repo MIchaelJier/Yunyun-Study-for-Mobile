@@ -47,12 +47,20 @@
 					})
 				})
 				return toDecimal(total)
+			},
+			isGetCart(){
+				return this.$store.getters.IsGetCart
 			}
 		},
 		components: {
 			cartItem
 		},
 		methods: {
+			//获取购物车数据
+			cartInit(){
+				this.cartList = this.$store.state.cartList;
+				this.total = this.$store.getters.getCartNum;
+			},
 			gotoPay(){
 				if(this.totalCount != 0)
 				uni.navigateTo({
@@ -94,27 +102,18 @@
 				this.allcheckedFlag = this.cartList.every(item => item.list.every(c => c.checked))
 			}
 		},
-		onLoad() {
-			let that = this;
-			that.$request({
-			   url: '/getCart',
-			   method: 'GET',
-			  }).then(res => {
-					if(res.data.status === '200'){
-						let list = res.data.data.list,
-							totalNum = 0;
-						list.forEach(item => {
-							item.checked = false;
-							item.list.forEach(course => {
-								course.checked = false;
-								totalNum ++;
-							})
-						})
-						that.total = totalNum;
-						that.cartList = list;
-					}
-			});
+		onShow() {
+			this.cartInit();
 		},
+		onHide() {
+			this.$store.commit('changeCartList',this.cartList);
+		},
+		watch:{
+			//防止onLaunch request异步获取比onShow慢
+			isGetCart(newVal){
+				newVal ? this.cartInit() : ''
+			}
+		}
 	}
 </script>
 
