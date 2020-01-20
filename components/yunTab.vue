@@ -102,8 +102,5 @@
 	}
 	.tabBody {
 	  position: relative;
-	  /* #ifdef H5 */
-	  padding-bottom: 50px;
-	  /* #endif */
 	}
 </style>

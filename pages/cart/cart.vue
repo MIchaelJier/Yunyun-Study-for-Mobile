@@ -14,7 +14,8 @@
 			<image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix" class="noimg"/>
 			<text class="nodata">您的购物车空空如也</text>
 		</view>
-		<checkbox-group class="count xBottom" @change="allCheck">
+		<view class="count xBottom" style="background: none;"></view>
+		<checkbox-group class="count xBottom bottomFixed" @change="allCheck">
 			<label><checkbox value="all" :checked="allcheckedFlag" color="#ff632a" class="count-checkbox"/></label>
 			<view class="count-msg">
 				<view><text>合计：</text><text style="color: #FF4400;">￥{{ totalCount }}</text></view>

@@ -12,8 +12,6 @@
 	height: 96rpx;
 	width: 100%;
 	background: #FFF;
-	position: fixed;
-	bottom: 0;
 	display: flex;
 }
 	.count-checkbox {

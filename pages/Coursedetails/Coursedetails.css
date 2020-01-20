@@ -338,8 +338,6 @@
 
 /* 底部固定栏 */
 	.underBar {
-		position: fixed;
-		bottom: 0;
 		height: 97rpx;
 		width: 100%;
 		background: #fff;

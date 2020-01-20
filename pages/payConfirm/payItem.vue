@@ -16,7 +16,7 @@
 						</view>
 					</view>
 					<view class="top-discount" v-if="course.discountPrice !== course.oldPrice">
-						<text>限时优惠省{{ course.oldPrice - course.discountPrice }}元</text>
+						<text>限时优惠省{{ Discount(course.discountPrice,course.oldPrice) }}元</text>
 					</view>
 					<view class="top-count">小计：￥{{ course.discountPrice }}</view>
 				</block>
@@ -34,6 +34,9 @@
 				if(this.payList.length === 1) return toDecimal(parseFloat(this.payList[0].discountPrice))
 				return this.payList.reduce((prev, cur) => 
 					toDecimal(parseFloat(prev.discountPrice) + parseFloat(cur.discountPrice)));
+			},
+			Discount(){
+				return (dis,old) => toDecimal(parseFloat(old) - parseFloat(dis))	
 			}
 		},
 		props: {
@@ -55,11 +58,11 @@
 
 <style>
 	.pay-item {
-		padding:0 20rpx;
 		background: #fff;
 		margin-top: 16rpx;
 	}
 		.item-top{
+			padding:0 20rpx;
 			display: flex;
 			flex-direction: column;
 			color: #3c4a55;
@@ -102,6 +105,8 @@
 			}
 		.item-bottom {
 			background: #f7f9fc;
+			width: calc( 100% - 40rpx );
+			padding:0 20rpx;
 			color: #333;
 			font-size: 14px;
 			height:120rpx;

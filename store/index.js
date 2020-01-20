@@ -6,7 +6,7 @@ const store = new Vuex.Store({
     state: {  
         userInfo:{},
 		cartList:[],
-		cartflag:false,
+		cartflag:false, //是否同步了购物车
     },  
     mutations: {  
 		/*
@@ -51,7 +51,11 @@ const store = new Vuex.Store({
 		//获取基本的用户信息
 		basicInfo(state) {
 			let u = state.userInfo;
-			return Object.keys(u).length === 0 ? {}:{ nikename:u.nikename ,haedImage:u.haedImage, loginWay:u.loginWay}
+			return Object.keys(u).length === 0 ? {}:{ 
+				nikename:u.nikename ,
+				haedImage:u.haedImage, 
+				loginWay:u.loginWay,
+				phone:u.phone}
 		},
 		//获取登录状态
 		IsLogin(state) {

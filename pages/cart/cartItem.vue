@@ -85,7 +85,7 @@
 
 <style>
 	.item-title {
-		width: 100%;
+		width: calc( 100% - 20rpx);
 		height: 68rpx;
 		background: #F7F9FC;
 	    padding: 0 10rpx;

@@ -4,15 +4,16 @@
 		<view class="userAccount">
 			<view class="userAccount-top">
 				<view class="account-msg">
-					<text style="color: #333;">Michael</text>
-					<text style="font-size: 12px;">手机号：1720970970</text>
+					<text style="color: #333;">{{ userInfo.nikename }}</text>
+					<text style="font-size: 12px;" v-if="userInfo.phone&&userInfo.phone !== ''">手机号：{{ userInfo.phone }}</text>
+					<text style="font-size: 12px;" v-else>未绑定手机号</text>
 				</view>
-				<view class="account-btn">
+				<navigator class="account-btn" url="/pages/chooseLogin/chooseLogin" hover-class="none">
 					<text>更换账号</text>
 					<view class="btn-arrow">
 						<uni-icons type="arrowright" size="20" color="#999"></uni-icons>
 					</view>
-				</view>
+				</navigator>
 			</view>
 			<view class="userAccount-bottom">
 				<text class="bottom-tip">购买后不支持退款、转让，请确认开课时间或有效期后再提交订单</text>
@@ -59,7 +60,7 @@
 				<text>注意：订单不支持退款、转让，提交订单则表示您同意</text>
 				<text>《用户付费协议》</text>
 			</view>
-			<view class="submitArea"></view>
+			<view class="submitArea xBottom" style="background: none;border-top:none;"></view>
 		</view>
 		<!-- 购买信息 结束 -->
 		<!-- 总金额和确认按钮 开始 -->
@@ -115,7 +116,10 @@
 				},
 				
 				//支付商品
-				payList:[]
+				payList:[],
+				
+				//用户信息
+				userInfo:{},
 			}
 		},
 		components: {
@@ -163,6 +167,7 @@
 		},
 		onShow() {
 			this.payList = this.$store.getters.getCartPay;
+			this.userInfo = this.$store.getters.basicInfo;
 		}
 	}
 </script>

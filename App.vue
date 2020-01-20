@@ -25,7 +25,7 @@
 		// 	this.$store.commit('getUserInfo')
 		// },
 		onHide: function() {
-			console.log('同步')
+			console.log('同步');
 		}
 	}
 </script>
@@ -40,9 +40,6 @@
 		position: absolute;
 		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
 
-		/*iphone全面屏底部适配*/
-	    padding-bottom: calc( constant(safe-area-inset-bottom));
-		padding-bottom: calc(env(safe-area-inset-bottom));
 		/*刘海屏*/
 		/* #ifdef APP-PLUS */
 		padding-top:var(--status-bar-height)
@@ -52,6 +49,10 @@
 		/*iphone全面屏底部适配*/
 		padding-bottom: constant(safe-area-inset-bottom);
 		padding-bottom: env(safe-area-inset-bottom);
+	}
+	.bottomFixed {
+		position: fixed;
+		bottom: 0;
 	}
 	
 </style>

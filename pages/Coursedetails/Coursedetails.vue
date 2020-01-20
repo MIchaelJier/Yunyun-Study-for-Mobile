@@ -181,7 +181,8 @@
 			</template>
 			<!-- 评价 结束 -->
 		</yun-tab>
-		<view class="underBar">
+		<view class="underBar" style="background: none;border-top:none"></view>
+		<view class="underBar bottomFixed">
 			<view class="underBar-left text-balck">
 				<view class="ux-icon ux-ykt-icon-new-cart"></view>
 				<text>加入购物车</text>
