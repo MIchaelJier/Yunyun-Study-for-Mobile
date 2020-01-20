@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex);
 import { monthDayDiff,formatTime } from "../utils/timeFormat.js"
+import { TimeDiff } from "../utils/timeFormat.js"
 const store = new Vuex.Store({  
     state: {  
         userInfo:{},
 		cartList:[],
-		cartflag:false, //是否同步了购物车
+		couponList:[],
+		cartflag:false, //是否同步了成功
     },  
     mutations: {  
 		/*
@@ -38,7 +40,7 @@ const store = new Vuex.Store({
 		/*
 		*  cartList
 		*/
-			//更改购物车信息
+			//获取购物车信息
 			changeCartList(state, value){
 				state.cartList = value
 			},
@@ -46,10 +48,17 @@ const store = new Vuex.Store({
 			changeCartflag(state, value){
 				state.cartflag = value
 			},
+		/*
+		*  couponList
+		*/
+		   //获取优惠券数据
+		   changeCouponList(state, value){
+				state.couponList = value
+		   },
     },
 	getters: {
 		//获取基本的用户信息
-		basicInfo(state) {
+		basicInfo: state => {
 			let u = state.userInfo;
 			return Object.keys(u).length === 0 ? {}:{ 
 				nikename:u.nikename ,
@@ -58,16 +67,11 @@ const store = new Vuex.Store({
 				phone:u.phone}
 		},
 		//获取登录状态
-		IsLogin(state) {
-			return Object.keys(state.userInfo).length !== 0
-		},
+		IsLogin: state => Object.keys(state.userInfo).length !== 0,
 		//获取是否获取到购物车信息
-		IsGetCart(state) {
-			return state.cartflag;
-		},
-		
+		IsGetCart: state => state.cartflag,
 		//获取购物车物品数量
-		getCartNum(state) {
+		getCartNum: state => {
 			let list = state.cartList,
 				totalNum = 0;
 			list.forEach(item => {
@@ -78,7 +82,7 @@ const store = new Vuex.Store({
 			return totalNum;
 		},
 		//获取需要支付的物品
-		getCartPay(state){ 
+		getCartPay: state => { 
 			//时间复杂度有点高
 			//对象数组深拷贝
 			let list = [].concat(JSON.parse(JSON.stringify(state.cartList)));
@@ -91,6 +95,20 @@ const store = new Vuex.Store({
 				item.list = newlist;
 			})
 			return list.filter(item => item.list.length !== 0)
+		},
+		//获取优惠券
+		getCoupon: state => type =>{
+			switch (type){
+				case 0: //有效优惠券
+					return state.couponList.filter(  item => !item.used&&TimeDiff(item.endTime) );
+					break;
+				case 1: //已使用优惠券
+					return state.couponList.filter(  item => item.used );
+					break;
+				case 2: //过期优惠券
+					return state.couponList.filter(  item => !item.used&&!TimeDiff(item.endTime) );
+					break;
+			}
 		}
 	}
 })  

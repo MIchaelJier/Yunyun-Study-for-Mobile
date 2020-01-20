@@ -2,7 +2,7 @@
 	<view>
 		<view v-if="couponList.length > 0">
 			<block v-for="item in couponList" :key="item.couponId" >
-				<view class="coupon-item">
+				<view class="coupon-item" :style="{filter: gray ? 'grayscale(100%)' : ''}">
 					<view class="item-top">
 						<view class="top-price">
 							<text>￥</text>
@@ -50,6 +50,10 @@
 			name: {
 				type: String,
 				default: ''
+			},
+			gray: {
+				type: Boolean,
+				default: false
 			}
 		},
 	}

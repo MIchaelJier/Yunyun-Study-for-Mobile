@@ -3,21 +3,29 @@
 		onLaunch: function() {
 			this.$store.commit('getUserInfo');
 			if(this.$store.getters.IsLogin){
-				this.$request({
-				   url: '/getCart',
-				   method: 'GET',
-				  }).then(res => {
-						if(res.data.status === '200'){
-							let list = res.data.data.list;
-							list.forEach(item => {
-								item.checked = false;
-								item.list.forEach(course => {
-									course.checked = false;
-								})
-							});
-							this.$store.commit('changeCartList',list);
-							this.$store.commit('changeCartflag',true);
-						}
+				let a = this.$request({
+					   url: '/getCoupon', //获取优惠券
+					   method: 'GET',
+					  }),
+				    b = this.$request({
+					   url: '/getCart', //获取购物车
+					   method: 'GET',
+					  });
+				Promise.all([a, b]).then(res => {
+					if(res[0].data.status === '200' && res[1].data.status === '200'){
+						//获取优惠券
+						this.$store.commit('changeCouponList',res[0].data.data);
+						//获取购物车
+						let list = res[1].data.data.list;
+						list.forEach(item => {
+							item.checked = false;
+							item.list.forEach(course => {
+								course.checked = false;
+							})
+						});
+						this.$store.commit('changeCartList',list);
+						this.$store.commit('changeCartflag',true);
+					}
 				})
 			};
 		},

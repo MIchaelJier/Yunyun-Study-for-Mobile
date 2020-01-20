@@ -14,11 +14,11 @@
 				</template>
 				<template v-slot:1>
 					<!-- 已使用 -->
-					<coupon-item :couponList="usedlist" :name="tabs[1]"></coupon-item>
+					<coupon-item :couponList="usedlist" :name="tabs[1]" gray></coupon-item>
 				</template>
 				<template v-slot:2>
 					<!-- 已过期 -->
-					<coupon-item :couponList="Expiredlist" :name="tabs[2]"></coupon-item>
+					<coupon-item :couponList="Expiredlist" :name="tabs[2]" gray></coupon-item>
 				</template>
 			</yun-tab>
 		</view>
@@ -37,26 +37,15 @@
 			}
 		},
 		computed:{
-			 uselist(){  return this.couponList.filter(  (item) => !item.used&&TimeDiff(item.endTime)  )},
-			 usedlist(){  return this.couponList.filter(  (item) => item.used )},
-			 Expiredlist(){  return this.couponList.filter(  (item) => !item.used&&!TimeDiff(item.endTime) )},
+			 uselist(){  return this.$store.getters.getCoupon(0) },
+			 usedlist(){  return this.$store.getters.getCoupon(1) },
+			 Expiredlist(){  return this.$store.getters.getCoupon(2) },
 		},
 		components: {
 			couponItem
 		},
 		methods: {
 			
-		},
-		onLoad() {
-			let that = this;
-			that.$request({
-			   url: '/getCoupon',
-			   method: 'GET',
-			  }).then(res => {
-					if(res.data.status === '200'){
-						that.couponList = res.data.data;
-					}
-			});
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
