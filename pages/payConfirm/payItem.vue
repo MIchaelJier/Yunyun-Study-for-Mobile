@@ -21,7 +21,20 @@
 					<view class="top-count">小计：￥{{ course.discountPrice }}</view>
 				</block>
 			</view>
-			<view class="item-bottom">小计：￥{{ allPrice }}</view>
+			<view class="item-bottom">
+				<view>
+					<view class="couponBox" v-if="coupon.length > 0">
+						<text>该机构/讲师优惠</text>
+						 <picker @change="bindPickerChange" :value="nowCoupon" :range="coupon" range-key="couponName">
+						        <view class="couponInput">
+									<text>{{ coupon[nowCoupon].couponName }}</text>
+									<uni-icons type="arrowdown" size="18"></uni-icons>
+								</view>
+						</picker>
+					</view>
+				</view>
+				<text class="bottom-count">小计：￥{{ afterCouponPrice }}</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -29,15 +42,58 @@
 <script>
 	import { toDecimal } from '../../utils/myMath.js'
 	export default {
+		data() {
+			return {
+				nowCoupon:0
+			}
+		},
 		computed:{
+			// 该机构合计
+			afterCouponPrice(){
+				let sum = parseFloat(this.allPrice) - parseFloat(this.coupon.length > 0 ? this.coupon[this.nowCoupon].amount : 0) ;
+				return toDecimal(sum)
+			},
 			allPrice(){
 				if(this.payList.length === 1) return toDecimal(parseFloat(this.payList[0].discountPrice))
 				return this.payList.reduce((prev, cur) => 
 					toDecimal(parseFloat(prev.discountPrice) + parseFloat(cur.discountPrice)));
 			},
+			// 优惠减少的价格
 			Discount(){
 				return (dis,old) => toDecimal(parseFloat(old) - parseFloat(dis))	
+			},
+			coupon(){
+				return this.courseCoupon.concat(this.itemCoupon).map(item => {
+					item.consumingThreshold === 0
+						? item.couponName = `优惠${item.amount}元(无门槛)，适用${item.targetName}`
+						: item.couponName = `满${item.consumingThreshold}减${item.amount}，适用${item.targetName}`
+					return item;
+					})
+			},
+			// 单一课程优惠券
+			courseCoupon(){
+				return this.$store.getters.getCoupon(5).filter( 
+					item => this.payList.some( 
+						course => item.targetId.includes(course.productId) 
+				))
+			},
+			// 该机构优惠券
+			itemCoupon(){
+				return  this.$store.getters.getCoupon(4).filter( 
+					item => 
+							item.targetId.includes(this.ownerMsg.ownerId) 
+								&&  
+							item.consumingThreshold === 0 ? '' : this.allPrice >= item.consumingThreshold
+				)
 			}
+		},
+		methods:{
+			 bindPickerChange(e) {
+			     this.nowCoupon = e.target.value
+			 },
+			 sum(value){
+				 this.$emit('getSum',parseFloat(value))
+			 }
 		},
 		props: {
 			payList: {
@@ -52,6 +108,14 @@
 			    	return {};
 			    }
 			},
+		},
+		mounted() {
+			this.sum(this.afterCouponPrice);
+		},
+		watch:{
+			afterCouponPrice(newVal,oldVal){
+				this.sum(newVal - oldVal)
+			}
 		}
 	}
 </script>
@@ -96,8 +160,7 @@
 				color: #D80000;
 				margin: 20rpx 0;
 			}
-			.top-count,
-			.item-bottom {
+			.top-count{
 				line-height: 80rpx;
 				height: 80rpx;
 				width: 100%;
@@ -106,10 +169,33 @@
 		.item-bottom {
 			background: #f7f9fc;
 			width: calc( 100% - 40rpx );
-			padding:0 20rpx;
+			padding:20rpx;
 			color: #333;
 			font-size: 14px;
-			height:120rpx;
-			line-height: 120rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
+			.bottom-count {
+				line-height: 80rpx;
+				width:300rpx;
+				text-align: right;
+				white-space:nowrap;
+			}
+			.couponBox {
+				font-size: 12px;
+				color: #999;
+				flex: 1;
+			}
+				.couponInput {
+					margin: 10rpx 0;
+					width: 400rpx;
+					padding: 10rpx;
+					border: 1px solid #ccc;
+					border-radius: 5px;
+					color: #999;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+				}
 </style>

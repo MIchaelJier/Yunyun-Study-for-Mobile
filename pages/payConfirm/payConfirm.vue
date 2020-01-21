@@ -25,8 +25,18 @@
 			
 			<view class="payItem">
 				<block v-for="item in payList" :key="item.ownerDto.ownerId" >
-					<pay-item :payList="item.list" :ownerMsg="item.ownerDto"></pay-item>
+					<pay-item :payList="item.list" :ownerMsg="item.ownerDto" @getSum="countSum"></pay-item>
 				</block>
+				<view class="payItem-count">总计：￥{{ decimalAllPayPrice }}</view>
+				<view class="couponBox" v-if="coupon.length > 0">
+					<text>全场通用</text>
+					 <picker @change="bindPickerChange" :value="nowCoupon" :range="coupon" range-key="couponName">
+					        <view class="couponInput">
+								<text>{{ coupon[nowCoupon].couponName }}</text>
+								<uni-icons type="arrowdown" size="18"></uni-icons>
+							</view>
+					</picker>
+				</view>
 			</view>
 			
 			<view class="payMethod">
@@ -67,7 +77,7 @@
 		<view class="submitArea xBottom bottomFixed">
 			<view class="submitArea-count">
 					<text>实付金额：</text>
-					<text style="color: #ff4400">￥888.00</text>
+					<text style="color: #ff4400">￥{{ payPrice }}</text>
 			</view>
 			<view class="submitArea-btn">提交订单</view>
 		</view>
@@ -80,6 +90,7 @@
 
 <script>
 	import payItem from './payItem.vue';
+	import { toDecimal } from '../../utils/myMath.js';
 	export default {
 		data() {
 			return {
@@ -117,15 +128,45 @@
 				
 				//支付商品
 				payList:[],
+				allPayPrice:0,
+				nowCoupon:0,
 				
 				//用户信息
 				userInfo:{},
+			}
+		},
+		computed:{
+			decimalAllPayPrice(){
+				return toDecimal(this.allPayPrice)
+			},
+			coupon(){
+				return  this.$store.getters.getCoupon(3)
+					.map(item => {
+						item.consumingThreshold === 0
+							? item.couponName = `优惠${item.amount}元(无门槛)，适用${item.targetName}`
+							: item.couponName = `满${item.consumingThreshold}减${item.amount}，适用${item.targetName}`
+						return item;
+					})
+					.filter(
+						item => item.consumingThreshold === 0 ? '' : this.allPayPrice >= item.consumingThreshold
+					)
+			},
+			payPrice(){
+				return toDecimal(
+						this.allPayPrice 
+							- 
+						parseFloat(this.coupon.length > 0 ? this.coupon[this.nowCoupon].amount : 0)
+					)
 			}
 		},
 		components: {
 			payItem
 		},
 		methods: {
+			//sum
+			countSum(value){
+			    this.allPayPrice += value;
+			},
 			// 点击 选择支付方式 改变勾选
 			choosePayMethods(index){
 				this.paymethods.forEach(item => {
@@ -163,6 +204,10 @@
 			// 拟态框 点击取消
 			cancel() {
 				console.log('用户点击取消');
+			},
+			//picker
+			bindPickerChange(e) {
+			    this.nowCoupon = e.target.value
 			}
 		},
 		onShow() {

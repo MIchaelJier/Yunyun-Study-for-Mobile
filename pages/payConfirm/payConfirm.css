@@ -49,8 +49,32 @@
 	.payMethod{
 		margin-top: 18rpx;
 	}
+		.payItem-count {
+			padding: 0 20rpx;
+			height: 90rpx;
+			line-height: 90rpx;
+			font-size: 15px;
+			text-align: right;
+		}
+		.couponBox{
+			font-size: 12px;
+			color: #999;
+			padding: 20rpx;
+			border-top: 1px solid #f1f1f1;
+		}
+			.couponInput {
+				margin: 20rpx 0;
+				padding: 10rpx;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				color: #999;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
 	.payMethod {		
 		background: #fff;
+		border-top: 1px solid #f1f1f1;
 	}
 	.goCoupon {
 		display: flex;

@@ -97,16 +97,25 @@ const store = new Vuex.Store({
 			return list.filter(item => item.list.length !== 0)
 		},
 		//获取优惠券
-		getCoupon: state => type =>{
+		getCoupon: state => type => {
 			switch (type){
-				case 0: //有效优惠券
-					return state.couponList.filter(  item => !item.used&&TimeDiff(item.endTime) );
+				case 0: // 有效优惠券
+					return state.couponList.filter(  item => !item.used && TimeDiff(item.endTime) );
 					break;
-				case 1: //已使用优惠券
+				case 1: // 已使用优惠券
 					return state.couponList.filter(  item => item.used );
 					break;
-				case 2: //过期优惠券
-					return state.couponList.filter(  item => !item.used&&!TimeDiff(item.endTime) );
+				case 2: // 过期优惠券
+					return state.couponList.filter(  item => !item.used && !TimeDiff(item.endTime) );
+					break;
+				case 3: // 官方 优惠券
+					return state.couponList.filter(  item => !item.used && item.targetType === 0 && TimeDiff(item.endTime) );
+					break;
+				case 4: // 机构/讲师 优惠券
+					return state.couponList.filter(  item => !item.used && item.targetType === 1 && TimeDiff(item.endTime) );
+					break;
+				case 5: // 单一课程 优惠券
+					return state.couponList.filter(  item => !item.used && item.targetType === 2 && TimeDiff(item.endTime) );
 					break;
 			}
 		}
