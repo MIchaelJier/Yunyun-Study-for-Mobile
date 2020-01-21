@@ -140,7 +140,7 @@
 				return toDecimal(this.allPayPrice)
 			},
 			coupon(){
-				return  this.$store.getters.getCoupon(3)
+				return  this.$store.getters['cart/getCoupon'](3)
 					.map(item => {
 						item.consumingThreshold === 0
 							? item.couponName = `优惠${item.amount}元(无门槛)，适用${item.targetName}`
@@ -211,8 +211,8 @@
 			}
 		},
 		onShow() {
-			this.payList = this.$store.getters.getCartPay;
-			this.userInfo = this.$store.getters.basicInfo;
+			this.payList = this.$store.getters['cart/getCartPay'];
+			this.userInfo = this.$store.getters['common/basicInfo'];
 		}
 	}
 </script>

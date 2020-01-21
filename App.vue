@@ -1,8 +1,8 @@
 <script>
 	export default {
 		onLaunch: function() {
-			this.$store.commit('getUserInfo');
-			if(this.$store.getters.IsLogin){
+			this.$store.commit('common/getUserInfo');
+			if(this.$store.getters['common/IsLogin']){
 				let a = this.$request({
 					   url: '/getCoupon', //获取优惠券
 					   method: 'GET',
@@ -14,7 +14,7 @@
 				Promise.all([a, b]).then(res => {
 					if(res[0].data.status === '200' && res[1].data.status === '200'){
 						//获取优惠券
-						this.$store.commit('changeCouponList',res[0].data.data);
+						this.$store.commit('cart/changeCouponList',res[0].data.data);
 						//获取购物车
 						let list = res[1].data.data.list;
 						list.forEach(item => {
@@ -23,8 +23,8 @@
 								course.checked = false;
 							})
 						});
-						this.$store.commit('changeCartList',list);
-						this.$store.commit('changeCartflag',true);
+						this.$store.commit('cart/changeCartList',list);
+						this.$store.commit('cart/changeCartflag',true);
 					}
 				})
 			};

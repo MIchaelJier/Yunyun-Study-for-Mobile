@@ -72,14 +72,14 @@
 			},
 			// 单一课程优惠券
 			courseCoupon(){
-				return this.$store.getters.getCoupon(5).filter( 
+				return this.$store.getters['cart/getCoupon'](5).filter( 
 					item => this.payList.some( 
 						course => item.targetId.includes(course.productId) 
 				))
 			},
 			// 该机构优惠券
 			itemCoupon(){
-				return  this.$store.getters.getCoupon(4).filter( 
+				return  this.$store.getters['cart/getCoupon'](4).filter( 
 					item => 
 							item.targetId.includes(this.ownerMsg.ownerId) 
 								&&  

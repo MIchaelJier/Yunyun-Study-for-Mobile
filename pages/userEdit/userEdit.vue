@@ -51,7 +51,7 @@
 				switch(this.type){
 					case 'default':
 						//退出登录
-						this.$store.commit('changeUserInfo',{});
+						this.$store.commit('common/changeUserInfo',{});
 						uni.removeStorageSync('userInfo');
 						uni.switchTab({
 							url: '/pages/index/index'
@@ -71,8 +71,8 @@
 							  }).then(res => {
 								  //更改页面 、缓存 和 vuex的保存值
 								  this.userInfo.nikename = newNikename;
-								  this.$store.commit('changeUserInfoAttr',{value:newNikename,key:'nikename'}); 
-								  uni.setStorageSync('userInfo', this.$store.state.userInfo);
+								  this.$store.commit('common/changeUserInfoAttr',{value:newNikename,key:'nikename'}); 
+								  uni.setStorageSync('userInfo', this.$store.getters['common/allInfo']);
 								  //更改成功 toast提示
 								  uni.showToast({title:res.data.data.tip,icon:'none',duration:1000});
 							  })
@@ -85,7 +85,7 @@
 			},
 		},
 		onShow() {
-			this.userInfo = this.$store.getters.basicInfo;
+			this.userInfo = this.$store.getters['common/basicInfo'];
 			if(Object.keys(this.userInfo).length === 0) {
 				uni.navigateTo({
 					url:'/pages/chooseLogin/chooseLogin'

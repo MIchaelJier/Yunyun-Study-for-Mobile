@@ -191,10 +191,10 @@
 										//存入用户缓存
 										uni.setStorageSync('userInfo', userInfo);
 										//vuex获取缓存
-										that.$store.commit('getUserInfo')
+										that.$store.commit('common/getUserInfo')
 									}else{
 										//一次性登录
-										that.$store.commit('changeUserInfo',userInfo)
+										that.$store.commit('common/changeUserInfo',userInfo)
 									}
 									uni.switchTab({
 										url: '/pages/index/index'
@@ -251,10 +251,10 @@
 										//存入用户缓存
 										uni.setStorageSync('userInfo', userInfo);
 										//vuex获取缓存
-										that.$store.commit('getUserInfo')
+										that.$store.commit('common/getUserInfo')
 									}else{
 										//一次性登录
-										that.$store.commit('changeUserInfo',userInfo)
+										that.$store.commit('common/changeUserInfo',userInfo)
 									}
 									uni.switchTab({
 										url: '/pages/index/index'

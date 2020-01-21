@@ -50,7 +50,7 @@
 				return toDecimal(total)
 			},
 			isGetCart(){
-				return this.$store.getters.IsGetCart
+				return this.$store.getters['cart/IsGetCart']
 			}
 		},
 		components: {
@@ -59,8 +59,8 @@
 		methods: {
 			//获取购物车数据
 			cartInit(){
-				this.cartList = this.$store.state.cartList;
-				this.total = this.$store.getters.getCartNum;
+				this.cartList = this.$store.getters['cart/getCart'];
+				this.total = this.$store.getters['cart/getCartNum'];
 			},
 			gotoPay(){
 				if(this.totalCount != 0)
@@ -107,7 +107,7 @@
 			this.cartInit();
 		},
 		onHide() {
-			this.$store.commit('changeCartList',this.cartList);
+			this.$store.commit('cart/changeCartList',this.cartList);
 		},
 		watch:{
 			//防止onLaunch request异步获取比onShow慢

@@ -37,9 +37,9 @@
 			}
 		},
 		computed:{
-			 uselist(){  return this.$store.getters.getCoupon(0) },
-			 usedlist(){  return this.$store.getters.getCoupon(1) },
-			 Expiredlist(){  return this.$store.getters.getCoupon(2) },
+			 uselist(){  return this.$store.getters['cart/getCoupon'](0) },
+			 usedlist(){  return this.$store.getters['cart/getCoupon'](1) },
+			 Expiredlist(){  return this.$store.getters['cart/getCoupon'](2) },
 		},
 		components: {
 			couponItem

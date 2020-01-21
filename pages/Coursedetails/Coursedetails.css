@@ -339,13 +339,13 @@
 /* 底部固定栏 */
 	.underBar {
 		height: 97rpx;
-		width: 100%;
+		width: calc( 100% - 32rpx);
 		background: #fff;
 		padding: 14rpx 16rpx;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
-		/* justify-content: space-between; */
+		justify-content: space-between;
 		border-top: 1px solid rgba(221, 221, 221, 0.4);
 	}
 	.underBar-left {
@@ -358,19 +358,18 @@
 		justify-content: space-around;
 		padding-top: 10rpx;
 	}
-	.underBar-left text {
-		font-size: 12px;
-		padding-bottom: 10rpx;
-	}
+		.underBar-left text {
+			font-size: 12px;
+			padding-bottom: 10rpx;
+		}
 	.underBar-right {
-		width: calc(100% - 160rpx - 32rpx);
 		height: 100%;
 		border-radius: 400rpx;
 		background: #FF632A;
 		font-size: 15px;
 		color: #fff;
 		display: flex;
-		/* flex: 1; */
+		flex: 1;
 		justify-content: center;
 		align-items: center;
 	}

@@ -20,7 +20,7 @@
 							<text style="color: #3C4A55;">￥{{ course.discountPrice }}</text>
 						</view>
 					</view>
-					<text class="course-delBtn">删除</text>
+					<text class="course-delBtn" @click.stop="cartDel">删除</text>
 				</label>			
 				<view class="item-courses-bottom">
 					<view class="bottom-main">
@@ -69,9 +69,11 @@
 			},
 		},
 		methods:{
+			// 机构选择
 			allCheck(e){
 				this.$emit('itemCheck',e.currentTarget.dataset.id)
 			},
+			// 课程选择
 			courseCheck(e){
 				let detail = {
 					key:e.currentTarget.dataset.id,
@@ -79,6 +81,9 @@
 				}
 				this.$emit('courseCheck',detail)
 			},
+			cartDel(){
+				console.log('del')
+			}
 		}
 	}
 </script>
