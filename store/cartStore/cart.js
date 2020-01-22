@@ -1,19 +1,45 @@
 import { TimeDiff } from "../../utils/timeFormat.js"
+import { request } from "../../utils/request.js"
 const cart = {
     namespaced:true,//命名空间的开启
     state:{
 		 cartList:[],
 		 couponList:[],
-		 cartflag:false, //是否同步了成功
+		 cartflag:false, //是否同步成功
     },
     actions:{
-      
+       request_cart({ commit }) {
+		   let a = request({
+				   url: '/getCoupon', //获取优惠券
+				   method: 'GET',
+		   	   }),
+		       b = request({
+				   url: '/getCart', //获取购物车
+				   method: 'GET',
+		   	  });
+		   Promise.all([a, b]).then(res => {
+		   	if(res[0].data.status === '200' && res[1].data.status === '200'){
+		   		//获取优惠券
+		   		 commit('changeCouponList',res[0].data.data);
+		   		//获取购物车
+		   		let list = res[1].data.data.list;
+		   		list.forEach(item => {
+		   			item.checked = false;
+		   			item.list.forEach(course => {
+		   				course.checked = false;
+		   			})
+		   		});
+		   		 commit('changeCartList',list);
+		   		 commit('changeCartflag',true);
+		   	}
+		   })
+	   }
     },
     mutations:{
 		/*
 		*  cartList
 		*/
-			//获取购物车信息
+			//改变所有购物车信息
 			changeCartList(state, value){
 				state.cartList = value
 			},
@@ -24,7 +50,7 @@ const cart = {
 		/*
 		*  couponList
 		*/
-		   //获取优惠券数据
+		   //改变所有优惠券数据
 		   changeCouponList(state, value){
 				state.couponList = value
 		   },

@@ -1,9 +1,10 @@
 <template>
 	<view>
-		<view class="set-wap" style="background-image: url(../../../static/images/loginBackground.png);">
+		<image src="../../static/images/loginBackground.png" mode="aspectFill" class="pageBackground"></image>
+		<view class="set-wap">
 			<view class="set-wap-top">
 				<view class="set-wap-top-main">
-					<image src="../../static/images/APPIcon.png" mode="" class="main-image"></image>
+					<image src="../../static/images/APPIcon.png" mode="aspectFill" class="main-image"></image>
 					<navigator url="/pages/phoneLogin/phoneLogin" hover-class="none">
 						<view class="main-btn btn-green" hover-class="btn-hover">手机号登录</view>
 					</navigator>

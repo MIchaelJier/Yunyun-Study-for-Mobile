@@ -3,38 +3,15 @@
 		onLaunch: function() {
 			this.$store.commit('common/getUserInfo');
 			if(this.$store.getters['common/IsLogin']){
-				let a = this.$request({
-					   url: '/getCoupon', //获取优惠券
-					   method: 'GET',
-					  }),
-				    b = this.$request({
-					   url: '/getCart', //获取购物车
-					   method: 'GET',
-					  });
-				Promise.all([a, b]).then(res => {
-					if(res[0].data.status === '200' && res[1].data.status === '200'){
-						//获取优惠券
-						this.$store.commit('cart/changeCouponList',res[0].data.data);
-						//获取购物车
-						let list = res[1].data.data.list;
-						list.forEach(item => {
-							item.checked = false;
-							item.list.forEach(course => {
-								course.checked = false;
-							})
-						});
-						this.$store.commit('cart/changeCartList',list);
-						this.$store.commit('cart/changeCartflag',true);
-					}
-				})
+				this.$store.dispatch('cart/request_cart');
 			};
 		},
 		// onShow: function() {
 		// 	this.$store.commit('getUserInfo')
 		// },
-		onHide: function() {
-			console.log('同步');
-		}
+		// onHide: function() {
+		// 	console.log('同步');
+		// }
 	}
 </script>
 
@@ -55,8 +32,8 @@
 	} 
 	.xBottom {
 		/*iphone全面屏底部适配*/
-		padding-bottom: constant(safe-area-inset-bottom);
-		padding-bottom: env(safe-area-inset-bottom);
+		padding-bottom: constant(safe-area-inset-bottom) !important;
+		padding-bottom: env(safe-area-inset-bottom) !important;
 	}
 	.bottomFixed {
 		position: fixed;

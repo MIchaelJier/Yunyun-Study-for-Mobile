@@ -1,9 +1,12 @@
+.pageBackground {
+	width: 100vw;
+	height: 100vh;
+}
 .set-wap {
 	position: fixed;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 20rpx 5% 0;
-	background-size: 100% 100%;
 	bottom: 0;
 	top: 0;
 }
@@ -105,6 +108,7 @@
 		padding-left: 0;
 		padding-right: 0;
 		line-height: 1;
+		background: none;
 	}
 	.bottom-icon:after{
 		border: none; 
