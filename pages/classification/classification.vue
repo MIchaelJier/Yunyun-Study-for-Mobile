@@ -115,6 +115,26 @@
 							{id: 4, name: "移动开发"},
 							{id: 5, name: "网络与安全"},
 						]
+					},{
+						id:7,
+						name:"语言学习",
+						children:[
+							{id: 1, name: "编程语言"},
+							{id: 2, name: "前端开发"},
+							{id: 3, name: "后端开发"},
+							{id: 4, name: "移动开发"},
+							{id: 5, name: "网络与安全"},
+						]
+					},{
+						id:8,
+						name:"语言学习",
+						children:[
+							{id: 1, name: "编程语言"},
+							{id: 2, name: "前端开发"},
+							{id: 3, name: "后端开发"},
+							{id: 4, name: "移动开发"},
+							{id: 5, name: "网络与安全"},
+						]
 					}
 				],
 				bodyClass:'',

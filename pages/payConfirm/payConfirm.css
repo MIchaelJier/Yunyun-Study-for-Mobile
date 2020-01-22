@@ -57,14 +57,14 @@
 			text-align: right;
 			background: #fff;
 		}
-		.couponBox{
+		.payItem-coupon{
 			font-size: 12px;
 			color: #999;
 			padding: 20rpx;
 			border-top: 1px solid #f1f1f1;
 			background: #fff;
 		}
-			.couponInput {
+			.payItem-coupon .couponInput {
 				margin: 20rpx 0;
 				padding: 10rpx;
 				border: 1px solid #ccc;

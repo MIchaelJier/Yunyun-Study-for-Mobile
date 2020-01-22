@@ -28,7 +28,7 @@
 					<pay-item :payList="item.list" :ownerMsg="item.ownerDto" @getSum="countSum"></pay-item>
 				</block>
 				<view class="payItem-count">总计：￥{{ decimalAllPayPrice }}</view>
-				<view class="couponBox" v-if="coupon.length > 0">
+				<view class="payItem-coupon" v-if="coupon.length > 0">
 					<text>全场通用</text>
 					 <picker @change="bindPickerChange" :value="nowCoupon" :range="coupon" range-key="couponName">
 					        <view class="couponInput">

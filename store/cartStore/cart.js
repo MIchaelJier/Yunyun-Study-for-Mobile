@@ -5,7 +5,6 @@ const cart = {
     state:{
 		 cartList:[],
 		 couponList:[],
-		 cartflag:false, //是否同步成功
     },
     actions:{
        request_cart({ commit }) {
@@ -30,7 +29,6 @@ const cart = {
 		   			})
 		   		});
 		   		 commit('changeCartList',list);
-		   		 commit('changeCartflag',true);
 		   	}
 		   })
 	   }
@@ -43,9 +41,41 @@ const cart = {
 			changeCartList(state, value){
 				state.cartList = value
 			},
-			//购物车信息是否联网拉取
-			changeCartflag(state, value){
-				state.cartflag = value
+			//删除购物车某一物品
+			// id = { ownerId , productId }
+			delCartOne(state, id){
+				let emptyIndex = -1;
+				state.cartList.forEach( (item, index) => {
+					if( item.ownerDto.ownerId === id.ownerId ){
+						item.list = item.list.filter( inner => inner.productId !== id.productId );
+						item.list.length === 0 ? emptyIndex = index : ''
+					}
+				});
+				emptyIndex >= 0 ? state.cartList = state.cartList.filter((item,index) => index !== emptyIndex) : ''
+			},
+			//购物车 新增商品
+			//  Info = { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime }
+			addCartOne(state, Info){
+				let {ownerId, ownername, ...course} = Info,
+					HaveOwner = state.cartList.some(item => item.ownerDto.ownerId === Info.ownerId),
+					HaveCourse = state.cartList.some(item => item.list.some(c => c.productId = Info.productId));
+				if(HaveOwner&&!HaveCourse){
+					state.cartList.forEach(item => {
+						if(item.ownerDto.ownerId === Info.ownerId){
+							item.list.push(course)
+						}
+					})
+				}else if(!HaveOwner&&HaveCourse){
+					let list = [ course ];
+					state.cartList.push({
+						checked: false,
+						ownerDto: {
+							ownername: Info.ownername,
+							ownerId: Info.ownerId
+						},
+						list,
+					})
+				}
 			},
 		/*
 		*  couponList
@@ -56,8 +86,6 @@ const cart = {
 		   },
 	},
     getters: {
-		//获取是否获取到购物车信息
-		IsGetCart: state => state.cartflag,
 		//获取购物车
 		getCart : state => state.cartList,
 		//获取购物车物品数量

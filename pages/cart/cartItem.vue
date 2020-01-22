@@ -20,7 +20,7 @@
 							<text style="color: #3C4A55;">￥{{ course.discountPrice }}</text>
 						</view>
 					</view>
-					<text class="course-delBtn" @click.stop="cartDel">删除</text>
+					<text class="course-delBtn" @click.stop="cartDel(course.productId)">删除</text>
 				</label>			
 				<view class="item-courses-bottom">
 					<view class="bottom-main">
@@ -81,8 +81,12 @@
 				}
 				this.$emit('courseCheck',detail)
 			},
-			cartDel(){
-				console.log('del')
+			// 删除课程
+			cartDel(productId){
+				this.$store.commit('cart/delCartOne',{
+					ownerId:this.ownerMsg.ownerId,
+					productId,
+				});
 			}
 		}
 	}

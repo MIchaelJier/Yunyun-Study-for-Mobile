@@ -4,7 +4,7 @@
 			<view  class="boxPost">
 				<image :src="image"  v-if="image" mode="scaleToFill" lazy-load></image>
 			</view>
-			<view class="boxRight" :style="{ height: image&&fitImage ? '137rpx':'' }"> <!-- :style="{ height: image ? '137rpx':'' }" -->
+			<view class="boxRight"> <!-- :style="{ height: image&&fitImage ? '137rpx':'' }" -->
 				<text class="boxRight-title" v-if="title">{{ title }}</text>
 				<slot></slot>
 			</view>
@@ -32,10 +32,6 @@
 			  type: String,
 			  default: ''
 			}, 
-			fitImage: {
-				type: Boolean,
-				default:false
-			}
 		},
 		methods: {
 			enter:function() {
@@ -46,37 +42,38 @@
 </script>
 
 <style>
-.box {
-	background: #fff;
-}
-.box-main {
-	padding: 17px 10px 17px 0;
-	margin-left: 15px;
-	position: relative;
-	border-bottom: 1px solid rgba(221, 221, 221, 0.4);
-	display: flex;
-	align-items: center;
-	background: #fff;
-}
-.boxPost {
-	height: 137rpx;
-	width: 220rpx;
-	border-radius: 5rpx;
-	padding-right: 20rpx;
-	flex: 0 0 220rpx;
-}
-.boxPost image {
-	width: 100%;
-	height: 100%;
-	border-radius: 10rpx;
-}
-.boxRight {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-.boxRight .boxRight-title{
-	font-size: 16px;
-	color: #333;
-}
+	.box {
+		background: #fff;
+	}
+	.box-main {
+		padding: 17px 10px 17px 0;
+		margin-left: 15px;
+		position: relative;
+		border-bottom: 1px solid #f1f1f1;
+		display: flex;
+		align-items: center;
+		background: #fff;
+	}
+	.boxPost {
+		height: 137rpx;
+		width: 220rpx;
+		border-radius: 5rpx;
+		padding-right: 20rpx;
+		flex: 0 0 220rpx;
+	}
+	.boxPost image {
+		width: 100%;
+		height: 100%;
+		border-radius: 10rpx;
+	}
+	.boxRight {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 137rpx;
+	}
+	.boxRight .boxRight-title{
+		font-size: 16px;
+		color: #333;
+	}
 </style>

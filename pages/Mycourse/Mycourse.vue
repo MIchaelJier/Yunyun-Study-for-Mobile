@@ -9,7 +9,7 @@
 				</view>
 				<view v-else>
 						<view v-for="my in my_courses" :key="my.id">
-						  <yun-box :image="my.picsrc" :title="my.name" :fitImage=true>
+						  <yun-box :image="my.picsrc" :title="my.name">
 							  <view class="yunBoxProg" v-if="my.overProgress != 0 && my.overProgress != ''">
 								  <text class="yunBoxProgText">已学习{{my.overProgress}}/{{my.all}}课时</text>
 								  <view class="yunBoxProgBar">

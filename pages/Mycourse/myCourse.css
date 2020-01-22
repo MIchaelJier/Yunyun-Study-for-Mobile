@@ -1,109 +1,110 @@
 /* tab选择卡头部 */
-.titleBar{
-  box-sizing: border-box;
-  width: 100%;
-  border-bottom: 1px solid #eee;
-  align-items: center;
-  background-color: white;
-}
-.titleBar .status{
-  display: flex;
-  padding: 0;
-}
-.titleBar .status li{
-  flex: 1;
-  display: inline-block;
-  height: 88rpx;
-  line-height: 88rpx;
-  text-align: center;
-}
-.titleBar .status li text{
-  color: #99a4bf;
-  display: inline-block;
-  height: 100%;
-  font-size: 15px;  
-  text-align: center;
-  padding: 0 16rpx;
-  box-sizing: border-box;
-}
-.titleBar .status li text.black{
-  color: #333;
-  padding: 0 40rpx;
-}
-.titleBar .status li text.active{
-  color:#2CC17B;
-  border-bottom: 6rpx solid #2CC17B;
-}
+	.titleBar{
+	  box-sizing: border-box;
+	  width: 100%;
+	  border-bottom: 1px solid #eee;
+	  align-items: center;
+	  background-color: white;
+	}
+	.titleBar .status{
+	  display: flex;
+	  padding: 0;
+	}
+	.titleBar .status li{
+	  flex: 1;
+	  display: inline-block;
+	  height: 88rpx;
+	  line-height: 88rpx;
+	  text-align: center;
+	}
+	.titleBar .status li text{
+	  color: #99a4bf;
+	  display: inline-block;
+	  height: 100%;
+	  font-size: 15px;  
+	  text-align: center;
+	  padding: 0 16rpx;
+	  box-sizing: border-box;
+	}
+	.titleBar .status li text.black{
+	  color: #333;
+	  padding: 0 40rpx;
+	}
+	.titleBar .status li text.active{
+	  color:#2CC17B;
+	  border-bottom: 6rpx solid #2CC17B;
+	}
 /* tab选择卡身体 */
-.none{
-    padding-top: 140rpx;
-    text-align: center;
-}
-.none text{
-    font-size: 28rpx;
-    color: #99a4bf;
-    margin: 24rpx 0 80rpx;
-    display: inline-block;
-    width: 100%;
-}
-.none .none-btn{
-    height: 90rpx;
-    width: 380rpx;
-    border-radius: 5rpx;
-    font-size: 30rpx;
-    background: #2cc17b;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+	.none{
+		padding-top: 140rpx;
+		text-align: center;
+	}
+	.none text{
+		font-size: 28rpx;
+		color: #99a4bf;
+		margin: 24rpx 0 80rpx;
+		display: inline-block;
+		width: 100%;
+	}
+	.none .none-btn{
+		height: 90rpx;
+		width: 380rpx;
+		border-radius: 5rpx;
+		font-size: 30rpx;
+		background: #2cc17b;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-.none image{
-    width: 38%;
-}
+	.none image{
+		width: 38%;
+	}
 
-.wrap{
-    height: 100vh;
-    /* overflow: hidden; */
-    
-    background-color: #f2f4f7;
-}
+	.wrap{
+		height: 100vh;
+		/* overflow: hidden; */
+		
+		background-color: #f2f4f7;
+	}
 
 
-.bottom{
-    text-align: center;
-    line-height: 80rpx;
-    font-size: 24rpx;
-    color: #99a4bf;
-}
+	.bottom{
+		text-align: center;
+		line-height: 80rpx;
+		font-size: 24rpx;
+		color: #99a4bf;
+	}
 /* 进度条 */
-.yunBoxProg {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-}
-.yunBoxProgText {
-	color: #2cc17b;
-	font-size: 13px;
-	margin-bottom: 15rpx;
-}
-.yunBoxProgBar {
-	height: 3px;
-	width: 444rpx;
-	background: #d3d8e6;
-}
-.yunBoxProgBarOver {
-	background:  #2cc17b;
-	height: 3px;
-}
-.yunBoxBtn {
-	    height: 48rpx;
-	    width: 200rpx;
-	    color: #2cc17b;
-	    text-decoration: none;
-	    font-size: 14px;
-	    display: inline-block;
-	    border: 1rpx solid #2cc17b;
-	    border-radius: 200rpx;
-	    text-align: center;
-	    line-height: 48rpx;
-}
+	.yunBoxProg {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+	.yunBoxProgText {
+		color: #2cc17b;
+		font-size: 13px;
+		margin-bottom: 15rpx;
+	}
+	.yunBoxProgBar {
+		height: 3px;
+		width: 444rpx;
+		background: #d3d8e6;
+	}
+	.yunBoxProgBarOver {
+		background:  #2cc17b;
+		height: 3px;
+	}
+	.yunBoxBtn {
+			height: 48rpx;
+			width: 200rpx;
+			color: #2cc17b;
+			text-decoration: none;
+			font-size: 14px;
+			display: inline-block;
+			border: 1rpx solid #2cc17b;
+			border-radius: 200rpx;
+			text-align: center;
+			line-height: 48rpx;
+			margin-top: 20rpx;
+	}

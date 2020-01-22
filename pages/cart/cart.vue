@@ -34,8 +34,6 @@
 	export default {
 		data() {
 			return {
-				total:0,
-				cartList:[],
 				allcheckedFlag:false,
 			}
 		},
@@ -49,8 +47,11 @@
 				})
 				return toDecimal(total)
 			},
-			isGetCart(){
-				return this.$store.getters['cart/IsGetCart']
+			cartList(){
+				return this.$store.getters['cart/getCart']
+			},
+			total(){
+				return this.$store.getters['cart/getCartNum']
 			}
 		},
 		components: {
@@ -58,10 +59,6 @@
 		},
 		methods: {
 			//获取购物车数据
-			cartInit(){
-				this.cartList = this.$store.getters['cart/getCart'];
-				this.total = this.$store.getters['cart/getCartNum'];
-			},
 			gotoPay(){
 				if(this.totalCount != 0)
 				uni.navigateTo({
@@ -103,18 +100,6 @@
 				this.allcheckedFlag = this.cartList.every(item => item.list.every(c => c.checked))
 			}
 		},
-		onShow() {
-			this.cartInit();
-		},
-		onHide() {
-			this.$store.commit('cart/changeCartList',this.cartList);
-		},
-		watch:{
-			//防止onLaunch request异步获取比onShow慢
-			isGetCart(newVal){
-				newVal ? this.cartInit() : ''
-			}
-		}
 	}
 </script>
 

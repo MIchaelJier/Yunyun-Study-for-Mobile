@@ -1,0 +1,41 @@
+/* 目录 开始 */
+	.listTitile {
+		padding: 16px 4%;
+		background-color: #f7f9fc;
+		font-size: 15px;
+		color: #333;
+	}
+	.dirList {
+		padding: 0 4%;
+		box-sizing: border-box;
+		border-bottom: 1px solid #ebeff7;
+		background: #fff;
+	}
+	.dirList-content {
+		padding: 17px 0;
+		color: #333333;
+		display: flex;
+	}
+	.dirList-content-icon {
+		border: 1px solid #3C4A55;
+		width: 56rpx;
+		height: 32rpx;
+		margin-right: 18rpx;
+		line-height: 32rpx;
+		border-radius: 5rpx;
+		white-space: nowrap;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: nowrap;
+	}
+	.dirList-content-title {
+		font-size: 15px;
+		flex: 1;
+	}
+	.dirList-content-add {
+		color: #2cc17b;
+		font-size: 12px;
+		margin-left: 10rpx;
+	}
+/* 目录 结束 */
