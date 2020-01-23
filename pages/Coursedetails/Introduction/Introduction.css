@@ -43,31 +43,31 @@
 		margin: 30rpx 0 0 0;
 		/* border-bottom: 1px solid #e6eaf2; */
 	}
-	.courseintrohead-price .nprice {
-		display: inline-block;
-		font-size: 20px;
-	}
-	.courseintrohead-price .priceMain {
-		display:flex;
-		flex-direction: row;
-		align-items: center;
-	}
-	.courseintrohead-price .yuan {
-		font-size: 12px;
-	}
-	.courseintrohead-price .nprice-tip {
-		display: inline-block;
-		border: 1px solid #ff632a;
-		color: #ff632a;
-		margin-right: 8rpx;
-		padding: 6rpx;
-		margin-left: 30rpx;
-		font-size: 24rpx;
-	}
-	.courseintrohead-price .oprice {
-		margin: 20rpx 0;
-		text-decoration: line-through;
-	}
+		.courseintrohead-price .nprice {
+			display: inline-block;
+			font-size: 20px;
+		}
+		.courseintrohead-price .priceMain {
+			display:flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.courseintrohead-price .yuan {
+			font-size: 12px;
+		}
+		.courseintrohead-price .nprice-tip {
+			display: inline-block;
+			border: 1px solid #ff632a;
+			color: #ff632a;
+			margin-right: 8rpx;
+			padding: 6rpx;
+			margin-left: 30rpx;
+			font-size: 24rpx;
+		}
+		.courseintrohead-price .oprice {
+			margin: 20rpx 0;
+			text-decoration: line-through;
+		}
 /* 价格区 结束 */
 /* 优惠区 开始 */
 	.contentbox{
@@ -106,20 +106,20 @@
 	.courseintrobody {
 		margin: 0 4%;
 	}
-	.courseintrobody-title {
-		font-size: 15px;
-		padding-top: 40rpx;
-		padding-bottom: 17rpx;
-		line-height: 42rpx;
-		font-weight: bold;
-	}
-	.courseintrobody-main {
-		font-size: 14px;
-		line-height: 19px;
-		padding-bottom: 15px;
-		border-bottom: 1px solid #e6eae5;
-		word-break: break-all;	
-	}
+		.courseintrobody-title {
+			font-size: 15px;
+			padding-top: 40rpx;
+			padding-bottom: 17rpx;
+			line-height: 42rpx;
+			font-weight: bold;
+		}
+		.courseintrobody-main {
+			font-size: 14px;
+			line-height: 19px;
+			padding-bottom: 15px;
+			border-bottom: 1px solid #e6eae5;
+			word-break: break-all;	
+		}
 /* 富文本介绍 结束*/
 /* 老师 和 网校 开始 */
 	.courseteacher {
@@ -128,25 +128,86 @@
 	.courseteacher-main {
 		margin-top: 10rpx;
 	}
-	.courseteacher-main-top {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-	}
-	.courseteacher-main-top .top-headpic {
-		width: 96rpx;
-		height: 96rpx;
-		border-radius: 50%;
-		background-color: #99A4BF;	
-	}
-	.courseteacher-main-top .top-name {
-		font-size: 15px;
-		color: #666;	
-		margin-left: 36rpx;
-	}
-	.courseteacher-main-detail {
-		padding-bottom: 40rpx;
-		padding-left: 134rpx;
-		font-size: 14px;
-	}
+		.courseteacher-main-top {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+			.courseteacher-main-top .top-headpic {
+				width: 96rpx;
+				height: 96rpx;
+				border-radius: 50%;
+				background-color: #99A4BF;	
+				}
+			.courseteacher-main-top .top-name {
+				font-size: 15px;
+				color: #666;	
+				margin-left: 36rpx;
+			}
+		.courseteacher-main-detail {
+			padding-bottom: 40rpx;
+			padding-left: 134rpx;
+			font-size: 14px;
+		}
 /* 老师 和 网校 结束 */
+
+/* 优惠券弹出层 开始 */
+	.couponsPopup {
+		background: #fff;
+		width: 100%;
+		max-height: 50vh;
+		overflow-y: auto;
+		font-size: 14px;
+		color: #666;
+	}
+		.couponsList {
+			border-bottom: 10rpx solid #f6f6f6;
+		}
+		.couponsList:last-child,
+		.coupon-item:last-child{
+			 border-bottom: none;
+		}
+		.list-line {
+			width: 100%;
+			height: 12rpx;
+			background: #F6F6F6;
+		}
+			.coupons-type {
+				padding: 20rpx;
+				border-bottom: 1px solid #f1f1f1;
+			}
+			.coupon-item {
+				 padding: 28rpx 20rpx;
+				 display: flex;
+				 flex-direction: column;
+				 border-bottom: 1px dashed #ddd;
+			}
+				.item-amount {
+					color: #FF4400;
+					font-size: 16px;
+					margin-right: 10rpx;
+				}
+				.item-firstline {
+					margin-bottom: 20rpx;
+					display: flex;
+					justify-content: space-between;
+					height: 40rpx;
+				}
+				.item-btn {
+					width: 100rpx;
+					height: 52rpx;
+					line-height: 52rpx;
+					border: 1px solid #FF6600;
+					border-radius: 2px;
+					color: #FF6600;
+					font-size: 12px;
+					text-align: center;
+					margin-top: -12rpx;
+				}
+				.item-other {
+					margin-bottom: 10rpx;
+				}
+				.item-other:last-child {
+					margin-bottom: 0;
+				}
+/* 优惠券弹出层 结束 */

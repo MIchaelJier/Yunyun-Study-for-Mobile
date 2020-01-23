@@ -12,7 +12,7 @@
 		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :initTop="initTop">
 			<!-- 简介 开始 -->
 			<template v-slot:0>
-				<introduction ref="intro"></introduction>
+				<introduction :courseInfo="courseInfo"></introduction>
 			</template>
 			<!-- 简介 结束-->
 			<!-- 目录 开始 -->			
@@ -50,21 +50,16 @@
 				initTop:0,
 				
 				tabs:['简介','目录','评价'],
-				courseInfo:{
-					ownername: "文豪金融",
-					ownerId: "1821091976",
-					photoUrl: "https://edu-image.nosdn.127.net/a12090ea-6978-4e7a-bb7c-f7294094ab94.png",
-					productId: "0008819237",
-					productName: "来自福布斯精英的25节金融思维课",
-					oldPrice: "199.00",
-					discountPrice: "99.00",
-					deadlineTime: 0
-				},
+				courseInfo:{},
 			}
 		},
 		computed:{
 			cartNum(){
 				return this.$store.getters['cart/getCartNum']
+			},
+			cartInfo(){
+				let { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime } = this.courseInfo;
+				return { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime }
 			}
 		},
 		components: {
@@ -74,32 +69,37 @@
 		},
 		methods: {
 			addCart(){
-				let oldNum = this.cartNum;
-				this.$store.commit('cart/addCartOne', this.courseInfo);
-				if(this.cartNum !== oldNum) {
-					uni.showToast({
-					    title: '成功添加到购物车',
-						icon:'none',
-					    duration: 1000
-					});
-				}else{
-					uni.showToast({
-					    title: '该课程已在购物车',
-						icon:'none',
-					    duration: 1000
-					});
-				}
+				let oldNum = this.cartNum,
+					title = '';
+				this.$store.commit('cart/addCartOne', this.cartInfo);
+				this.cartNum !== oldNum
+					? title = '成功添加到购物车'
+					: title = '该课程已在购物车'
+				
+				uni.showToast({
+				    title,
+					icon:'none',
+				    duration: 1000
+				});
 			}
-		},
+		}, 
 		onLoad(options) {
-			console.log(options.id);
 			this.$nextTick(() => {
 				uni.createSelectorQuery().in(this).select('.player').boundingClientRect((res) => {
-					if (res) {
-						this.initTop = res.height
-					}
+					res ? this.initTop = res.height : ''
 				}).exec()
-			})
+			});
+			this.$request({
+			   url: '/getCoursedetail',
+			   method: 'GET',
+			   data:{
+				   productId:options.id
+			   }
+			  }).then(res => {
+					if(res.data.status === '200'){
+						this.courseInfo = res.data.data;
+					}
+			});
 		},
 		onPageScroll(e) {
 				this.scrollTop = e.scrollTop

@@ -97,7 +97,7 @@
 				})
 			},
 			allisCheck(){
-				this.allcheckedFlag = this.cartList.every(item => item.list.every(c => c.checked))
+				this.allcheckedFlag = this.cartList.every(item => item.list.every(c => c.checked));
 			}
 		},
 	}

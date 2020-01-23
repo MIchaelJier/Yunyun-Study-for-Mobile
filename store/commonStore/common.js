@@ -15,11 +15,11 @@ const common = {
       	getUserInfo(state){
       		let u = uni.getStorageSync('userInfo');
       		if(u !== '' ? u.loginTime !== '': false){
-      			let gap = monthDayDiff(u.loginTime,new Date());
+      			let gap = monthDayDiff(u.loginTime,new Date()); 
       			//判断缓存是否过期
       			//是 存入vuex
       			//否 清除userInfo缓存
-      			gap.year === 0 && gap.month === 0 && gap.day <= 10 
+      			gap.days < 10 
       				? state.userInfo = u
       				: uni.removeStorageSync('userInfo');
       		}

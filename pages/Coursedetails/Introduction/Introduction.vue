@@ -1,34 +1,59 @@
 <template>
 	<view>
+		<!-- 插屏弹窗 -->
+		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
+			<scroll-view class="couponsPopup" scroll-y>
+				<view class="couponsList" v-for="(item, index) in couponList" :key="index">
+					<view class="coupons-type">{{ item.type }}</view>
+					<view class="coupon-item" v-for="coupon in item.list" :key="coupon.couponId">
+						<view class="item-firstline">
+							<view>
+								<text class="item-amount">￥{{ coupon.amount }}</text>
+								<text v-if="coupon.consumingThreshold === 0" style="font-size: 12px">无金额门槛</text>
+								<text v-else style="font-size: 12px">满￥{{ coupon.consumingThreshold }}可用</text>
+							</view>
+							<view class="item-btn">领取</view>
+						</view>
+						<text class="item-other">适用范围：{{ coupon.targetName }}</text>
+						<text class="item-other">有效时间：xxxxx-xxxxx</text>
+					</view>
+				</view>
+			</scroll-view>
+		</uni-popup>
 		<view class="courseintrohead">
 			<view class="courseintrohead-title">
 				<view class="title-name text-balck">
-					来自福布斯精英的25节金融思维课
+					{{ courseInfo.productName }}
 				</view>
 				<view class="title-other">
-					<view class="title-other-star">
-						<uni-rate :value="4.7" :size="17" disabled="true"></uni-rate>
+					<view class="title-other-star" v-if="courseInfo.rate >= 0">
+						<uni-rate :value="courseInfo.rate" size="17" disabled="true"></uni-rate>
 					</view>
-					<text class="text-grey">4.7分</text>
-					<text class="text-grey title-other-full">3515人在学</text>
-					<view class="title-other-tip">独家</view>
+					<text class="text-grey">{{  courseInfo.rate }}分</text>
+					<text class="text-grey title-other-full">{{  courseInfo.learningNum }}人在学</text>
+					<block  v-for="(tip, index) in courseInfo.tips" :key="index">
+						<view class="title-other-tip">{{ tip }}</view>
+					</block>
 				</view>
 			</view>
 			<view class="courseintrohead-price">
 				<view class="priceMain">
 					<view class="nprice">
 						<text class="yuan">¥</text>
-						99.00
+						{{ courseInfo.discountPrice&&courseInfo.discountPrice!=='' ? courseInfo.discountPrice : courseInfo.oldPrice }}
 					</view>
-					<view class="nprice-tip">特价仅剩10天9小时31分钟</view>
+					<view class="nprice-tip" v-if="remainingTime">{{ remainingTime }}</view>
 				</view>
-				<view class="oprice text-grey">¥199.00</view>
+				<view class="oprice text-grey" v-if="courseInfo.discountPrice&&courseInfo.discountPrice!==''">
+					¥{{ courseInfo.oldPrice }}
+				</view>
 			</view>
 		</view>
 		<view class="contentbox">
-			<view class="youhuicontent">
-				<view class="ux-ykt-icon-youhui youhui-tip"></view>
-				<text class="youhui-full">减￥20</text>
+			<view class="youhuicontent" v-for="(coupon,index) in courseInfo.coupons" :key="index" @click="togglePopup(coupon.link)">
+				<view class="ux-ykt-icon-youhui youhui-tip" v-if="coupon.type === 0"></view>
+				<view class="ux-ykt-icon-lingquan youhui-tip" v-if="coupon.type === 1"></view>
+				<text class="youhui-full" :style="{color:coupon.type === 1 ? '#FF4400':'#333740'}">{{ coupon.content }}</text>
 				<view class="ux-ykt-icon-right-arrow youhui-arrow"></view>
 			</view>
 		</view>
@@ -37,14 +62,14 @@
 				<view class="courseintrobody-title">课程介绍</view>
 				<view class="courseintrobody-main text-grey">
 					<!-- 富文本 nnodes属性为String -->
-					<rich-text :nodes="intro"></rich-text>
+					<rich-text :nodes="courseInfo.description"></rich-text>
 				</view>
 			</view>
 			<view class="courseprovider">
 				<uni-list>
-				    <uni-list-item title="文豪金融" 
-								   note="3512位学员"
-								   thumb="https://edu-image.nosdn.127.net/f397a3c1-bb3c-43f6-a49b-c5527b061c59.png?imageView&quality=100&thumbnail=80y80" 
+				    <uni-list-item :title="courseInfo.ownername" 
+								   :note="courseInfo.ownerStudentNum +'位学员'"
+								   :thumb="courseInfo.ownerPhotoUrl" 
 								   :show-badge="true"
 								   badgeType="default"
 								   badge-text="进入网校"
@@ -55,13 +80,15 @@
 			<view class="courseteacher">
 				<view class="courseintrobody-title">讲师</view>
 				<view class="courseteacher-main">
+					<block v-for="teacher in courseInfo.teachers" :key="teacher.teacherId">
 						<view class="courseteacher-main-top">
-							<image class="top-headpic" src="https://edu-image.nosdn.127.net/eed99132-996e-4c26-b839-02d6220ae50d.jpg?imageView&quality=100&thumbnail=48x48&type=webp"></image>
-							<text class="top-name">Michael</text>
+							<image class="top-headpic" :src="teacher.headImg"></image>
+							<text class="top-name">{{ teacher.name }}</text>
 						</view>
 						<view class="courseteacher-main-detail">
-							<text class="text-grey">2017年福布斯精英（30岁以下创业精英榜），纽约大学商学院毕业，剑桥大学商学院MBA，华尔街投行分析师，文豪金融创始人。希望将通俗易懂的金融和理财知识带给大家！</text>
+							<text class="text-grey">{{ teacher.teacherIntro }}</text>
 						</view>
+					</block>
 				</view>
 			</view>
 		</view>
@@ -69,45 +96,111 @@
 </template>
 
 <script>
+	import { monthDayDiff } from "../../../utils/timeFormat.js"
 	export default {
 		name: "Introduction",
 		data() {
 			return {
-				
-				intro:`25节听得懂的金融思维课 ，零基础，人人用得上！<br/>
-								帮你快速入门金融学，建立财富观，开启有收益的人生！<br/>
-								<br/>
-								【为什么学这门课？】<br/>
-								生活中听不懂新闻里金融名词？——这门课帮助你了解金融概念，摸清金融脉络<br/>
-								年轻人没建立起财富观不知道怎样开始？——课程帮助你培养金融思维与自我财富意识<br/>
-								普通人不知如何开启个人投资之路？——这里会讲金融投资那些事儿，帮助你玩转个人投资<br/>
-								职场人要做管理层或创业但不了解相关知识？——这里有用得上的公司决策，帮你看清趋势<br/>
-								<br/>
-								【讲师介绍】<br/>
-								文豪 福布斯精英（30岁以下创业精英榜）  <br/>
-								纽约大学商学院毕业 剑桥大学商学院MBA<br/>
-								华尔街投行分析师 文豪金融创始人 <br/>
-								<br/>
-								【课程包括】<br/>
-								25堂精品课（包括视频版和音频版！） 永久观看 不限次数！<br/>
-								涵盖金融思维、金融工具、个人投资、公司决策、未来趋势5大章节<br/>
-								25个通俗易懂的金融案例切入及评析<br/>
-								每节一个练习思考，帮助你实操锻炼<br/>
-								N+关于提升金融思维的点拨！<br/>
-								<br/>
-								【价格说明】<br/>
-								原价199，限时特价！越早加入越划算！<br/>
-								<br/>
-								【加群交流】<br/>
-								助教微信：18801076695 ，加入文豪金融群，每周一次金融解读，不定期彩蛋，文豪老师也在，一起交流！<br/>
-								<br/>
-								<img src="https://edu-image.nosdn.127.net/b67e7cf6-7362-4f11-8a6c-7e30b3ddbfac.jpg?imageView&amp;quality=100&amp;type=webp" data-src="//edu-image.nosdn.127.net/b67e7cf6-7362-4f11-8a6c-7e30b3ddbfac.jpg?imageView&amp;quality=100&amp;type=webp" class="intro-img" id="auto-id-1574235103679" style="width: 100%;">`
-				
+				couponList:[
+					{
+						type:'本课程可用',
+						list:[
+							{
+								  couponId:"1223432123",
+								  amount: 10,
+								  consumingThreshold: 0,
+								  "targetName": "来自福布斯精英的25节金融思维",
+								  "targetType": 2,
+								  "targetId": [
+									 "0008819237"
+								  ]
+							}
+						]
+					},{
+						type:'该讲师/机构下其他优惠券',
+						list:[
+							{
+								  couponId:"1223432857",
+								  amount: 20,
+								  consumingThreshold: 0,
+								  "targetName": "金融思维超级大脑",
+								  "targetType": 2,
+								  "targetId": [
+								     "0008819237"
+								  ]
+							},
+							{
+								  couponId:"1223432999",
+								  amount: 10,
+								  consumingThreshold: 0,
+								  "targetName": "该机构/讲师下所有课程",
+								  "targetType": 1,
+								  "targetId": [
+								     "1821091976"
+								  ]
+							},
+							{
+								  couponId:"1223432999",
+								  amount: 10,
+								  consumingThreshold: 0,
+								  "targetName": "该机构/讲师下所有课程",
+								  "targetType": 1,
+								  "targetId": [
+								     "1821091976"
+								  ]
+							},
+							{
+								  couponId:"1223432999",
+								  amount: 10,
+								  consumingThreshold: 0,
+								  "targetName": "该机构/讲师下所有课程",
+								  "targetType": 1,
+								  "targetId": [
+								     "1821091976"
+								  ]
+							},
+							{
+								  couponId:"1223432999",
+								  amount: 10,
+								  consumingThreshold: 0,
+								  "targetName": "该机构/讲师下所有课程",
+								  "targetType": 1,
+								  "targetId": [
+								     "1821091976"
+								  ]
+							},
+						]
+					}
+				]
+		
 			};
 		},
-		props: {
-			
+		computed:{
+			remainingTime(){
+				if(this.courseInfo.discountTime && this.courseInfo.discountTime !== 0){
+					let { days, hours, minutes, seconds } = monthDayDiff(new Date(),this.courseInfo.discountTime)
+					return `特价仅剩${days}天${hours}小时${minutes}分钟`
+				}
+			}
 		},
+		props: {
+			courseInfo: {
+				type:[Object, Array],
+				default:()=>{}
+			}
+		},
+		methods:{
+			togglePopup(link) {
+				if(link){
+					window.location.href = link
+				}else{
+					this.$nextTick(() => {
+						this.$refs['showpopup'].open()
+					})
+				}
+				
+			},
+		}
 	}
 </script>
 

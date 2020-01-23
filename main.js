@@ -3,6 +3,13 @@ import App from './App'
 //引入并挂载vuex
 import store from './store'  
 Vue.prototype.$store = store  
+//一次性注册 components文件夹中的 所有组件(uniapp不支持)
+// const requireComponents = require.context('./components', true, /\.vue/);
+// requireComponents.keys().forEach( fileName => {
+//   const reqCom = requireComponents(fileName)
+//   const reqComName = fileName.split('/')[1];
+//   Vue.component(reqComName.substring(0 , reqComName.length - 4), reqCom.default || reqCom)
+// })
 // 自定义组件
 	import yunBox from "./components/yunBox.vue"
 	import yunSwiper from "./components/yunSwiper.vue"
@@ -31,12 +38,14 @@ Vue.prototype.$store = store
 	import uniIcons from "./uniUI//components/uni-icons/uni-icons.vue"
 	import uniCollapse from './uniUI//components/uni-collapse/uni-collapse.vue'
 	import uniCollapseItem from './uniUI//components/uni-collapse-item/uni-collapse-item.vue'
+	import uniPopup from './uniUI//components/uni-popup/uni-popup.vue'
 	Vue.component('uniList',uniList);
 	Vue.component('uniRate',uniRate);
 	Vue.component('uniListItem',uniListItem);
 	Vue.component('uniIcons',uniIcons);
 	Vue.component('uniCollapse',uniCollapse);
 	Vue.component('uniCollapseItem',uniCollapseItem);
+	Vue.component('uniPopup',uniPopup);
 
 Vue.config.productionTip = false;
 
@@ -59,10 +68,3 @@ const app = new Vue({
 })
 app.$mount()
 
-//一次性注册 components文件夹中的 所有组件(uniapp不支持)
-// const requireComponents = require.context('./components', true, /\.vue/);
-// requireComponents.keys().forEach( fileName => {
-//   const reqCom = requireComponents(fileName)
-//   const reqComName = fileName.split('/')[1];
-//   Vue.component(reqComName.substring(0 , reqComName.length - 4), reqCom.default || reqCom)
-// })

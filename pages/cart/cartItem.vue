@@ -29,6 +29,8 @@
 					</view>
 				</view>
 			</checkbox-group>
+			<!-- 拟态框 -->
+			<yun-modal v-model="value" :mData="modelData" type="default" @onConfirm="onConfirm" @cancel="cancel" ref="myModel"></yun-modal>
 		</view>
 	</view>
 </template>
@@ -38,7 +40,10 @@
 	export default {
 		data() {
 			return {
-				
+				// 弹出框
+				value:false,
+				modelData:{title:'提示',content:'确认删除该课程？',cancelText:'取消'},
+				delProductId:'',
 			};
 		},
 		computed:{
@@ -83,11 +88,19 @@
 			},
 			// 删除课程
 			cartDel(productId){
+				this.value = !this.value;
+				this.delProductId = productId;
+			},
+			onConfirm() {
 				this.$store.commit('cart/delCartOne',{
 					ownerId:this.ownerMsg.ownerId,
-					productId,
+					productId:this.delProductId,
 				});
-			}
+				this.delProductId = '';
+			},
+			cancel(){
+				this.delProductId = '';
+			},
 		}
 	}
 </script>
