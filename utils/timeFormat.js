@@ -17,17 +17,25 @@ export const monthDayDiff = (startDate, endDate) => {
 		//秒
 		let leave3=leave2%(60 * 1000)      //计算分钟数后剩余的毫秒数
 		let seconds=Math.round(leave3 / 1000)
-		console.log(`距上次登录相差 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`);
 		return {days,hours,minutes,seconds}
 }
-
+/*
+*	时间增加
+* 	@param time 格式:xxxx-xx-xx xx:xx.xx
+*   @param {...} days
+* */
+export const TimeAdd = (time,{...param2}) => {
+	  let oldDate = new Date(Date.parse(time.replace(/-|\./g,"/"))),
+	      addDate = new Date(oldDate.getTime()+param2.days*24*60*60*1000);
+	  return  formatTime(addDate)
+}
 /*
 *	判断时间是否大于当前时间
 * 	@param time 格式:xxxx-xx-xx xx:xx || xxxx.xx.xx xx:xx
 * */
 export const TimeDiff = time => {
-	  let otime=new Date(Date.parse(time.replace(/-|\./g,"/")+':00')),
-		  curtime=new Date();
+	  let otime=new Date(Date.parse(time.replace(/-|\./g,"/"))),
+		  curtime = new Date();
 	  if(otime > curtime) return true
 	  else return false
 }

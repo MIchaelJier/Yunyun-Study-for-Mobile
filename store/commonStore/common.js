@@ -16,6 +16,7 @@ const common = {
       		let u = uni.getStorageSync('userInfo');
       		if(u !== '' ? u.loginTime !== '': false){
       			let gap = monthDayDiff(u.loginTime,new Date()); 
+				console.log(`距上次登录相差 ${gap.days} 天 ${gap.hours} 小时 ${gap.minutes} 分钟 ${gap.seconds} 秒`);
       			//判断缓存是否过期
       			//是 存入vuex
       			//否 清除userInfo缓存

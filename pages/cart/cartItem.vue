@@ -47,13 +47,14 @@
 			};
 		},
 		computed:{
-			totalCount(){
-				let total = 0;
-				this.cartList.forEach( course => {
-					if(course.checked) total += parseFloat(course.discountPrice)
-				})
-				return toDecimal(total)
-			}
+			// 新增课程 勾选 无法更新
+			// totalCount(){
+			// 	let total = 0;
+			// 	this.cartList.forEach( course => {
+			// 		if(course.checked) total += parseFloat(course.discountPrice)
+			// 	})
+			// 	return toDecimal(total)
+			// },
 		},
 		props:{
 			cartList: {
@@ -72,11 +73,15 @@
 			    type: Boolean,
 				default:false,
 			},
+			totalCount: { 
+				type: String,
+				default: '0.00',
+			}
 		},
 		methods:{
 			// 机构选择
 			allCheck(e){
-				this.$emit('itemCheck',e.currentTarget.dataset.id)
+				this.$emit('itemCheck',e.currentTarget.dataset.id);
 			},
 			// 课程选择
 			courseCheck(e){
@@ -84,7 +89,7 @@
 					key:e.currentTarget.dataset.id,
 					value:e.detail.value
 				}
-				this.$emit('courseCheck',detail)
+				this.$emit('courseCheck',detail);
 			},
 			// 删除课程
 			cartDel(productId){
@@ -101,7 +106,7 @@
 			cancel(){
 				this.delProductId = '';
 			},
-		}
+		},
 	}
 </script>
 

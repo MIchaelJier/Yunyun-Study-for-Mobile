@@ -2,7 +2,7 @@
 	<view>
 		<!-- 插屏弹窗 -->
 		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
-			<scroll-view class="couponsPopup" scroll-y>
+			<scroll-view class="couponsPopup xBottom" scroll-y>
 				<view class="couponsList" v-for="(item, index) in couponList" :key="index">
 					<view class="coupons-type">{{ item.type }}</view>
 					<view class="coupon-item" v-for="coupon in item.list" :key="coupon.couponId">
@@ -12,10 +12,17 @@
 								<text v-if="coupon.consumingThreshold === 0" style="font-size: 12px">无金额门槛</text>
 								<text v-else style="font-size: 12px">满￥{{ coupon.consumingThreshold }}可用</text>
 							</view>
-							<view class="item-btn">领取</view>
+							<view class="item-btn" 
+								:style="{color:coupon.isHave ? '#666':'#FF6600','border-color':coupon.isHave ? '#666':'#FF6600'}"
+								@click="addCoupon(coupon)">{{ coupon.isHave ? '已领取':'领取' }}</view>
 						</view>
 						<text class="item-other">适用范围：{{ coupon.targetName }}</text>
-						<text class="item-other">有效时间：xxxxx-xxxxx</text>
+						<text class="item-other" v-if="coupon.createTime&&coupon.endTime">
+							有效时间：{{coupon.createTime}}-{{coupon.endTime}}
+						</text>
+						<text class="item-other" v-if="coupon.saveTime">
+							领取后{{ coupon.saveTime }}天有效
+						</text>
 					</view>
 				</view>
 			</scroll-view>
@@ -96,82 +103,12 @@
 </template>
 
 <script>
-	import { monthDayDiff } from "../../../utils/timeFormat.js"
+	import { monthDayDiff,formatTime,TimeAdd } from "../../../utils/timeFormat.js"
 	export default {
 		name: "Introduction",
 		data() {
 			return {
-				couponList:[
-					{
-						type:'本课程可用',
-						list:[
-							{
-								  couponId:"1223432123",
-								  amount: 10,
-								  consumingThreshold: 0,
-								  "targetName": "来自福布斯精英的25节金融思维",
-								  "targetType": 2,
-								  "targetId": [
-									 "0008819237"
-								  ]
-							}
-						]
-					},{
-						type:'该讲师/机构下其他优惠券',
-						list:[
-							{
-								  couponId:"1223432857",
-								  amount: 20,
-								  consumingThreshold: 0,
-								  "targetName": "金融思维超级大脑",
-								  "targetType": 2,
-								  "targetId": [
-								     "0008819237"
-								  ]
-							},
-							{
-								  couponId:"1223432999",
-								  amount: 10,
-								  consumingThreshold: 0,
-								  "targetName": "该机构/讲师下所有课程",
-								  "targetType": 1,
-								  "targetId": [
-								     "1821091976"
-								  ]
-							},
-							{
-								  couponId:"1223432999",
-								  amount: 10,
-								  consumingThreshold: 0,
-								  "targetName": "该机构/讲师下所有课程",
-								  "targetType": 1,
-								  "targetId": [
-								     "1821091976"
-								  ]
-							},
-							{
-								  couponId:"1223432999",
-								  amount: 10,
-								  consumingThreshold: 0,
-								  "targetName": "该机构/讲师下所有课程",
-								  "targetType": 1,
-								  "targetId": [
-								     "1821091976"
-								  ]
-							},
-							{
-								  couponId:"1223432999",
-								  amount: 10,
-								  consumingThreshold: 0,
-								  "targetName": "该机构/讲师下所有课程",
-								  "targetType": 1,
-								  "targetId": [
-								     "1821091976"
-								  ]
-							},
-						]
-					}
-				]
+				couponList:[],
 		
 			};
 		},
@@ -192,14 +129,53 @@
 		methods:{
 			togglePopup(link) {
 				if(link){
-					window.location.href = link
+					// window.location.href = link
+					// 跳转到活动页面
 				}else{
-					this.$nextTick(() => {
-						this.$refs['showpopup'].open()
-					})
+					// this.$nextTick(() => {...})
+					this.$request({
+					   url: '/getCourseCoupon',
+					   method: 'GET',
+					   data:{
+						   productId:this.courseInfo.productId,
+						   ownerId:this.courseInfo.ownerId
+					   }
+					  }).then(res => {
+							if(res.data.status === '200'){
+								if(this.couponList.length === 0){
+									let cou = res.data.data.coupons;
+									cou.forEach( out => {
+										 out.list = out.list.map( item => {
+											item.isHave = this.$store.getters['cart/isHaveCoupon'](item.couponId)
+											return item
+										});
+									})
+									this.couponList = cou;
+								}
+								this.$refs['showpopup'].open();
+							}
+					});
 				}
-				
 			},
+			addCoupon(coupon){
+				if(!coupon.isHave){
+					coupon.isHave = true;
+					let {amount,consumingThreshold,couponId,isVip,ownerId,creatorName,creatorUrl,targetId,targetName,targetType} = coupon;
+					let add = {amount,consumingThreshold,couponId,isVip,ownerId,targetId,targetName,targetType};
+					add.used = false;
+					if(coupon.saveTime){
+						add.createTime = formatTime(new Date());
+						add.endTime = TimeAdd(add.createTime , {
+							days: parseInt(coupon.saveTime)
+						})
+					}else if(coupon.createTime && coupon.endTime){
+						add.createTime = coupon.createTime;
+						add.endTime = coupon.endTime
+					}
+					// console.log(add)
+					this.$store.commit('cart/addCouponOne', add)
+				}
+			}
 		}
 	}
 </script>

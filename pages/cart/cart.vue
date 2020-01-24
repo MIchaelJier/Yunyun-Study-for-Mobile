@@ -4,8 +4,11 @@
 			<text>共{{ total }}门课程</text>
 		</view>
 		<view class="content" v-if="total !== 0">
-			<block v-for="item in cartList" :key="item.ownerDto.ownerId" >
-				<cart-item :cartList="item.list" :ownerMsg="item.ownerDto" :allChecked="item.checked" 
+			<block v-for="(item,index) in cartList" :key="item.ownerDto.ownerId" >
+				<cart-item :cartList="item.list" 
+				:ownerMsg="item.ownerDto" 
+				:allChecked="item.checked" 
+				:totalCount="itemcount(index)"
 				@itemCheck="itemCheck" @courseCheck="courseCheck"
 				:ref="item.ownerDto.ownerId"></cart-item>
 			</block>
@@ -35,17 +38,13 @@
 		data() {
 			return {
 				allcheckedFlag:false,
+				totalCount:'0.00',
+				itemsCount:[]
 			}
 		},
 		computed:{
-			totalCount(){
-				let total = 0;
-				this.cartList.forEach( item => {
-					item.list.forEach(course => {
-						if(course.checked) total += parseFloat(course.discountPrice)
-					})
-				})
-				return toDecimal(total)
+			itemcount(){
+				return index => this.itemsCount[index] || 0
 			},
 			cartList(){
 				return this.$store.getters['cart/getCart']
@@ -100,6 +99,29 @@
 				this.allcheckedFlag = this.cartList.every(item => item.list.every(c => c.checked));
 			}
 		},
+		watch:{
+			cartList:{
+				immediate:true,
+				deep:true,
+				handler(newVal,oldVal){
+					let total = 0,
+						list = []
+					newVal.forEach( item => {
+							let itemTotal = 0; 
+							item.list.forEach( course => {
+								if(course.checked){
+									let price = parseFloat(course.discountPrice);
+									total += price;
+									itemTotal += price;
+								}
+							})
+							list.push(toDecimal(itemTotal))
+						})
+					this.totalCount = toDecimal(total)
+					this.itemsCount = list
+				}
+			},
+		}
 	}
 </script>
 

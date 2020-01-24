@@ -58,23 +58,24 @@ const cart = {
 			addCartOne(state, Info){
 				let {ownerId, ownername, ...course} = Info,
 					HaveOwner = state.cartList.some(item => item.ownerDto.ownerId === Info.ownerId),
-					HaveCourse = state.cartList.some(item => item.list.some(c => c.productId = Info.productId));
+					HaveCourse = state.cartList.some(item => item.list.some(c => c.productId === Info.productId));
 				if(HaveOwner&&!HaveCourse){
 					state.cartList.forEach(item => {
 						if(item.ownerDto.ownerId === Info.ownerId){
 							item.list.push(course)
 						}
 					})
-				}else if(!HaveOwner&&HaveCourse){
-					let list = [ course ];
-					state.cartList.push({
-						checked: false,
-						ownerDto: {
-							ownername: Info.ownername,
-							ownerId: Info.ownerId
-						},
-						list,
-					})
+				}else if(!HaveOwner&&!HaveCourse){
+					let list = [ course ],
+					    add = {
+							checked: false,
+							ownerDto: {
+								ownername: Info.ownername,
+								ownerId: Info.ownerId
+							},
+							list,
+						};
+					state.cartList.push(add)
 				}
 			},
 		/*
@@ -84,6 +85,13 @@ const cart = {
 		   changeCouponList(state, value){
 				state.couponList = value
 		   },
+		   // 增加优惠券
+		   addCouponOne(state, coupon){
+			  let HaveCoupon = state.couponList.some(item => item.couponId === coupon.couponId)
+			  if(!HaveCoupon){
+				  state.couponList.push(coupon);
+			  }
+		   }
 	},
     getters: {
 		//获取购物车
@@ -103,7 +111,7 @@ const cart = {
 		getCartPay: state => { 
 			//时间复杂度有点高
 			//对象数组深拷贝
-			let list = [].concat(JSON.parse(JSON.stringify(state.cartList)));
+			let list = [].concat(JSON.parse(JSON.stringify(state.cartList))); //Object.assign({},obj)
 			list.forEach((item, index) => {
 				//为毛fliter不能用
 				let newlist = [];
@@ -136,7 +144,10 @@ const cart = {
 					return state.couponList.filter(  item => !item.used && item.targetType === 2 && TimeDiff(item.endTime) );
 					break;
 			}
-		}
+		},
+		//判断 该优惠券是否已领取
+		isHaveCoupon: state => id => state.couponList.some(item => item.couponId === id)
+		
     }
 }
 export default cart;
