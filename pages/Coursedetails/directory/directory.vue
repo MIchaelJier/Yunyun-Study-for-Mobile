@@ -1,13 +1,18 @@
 <template>
 	<view>
-		<view class="listTitile">课程已完更（含视频、音频版课件，内容相同）</view>
-		<view class="dirList">
-			<view class="dirList-content">
-				<view class="dirList-content-icon">视频</view>
-				<text class="dirList-content-title">3.【视频版】导读：来自文豪老师的课程介绍以及学习指南</text>
-				<text class="dirList-content-add">可试看</text>
+		<block v-for="(item,index) in chapterList" :key="index">
+			<view class="listTitile">{{ item.title }}</view>
+			<view class="dirList" v-for="inner in item.body" :key="inner.id">
+				<view class="dirList-content" :style="{color:inner.src === ''?'#ccc':'#333'}" @click="changeSrc(inner.src)">
+					<view class="dirList-content-icon" :style="{'border-color':inner.src === ''?'#ccc':'#333'}">
+						{{ inner.type === 0 ? '视频' : '' }}
+						{{ inner.type === 1 ? '音频' : '' }}
+					</view>
+					<text class="dirList-content-title">{{ inner.name }}</text>
+					<text class="dirList-content-add" v-if="inner.tip&&inner.tip!==''">{{ inner.tip }}</text>
+				</view> 
 			</view>
-		</view>
+		</block>
 	</view>
 </template>
 
@@ -20,8 +25,16 @@
 			};
 		},
 		props: {
-			
+			chapterList: {
+				type: Array,
+				default:()=>{}
+			}
 		},
+		methods:{
+			'changeSrc'(src){
+				this.$emit('changeVedio',src)
+			}
+		}
 	}
 </script>
 

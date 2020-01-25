@@ -1,32 +1,5 @@
 <template>
-	<view>
-		<!-- 插屏弹窗 -->
-		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
-			<scroll-view class="couponsPopup xBottom" scroll-y>
-				<view class="couponsList" v-for="(item, index) in couponList" :key="index">
-					<view class="coupons-type">{{ item.type }}</view>
-					<view class="coupon-item" v-for="coupon in item.list" :key="coupon.couponId">
-						<view class="item-firstline">
-							<view>
-								<text class="item-amount">￥{{ coupon.amount }}</text>
-								<text v-if="coupon.consumingThreshold === 0" style="font-size: 12px">无金额门槛</text>
-								<text v-else style="font-size: 12px">满￥{{ coupon.consumingThreshold }}可用</text>
-							</view>
-							<view class="item-btn" 
-								:style="{color:coupon.isHave ? '#666':'#FF6600','border-color':coupon.isHave ? '#666':'#FF6600'}"
-								@click="addCoupon(coupon)">{{ coupon.isHave ? '已领取':'领取' }}</view>
-						</view>
-						<text class="item-other">适用范围：{{ coupon.targetName }}</text>
-						<text class="item-other" v-if="coupon.createTime&&coupon.endTime">
-							有效时间：{{coupon.createTime}}-{{coupon.endTime}}
-						</text>
-						<text class="item-other" v-if="coupon.saveTime">
-							领取后{{ coupon.saveTime }}天有效
-						</text>
-					</view>
-				</view>
-			</scroll-view>
-		</uni-popup>
+	<view v-if="Object.keys(this.courseInfo).length !== 0">
 		<view class="courseintrohead">
 			<view class="courseintrohead-title">
 				<view class="title-name text-balck">
@@ -99,6 +72,33 @@
 				</view>
 			</view>
 		</view>
+		<!-- 插屏弹窗 -->
+		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
+			<scroll-view class="couponsPopup xBottom" scroll-y>
+				<view class="couponsList" v-for="(item, index) in couponList" :key="index">
+					<view class="coupons-type">{{ item.type }}</view>
+					<view class="coupon-item" v-for="coupon in item.list" :key="coupon.couponId">
+						<view class="item-firstline">
+							<view>
+								<text class="item-amount">￥{{ coupon.amount }}</text>
+								<text v-if="coupon.consumingThreshold === 0" style="font-size: 12px">无金额门槛</text>
+								<text v-else style="font-size: 12px">满￥{{ coupon.consumingThreshold }}可用</text>
+							</view>
+							<view class="item-btn" 
+								:style="{color:coupon.isHave ? '#666':'#FF6600','border-color':coupon.isHave ? '#666':'#FF6600'}"
+								@click="addCoupon(coupon)">{{ coupon.isHave ? '已领取':'领取' }}</view>
+						</view>
+						<text class="item-other">适用范围：{{ coupon.targetName }}</text>
+						<text class="item-other" v-if="coupon.createTime&&coupon.endTime">
+							有效时间：{{coupon.createTime}}-{{coupon.endTime}}
+						</text>
+						<text class="item-other" v-if="coupon.saveTime">
+							领取后{{ coupon.saveTime }}天有效
+						</text>
+					</view>
+				</view>
+			</scroll-view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -109,7 +109,6 @@
 		data() {
 			return {
 				couponList:[],
-		
 			};
 		},
 		computed:{
@@ -161,13 +160,14 @@
 				if(!coupon.isHave){
 					coupon.isHave = true;
 					let {amount,consumingThreshold,couponId,isVip,ownerId,creatorName,creatorUrl,targetId,targetName,targetType} = coupon;
-					let add = {amount,consumingThreshold,couponId,isVip,ownerId,targetId,targetName,targetType};
+					let add = {amount,consumingThreshold,couponId,isVip,ownerId,targetId,creatorName,targetName,targetType};
 					add.used = false;
 					if(coupon.saveTime){
-						add.createTime = formatTime(new Date());
+						add.createTime = formatTime(new Date(),'.').substr(0, 16);
 						add.endTime = TimeAdd(add.createTime , {
-							days: parseInt(coupon.saveTime)
-						})
+							days: parseInt(coupon.saveTime),
+							type: '.'
+						}).substr(0, 16)
 					}else if(coupon.createTime && coupon.endTime){
 						add.createTime = coupon.createTime;
 						add.endTime = coupon.endTime

@@ -27,7 +27,7 @@ export const monthDayDiff = (startDate, endDate) => {
 export const TimeAdd = (time,{...param2}) => {
 	  let oldDate = new Date(Date.parse(time.replace(/-|\./g,"/"))),
 	      addDate = new Date(oldDate.getTime()+param2.days*24*60*60*1000);
-	  return  formatTime(addDate)
+	  return  formatTime(addDate,param2.type)
 }
 /*
 *	判断时间是否大于当前时间
@@ -42,8 +42,9 @@ export const TimeDiff = time => {
 
 /*
 *	格式化Data
+*   @param type 日期分隔符 
 * */
-export const formatTime = date => {
+export const formatTime = (date,type = '/') => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -51,7 +52,7 @@ export const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join(type) + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 const formatNumber = n => {
   n = n.toString()

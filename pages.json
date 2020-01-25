@@ -48,6 +48,7 @@
             "path" : "pages/search/search",
 			"navigationBarTitleText": "搜索",
             "style" : {
+				"enablePullDownRefresh": true,
 				"app-plus":{
 					"titleNView":false
 					}
@@ -66,6 +67,7 @@
             "path" : "pages/Coursedetails/Coursedetails",
 			"navigationBarTitleText": "课程详情",
             "style" : {
+				"enablePullDownRefresh": true,
 				"app-plus":{
 					"titleNView":false
 					}

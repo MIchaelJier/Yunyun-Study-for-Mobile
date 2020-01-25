@@ -3,13 +3,13 @@
 		<!-- 视频 开始 -->
 		<view class="player">
 			<video 
-				src="" 
+				:src="nowVedio" 
 				:poster="courseInfo.photoUrl"
 				controls
 				id="video"></video>
 		</view>
 		<!-- 视频 结束 -->
-		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :initTop="initTop">
+		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :initTop="initTop" @tabClick="tabClick" ref="tabs">
 			<!-- 简介 开始 -->
 			<template v-slot:0>
 				<introduction :courseInfo="courseInfo"></introduction>
@@ -17,12 +17,12 @@
 			<!-- 简介 结束-->
 			<!-- 目录 开始 -->			
 			<template v-slot:1>
-				<directory></directory>
+				<directory :chapterList="chapterList" @changeVedio="changeVedio"></directory>
 			</template>
 			<!-- 目录 结束 -->			
 			<!-- 评价 开始 -->			
 			<template v-slot:2>
-				<comment></comment>
+				<comment :commentsInfo="commentsInfo"></comment>
 			</template>
 			<!-- 评价 结束 -->
 		</yun-tab>
@@ -51,6 +51,13 @@
 				
 				tabs:['简介','目录','评价'],
 				courseInfo:{},
+				chapterList:[],
+				nowVedio:'',
+				commentsInfo:{},
+				
+				//上拉加载参数
+				star:0,
+				add:5,
 			}
 		},
 		computed:{
@@ -81,7 +88,33 @@
 					icon:'none',
 				    duration: 1000
 				});
-			}
+			},
+			changeVedio(src){
+				this.nowVedio = src;
+			},
+			tabClick(status){
+				if(status == 1 && this.chapterList.length === 0){
+					this.firstRequest('/getChapterlist','chapterList');
+				}
+				if(status == 2 && Object.keys(this.commentsInfo).length === 0){
+					this.firstRequest('/getComments','commentsInfo');
+				}
+			},
+			firstRequest(u,d){
+				let that = this;
+				return new Promise((resolve, reject) => {
+					that.$request({
+					   url: u,
+					   method: 'GET',
+					  }).then(res => {
+							if(res.data.status === '200'){
+								that.$data[d] = res.data.data;
+								resolve();
+							}
+					});
+				})
+			},
+			
 		}, 
 		onLoad(options) {
 			this.$nextTick(() => {
@@ -89,21 +122,30 @@
 					res ? this.initTop = res.height : ''
 				}).exec()
 			});
-			this.$request({
-			   url: '/getCoursedetail',
-			   method: 'GET',
-			   data:{
-				   productId:options.id
-			   }
-			  }).then(res => {
-					if(res.data.status === '200'){
-						this.courseInfo = res.data.data;
-					}
-			});
+			this.firstRequest('/getCoursedetail','courseInfo');
 		},
+		onPullDownRefresh() {
+			this.courseInfo = {};
+			this.chapterList = [];
+			this.nowVedio = '';
+			this.commentsInfo = {};
+			this.$refs.tabs.status = 0;
+			this.star = 0;
+			setTimeout(() => {
+				this.firstRequest('/getCoursedetail','courseInfo').then(() => {
+					uni.stopPullDownRefresh()
+				})
+			},500)
+		},
+		// onReachBottom() {
+		// 	if(this.$refs.tabs.status == 2){
+		// 		console.log('上拉加载更多')
+		// 	}
+		// },
 		onPageScroll(e) {
 				this.scrollTop = e.scrollTop
 		},
+		
 	}
 </script>
 

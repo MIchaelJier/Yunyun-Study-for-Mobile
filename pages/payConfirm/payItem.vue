@@ -80,10 +80,13 @@
 			// 该机构优惠券
 			itemCoupon(){
 				return  this.$store.getters['cart/getCoupon'](4).filter( 
-					item => 
-							item.targetId.includes(this.ownerMsg.ownerId) 
-								&&  
-							item.consumingThreshold === 0 ? '' : this.allPrice >= item.consumingThreshold
+					item => {
+						console.log(item.targetId.includes(this.ownerMsg.ownerId))
+						return item.targetId.includes(this.ownerMsg.ownerId)
+							&&  
+						parseFloat(this.allPrice) >= parseFloat(item.consumingThreshold)
+					}
+							
 				)
 			}
 		},

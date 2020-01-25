@@ -56,9 +56,17 @@
 		methods:{
 			showStatus(e){
 			   let status = e.currentTarget.dataset.status;
-							this.status = status
+				  this.status = status
 			 },
+			 statusEvent(status){
+				 this.$emit('tabClick',status)
+			 }
 		},
+		watch:{
+			status(newVal){
+				this.statusEvent(newVal)
+			}
+		}
 	}
 </script>
 
