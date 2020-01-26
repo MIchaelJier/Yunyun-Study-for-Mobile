@@ -5,11 +5,11 @@
 			<text class="ux-ykt-icon-right-arrow chooseBtn"
 				   :style="{transform:show ? 'rotate(270deg)' : ''}"></text>
 		</view>
-		<view class="conditionBar-bottom" v-show="show">
+		<view class="conditionBar-bottom" v-show="show" @click="Click">
 			<!-- <yun-select :items="selectItems"  ref="select" @func="requestNew('selectItems','select')"></yun-select> -->
 			<block v-for="item in items" :key="item.id">
 				<view class="select-item" 
-					  @click="selectIt(item)"
+					  @click.stop="selectIt(item)"
 					  :class="nowSelect === item.id ? 'item-active':''">
 					  
 				{{ item.name }}

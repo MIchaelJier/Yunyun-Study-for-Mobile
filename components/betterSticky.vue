@@ -16,9 +16,11 @@
 </template>
 
 <script>
-	/**initDone
-	 * scrollTop
-	 * initTop
+	/**initDone 初始
+	 * scrollTop 页面滚动高度
+	 * initTop 初始高度
+	 * isUp 是否开启顶格
+	 * 
 	 * 引用页需要加的：
 	 * onLoad(options) {
 	 *	 this.$nextTick(() => {
@@ -47,6 +49,10 @@
 				type: Boolean,
 				default: true
 			},
+			isUp: {
+				type: Boolean,
+				default: false
+			}
 		},
 		watch: {
 			scrollTop(newValue, oldValue) {
@@ -93,11 +99,10 @@
 				const height = this.height;
 				const scrollTop = this.scrollTop
 					
-				const delY = scrollTop - (top + height)
-				this.isFixed = (scrollTop >= top && delY <= 0) ? true : false
-					
+				const delY = scrollTop - (top + height) ; // 顶格操作，效果参考日期条
+				this.isFixed = (scrollTop >= top && (this.isUp ? delY <= 0 : true)) ? true : false
 				this.translateY = 0
-				if (delY < 0 && -delY < this.holderHeight) {
+				if (delY < 0 && -delY < this.holderHeight && this.isUp) {
 					this.translateY = -this.holderHeight - delY
 				}	
 				

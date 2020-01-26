@@ -53,7 +53,6 @@
 技术 | 说明 |  文档    
 -|-|-  
 uni-app |  是一个使用 Vue.js 开发所有前端应用的框架 | [https://uniapp.dcloud.io/README](https://uniapp.dcloud.io/README) |  
-mescroll-uni | 下拉刷新和上拉加载的组件 | [http://www.mescroll.com/uni.html](http://www.mescroll.com/uni.html) |  
 uni-ui | 官方跨端ui库 | [https://uniapp.dcloud.io/component/README?id=uniui](https://uniapp.dcloud.io/component/README?id=uniui) |  
 vuex | vue状态管理器 | [https://vuex.vuejs.org/zh/](https://vuex.vuejs.org/zh/) |  
 yapi | 可视化接口管理平台（模拟接口管理，部署在个人服务器9000端口） | [https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md](https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md) <br> 基于[mockjs](http://mockjs.com) | 
@@ -64,18 +63,28 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
 部署网址：[http://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/).  
 小程序：微信搜索“芸云学堂”.  
 后端接口文档：[文档](http://zfroot.top:8081/yun)  
+
 ### 目前完成进度  
  1. 首页  
  2. 我的课程页 (我的微专业 x)
  3. 个人中心页   
- 4. 搜索页 (上拉加载更多 x)   
+ 4. 搜索页
  5. 分类页  
- 6. 详情页 (评论上拉加载更多 x)
+ 6. 详情页 (对已购买者的判断 x)
  7. 选择登录页（第三方登陆 x）
- 8. 账号密码登录页
- 9. 用户信息页
+ 8. 账号密码登录页 (验证码与后端的交互 x)
+ 9. 用户信息页 (只有对昵称的修改)
  10. 我的订单
  11. 我的优惠券
  12. 我的购物车
- 13. 支付页面( 微信/支付宝支付 x)
+ 13. 支付页面( 微信/支付宝支付 x) 
+ 14. x 微专业
+ 15. x 注册页 
+ 16. x 讲师/机构课程页
+ 17. x 我的学习卡
+ 17. ...
  
+其他：
+ x 返回顶部按钮
+ x 菜单悬浮栏
+ x 部分页面的刷新功能

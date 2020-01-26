@@ -8,7 +8,7 @@
 		<view class="classify">
 			<view class="classify-content">
 					<block v-for="cl in classList" :key="cl.id">
-						 <navigator :url="'/pages/classification/classification?class='+cl.url" hover-class="none" class="class">
+						 <navigator :url="navigatorUrl(cl.id, cl.url)" hover-class="none" class="class">
 							<image  :src="cl.picsrc"></image>
 							<text>{{ cl.titile }}</text>
 						</navigator>
@@ -29,13 +29,25 @@
 				themeList:[]
 			}
 		},
-		onLoad() {
-			let that = this;
-			that.firstRequest('/getSwiperPic','swiperList');
-			that.firstRequest('/getClassList','classList');
-			that.firstRequest('/getTheme','themeList');
+		computed:{
+			navigatorUrl(){
+				return (id,url) => {
+					if(id === 0){
+						
+					}else{
+						return `/pages/classification/classification?class=${url - 1}`
+					}
+				}
+			}
 		},
 		methods: {
+			AllfirstRequest(){
+				return Promise.all([
+						this.firstRequest('/getSwiperPic','swiperList'), 
+						this.firstRequest('/getClassList','classList'), 
+						this.firstRequest('/getTheme','themeList')
+					]);
+			},
 			//二次封装request
 			firstRequest(u,d){
 				let that = this;
@@ -46,11 +58,23 @@
 					  }).then(res => {
 							if(res.data.status === '200'){
 								that.$data[d] = res.data.data;
-								resolve();
+								resolve(res.data.data);
 							}
 					});
 				})
 			},
+		},
+		onLoad() {
+			this.AllfirstRequest();
+		},
+		onPullDownRefresh() {
+			// this.swiperList = this.classList = this.themeList = []
+			setTimeout(() => {
+				this.AllfirstRequest().then( res => {
+					uni.stopPullDownRefresh();
+				})
+			},500)
+			
 		}
 	}
 </script>

@@ -9,8 +9,10 @@
 				   @input="showResult ? searchText = '搜索' : ''"
 				   v-model="inputValue"
 				   placeholder-style="color:#ADB9D2"
-				   :placeholder="inputPlaceholder"/>
-			<text @click="showSearchResult" :style="{color: searchText !== '搜索' ? '#000' : '#2CC17B'}">{{ searchText }}</text>
+				   :placeholder="inputPlaceholder"
+				   confirm-type="search"
+				   @confirm="showSearchResult(true)"/>
+			<text @click="showSearchResult(false)" :style="{color: searchText !== '搜索' ? '#000' : '#2CC17B'}">{{ searchText }}</text>
 			<view class="searchBar-delIcon" @click.stop="clearInput" v-show="inputValue !== ''"></view>
 		</view>
 		<!-- 热门搜索 -->
@@ -34,7 +36,7 @@
 				<template v-slot:header>
 					<view class="conditionBar">
 						<view class="conditionBar-main">
-							<text class="conditionBar-sum">共 1 门相关课程</text>
+							<text class="conditionBar-sum">共 {{ searchSum }} 门相关课程</text>
 							<view class="conditionBar-right">
 								<view class="conditionBar-right-select">
 									筛选：
@@ -42,7 +44,7 @@
 												:show="showSelect" 
 												ref="select" 
 												@yunClick="showSelectF()"
-												@func="requestNew('selectItems','select')"></yun-select>
+												@func="requestNew"></yun-select>
 								</view>
 								<view class="conditionBar-right-select">
 									排序：
@@ -50,7 +52,7 @@
 												:show="showSort" 
 												ref="sort" 
 												@yunClick="showSortF()"
-												@func="requestNew('sortItems','sort')"></yun-select>
+												@func="requestNew"></yun-select>
 								</view>
 							</view>
 						</view>
@@ -58,8 +60,9 @@
 				</template>
 				<template v-slot:content style="z-index: 1;">
 						<view class="searchResult-result" 
-						:style="[{'z-index': showSelect || showSort ? '-1':''}]"> <!-- {height: searchResultArr === '' ? '100vh':''}, -->
-							<block v-for="item in searchResultArr" :key="item.id">
+						:style="[{'z-index': showSelect || showSort ? '-1':''}]"
+						> <!-- {height: searchResultArr === '' ? '100vh':''}, -->
+							<block v-for="(item, index) in searchResultArr" :key="index"> <!-- :key="item.id" -->
 								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :fitImage="!item.vipprice">				
 									<view class="item-up">
 										<view class="item-up-u">
@@ -82,6 +85,8 @@
 									</view>
 								</yun-box>
 							</block>
+							<!-- 加载更多 -->
+							<uni-load-more :status="more" iconType="circle" :iconSize="iconSize"></uni-load-more>
 						</view>
 				</template>
 			</better-sticky>
@@ -103,14 +108,20 @@
 				sortItems:[{id:0,name:'好评'},{id:1,name:'畅销'},{id:2,name:'全部'}],
 				showSelect:false,
 				showSort:false,
-				searchResultArr:'',
+				searchSum:0,
+				searchResultArr:[],
 				
 				scrollTop:0,
 				initDone:false,
+				// 加载更多
+				iconSize:18,
+				more:'more',
+				star:0,
+				add:7,
 			}
 		},
 		onLoad() {
-			this.firstRequest('/getHotSearch','hotSearchArr')
+			this.firstRequest('/getHotSearch','hotSearchArr');
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
@@ -131,69 +142,25 @@
 				this.searchText = '搜索';
 				this.showResult = false;
 			},
-			showSearchResult() {
+			showSearchResult(keyboard = false) {
 				if( this.inputValue === '' ) return;
-				if( this.searchText === '取消' ){
+				if( this.searchText === '返回' && !keyboard){
 					uni.navigateBack({
 					    delta: 1
 					});
 				}
 				if(!this.showResult) {
 					this.showResult = true;
-					this.searchText = '取消';
-					let that = this,
-						inputData = that.inputValue;
-						
-					that.$request({
-					   url: '/getSearchResult',
-					   method: 'GET',
-					   data:{
-							
-						   input:inputData
-					   }
-					  }).then(res => {
-							if(res.data.status === '200'){
-								that.searchResultArr = res.data.data;
-								that.initDone = true
-							}
-					});
+					this.searchText = '返回';
+					this.$nextTick(() => {
+						this.getSearchResultFrist();
+					})
+					
 				}
 			},
-			firstRequest(u,d){
-				let that = this;
-				return new Promise((resolve, reject) => {
-					that.$request({
-					   url: u,
-					   method: 'GET',
-					  }).then(res => {
-							if(res.data.status === '200'){
-								that.$data[d] = res.data.data;
-								resolve();
-							}
-					});
-				});
+			requestNew(){
+				this.getSearchResultFrist()
 			},
-			requestNew(items,ref){
-				let that = this,
-					selectData = that[items][that.$refs[ref].nowSelect],
-					inputData = that.inputValue;
-				that.searchResultArr = [];
-				console.log(selectData);
-				that.$request({
-				   url: '/getSearchResult',
-				   method: 'GET',
-				   data:{
-					   select:selectData,
-					   input:inputData
-				   }
-				  }).then(res => {
-						that.showSort = that.showSelect  = false;
-						if(res.data.status === '200'){
-							that.searchResultArr = res.data.data;
-						}
-				});
-			},
-			
 			// 防抖
 			debounce(fn, wait) {
 				if (this.fun !== null) {
@@ -201,6 +168,73 @@
 				}
 				this.fun = setTimeout(fn, wait)
 			},
+			// 初次请求
+			firstRequest(u,d){
+				let that = this;
+				return that.$request({
+					   url: u,
+					   method: 'GET',
+					  }).then(res => {
+							if(res.data.status === '200'){
+								that.$data[d] = res.data.data;
+							}
+					});
+			
+			},
+			// 请求搜索结果
+			getSearchResult(){
+				const that = this,
+					  select = that.$refs['select'].nowSelect,
+					  sort =  that.$refs['sort'].nowSelect,
+					  input = that.inputValue,
+					  add = that.add,
+					  star = that.star;
+				return that.$request({
+				   url: '/getSearchResult',
+				   method: 'GET',
+				   data: { select,sort,input,star,add }
+				  })
+			},
+			getSearchResultFrist(){
+				this.showSort = this.showSelect  = false;
+				this.star = 0;
+				this.more = 'more';
+				return this.getSearchResult().then(res => {
+					this.searchSum = res.data.data.searchsum;
+					let list = res.data.data.searchresult;
+					this.star += this.add;
+					list.length === this.add ? this.more = 'more' :  this.more = 'noMore';
+					this.searchResultArr = list;
+					this.initDone = true;
+				})
+			}
+		},
+		onPullDownRefresh() {
+			if(this.searchResultArr.length === 0){
+				this.inputValue = '';
+				this.firstRequest('/getHotSearch','hotSearchArr').then(() => {
+					uni.stopPullDownRefresh()
+				})
+			}else{
+				this.getSearchResultFrist().then(() => {
+					uni.stopPullDownRefresh()
+				})
+			}
+		},
+		onReachBottom() {
+			if(this.more !== 'noMore') {
+				this.more = 'loading';
+				this.getSearchResult().then(res => {
+							if(res.data.status === '200'){
+								setTimeout(() => {
+									let addlist = res.data.data.searchresult;
+									this.star += this.add;
+									addlist.length === this.add ? this.more = 'more' :  this.more = 'noMore'
+									this.searchResultArr.push(...addlist);
+								}, 500)
+							}
+					})
+			}
 		},
 		watch: {
 			'inputValue':function(){

@@ -32,13 +32,14 @@ Vue.prototype.$store = store
 	Vue.component('yunModal',yunModal);
 	Vue.component('betterSticky',betterSticky);
 // uniUI组件
-	import uniRate from "./uniUI//components/uni-rate/uni-rate.vue"
-	import uniList from "./uniUI//components/uni-list/uni-list.vue"
-	import uniListItem from "./uniUI//components/uni-list-item/uni-list-item.vue"
-	import uniIcons from "./uniUI//components/uni-icons/uni-icons.vue"
-	import uniCollapse from './uniUI//components/uni-collapse/uni-collapse.vue'
-	import uniCollapseItem from './uniUI//components/uni-collapse-item/uni-collapse-item.vue'
-	import uniPopup from './uniUI//components/uni-popup/uni-popup.vue'
+	import uniRate from "./uniUI/components/uni-rate/uni-rate.vue"
+	import uniList from "./uniUI/components/uni-list/uni-list.vue"
+	import uniListItem from "./uniUI/components/uni-list-item/uni-list-item.vue"
+	import uniIcons from "./uniUI/components/uni-icons/uni-icons.vue"
+	import uniCollapse from './uniUI/components/uni-collapse/uni-collapse.vue'
+	import uniCollapseItem from './uniUI/components/uni-collapse-item/uni-collapse-item.vue'
+	import uniPopup from './uniUI/components/uni-popup/uni-popup.vue'
+	import uniLoadMore from './uniUI/components/uni-load-more/uni-load-more.vue'
 	Vue.component('uniList',uniList);
 	Vue.component('uniRate',uniRate);
 	Vue.component('uniListItem',uniListItem);
@@ -46,6 +47,7 @@ Vue.prototype.$store = store
 	Vue.component('uniCollapse',uniCollapse);
 	Vue.component('uniCollapseItem',uniCollapseItem);
 	Vue.component('uniPopup',uniPopup);
+	Vue.component('uniLoadMore',uniLoadMore);
 
 Vue.config.productionTip = false;
 

@@ -22,7 +22,7 @@
 			<!-- 目录 结束 -->			
 			<!-- 评价 开始 -->			
 			<template v-slot:2>
-				<comment :commentsInfo="commentsInfo"></comment>
+				<comment :commentsInfo="commentsInfo" :more="more"></comment>
 			</template>
 			<!-- 评价 结束 -->
 		</yun-tab>
@@ -50,12 +50,14 @@
 				initTop:0,
 				
 				tabs:['简介','目录','评价'],
+				courseId:'', //页面url获取
 				courseInfo:{},
 				chapterList:[],
 				nowVedio:'',
 				commentsInfo:{},
 				
 				//上拉加载参数
+				more:'more',
 				star:0,
 				add:5,
 			}
@@ -106,6 +108,9 @@
 					that.$request({
 					   url: u,
 					   method: 'GET',
+					   data:{
+						   courseId: this.courseId
+					   }		   
 					  }).then(res => {
 							if(res.data.status === '200'){
 								that.$data[d] = res.data.data;
@@ -117,6 +122,7 @@
 			
 		}, 
 		onLoad(options) {
+			this.courseId = options.id;
 			this.$nextTick(() => {
 				uni.createSelectorQuery().in(this).select('.player').boundingClientRect((res) => {
 					res ? this.initTop = res.height : ''
@@ -125,23 +131,42 @@
 			this.firstRequest('/getCoursedetail','courseInfo');
 		},
 		onPullDownRefresh() {
-			this.courseInfo = {};
+			// this.courseInfo = {};
 			this.chapterList = [];
 			this.nowVedio = '';
 			this.commentsInfo = {};
 			this.$refs.tabs.status = 0;
 			this.star = 0;
+			this.more = 'more';
 			setTimeout(() => {
 				this.firstRequest('/getCoursedetail','courseInfo').then(() => {
 					uni.stopPullDownRefresh()
 				})
 			},500)
 		},
-		// onReachBottom() {
-		// 	if(this.$refs.tabs.status == 2){
-		// 		console.log('上拉加载更多')
-		// 	}
-		// },
+		onReachBottom() {
+			if(this.$refs.tabs.status == 2 && this.more !== 'noMore'){
+				this.more = 'loading';
+				this.$request({
+				   url: '/getCommentsMore',
+				   method: 'GET',
+				   data:{
+					   courseId: this.courseId,
+					   star: this.star,
+					   add: this.add,
+				   }
+				  }).then(res => {
+						if(res.data.status === '200'){
+							setTimeout(() => {
+								let addcom = res.data.data.comments
+								this.star += this.add;
+								addcom.length === this.add ? this.more = 'more' :  this.more = 'noMore'
+								this.commentsInfo.comments.push(...addcom);
+							}, 500);
+						}
+				});
+			}
+		},
 		onPageScroll(e) {
 				this.scrollTop = e.scrollTop
 		},

@@ -4,6 +4,7 @@
 			"path": "pages/index/index",
 			"navigationBarTitleText": "芸云课堂",
 			"style": {
+				"enablePullDownRefresh": true,
 				"app-plus":{
 					"titleNView":false
 				}

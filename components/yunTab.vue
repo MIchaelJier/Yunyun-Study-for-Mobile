@@ -60,7 +60,7 @@
 			 },
 			 statusEvent(status){
 				 this.$emit('tabClick',status)
-			 }
+			 },
 		},
 		watch:{
 			status(newVal){

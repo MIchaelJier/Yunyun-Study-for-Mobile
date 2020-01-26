@@ -117,7 +117,7 @@
 			font-size: 14px;
 			line-height: 19px;
 			padding-bottom: 15px;
-			border-bottom: 1px solid #e6eae5;
+			/* border-bottom: 1px solid #e6eae5; */
 			word-break: break-all;	
 		}
 /* 富文本介绍 结束*/
