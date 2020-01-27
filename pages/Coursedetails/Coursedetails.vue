@@ -109,11 +109,12 @@
 					   url: u,
 					   method: 'GET',
 					   data:{
-						   courseId: this.courseId
+						   courseId: that.courseId
 					   }		   
 					  }).then(res => {
 							if(res.data.status === '200'){
 								that.$data[d] = res.data.data;
+								that.$refs.tabs.swiperHeight();
 								resolve();
 							}
 					});
@@ -145,6 +146,7 @@
 			},500)
 		},
 		onReachBottom() {
+			if(this.$refs.tabs.status == 0) this.$refs.tabs.swiperHeight();
 			if(this.$refs.tabs.status == 2 && this.more !== 'noMore'){
 				this.more = 'loading';
 				this.$request({
@@ -162,6 +164,7 @@
 								this.star += this.add;
 								addcom.length === this.add ? this.more = 'more' :  this.more = 'noMore'
 								this.commentsInfo.comments.push(...addcom);
+								this.$refs.tabs.swiperHeight();
 							}, 500);
 						}
 				});
@@ -170,7 +173,6 @@
 		onPageScroll(e) {
 				this.scrollTop = e.scrollTop
 		},
-		
 	}
 </script>
 

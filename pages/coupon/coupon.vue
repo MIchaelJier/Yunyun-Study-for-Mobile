@@ -7,7 +7,7 @@
 			<view class="exchange-btn">兑换</view>
 		</view>
 		<view class="content">
-			<yun-tab :tabs="tabs" :scrollTop="scrollTop">
+			<yun-tab :tabs="tabs" :scrollTop="scrollTop" ref="tabs">
 				<template v-slot:0>
 					<!-- 可使用-->
 					<coupon-item :couponList="uselist" :name="tabs[0]"></coupon-item>
@@ -37,7 +37,7 @@
 			}
 		},
 		computed:{
-			 uselist(){  return this.$store.getters['cart/getCoupon'](0) },
+			 uselist(){ return this.$store.getters['cart/getCoupon'](0) },
 			 usedlist(){  return this.$store.getters['cart/getCoupon'](1) },
 			 Expiredlist(){  return this.$store.getters['cart/getCoupon'](2) },
 		},
@@ -47,8 +47,15 @@
 		methods: {
 			
 		},
+		mounted(){
+			this.$nextTick( () => {
+				setTimeout(() => {
+					this.$refs.tabs.swiperHeight();
+				});
+			})
+		},
 		onPageScroll(e) {
-			this.scrollTop= e.scrollTop
+			this.scrollTop = e.scrollTop
 		},
 	}
 </script>

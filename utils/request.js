@@ -29,7 +29,7 @@ export const request = (params) => {
 			header:header,
 			url:baseUrl + params.url,
 			success:(res) => {
-				console.log(res.data);
+				console.log(res.data); 
 				resolve(res);
 			},
 			fail:(err) => {

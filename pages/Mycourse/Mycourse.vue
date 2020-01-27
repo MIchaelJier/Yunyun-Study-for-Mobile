@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<yun-tab :tabs="tabs" :scrollTop="scrollTop">
+		<yun-tab :tabs="tabs" :scrollTop="scrollTop" ref="tabs">
 			<template v-slot:0>
 				<view class="none" v-if="my_courses.length < 1">
 				  <image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix"/>
@@ -69,6 +69,7 @@
 					  }).then(res => {
 							if(res.data.status === '200'){
 								that.$data[d] = res.data.data;
+								this.$refs.tabs.swiperHeight();
 								resolve();
 							}
 					});

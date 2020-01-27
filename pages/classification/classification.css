@@ -23,7 +23,8 @@
 	}
 	.tab-item .tab-item-active {
 		padding-bottom: 5rpx;
-		border-bottom: 3px solid #2CC17B;
+		color: #22C32E;
+		/* border-bottom: 3px solid #2CC17B; */
 	}
 	/*tips*/
 	.content-tips {
@@ -39,4 +40,13 @@
 		border-radius: 30rpx;
 		padding: 14rpx 16rpx;
 		margin: 0 24rpx 28rpx 0;
+	}
+	.line {
+		display: block;
+		height:6rpx;
+		bottom: 6rpx;
+		left: 0;
+		z-index: 111;
+		border-radius: 3rpx;
+		position: relative;
 	}

@@ -1,5 +1,8 @@
+
 <script>
+	import pageAnimation from './components/page-animation'
 	export default {
+		mixins: [pageAnimation],
 		onLaunch: function() {
 			this.$store.commit('common/getUserInfo');
 			if(this.$store.getters['common/IsLogin']){

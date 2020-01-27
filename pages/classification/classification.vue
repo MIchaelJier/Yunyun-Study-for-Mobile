@@ -8,13 +8,16 @@
 		<better-sticky :scrollTop="scrollTop" :initTop="initTop" :initDone="initDone">
 			<!-- tab -->
 			<template v-slot:header>
-				<scroll-view scroll-x="true" show-scrollbar="false" :scroll-left="scrollLeft">
+				<scroll-view scroll-x="true" show-scrollbar="false" :scroll-left="scrollLeft" class="scrollTab">
 					<view class="tab-items">
 						<block v-for="item in tabClass" :key="item.id">
 							<view class="tab-item" @click="chooseItem(item.id)">
 								<text :class=" item.id === nowSelect ? 'tab-item-active' : ''">{{ item.name }}</text>
 							</view>
 						</block>
+					</view>
+					<view class="line"
+						:style="{background: lineColor,width: lineStyle.width || 0, transform: lineStyle.transform,transitionDuration: lineStyle.transitionDuration}">
 					</view>
 				</scroll-view>
 			</template>
@@ -119,6 +122,9 @@
 				],
 				bodyClass:'',
 				nowSelect:0,
+				duration: 0.3,
+				lineStyle: {},
+				lineColor: '#2CC17B',
 				scrollLeft:0,
 				
 				scrollTop:0,
@@ -140,7 +146,8 @@
 						this.initTop = res.height
 						console.log(this.initTop)
 					}
-				}).exec()
+				}).exec();
+				this.getLeft();
 			})
 			
 		},
@@ -173,8 +180,8 @@
 				})
 			},
 			//tab条选中居中
-			tabMid:function(id){
-				this.$nextTick(function () { //防止第一次进入scrollLeft无效
+			tabMid(id){
+				this.$nextTick( () => { 
 					let that = this;
 					//改变页面标题名字
 					let title =  that.tabClass.filter( i => i.id === that.nowSelect)[0].name;
@@ -194,13 +201,30 @@
 							distance += arr.width;
 						});
 						//偏移量 = 节点到srcoll-view起点长度 - 屏幕宽度/2 + 节点长度/2
-					  that.scrollLeft = distance - that.$ww/2 + data[id].width/2
+					  that.scrollLeft = distance - that.$ww/2 + data[id].width/2;
+					  that.getLeft()
 					}).exec();
 				})
-			}
+			},
+			getLeft(){
+				this.$nextTick( () => {
+					let scrollLeft = 0;
+					uni.createSelectorQuery().in(this).select('.scrollTab').scrollOffset().exec((res) => {
+						scrollLeft = res[0].scrollLeft
+					})
+					uni.createSelectorQuery().in(this).select('.tab-item-active').boundingClientRect().exec((res) => {
+						const left = scrollLeft + res[0].left + res[0].width / 2
+						this.lineStyle = {
+							width: `${res[0].width}px`,
+							transform: `translateX(${left}px) translateX(-50%)`,
+							transitionDuration: `${this.duration}s`
+						};
+					});
+				})
+			 },	
 		},
 		watch:{
-			'nowSelect':function(){
+			'nowSelect'(){
 				this.tabMid(this.nowSelect);
 				this.firstRequest('/getClassification','bodyClass');
 			}

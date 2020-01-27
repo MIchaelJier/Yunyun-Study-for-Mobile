@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<yun-tab :tabs="tabs" :scrollTop="scrollTop">
+		<yun-tab :tabs="tabs" :scrollTop="scrollTop" ref="tabs">
 			<template v-slot:0>
 				<!-- 全部订单 -->
 				<order-item :orderList="orderList" :name="tabs[0]"></order-item>
@@ -50,6 +50,7 @@
 			  }).then(res => {
 					if(res.data.status === '200'){
 						that.orderList = res.data.data;
+						this.$refs.tabs.swiperHeight();
 					}
 			});
 		},

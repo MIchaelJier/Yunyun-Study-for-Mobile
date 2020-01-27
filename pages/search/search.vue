@@ -209,18 +209,20 @@
 				})
 			}
 		},
-		onPullDownRefresh() {
-			if(this.searchResultArr.length === 0){
-				this.inputValue = '';
-				this.firstRequest('/getHotSearch','hotSearchArr').then(() => {
-					uni.stopPullDownRefresh()
-				})
-			}else{
-				this.getSearchResultFrist().then(() => {
-					uni.stopPullDownRefresh()
-				})
-			}
-		},
+		// 下拉刷新
+		// onPullDownRefresh() {
+		// 	if(this.searchResultArr.length === 0){
+		// 		this.inputValue = '';
+		// 		this.firstRequest('/getHotSearch','hotSearchArr').then(() => {
+		// 			uni.stopPullDownRefresh()
+		// 		})
+		// 	}else{
+		// 		this.getSearchResultFrist().then(() => {
+		// 			uni.stopPullDownRefresh()
+		// 		})
+		// 	}
+		// },
+		// 上拉加载更多
 		onReachBottom() {
 			if(this.more !== 'noMore') {
 				this.more = 'loading';
