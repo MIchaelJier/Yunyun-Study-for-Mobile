@@ -119,6 +119,15 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/provider/provider",
+            "navigationBarTitleText": "机构/讲师",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

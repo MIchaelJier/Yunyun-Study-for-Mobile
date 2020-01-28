@@ -2,9 +2,12 @@
 uni-page {
 	opacity: 0;
 }
-
 uni-page.animation-before {
 	/* 在页面上使用 transform 会导致页面内的 fixed 定位渲染为 absolute，需要在动画完成后移除 */
+	transform: translateX(-20px);
+}
+/* 返回 */
+uni-page.animation-before2 { 
 	transform: translateX(20px);
 }
 
@@ -19,10 +22,16 @@ uni-page.animation-enter {
 uni-page.animation-show {
 	opacity: 1;
 }
-
+uni-page.animation-afterstart {
+	transform: translateX(20px);
+}
+/* 返回 */
+uni-page.animation-afterstart2 {
+	transform: translateX(-20px);
+}
 uni-page.animation-after {
 	/* 在页面上使用 transform 会导致页面内的 fixed 定位渲染为 absolute，需要在动画完成后移除 */
-	transform: translateY(0);
+	transform: translateX(0);
 }
 
 /* #endif */

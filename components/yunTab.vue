@@ -64,6 +64,10 @@
 			initTop: {  //tab到顶部初始值
 				type: [String, Number],
 				default: 0
+			},
+			bottomBarHeight: { //底部fixed栏高度
+				type: [String, Number],
+				default: 0
 			}
 		},
 		methods:{
@@ -96,9 +100,9 @@
 						const slot = res[this.status],
 						      { windowHeight } = uni.getSystemInfoSync();	
 							  // console.log({slot,windowHeight})
-					 	if(slot.top + slot.height < windowHeight && slot.top >= 0){
+					 	if(slot.top + slot.height < windowHeight - this.bottomBarHeight && slot.top >= 0){
 							// slot长度小于屏幕高度
-							this.contentHeight = windowHeight - slot.top;
+							this.contentHeight = windowHeight - slot.top - this.bottomBarHeight;
 						}else{
 							this.contentHeight = res[this.status].height
 						}
@@ -107,7 +111,10 @@
 			 }
 		},
 		mounted() {
-			this.getLeft();
+			setTimeout( () => {
+				this.getLeft();
+			},300)
+			// 300是 路由动画时间
 		},
 		watch:{
 			status(newVal){
@@ -157,7 +164,7 @@
 	}
 	.line {
 		display: block;
-		height:6rpx;
+		height: 6rpx;
 		bottom: 6rpx;
 		left: 0;
 		z-index: 111;

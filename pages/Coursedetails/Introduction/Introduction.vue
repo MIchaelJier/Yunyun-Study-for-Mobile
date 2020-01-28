@@ -46,16 +46,18 @@
 				</view>
 			</view>
 			<view class="courseprovider">
-				<uni-list>
-				    <uni-list-item :title="courseInfo.ownername" 
-								   :note="courseInfo.ownerStudentNum +'位学员'"
-								   :thumb="courseInfo.ownerPhotoUrl" 
-								   :show-badge="true"
-								   badgeType="default"
-								   badge-text="进入网校"
-								   ></uni-list-item>
-							
-				</uni-list>
+				<navigator :url="'/pages/provider/provider?ownerId=' + courseInfo.ownerId">
+					<uni-list>
+					    <uni-list-item :title="courseInfo.ownername" 
+									   :note="courseInfo.ownerStudentNum +'位学员'"
+									   :thumb="courseInfo.ownerPhotoUrl" 
+									   :show-badge="true"
+									   badgeType="default"
+									   badge-text="进入网校"
+									   >
+						</uni-list-item>					
+					</uni-list>
+				</navigator>			
 			</view>
 			<view class="courseteacher">
 				<view class="courseintrobody-title">讲师</view>
@@ -72,33 +74,6 @@
 				</view>
 			</view>
 		</view>
-		<!-- 插屏弹窗 -->
-		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
-			<scroll-view class="couponsPopup xBottom" scroll-y>
-				<view class="couponsList" v-for="(item, index) in couponList" :key="index">
-					<view class="coupons-type">{{ item.type }}</view>
-					<view class="coupon-item" v-for="coupon in item.list" :key="coupon.couponId">
-						<view class="item-firstline">
-							<view>
-								<text class="item-amount">￥{{ coupon.amount }}</text>
-								<text v-if="coupon.consumingThreshold === 0" style="font-size: 12px">无金额门槛</text>
-								<text v-else style="font-size: 12px">满￥{{ coupon.consumingThreshold }}可用</text>
-							</view>
-							<view class="item-btn" 
-								:style="{color:coupon.isHave ? '#666':'#FF6600','border-color':coupon.isHave ? '#666':'#FF6600'}"
-								@click="addCoupon(coupon)">{{ coupon.isHave ? '已领取':'领取' }}</view>
-						</view>
-						<text class="item-other">适用范围：{{ coupon.targetName }}</text>
-						<text class="item-other" v-if="coupon.createTime&&coupon.endTime">
-							有效时间：{{coupon.createTime}}-{{coupon.endTime}}
-						</text>
-						<text class="item-other" v-if="coupon.saveTime">
-							领取后{{ coupon.saveTime }}天有效
-						</text>
-					</view>
-				</view>
-			</scroll-view>
-		</uni-popup>
 	</view>
 </template>
 
@@ -151,7 +126,8 @@
 									})
 									this.couponList = cou;
 								}
-								this.$refs['showpopup'].open();
+								// this.$refs['showpopup'].open();
+								this.$emit('open')
 							}
 					});
 				}

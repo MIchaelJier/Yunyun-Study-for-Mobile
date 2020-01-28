@@ -6,9 +6,13 @@
 					<view class="themes-item-contents">
 						<block v-for="co in th.content" :key="co.contentid">
 							<view class="themes-item-content">
-								<view class="themes-item-content-main" @click="enter(co.name)"
-									:style="{ width:co.size === 0 ? 'calc(100vw - 60rpx)' : 'calc(50vw - 40rpx)' , marginBottom: co.name ? '50rpx':'' }">
-									<image :src="co.picsrc" mode="" :class="co.size === 0 ? 'themes-item-content-big' : 'themes-item-content-small' " lazy-load></image>
+								<view class="themes-item-content-main" 
+									  @click="enter(co.name)"
+									  :style="{ width:co.size === 0 ? 'calc(100vw - 60rpx)' : 'calc(50vw - 40rpx)' , marginBottom: co.name ? '50rpx':'' }">
+									<image :src="co.picsrc" mode="" 
+											:class="co.size === 0 ? 'themes-item-content-big' : 'themes-item-content-small' " 
+											lazy-load>
+									</image>
 									<text class="themes-item-content-name" v-if="co.name">{{ co.name }}</text>
 									<view class="themes-item-content-price">
 										<text class="price-red" v-if="co.nprice">￥{{ co.nprice }}</text>

@@ -1,0 +1,18 @@
+export const pageIndexSetting = [
+	{path:'pages/index/index',index:1},
+	{path:'pages/Mycourse/Mycourse',index:2},
+	{path:'pages/center/center',index:3},
+	{path:'pages/classification/classification',index:4},
+	{path:'pages/Coursedetails/Coursedetails',index:5},
+	// {path:'',index:},
+	{path:'pages/provider/provider',index:7},
+	{path:'pages/chooseLogin/chooseLogin',index:8},
+	{path:'pages/phoneLogin/phoneLogin',index:9},
+	{path:'pages/search/search',index:10},
+	{path:'pages/userEdit/userEdit',index:11},
+	{path:'pages/order/order',index:11},
+	{path:'pages/coupon/coupon',index:11},
+	{path:'pages/cart/cart',index:11},
+	{path:'pages/payConfirm/payConfirm',index:12},
+	// {path:'',index:},
+]

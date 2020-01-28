@@ -9,10 +9,16 @@
 				id="video"></video>
 		</view>
 		<!-- 视频 结束 -->
-		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :initTop="initTop" @tabClick="tabClick" ref="tabs">
+		<yun-tab :tabs="tabs" 
+				 :scrollTop="scrollTop" 
+				 :initTop="initTop" 
+				 :bottomBarHeight="underBarHeight"
+				 @tabClick="tabClick" 
+				 ref="tabs" 
+				 >
 			<!-- 简介 开始 -->
 			<template v-slot:0>
-				<introduction :courseInfo="courseInfo"></introduction>
+				<introduction :courseInfo="courseInfo" ref="introduction" @open="open"></introduction>
 			</template>
 			<!-- 简介 结束-->
 			<!-- 目录 开始 -->			
@@ -36,6 +42,33 @@
 				<text>加入学习</text>
 			</view>
 		</view>
+		<!-- 插屏弹窗 -->
+		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
+			<scroll-view class="couponsPopup xBottom" scroll-y>
+				<view class="couponsList" v-for="(item, index) in couponList" :key="index">
+					<view class="coupons-type">{{ item.type }}</view>
+					<view class="coupon-item" v-for="coupon in item.list" :key="coupon.couponId">
+						<view class="item-firstline">
+							<view>
+								<text class="item-amount">￥{{ coupon.amount }}</text>
+								<text v-if="coupon.consumingThreshold === 0" style="font-size: 12px">无金额门槛</text>
+								<text v-else style="font-size: 12px">满￥{{ coupon.consumingThreshold }}可用</text>
+							</view>
+							<view class="item-btn" 
+								:style="{color:coupon.isHave ? '#666':'#FF6600','border-color':coupon.isHave ? '#666':'#FF6600'}"
+								@click="addCoupon(coupon)">{{ coupon.isHave ? '已领取':'领取' }}</view>
+						</view>
+						<text class="item-other">适用范围：{{ coupon.targetName }}</text>
+						<text class="item-other" v-if="coupon.createTime&&coupon.endTime">
+							有效时间：{{coupon.createTime}}-{{coupon.endTime}}
+						</text>
+						<text class="item-other" v-if="coupon.saveTime">
+							领取后{{ coupon.saveTime }}天有效
+						</text>
+					</view>
+				</view>
+			</scroll-view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -50,9 +83,12 @@
 				initTop:0,
 				
 				tabs:['简介','目录','评价'],
+				underBarHeight:0,
+				
 				courseId:'', //页面url获取
 				courseInfo:{},
 				chapterList:[],
+				couponList:[],
 				nowVedio:'',
 				commentsInfo:{},
 				
@@ -69,7 +105,7 @@
 			cartInfo(){
 				let { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime } = this.courseInfo;
 				return { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime }
-			}
+			},
 		},
 		components: {
 			introduction,
@@ -120,16 +156,32 @@
 					});
 				})
 			},
-			
+			open(){
+				this.couponList = this.$refs.introduction.couponList;
+				this.$refs['showpopup'].open();
+			},
+			addCoupon(coupon){
+				 this.$refs.introduction.addCoupon(coupon)
+			},
+			getNodeHeight(className,name){
+				this.$nextTick(() => {
+					uni.createSelectorQuery().in(this).select(className).boundingClientRect((res) => {
+						res ? this[name] = res.height : ''
+					}).exec();
+				})
+			},
 		}, 
 		onLoad(options) {
 			this.courseId = options.id;
-			this.$nextTick(() => {
-				uni.createSelectorQuery().in(this).select('.player').boundingClientRect((res) => {
-					res ? this.initTop = res.height : ''
-				}).exec()
-			});
+			this.getNodeHeight('.player','initTop');
+			this.getNodeHeight('.underBar','underBarHeight');
 			this.firstRequest('/getCoursedetail','courseInfo');
+		},
+		onHide(){
+			uni.pageScrollTo({
+				scrollTop: 0,
+				duration: 0
+			});
 		},
 		onPullDownRefresh() {
 			// this.courseInfo = {};
@@ -177,53 +229,5 @@
 </script>
 
 <style>
-	.page {
-		font: 12px/1.14 "Arial","Hiragino Sans GB", \5fae\8f6f\96c5\9ed1, "Helvetica", "sans-serif";
-	}
-	/* 视频开始 */
-		.player,
-		.player video{
-			width: 100vw;
-			height: 422rpx;
-		}
-	/* 视频 结束 */
-	
-	/* 底部固定栏 */
-		.underBar {
-			height: 126rpx;
-			width: calc( 100% - 32rpx);
-			background: #fff;
-			padding: 0 16rpx;
-			display: flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			justify-content: space-between;
-			align-items: center;
-			border-top: 1px solid #f1f1f1;
-		}
-		.underBar-left {
-			width: 160rpx;
-			height: 96rpx;
-			font-size: 18px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: space-around;
-			padding-top: 10rpx;
-		}
-			.underBar-left text {
-				font-size: 12px;
-				padding-bottom: 10rpx;
-			}
-		.underBar-right {
-			height: 96rpx;
-			border-radius: 400rpx;
-			background: #FF632A;
-			font-size: 15px;
-			color: #fff;
-			display: flex;
-			flex: 1;
-			justify-content: center;
-			align-items: center;
-		}
+	@import url("Coursedetails.css");
 </style>
