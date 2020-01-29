@@ -60,3 +60,13 @@
 				height: 100%;
 				width: 100%;
 			}
+.moreCourse {
+	height: 88rpx;
+	width: 100%;
+	line-height: 88rpx;
+	text-align: center;
+	background: #fff;
+	font-size: 14px;
+	color: #333740;
+	margin: 16rpx 0;
+}

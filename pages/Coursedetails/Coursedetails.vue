@@ -172,15 +172,16 @@
 			},
 		}, 
 		onLoad(options) {
+			console.log(options)
 			this.courseId = options.id;
 			this.getNodeHeight('.player','initTop');
 			this.getNodeHeight('.underBar','underBarHeight');
 			this.firstRequest('/getCoursedetail','courseInfo');
 		},
-		onHide(){
+		onShow() {
 			uni.pageScrollTo({
-				scrollTop: 0,
-				duration: 0
+			    scrollTop: this.scrollTop,
+			    duration: 0
 			});
 		},
 		onPullDownRefresh() {

@@ -29,10 +29,15 @@
                     </swiper>
 				</view>
 			</view>
+			
 		</view>
-		<navigator url="/pages/Coursedetails/Coursedetails">
-			go to Coursedetails
-		</navigator>
+		<view class="goodCourseInfo">
+			<yunThemes :themeList="goodCourseList" 
+					   :boldTitle="false" 
+					   :haveBottom="false">
+			</yunThemes>
+		</view>
+		<view class="moreCourse">查看全部课程</view>
 	</view>
 </template>
 
@@ -40,27 +45,101 @@
 	export default {
 		data() {
 			return {
-				// originalIndex:0
+				goodCourseList:[
+    {
+      "id": 1,
+      "title": "实战前端课程",
+      "content": [
+        {
+          "contentid": 1,
+          "size": 1,
+          "picsrc": "https://edu-image.nosdn.127.net/a63f9726e91e4ab0945dd56664e55255.jpg?imageView&quality=100&crop=0_0_1190_668&thumbnail=340y191",
+          "name": "使用Vue.js制作拼多多购物类APP",
+		  "star":"4.7",
+		  "learnNum":409,
+          "oprice": "299.00",
+          "nprice": "169.00"
+        },
+        {
+          "contentid": 2,
+          "size": 1,
+          "picsrc": "https://edu-image.nosdn.127.net/57918425c1c842aab9bd0b74cc749f63.jpg?imageView&quality=100&crop=0_0_1190_671&thumbnail=340y191",
+          "name": "使用Vue.js制作爱奇艺视频类App",
+		  "star":"4.9",
+		  "learnNum":391,
+          "oprice": "299.00",
+          "nprice": "169.00"
+        },
+        {
+          "contentid": 3,
+          "size": 1,
+          "picsrc": "https://edu-image.nosdn.127.net/3ab5193047084308b157266fac019b03.jpg?imageView&quality=100&crop=0_0_904_509&thumbnail=340y191",
+          "name": "使用Vue.js制作今日头条新闻App",
+		  "star":"4.9",
+		  "learnNum":298,
+          "oprice": "299.00",
+          "nprice": "169.00"
+        },
+        {
+          "contentid": 4,
+          "size": 1,
+          "picsrc": "https://edu-image.nosdn.127.net/b48a753b402e4d70bdd6fdd7596842a4.jpg?imageView&quality=100&crop=0_0_1190_671&thumbnail=340y191",
+          "name": "使用Vue.js制作云音乐跨平台APP",
+		  "star":"4.9",
+		  "learnNum":438,
+          "oprice": "599.00",
+          "nprice": "169.00"
+        }
+      ]
+    },
+	{
+		"id": 2,
+		"title": "实战数据课程",
+		"content": [
+		  {
+		    "contentid": 5,
+		    "size": 2,
+		    "picsrc": "https://edu-image.nosdn.127.net/76f81ba9e4984f1a909ebbd074599466.jpg?imageView&quality=100&crop=0_0_439_247&thumbnail=220y138",
+		    "name": "2019全新电商数据分析实战教程",
+			"star":"4.7",
+			"learnNum":409,
+			"chapterNum":88,
+		    "oprice": "299.00",
+		    "nprice": "169.00"
+		  },
+		  {
+		    "contentid": 6,
+		    "size": 2,
+		    "picsrc": "https://edu-image.nosdn.127.net/76f81ba9e4984f1a909ebbd074599466.jpg?imageView&quality=100&crop=0_0_439_247&thumbnail=220y138",
+		    "name": "2019全新电商数据分析实战教程",
+		  			"star":"4.7",
+		  			"learnNum":409,
+		  			"chapterNum":88,
+		    "oprice": "299.00",
+		    "nprice": "169.00"
+		  },
+		  {
+		    "contentid": 7,
+		    "size": 2,
+		    "picsrc": "https://edu-image.nosdn.127.net/76f81ba9e4984f1a909ebbd074599466.jpg?imageView&quality=100&crop=0_0_439_247&thumbnail=220y138",
+		    "name": "2019全新电商数据分析实战教程",
+		  			"star":"4.7",
+		  			"learnNum":409,
+		  			"chapterNum":88,
+		    "oprice": "299.00",
+		    "nprice": "169.00"
+		  }
+		]
+	}
+      ]
 			}
 		},
 		methods: {
 			
 		},
-		// onShow() {
-		// 	this.$router.options.routes.forEach(item => {
-		// 		if(item.meta.pagePath === 'pages/Coursedetails/Coursedetails') {
-		// 			this.originalIndex = item.meta.pageIndex
-		// 			item.meta.pageIndex = 100;
-		// 		}
-		// 	});
-		// },
-		// onHide() {
-		// 	this.$router.options.routes.forEach(item => {
-		// 		if(item.meta.pagePath === 'pages/Coursedetails/Coursedetails') {
-		// 			item.meta.pageIndex = this.originalIndex;
-		// 		}
-		// 	})
-		// }
+		onLoad() {
+			
+		}
 	}
 </script>
 

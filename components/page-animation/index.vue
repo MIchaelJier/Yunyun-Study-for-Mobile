@@ -7,18 +7,24 @@
 			return {
 				before:'',
 				afterstart:'',
+				isBack:false,
 			};
 		},
 		onLaunch: function() {
+			// 监听浏览器返回按钮
+			window.addEventListener("popstate", (e) => { 
+				this.isBack = true;
+			}, false); 
 			this.equipSetting();
 			this.show()
 			this.$router.beforeEach((toPage, fromPage, next) => {
-				const type = toPage.meta.pageIndex >= fromPage.meta.pageIndex
+				let type = toPage.meta.pageIndex >= fromPage.meta.pageIndex;
 				this.before =  type ? 'animation-before' : 'animation-before2';
 				this.afterstart =  type ? 'animation-afterstart' : 'animation-afterstart2';
-				this.hide(next);
+				setTimeout(this.hide(next));
 			})
 			this.$router.afterEach(() => {
+				this.isBack = false
 				setTimeout(this.show, 50)
 			});
 		},
@@ -33,13 +39,18 @@
 				});
 			},
 			hide(callback) {
-				const classList = document.querySelector('uni-page').classList
-				classList.add(this.before,'animation-leave')
-				classList.remove('animation-show')
 				setTimeout(() => {
-					classList.remove(this.before, 'animation-leave')
-					callback && callback();
-				}, 300);
+					this.before = this.isBack ? 'animation-before2' : this.before;
+					this.afterstart = this.isBack ? 'animation-afterstart2' : this.afterstart;
+					
+					const classList = document.querySelector('uni-page').classList
+					classList.add(this.before,'animation-leave')
+					classList.remove('animation-show')
+					setTimeout(() => {
+						classList.remove(this.before, 'animation-leave')
+						callback && callback();
+					}, 300);
+				},20)
 			},
 			show() {
 				const classList = document.querySelector('uni-page').classList
