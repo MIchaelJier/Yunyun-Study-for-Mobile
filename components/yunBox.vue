@@ -5,7 +5,8 @@
 				<image :src="image"  v-if="image" mode="scaleToFill" lazy-load></image>
 			</view>
 			<view class="boxRight"> <!-- :style="{ height: image&&fitImage ? '137rpx':'' }" -->
-				<text class="boxRight-title" v-if="title">{{ title }}</text>
+				<text class="boxRight-title" v-if="title" 
+					 :style="{fontSize:titleFontSize +'px'}">{{ title }}</text>
 				<slot></slot>
 			</view>
 		</view>
@@ -32,6 +33,10 @@
 			  type: String,
 			  default: ''
 			}, 
+			titleFontSize: {
+			  type: [String,Number],
+			  default: 16	
+			}
 		},
 		methods: {
 			enter:function() {
@@ -71,9 +76,9 @@
 		flex-direction: column;
 		justify-content: space-between;
 		min-height: 137rpx;
+		flex: 1;
 	}
 	.boxRight .boxRight-title{
-		font-size: 16px;
 		color: #333;
 	}
 </style>

@@ -207,7 +207,7 @@
 				   method: 'GET',
 				   data:{
 					   courseId: this.courseId,
-					   star: this.star,
+					   start: this.star,
 					   add: this.add,
 				   }
 				  }).then(res => {
@@ -224,7 +224,7 @@
 			}
 		},
 		onPageScroll(e) {
-				this.scrollTop = e.scrollTop
+			this.scrollTop = e.scrollTop
 		},
 	}
 </script>

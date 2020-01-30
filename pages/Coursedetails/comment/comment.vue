@@ -70,9 +70,10 @@
 			return {
 				iconSize: 18,
 				contentText: {
-					contentdown: "上拉加载更多评论",
-					contentrefresh: "正在加载中...",
-					contentnomore: "没有更多评论了"}
+						contentdown: "上拉加载更多评论",
+						contentrefresh: "正在加载中...",
+						contentnomore: "没有更多评论了",
+					}
 			};
 		},
 		computed:{

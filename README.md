@@ -5,6 +5,7 @@
 ### 项目目录  
 ```JavaScript  
 ├─components                    // 公共组件
+│  ├─page-animation             // H5路由动画
 │  ├─betterSticky.vue           // 吸顶效果组件
 │  ├─yunBox.vue                 // 图片+文字说明 的特殊盒子
 │  ├─yunHeader.vue              // 页面导航栏
@@ -32,14 +33,14 @@
 ├─store                         // vuex的状态管理
 │  ├─cartStore                  // 购物车store
 │  └─commonStroe                // 普通store
-│          
+│        
+├─request                       // uni.request封装
 ├─static                        // 静态资源
 ├─styles                        // 公共样式文件
 ├─uniUI                         // uniUI跨端UI组件
 │
 ├─utils                         // 公共函数
 │  ├─mymath.js                  // 计算函数
-│  ├─request.js                 // uni.request封装
 │  └─timeFormat.js              // 时间格式转换函数
 │ 
 ├─.gitignore                    // git提交忽略设置文件
@@ -54,6 +55,7 @@
 -|-|-  
 uni-app |  是一个使用 Vue.js 开发所有前端应用的框架 | [https://uniapp.dcloud.io/README](https://uniapp.dcloud.io/README) |  
 uni-ui | 官方跨端ui库 | [https://uniapp.dcloud.io/component/README?id=uniui](https://uniapp.dcloud.io/component/README?id=uniui) |  
+sass | css处理器 | [https://www.sass.hk/guide/](https://www.sass.hk/guide/) |
 vuex | vue状态管理器 | [https://vuex.vuejs.org/zh/](https://vuex.vuejs.org/zh/) |  
 yapi | 可视化接口管理平台（模拟接口管理，部署在个人服务器9000端口） | [https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md](https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md) <br> 基于[mockjs](http://mockjs.com) | 
 express | 用于代理转发 | [http://www.expressjs.com.cn](http://www.expressjs.com.cn) | 
@@ -61,8 +63,9 @@ express | 用于代理转发 | [http://www.expressjs.com.cn](http://www.expressj
 ### 相关链接  
 github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://github.com/MIchaelJier/Yunyun-Study-for-Mobile).  
 部署网址：[http://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/).  
-小程序：微信搜索“芸云学堂”.  
-后端接口文档：[文档](http://zfroot.top:8081/yun)  
+小程序：个人微信搜索“芸云学堂”.  
+后端接口文档：[接口文档](http://zfroot.top:8081/yun)  
+衍生插件：uni H5路由动画插件([路由动画 page-animation升级版](https://ext.dcloud.net.cn/plugin?id=1265))
 
 ### 目前完成进度  
  1. 首页  
@@ -78,13 +81,5 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
  11. 我的优惠券
  12. 我的购物车
  13. 支付页面( 微信/支付宝支付 x) 
- 14. x 微专业
- 15. x 注册页 
- 16. x 讲师/机构课程页
- 17. x 我的学习卡
- 17. ...
- 
-其他：
- x 返回顶部按钮
- x 菜单悬浮栏
- x 部分页面的刷新功能
+ 14. 讲师/机构课程页
+

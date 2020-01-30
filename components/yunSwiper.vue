@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<swiper :indicator-dots="true" :autoplay="true" :circular="true" :interval="3000" :duration="1000" class="swiperBox">
+		<swiper indicator-dots autoplay circular indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#fff" interval="3000" duration="1000" class="swiperBox">
 			<swiper-item v-for="sw in list" :key="sw.id">
 				<image :src="sw.picsrc"></image>
 			</swiper-item>

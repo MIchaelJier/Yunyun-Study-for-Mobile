@@ -52,7 +52,7 @@ Vue.prototype.$store = store
 Vue.config.productionTip = false;
 
 //uni.request $request
-import { request } from "./utils/request.js"
+import { request } from "./request/index.js"
 Vue.prototype.$request = request;
 
 //屏幕宽高 $ww $wh

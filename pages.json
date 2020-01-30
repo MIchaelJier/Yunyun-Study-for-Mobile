@@ -128,6 +128,15 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/allCourse/allCourse",
+            "navigationBarTitleText": "全部课程",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

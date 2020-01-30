@@ -30,9 +30,9 @@
 									  		lazy-load>
 									  </image>
 									  <text class="themes-item-content-name" v-if="co.name">{{ co.name }}</text>
-									  <view class="themes-item-content-num" v-if="co.star&&co.learnNum">
+									  <view class="themes-item-content-num" v-if="co.star&&co.learned">
 									  	<view class="num-star">{{ co.star }}星</view>
-									  	<view style="color: #8B8F97">{{ co.learnNum }}人学过</view>
+									  	<view style="color: #8B8F97">{{ co.learned }}人学过</view>
 									  </view>
 									  <view class="themes-item-content-price">
 									  	<text class="price-red" v-if="co.nprice">￥{{ co.nprice }}</text>
@@ -48,12 +48,12 @@
 											  <view>
 												  <view class="themes-item-content-num num-space-between">
 													  <text>共{{ co.chapterNum }}课时</text>
-													  <text class="price-grey">￥{{ co.oprice }}</text>
+													  <text class="price-grey" v-if="co.oprice">￥{{ co.oprice }}</text>
 												  </view>
 												  <view class="themes-item-content-num num-space-between">
 													  <view>
 														  <text class="num-star">{{ co.star }}星</text>
-														  <text style="color: #8B8F97">{{ co.learnNum }}人学过</text>
+														  <text style="color: #8B8F97">{{ co.learned }}人学过</text>
 													  </view>
 													  <view class="price-red">￥{{ co.nprice }}</view>
 												  </view>

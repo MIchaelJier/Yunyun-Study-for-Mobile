@@ -1,5 +1,5 @@
 import { TimeDiff } from "../../utils/timeFormat.js"
-import { request } from "../../utils/request.js"
+import { request } from "../../request/index.js"
 const cart = {
     namespaced:true,//命名空间的开启
     state:{

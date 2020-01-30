@@ -18,10 +18,11 @@
 						@change="sliderSwiper" 
 						:current="status" 
 						:style="{height:contentHeight + 'px'}"
-						@animationfinish="getLeft()">
+						@animationfinish="getLeft()"
+						>
 				        <block v-for="(item, index) in tabs" :key="index">
-							<swiper-item >
-								<view class="swiperflag"><!-- v-if="status == index" -->
+							<swiper-item><!-- v-if="status == index" -->
+								<view class="swiperflag">
 									<!-- #ifdef   H5 -->
 									<slot :name="index"></slot>
 									<!-- #endif--> 

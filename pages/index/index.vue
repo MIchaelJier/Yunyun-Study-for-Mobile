@@ -57,7 +57,7 @@
 					   method: 'GET',
 					  }).then(res => {
 							if(res.data.status === '200'){
-								that.$data[d] = res.data.data;
+								that[d] = res.data.data;
 								resolve(res.data.data);
 							}
 					});
