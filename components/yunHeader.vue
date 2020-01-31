@@ -22,44 +22,56 @@
 	}
 </script>
 
-<style>
-	.pageHead {
-		width: 100%;
-		height: 100rpx;
-		background: #fff;
-	}
-	.pageHead ,
-	.header-left,
-	.header-span{
+<style lang="scss">
+	
+	@mixin flexStyle {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
-	.header-logo {
-		width: 240rpx;
-		height: 60rpx;
-		background-image: url(../static/images/headerIcon.png);
-		margin-left: 20rpx;
+	@mixin BGStyle {
+		background: {
+			repeat: no-repeat;
+			size: cover;
+		}
 	}
-	.header-search ,
-	.header-logo {
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-	.header-span {
-		width: 110rpx;
-		height: 35rpx;
-		margin-left: 10rpx;
-		justify-content: center;
-		border: 1px solid #2CC17B;
-		border-radius: 30rpx;
-		font-size: 12px;
-		color: #2CC17B;
-	}
-	.header-search {
-		width: 30rpx;
-		height: 30rpx;
-		margin-right: 50rpx;
-		background-image: url(../static/images/searchIcon.png);
+	
+	.pageHead {
+		width: 100%;
+		height: 100rpx;
+		background: #fff;
+		@include flexStyle;
+		
+		.header-left{
+			@include flexStyle;
+			
+			.header-span{
+				@include flexStyle;
+				width: 110rpx;
+				height: 35rpx;
+				margin-left: 10rpx;
+				justify-content: center;
+				border: 1px solid #2CC17B {
+					radius: 30rpx;
+				};
+				font-size: 12px;
+				color: #2CC17B;
+			}
+			
+			.header-logo {
+				@include BGStyle;
+				width: 240rpx;
+				height: 60rpx;
+				background-image: url(../static/images/headerIcon.png);
+				margin-left: 20rpx;
+			}
+		}
+		.header-search {
+			@include BGStyle;
+			width: 30rpx;
+			height: 30rpx;
+			margin-right: 50rpx;
+			background-image: url(../static/images/searchIcon.png);
+		}
 	}
 </style>

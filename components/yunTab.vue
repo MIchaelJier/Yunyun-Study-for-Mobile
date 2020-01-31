@@ -4,8 +4,8 @@
 			<template v-slot:header>
 				<view class="titleBar">
 				  <ul class="status">
-					<li  v-for="(item, index) in tabs" :key="index">
-					  <text :class=" status == index ? 'active':'' " @click="showStatus" :data-status="index">{{ item }}</text>
+					<li  v-for="(item, index) in tabs" :key="index" class="item">
+					  <text :class=" status == index ? 'active':'' " @click="showStatus" :data-status="index" class="text">{{ item }}</text>
 					</li>
 				  </ul>
 				  <view class="line" 
@@ -125,53 +125,58 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	/* tab选择卡头部 */
-	.titleBar{
+	.titleBar {
 	  position: relative;
 	  box-sizing: border-box;
 	  width: 100%;
 	  border-bottom: 1px solid #eee;
 	  align-items: center;
 	  background-color: white;
+	  
+	  .line {
+	  	display: block;
+	  	height: 6rpx;
+	  	bottom: 6rpx;
+	  	left: 0;
+	  	z-index: 111;
+	  	border-radius: 3rpx;
+	  	position: relative;
+	  }
+	  
+	  .status {
+	    display: flex;
+	    padding: 0;
+		
+		.item {
+			flex: 1;
+			display: inline-block;
+			height: 88rpx;
+			line-height: 88rpx;
+			text-align: center;
+			
+			.text {
+			  color: #99a4bf;
+			  display: inline-block;
+			  height: 100%;
+			  font-size: 15px;  
+			  text-align: center;
+			  padding: 0 16rpx;
+			  box-sizing: border-box;
+			  /* transition: all .5s; */
+			}
+			.black {
+			  color: #333;
+			  padding: 0 40rpx;
+			}
+			.active {
+			  color:#2CC17B;
+			}
+		}
+	  }
 	}
-	.titleBar .status{
-	  display: flex;
-	  padding: 0;
-	}
-	.titleBar .status li{
-	  flex: 1;
-	  display: inline-block;
-	  height: 88rpx;
-	  line-height: 88rpx;
-	  text-align: center;
-	}
-	.titleBar .status li text{
-	  color: #99a4bf;
-	  display: inline-block;
-	  height: 100%;
-	  font-size: 15px;  
-	  text-align: center;
-	  padding: 0 16rpx;
-	  box-sizing: border-box;
-	  /* transition: all .5s; */
-	}
-	.titleBar .status li text.black{
-	  color: #333;
-	  padding: 0 40rpx;
-	}
-	.titleBar .status li text.active{
-	  color:#2CC17B;
-	}
-	.line {
-		display: block;
-		height: 6rpx;
-		bottom: 6rpx;
-		left: 0;
-		z-index: 111;
-		border-radius: 3rpx;
-		position: relative;
-	}
+
 	.tabBody {
 	  position: relative;
 	}

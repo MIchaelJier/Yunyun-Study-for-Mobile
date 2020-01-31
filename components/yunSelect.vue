@@ -5,7 +5,10 @@
 			<text class="ux-ykt-icon-right-arrow chooseBtn"
 				   :style="{transform:show ? 'rotate(270deg)' : ''}"></text>
 		</view>
-		<view class="conditionBar-bottom" v-show="show" @click="Click">
+		<view class="conditionBar-bottom" 
+			 :style="{opacity: realShow ? 1 : '' }" 
+			 v-show="vShow"  
+			 @click="Click">  
 			<!-- <yun-select :items="selectItems"  ref="select" @func="requestNew('selectItems','select')"></yun-select> -->
 			<block v-for="item in items" :key="item.id">
 				<view class="select-item" 
@@ -24,10 +27,18 @@
 	export default {
 		data() {
 			return {
-				nowSelect:0
+				nowSelect:0 ,
+				delayShow:false,
 			};
 		},
-		// props: ['items','show','func'],
+		computed:{
+			realShow() {
+				return this.show && this.delayShow
+			},
+			vShow(){
+				return this.show || ( !this.show && this.delayShow )
+			}
+		},
 		props: {
 			items: {
 			   type:Array,
@@ -44,21 +55,51 @@
 		},
 		methods: {
 			selectIt(item) {
-				this.nowSelect = item.id
+				this.nowSelect = item.id;
 			},
 			Click() {
-				this.$emit('yunClick')
+				if(this.show === this.delayShow)
+					this.$emit('yunClick');
 			}
 		},
 		watch: {
 			'nowSelect'() {
 				this.$emit('func')
 			},
+			'show'(newVal) {
+				clearTimeout(d)
+				let delay =  newVal ? 0 : 600;
+				let d = setTimeout(() => {
+					this.delayShow = newVal;
+				}, delay)
+			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
+	$green: #36b378;
+	
+	.green {
+		color: $green;
+	}
+	.chooseBtn {
+		display: inline-block;
+		font-size: 12px;
+		margin-left: 15rpx;
+		transform: rotate(90deg);
+		transition: all .5s;
+	}
+	.conditionBar-bottom {
+		width: 100vw;
+		height: 100vh;
+		position: absolute;
+		top:87rpx;
+		left:0;
+		background-color:rgba(0,0,0,0.5);
+		opacity: 0;
+		transition: opacity .5s;
+		
 		.select-item {
 			height: 85rpx;
 			text-align: center;
@@ -66,27 +107,12 @@
 			background: #fff;
 			font-size: 15px;
 			color: #3c4a55;
-		}
+		}	
+		
 		.item-active {
 			background: #f6f6f6;
-			color: #36B378;
-		}
-		.green {
-			color: #36b378;
-		}
-		.conditionBar-bottom {
-			width: 100vw;
-			height: 100vh;
-			position: absolute;
-			top:87rpx;
-			left:0;
-			background-color:rgba(0,0,0,0.5)
-		}
-		.chooseBtn {
-			display: inline-block;
-			font-size: 12px;
-			margin-left: 15rpx;
-			transform: rotate(90deg);
-			transition: all .5s;
-		}
+			color: $green;
+		}	
+	}
+	
 </style>

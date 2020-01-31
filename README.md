@@ -57,7 +57,7 @@ uni-app |  是一个使用 Vue.js 开发所有前端应用的框架 | [https://u
 uni-ui | 官方跨端ui库 | [https://uniapp.dcloud.io/component/README?id=uniui](https://uniapp.dcloud.io/component/README?id=uniui) |  
 sass | css处理器 | [https://www.sass.hk/guide/](https://www.sass.hk/guide/) |
 vuex | vue状态管理器 | [https://vuex.vuejs.org/zh/](https://vuex.vuejs.org/zh/) |  
-yapi | 可视化接口管理平台（模拟接口管理，部署在个人服务器9000端口） | [https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md](https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md) <br> 基于[mockjs](http://mockjs.com) | 
+yapi | 可视化接口管理平台（模拟接口管理，已部署在个人服务器上） | [https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md](https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md) <br> 基于[mockjs](http://mockjs.com) | 
 express | 用于代理转发 | [http://www.expressjs.com.cn](http://www.expressjs.com.cn) | 
 
 ### 相关链接  
@@ -81,5 +81,6 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
  11. 我的优惠券
  12. 我的购物车
  13. 支付页面( 微信/支付宝支付 x) 
- 14. 讲师/机构课程页
+ 14. 讲师/机构介绍和精选课程页
+ 15. 讲师/机构全部课程页
 

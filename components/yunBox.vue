@@ -1,11 +1,16 @@
 <template>
 	<view class="box">
-		<view class="box-main"  @click="enter()">
+		<view class="box__main"  @click="enter()">
 			<view  class="boxPost">
-				<image :src="image"  v-if="image" mode="scaleToFill" lazy-load></image>
+				<image :src="image"  
+						v-if="image" 
+						class="postimage"
+						mode="scaleToFill" 
+						lazy-load>
+				</image>
 			</view>
 			<view class="boxRight"> <!-- :style="{ height: image&&fitImage ? '137rpx':'' }" -->
-				<text class="boxRight-title" v-if="title" 
+				<text class="title" v-if="title" 
 					 :style="{fontSize:titleFontSize +'px'}">{{ title }}</text>
 				<slot></slot>
 			</view>
@@ -46,39 +51,43 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.box {
 		background: #fff;
+		&__main{
+			padding: 17px 10px 17px 0;
+			margin-left: 15px;
+			position: relative;
+			border-bottom: 1px solid #f1f1f1;
+			display: flex;
+			align-items: center;
+			background: #fff;
+			.boxPost {
+				height: 137rpx;
+				width: 220rpx;
+				border-radius: 5rpx;
+				padding-right: 20rpx;
+				flex: 0 0 220rpx;
+				.postimage {
+					width: 100%;
+					height: 100%;
+					border-radius: 10rpx;
+				}
+			}
+			.boxRight {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				min-height: 137rpx;
+				flex: 1;
+				.title {
+					color: #333;
+				}
+			}
+		}
 	}
-	.box-main {
-		padding: 17px 10px 17px 0;
-		margin-left: 15px;
-		position: relative;
-		border-bottom: 1px solid #f1f1f1;
-		display: flex;
-		align-items: center;
-		background: #fff;
-	}
-	.boxPost {
-		height: 137rpx;
-		width: 220rpx;
-		border-radius: 5rpx;
-		padding-right: 20rpx;
-		flex: 0 0 220rpx;
-	}
-	.boxPost image {
-		width: 100%;
-		height: 100%;
-		border-radius: 10rpx;
-	}
-	.boxRight {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		min-height: 137rpx;
-		flex: 1;
-	}
-	.boxRight .boxRight-title{
-		color: #333;
-	}
+
+
+	
+
 </style>

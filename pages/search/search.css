@@ -114,6 +114,10 @@
 		}
 		.conditionBar-sum {
 			margin-left: 30rpx;
+			flex: 1;
+			white-space: nowrap;  
+			text-overflow:ellipsis; 
+			overflow:hidden;
 		}
 		.conditionBar-right,
 		.conditionBar-right-select {

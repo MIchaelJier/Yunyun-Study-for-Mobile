@@ -8,11 +8,13 @@ export const pageIndexSetting = [
 	{path:'pages/allCourse/allCourse',index:5},
 	{path:'pages/chooseLogin/chooseLogin',index:8},
 	{path:'pages/phoneLogin/phoneLogin',index:9},
+	{path:'pages/register/register',index:9},
 	{path:'pages/search/search',index:10},
 	{path:'pages/userEdit/userEdit',index:11},
 	{path:'pages/order/order',index:11},
 	{path:'pages/coupon/coupon',index:11},
 	{path:'pages/cart/cart',index:11},
 	{path:'pages/payConfirm/payConfirm',index:12},
+	// {path:'',index:},
 	// {path:'',index:},
 ]

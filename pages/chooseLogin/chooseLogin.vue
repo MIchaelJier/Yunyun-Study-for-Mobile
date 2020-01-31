@@ -8,7 +8,9 @@
 					<navigator url="/pages/phoneLogin/phoneLogin" hover-class="none">
 						<view class="main-btn btn-green" hover-class="btn-hover">手机号登录</view>
 					</navigator>
-					<view class="main-btn btn-white" hover-class="btn-hover">手机号快捷注册</view>
+					<navigator url="/pages/register/register" hover-class="none">
+						<view class="main-btn btn-white" hover-class="btn-hover">手机号快捷注册</view>
+					</navigator>
 				</view>
 			</view>
 			<view class="set-wap-bottom">

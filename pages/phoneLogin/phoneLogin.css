@@ -39,9 +39,10 @@
 .unloginBtn {
 	padding: 20rpx 0;
 	font-size: calc( 12px / 0.7 );
-	margin-left: calc( -40rpx / 0.7);
+	margin-left: -15%; 
 	color: #999;
 	height: 32rpx;
+	width: calc(100vw - 80rpx);
 }
 /* >>> .uni-checkbox-input {
 	width: 28rpx;
@@ -51,6 +52,7 @@
 	padding-right: 20rpx;
 	border-right: 2px solid  #ccc;
 	margin-right: 20rpx;
+	white-space: nowrap;
 }
 .tipBox {
 	font-size: 12px;

@@ -60,7 +60,7 @@
 				</template>
 				<template v-slot:content style="z-index: 1;">
 						<view class="searchResult-result" 
-						:style="[{'z-index': showSelect || showSort ? '-1':''}]"
+						:style="[{'z-index': refShow ? '-1':''}]"
 						> <!-- {height: searchResultArr === '' ? '100vh':''}, -->
 							<block v-for="(item, index) in searchResultArr" :key="index"> <!-- :key="item.id" -->
 								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :fitImage="!item.vipprice">				
@@ -120,6 +120,16 @@
 				add:7,
 			}
 		},
+		computed:{
+			refShow(){
+				const select = this.$refs['select'],
+					  sort = this.$refs['sort'];
+				if(select && sort)
+					return this.$refs['select'].vShow || this.$refs['sort'].vShow
+				else 
+					return true
+			}
+		},
 		onLoad() {
 			this.firstRequest('/getHotSearch','hotSearchArr');
 		},
@@ -159,7 +169,7 @@
 				}
 			},
 			requestNew(){
-				this.getSearchResultFrist()
+				this.getSearchResultFrist() 
 			},
 			// 防抖
 			debounce(fn, wait) {
@@ -176,7 +186,7 @@
 					   method: 'GET',
 					  }).then(res => {
 							if(res.data.status === '200'){
-								that.$data[d] = res.data.data;
+								that[d] = res.data.data;
 							}
 					});
 			

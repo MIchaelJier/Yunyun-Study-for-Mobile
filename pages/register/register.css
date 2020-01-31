@@ -1,0 +1,52 @@
+.register-form {
+	margin:72rpx 40rpx;
+	display: flex;
+	flex-direction: column;
+}
+.inputoutside {
+	margin-top: 60rpx;
+}
+.getsmscode {
+	float: right;
+	width: 35%;
+	height: 88rpx;
+	background: #fff;
+	border: 1px solid #2CC17B;
+	display: inline-block;
+	color: #2CC17B;
+	font-size: 14px;
+	line-height: 88rpx;
+	border-radius: 2px;
+	text-align: center;
+}
+.getsmscode-hover {
+	background: #ade1f5
+}
+.getsmscode-disable {
+	border: 1px solid #c5cddb;
+	color: #C5CDDB;
+}
+.registerBtn {
+	width: 100%;
+	height: 88rpx;
+	background: #2CC17B;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #FFF;
+	font-size: 18px;
+	line-height: 88rpx;
+	letter-spacing: 5px;
+	border-radius: 2px;
+}
+.checkagree {
+	padding: 20rpx 0;
+	font-size: calc( 12px / 0.7 );
+	margin-left: -15%;
+	color: #999;
+	height: 32rpx;
+	width: calc(100vw - 80rpx);
+}
+.checkbox-first {
+	white-space: nowrap;
+}
