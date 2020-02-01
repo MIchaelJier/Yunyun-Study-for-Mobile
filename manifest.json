@@ -85,7 +85,10 @@
             "https" : false
         },
         "router" : {
-            "mode" : "hash"
-        }
+            "mode" : "hash",
+            "base" : ""
+        },
+        "template" : "index.html",
+        "title" : "芸云课堂"
     }
 }
