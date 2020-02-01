@@ -39,7 +39,8 @@
 			<!-- 提示 结束 -->
 			
 			<!-- 登录按钮 开始 -->
-			<view class="startBtn" @click=" nowWay === 0 ? startLogin() : startLoginwithVerifycode()" 
+			<view class="startBtn" 
+			@click=" nowWay === 0 ? startLogin() : startLoginwithVerifycode()" 
 				 :style="{'margin-top': tipText !== ''?'0':'40rpx'}">登录</view>
 			<!-- 登录按钮 结束 -->
 			
@@ -105,9 +106,10 @@
 				console.log('获取验证码');
 				this.$refs.phoneInput.emptyWarn();
 				let phone = this.$refs.phoneInput.text,
+					phoneReg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
 					all = [
 						phone === '' ,
-						phone.length !== 11 ,
+						!phoneReg.test(phone) ,
 						this.resultData === '' || !this.resultData.flag,
 					];
 				/**

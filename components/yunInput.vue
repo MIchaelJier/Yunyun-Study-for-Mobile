@@ -11,7 +11,7 @@
 				   class="box-input"  placeholder-class="placeholder"
 				   :style="{width:inputWidth}"
 				   />
-			<view class="box-tip" v-show="text !== '' && icon !== ''">
+			<view class="box-tip" v-if="text !== '' && icon !== ''">
 				<uni-icons type="clear" size="20" @click="clearInput"></uni-icons>
 				<!-- color="#c5ccd8" -->
 			</view>
@@ -67,6 +67,9 @@
 				}
 			}
 		},
+		mounted() {
+			this.clearInput()
+		},
 		watch:{
 			'text'(text){	
 				// #ifdef H5
@@ -75,7 +78,7 @@
 				}
 				// #endif
 			}
-		}
+		},
 	}
 </script>
 
