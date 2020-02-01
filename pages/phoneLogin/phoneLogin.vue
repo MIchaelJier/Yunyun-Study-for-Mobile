@@ -59,7 +59,9 @@
 </template>
 
 <script>
-	import { monthDayDiff,formatTime } from "../../utils/timeFormat.js"
+	import { formatTime } from "../../utils/timeFormat.js"
+	import { loginProcess,allSituation } from './verifProcess.js'
+	import { condition } from "../../utils/myMath.js"
 	export default {
 		data() {
 			return {
@@ -79,11 +81,11 @@
 			changeWay() {
 				this.nowWay  =  this.nowWay ? 0:1
 			},
-			//改变 免登录checkbox的值
+			//是否 勾选免登陆选择框
 			changeFlag(e){
 				this.checkboxFlag = e.detail.value.length === 1
 			},
-			//校验结果回调函数
+			//滑动验证模块 校验结果回调函数
 			verifyResult(res){
 			    this.resultData = res;
 			},
@@ -93,182 +95,55 @@
 			    //删除当前页面的数据 
 			    this.resultData = {};
 			}, */
-			
-			//遍历数组 返回第一个值为true的index
-			condition(arr){
-				for(let i = 0 ; i < arr.length ; i++ ){
-					if(arr[i]) return i+1;
-				}
-				return 0;
-			},
 			//获取验证码
 			getVCode(){
-				console.log('获取验证码');
-				this.$refs.phoneInput.emptyWarn();
-				let phone = this.$refs.phoneInput.text,
-					phoneReg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
-					all = [
-						phone === '' ,
-						!phoneReg.test(phone) ,
-						this.resultData === '' || !this.resultData.flag,
-					];
-				/**
-				 * 点击发送验证码
-				 * 输入状态：
-				 * 1用户输入电话号码为空
-				 * 2电话号码位数错误
-				 * 3没有进行滑动验证
-				 * 0没有问题 
-				 */
-				const actions = new Map([
-				  [1, ()=>{this.tipText = '请输入手机号'}],
-				  [2, ()=>{
-					  this.$refs.phoneInput.color = '#fa6060';
-					  this.tipText = '请输入正确的手机号'
-				  }],
-				  [3, ()=>{this.tipText = '请先拖动滑块进行安全验证'}],
-				  [0, ()=>{
-					  //提交手机号获取验证码
-					  this.$request({
-					     url: '/getVCode',
-					     method: 'GET',
-					     data:{
-					  	   phone,
-					     }
-					    }).then(res => {
-					  	  if(res.data.status === '200' ? res.data.data.send : false){
-					  		  this.tipText = '';
-					  		  this.codeExpiration = 30;
-					  		  //再次能提交验证码 倒计时
-					  		  let interval = setInterval(() => {
-					  		    --this.codeExpiration;
-					  		  }, 1000)
-					  		  setTimeout(() => {
-					  		     clearInterval(interval)
-					  		     this.codeExpiration = 0
-					  		  }, 30000)
-					  	  }
-					    })
-				  }],
-				])
-				//执行
-				actions.get(this.condition(all)).call(this)
+				console.log('用户点击获取验证码');
+				const all = allSituation.call(this).slice(0,5);
+				all[2] = false;
+				all[3] = false;
+				/* all : [
+					phone === '' ,
+					!phoneReg.test(phone) ,
+					false,false,
+					this.resultData === '' || !this.resultData.flag ,
+				] */
+				//执行验证码验证
+				loginProcess.get(condition(all)).apply(this,[0])
 			},
 			//普通登录流程
 			startLogin(){
-				let phone = this.$refs.phoneInput.text,
-					password = this.$refs.passwordInput.text;
-				this.$refs.phoneInput.emptyWarn();
-				this.$refs.passwordInput.emptyWarn();
-				
-				if(phone === ''){
-					//用户手机号输入为空
-					this.tipText = '请输入手机号'
-				}else if(phone.length !== 11 ){
-					//用户输入手机号位数不准确
-					this.$refs.phoneInput.color = '#fa6060';
-					this.tipText = '请输入正确的手机号'
-				}else if(password === ''){
-					//用户输入密码为空
-					this.tipText = '请输入密码'
-				}else{
-					let that = this;
-					//输入正确 请求登录接口 判断账号密码是否正确
-					that.$request({
-					   url: '/login',
-					   method: 'GET',
-					   data:{
-						   phone,
-						   password,
-					   }
-					  }).then(res => {
-							if(res.data.status === '200'){
-								if(res.data.data['truepass']){
-									let userInfo = res.data.data;
-									that.tipText = ''
-									console.log('登录成功');
-									//获取当前时间,并写入
-									userInfo['loginTime'] = formatTime(new Date());
-									if(that.checkboxFlag){
-										//存入用户缓存
-										uni.setStorageSync('userInfo', userInfo);
-										//vuex获取缓存
-										that.$store.commit('common/getUserInfo');
-										
-									}else{
-										//一次性登录
-										that.$store.commit('common/changeUserInfo',userInfo)
-									}
-									that.$store.dispatch('cart/request_cart');
-									uni.switchTab({
-										url: '/pages/index/index'
-									});
-								}else{
-									that.tipText = '账号或密码错误'
-								}
-							}
-					});
-				}
+				console.log('用户使用账号密码登录');
+				const all = allSituation.call(this).slice(0,4)
+				/* all : [
+					phone === '' ,
+					!phoneReg.test(phone) ,
+					pwd === '' ,
+					!pwdReg.test(pwd) ,
+				] */
+				//执行登录验证
+				loginProcess.get(condition(all)).call(this)
 			},
 			//验证码登录
 			//verifycodeInput
 			startLoginwithVerifycode(){
-				let phone = this.$refs.phoneInput.text,
-					code = this.$refs.verifycodeInput.text;
-				this.$refs.phoneInput.emptyWarn();
-				this.$refs.verifycodeInput.emptyWarn();
-				
-				
-				if(phone === ''){
-					//用户手机号输入为空
-					this.tipText = '请输入手机号'
-				}else if(phone.length !== 11 ){
-					//用户输入手机号位数不准确
-					this.$refs.phoneInput.color = '#fa6060';
-					this.tipText = '请输入正确的手机号'
-				}else if(this.resultData === '' || !this.resultData.flag){
-					this.tipText = '请先拖动滑块进行安全验证'
-				}else if(code === ''){
-					//用户输入密码为空
-					this.tipText = '请输入验证码'
-				}else if(code.length !== 6){
-					this.tipText = '请输入正确的验证码'
-				}else{
-					let that = this;
-					//输入正确 请求登录接口 判断账号密码是否正确
-					that.$request({
-					   url: '/login',
-					   method: 'GET',
-					   data:{
-						   phone,
-						   code,
-					   }
-					  }).then(res => {
-							if(res.data.status === '200'){
-								if(res.data.data['truepass']){
-									let userInfo = res.data.data;
-									that.tipText = ''
-									console.log('登录成功');
-									//获取当前时间,并写入
-									userInfo['loginTime'] = formatTime(new Date());
-									if(that.checkboxFlag){
-										//存入用户缓存
-										uni.setStorageSync('userInfo', userInfo);
-										//vuex获取缓存
-										that.$store.commit('common/getUserInfo')
-									}else{
-										//一次性登录
-										that.$store.commit('common/changeUserInfo',userInfo)
-									}
-									uni.switchTab({
-										url: '/pages/index/index'
-									});
-								}else{
-									that.tipText = '账号或密码错误'
-								}
-							}
-					});
-				}
+				console.log('用户使用验证码登录');
+				const all = allSituation.call(this);
+				// allSituation 关闭对密码的验证
+				all[2] = false;
+				all[3] = false;
+				/* all : [
+					phone === '' ,
+					!phoneReg.test(phone) ,
+					false,false,
+					this.resultData === '' || !this.resultData.flag ,
+					vcode === '' ,
+					!vcodeReg.test(vcode)  ,
+				] */
+				//执行登录验证
+				loginProcess.get(condition(all)).call(this)
+			},
+			formatTime(date){
+				return formatTime(date)
 			}
 		},
 	}

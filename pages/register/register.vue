@@ -46,6 +46,7 @@
 
 <script>
 	import { registerProcess,allSituation } from './verifProcess.js'
+	import { condition } from "../../utils/myMath.js"
 	export default {
 		data() {
 			return {
@@ -67,26 +68,19 @@
 			//点击 获取验证码
 			getVCode(){
 				console.log('用户点击了获取验证码');
-				this.$refs.phoneInput.emptyWarn();
+				// this.$refs.phoneInput.emptyWarn();
 				//allSituation 的前五种情况
 				const all = allSituation.call(this).slice(0,4)
 				//执行注册验证
-				registerProcess.get(this.condition(all)).call(this)
+				registerProcess.get(condition(all)).call(this)
 			},
 			// 点击注册
 			registerLogin(){
 				console.log('用户点击了注册按钮');
 				const all = allSituation.call(this);
 				//执行注册验证
-				registerProcess.get(this.condition(all)).apply(this,[1])
-			},
-			//遍历数组 返回第一个值为true的index
-			condition(arr){
-				for(let i = 0 ; i < arr.length ; i++ ){
-					if(arr[i]) return i+1;
-				}
-				return 0;
-			},
+				registerProcess.get(condition(all)).apply(this,[1])
+			}
 		}
 	}
 </script>
