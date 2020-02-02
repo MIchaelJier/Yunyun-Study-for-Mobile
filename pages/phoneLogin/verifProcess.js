@@ -85,15 +85,25 @@ export const loginProcess = new Map([
 								uni.setStorageSync('userInfo', userInfo);
 								//vuex获取缓存
 								that.$store.commit('common/getUserInfo');
-								
 							}else{
 								//一次性登录
 								that.$store.commit('common/changeUserInfo',userInfo)
 							}
-							that.$store.dispatch('cart/request_cart');
-							uni.switchTab({
-								url: '/pages/index/index'
+							//登录成功提示
+							uni.showToast({
+							    title: '登录成功,跳转至登录页面',
+								icon:'none'
 							});
+							//获取 购物车和优惠券信息 
+							that.$store.dispatch('cart/request_cart').then(() => {
+								setTimeout( () => {
+								    uni.hideToast();
+									//跳转到首页
+									uni.switchTab({
+										url: '/pages/index/index'
+									});
+								}, 1000);
+							})
 						}else{
 							that.tipText = '账号或密码错误'
 						}

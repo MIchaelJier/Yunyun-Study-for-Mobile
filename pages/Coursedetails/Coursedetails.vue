@@ -106,6 +106,9 @@
 				let { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime } = this.courseInfo;
 				return { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime }
 			},
+			isLogin(){
+				return  this.$store.getters['common/IsLogin']
+			}
 		},
 		components: {
 			introduction,
@@ -116,16 +119,22 @@
 			addCart(){
 				let oldNum = this.cartNum,
 					title = '';
-				this.$store.commit('cart/addCartOne', this.cartInfo);
-				this.cartNum !== oldNum
-					? title = '成功添加到购物车'
-					: title = '该课程已在购物车'
-				
-				uni.showToast({
-				    title,
-					icon:'none',
-				    duration: 1000
-				});
+				if(this.isLogin){
+					this.$store.commit('cart/addCartOne', this.cartInfo);
+					this.cartNum !== oldNum
+						? title = '成功添加到购物车'
+						: title = '该课程已在购物车'
+					
+					uni.showToast({
+					    title,
+						icon:'none',
+					    duration: 1000
+					});
+				}else{
+					uni.navigateTo({
+						url:'/pages/chooseLogin/chooseLogin'
+					})
+				}
 			},
 			changeVedio(src){
 				this.nowVedio = src;

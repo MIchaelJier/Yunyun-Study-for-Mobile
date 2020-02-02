@@ -11,6 +11,10 @@ const common = {
       /*
       *  userInfo
       */
+		//登录
+		
+		//注销
+		
       	//从缓存中获取用户信息
       	getUserInfo(state){
       		let u = uni.getStorageSync('userInfo');

@@ -7,6 +7,7 @@ const cart = {
 		 couponList:[],
     },
     actions:{
+	   //重新获取购车车和优惠券数据
        request_cart({ commit }) {
 		   let a = request({
 				   url: '/getCoupon', //获取优惠券
@@ -16,7 +17,11 @@ const cart = {
 				   url: '/getCart', //获取购物车
 				   method: 'GET',
 		   	  });
-		   Promise.all([a, b]).then(res => {
+		   //清空原有的购物车和优惠券
+		   commit('delCartAll');
+		   commit('delCouponAll');
+		   //返回赋值完成的pormise
+		   return Promise.all([a, b]).then(res => {
 		   	if(res[0].data.status === '200' && res[1].data.status === '200'){
 		   		//获取优惠券
 		   		 commit('changeCouponList',res[0].data.data);
@@ -52,6 +57,10 @@ const cart = {
 					}
 				});
 				emptyIndex >= 0 ? state.cartList = state.cartList.filter((item,index) => index !== emptyIndex) : ''
+			},
+			//清空购物车 
+			delCartAll(state){
+				state.cartList = []
 			},
 			//购物车 新增商品
 			//  Info = { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime }
@@ -91,6 +100,10 @@ const cart = {
 			  if(!HaveCoupon){
 				  state.couponList.push(coupon);
 			  }
+		   },
+		   //清空所有优惠券数据
+		   delCouponAll(state){
+			   state.couponList = []
 		   }
 	},
     getters: {

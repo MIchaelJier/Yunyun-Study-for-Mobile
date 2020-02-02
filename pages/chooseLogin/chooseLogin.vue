@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="page">
 		<image src="../../static/images/loginBackground.png" mode="aspectFill" class="pageBackground"></image>
 		<view class="set-wap">
 			<view class="set-wap-top">
@@ -37,7 +37,7 @@
 					<!-- #endif -->
 					<!-- 在 微信小程序端 只能通过微信登录 -->
 					<!-- #ifdef MP-WEIXIN -->
-					<button class="bottom-icon" open-type="getUserInfo" hover-class="none" >
+					<button class="bottom-icon" open-type="getUserInfo" @getuserinfo="wxLogin" hover-class="none" >
 						<view class="bottom-icon-o" hover-class="btn-hover">
 							<uni-icons type="weixin" size="46" :color="iconColor"></uni-icons>
 						</view>
@@ -50,6 +50,7 @@
 	</view>
 </template>
 <script>
+	import { formatTime } from "../../utils/timeFormat.js"
 	export default {
 		data() {
 			return {
@@ -59,6 +60,7 @@
 		methods: {
 			appOAuthLogin(e){
 				const provider = e.currentTarget.dataset.loginType;
+				// App 端第三方登录
 				// #ifdef APP-PLUS
 				uni.login({
 					provider,
@@ -68,12 +70,73 @@
 				})
 				// #endif
 				
+				// H5 端第三方登录
 				// #ifdef H5
 				QC.Login.showPopup({
 				     appId:"101825637",
 					 redirectURI:"https:zfroot.top:8081/yun/auth"
 				});
 				// #endif
+			},
+			// 微信小程序登录
+			wxLogin(e){
+				const userInfo = e.detail.userInfo,
+					  that = this;
+				uni.login({
+					provider:"weixin",
+					success(res) {
+						const code = res.code,
+							  // 设置登录到哪个对应的微信小程序 [0:芸云学堂]
+							  loginToWhichMP = 1;
+						//code 给后端换取登录信息
+						that.$request({
+						   url: '/login',
+						   method: 'GET',  //这里包含注册 正式应该为POST
+						   data:{
+							   avatarUrl:userInfo.avatarUrl,
+							   nikename:userInfo.nikename,
+							   whichMP:loginToWhichMP
+						   }
+						  }).then(res => {
+								if(res.data.status === '200'){
+									if(res.data.data['truepass']){
+										let userInfo = res.data.data;
+										console.log('登录成功');
+										//获取当前时间,并写入
+										userInfo['loginTime'] = formatTime(new Date());
+										//存入用户缓存
+										uni.setStorageSync('userInfo', userInfo);
+										//vuex获取缓存
+										that.$store.commit('common/getUserInfo');										
+										//登录成功提示
+										uni.showToast({
+										    title: '登录成功,跳转至登录页面',
+											icon:'none'
+										});
+										//获取购物车以及优惠券信息
+										that.$store.dispatch('cart/request_cart').then(() => {
+											setTimeout(function () {
+											    uni.hideToast();
+												//跳转到首页
+												uni.switchTab({
+													url: '/pages/index/index'
+												});
+											}, 1000);
+										})
+										
+									}else{
+										uni.showToast({
+										    title: '登录失败',
+											icon:'none'
+										});
+										setTimeout(function () {
+										    uni.hideToast();
+										}, 1000);
+									}
+								}
+						})
+					}
+				})
 			}
 		}
 	}
