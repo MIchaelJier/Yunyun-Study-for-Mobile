@@ -6,6 +6,8 @@
 						v-if="image" 
 						class="postimage"
 						mode="scaleToFill" 
+						:style="{opacity: show ? '1':'0'}"
+						@load="loadEvent"
 						lazy-load>
 				</image>
 			</view>
@@ -41,11 +43,20 @@
 			titleFontSize: {
 			  type: [String,Number],
 			  default: 16	
+			},
+			show: { //图片显示标识
+			  type: Boolean,
+			  default: true
 			}
+			
 		},
 		methods: {
 			enter:function() {
 				console.log(this.url)
+			},
+			loadEvent(){
+				//加载事件
+				this.$emit('loadEvent')
 			}
 		}
 	}
@@ -72,6 +83,7 @@
 					width: 100%;
 					height: 100%;
 					border-radius: 10rpx;
+					transition: opacity .5s ; 
 				}
 			}
 			.boxRight {

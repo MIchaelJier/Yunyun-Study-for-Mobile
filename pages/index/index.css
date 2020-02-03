@@ -22,6 +22,7 @@
 		width: 80rpx;
 		height: 80rpx;
 		border-radius: 50%;
+		transition: opacity .5s; 
 	}
 	.class text {
 		margin-top: 10rpx;

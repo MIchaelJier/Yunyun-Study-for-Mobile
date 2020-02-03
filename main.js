@@ -10,6 +10,7 @@ Vue.prototype.$store = store
 //   const reqComName = fileName.split('/')[1];
 //   Vue.component(reqComName.substring(0 , reqComName.length - 4), reqCom.default || reqCom)
 // })
+
 // 自定义组件
 	import yunBox from "./components/yunBox.vue"
 	import yunSwiper from "./components/yunSwiper.vue"

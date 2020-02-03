@@ -29,6 +29,7 @@ export const request = (params) => {
 			header:header,
 			url:baseUrl + params.url,
 			success:(res) => {
+				params.showLoading ? uni.hideLoading() : '' ;
 				console.log(res.data); 
 				resolve(res);
 			},
