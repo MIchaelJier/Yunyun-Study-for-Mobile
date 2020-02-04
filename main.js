@@ -22,6 +22,7 @@ Vue.prototype.$store = store
 	import yunMoveVerify from "./components/yunMoveVerify.vue"
 	import yunModal from "./components/yunModal.vue"
 	import betterSticky from "./components/betterSticky.vue"
+	import yunImage from "./components/yunImage.vue"
 	Vue.component('yunBox',yunBox);
 	Vue.component('yunTab',yunTab);
 	Vue.component('yunSwiper',yunSwiper);
@@ -32,6 +33,7 @@ Vue.prototype.$store = store
 	Vue.component('yunMoveVerify',yunMoveVerify);
 	Vue.component('yunModal',yunModal);
 	Vue.component('betterSticky',betterSticky);
+	Vue.component('yunImage',yunImage);
 // uniUI组件
 	import uniRate from "./uniUI/components/uni-rate/uni-rate.vue"
 	import uniList from "./uniUI/components/uni-list/uni-list.vue"

@@ -19,25 +19,18 @@
 									  style="width:calc(100vw - 60rpx)"
 									  v-if="co.size === 0"
 								>
-									<image :src="co.picsrc" mode="" 
-											class="themes-item-content-big" 
-											:style="{opacity: showNum === allShowNum ? '1': '0'}"
-											@load="showAdd"
-											lazy-load
-									>
-									</image>
+									<view class="themes-item-content-big">
+										<yun-image :src="co.picsrc"></yun-image>
+									</view>
 								</view>
 								<!-- co.size ===  1   一行两个-->
 								<view class="themes-item-content"
 									  @click="enter(co.name)"
 									  :style="{marginBottom: co.name ? '50rpx':'',width:'calc(50vw - 40rpx)'}"
 									  v-if="co.size === 1">
-									  <image :src="co.picsrc" mode=""
-									  		class="themes-item-content-small" 
-											:style="{opacity: showNum === allShowNum ? '1': '0'}"
-											@load="showAdd"
-									  		lazy-load
-									  >
+									  <view class="themes-item-content-small">
+										  <yun-image :src="co.picsrc"></yun-image>
+									  </view>
 									  </image>
 									  <text class="themes-item-content-name" v-if="co.name">{{ co.name }}</text>
 									  <view class="themes-item-content-num" v-if="co.star&&co.learned">
@@ -54,7 +47,7 @@
 									  @click="enter(co.name)"
 									  v-if="co.size === 2">
 									  <view class="boxPosition">
-										  <yun-box :image="co.picsrc" :title="co.name" :show="showNum === allShowNum" @loadEvent="showAdd()" >
+										  <yun-box :image="co.picsrc" :title="co.name">
 											  <view>
 												  <view class="themes-item-content-num sb">
 													  <text>共{{ co.chapterNum }}课时</text>
@@ -80,21 +73,17 @@
 </template>
 
 <script>
+	import yunImage from './yunImage.vue'
 	import yunBox from './yunBox';
 	export default {
 		data() {
 			return {
-				showNum:0,
-				allShowNum: 0,
+
 			};
 		},
 		components: {
-			yunBox
-		},
-		computed:{
-			// showflag(){
-			// 	return this.showAdd === this.allShowNum
-			// }
+			yunBox,
+			yunImage
 		},
 		props:{
 			themeList: { 
@@ -118,21 +107,6 @@
 				uni.navigateTo({
 					url:"/pages/Coursedetails/Coursedetails?id=" + flag
 				})
-			},
-			showAdd(){
-				this.showNum += 1;
-			}
-		},
-		watch:{
-			themeList(newList){
-				let all = 0;
-				newList.forEach(item => {
-					item.content.forEach(inner => {
-						inner.show = false
-						all += 1;
-					})
-				});
-				this.allShowNum = all;
 			}
 		}
 	}
@@ -181,12 +155,10 @@
 						&-big {
 							width: calc(100vw - 60rpx);
 							height: 300rpx;
-							transition: opacity .5s; 
 						}
 						&-small {
 							width: calc(50vw - 40rpx);
 							height: 190rpx;
-							transition: opacity .5s; 
 						}
 						&-name {
 							font-size: 32rpx;

@@ -5,7 +5,9 @@
 				<view class="top-title">机构 {{ ownerMsg.ownername }}</view>
 				<block v-for="course in payList" :key="course.productId">
 					<view class="top-course">
-						<image :src="course.photoUrl" mode="scaleToFill" class="course-img"></image>
+						<view class="course-img">
+							<yun-image :src="course.photoUrl"></yun-image>
+						</view>
 						<view class="course-msg">
 							<text style="font-size: 14px;color: #3C4A55;">{{ course.productName }}</text>
 							<view class="msg-under">
@@ -145,6 +147,7 @@
 					width: 240rpx;
 					height: 150rpx;
 					border-radius: 3px;
+					overflow: hidden;
 				}
 				.course-msg {
 					flex: 1;

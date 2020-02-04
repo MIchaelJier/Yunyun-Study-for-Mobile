@@ -12,21 +12,20 @@
 			:style="{height:height,width:width}"
 		>
 			<swiper-item v-for="sw in list" :key="sw.id" class="swp">
-				<image :src="sw.picsrc" 
-						class="img"
-						:style="{opacity: showNum === allShowNum ? '1': '0'}"
-						@load="showAdd"
-				></image>
+				<view class="img">
+					<yun-image :src="sw.picsrc"></yun-image>
+				</view>
 			</swiper-item>
 		</swiper>
 	</view>
 </template>
 
 <script>
+	import yunImage from './yunImage.vue'
 	export default {
 		data() {
 			return {
-				showNum: 0,
+				
 			};
 		},
 		props:{
@@ -45,22 +44,11 @@
 				default: ''
 			}
 		},
-		computed:{
-			allShowNum(){
-				return this.list.length;
-			},
+		components: {
+			yunImage
 		},
 		methods:{
-			showAdd(){
-				this.showNum += 1;
-			}
-		},
-		watch:{
-			list(newList){
-				newList.forEach(item => {
-					item.show = false;
-				});
-			}
+		
 		}
 	}
 </script>
@@ -76,7 +64,6 @@
 		.img {
 			height: 100%;
 			width: 100%;
-			transition: opacity .5s;
 		}	
 	}
 </style>

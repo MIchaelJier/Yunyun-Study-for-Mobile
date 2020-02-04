@@ -9,10 +9,13 @@
 			<view class="classify-content">
 					<block v-for="cl in classList" :key="cl.id">
 						 <navigator :url="navigatorUrl(cl.id, cl.url)" hover-class="none" class="class">
-							<image  :src="cl.picsrc"
-									:style="{opacity: showNum === allShowNum ? '1': '0'}"
-									@load="showAdd"
-							></image>
+							<!-- <image  :src="cl.picsrc"
+									:style="{opacity: cl.show ? '1': '0'}"
+									@load="showitem(cl.id)"
+							></image> -->
+							<view class="classimage">
+								<yun-image :src="cl.picsrc"></yun-image>
+							</view>
 							<text>{{ cl.titile }}</text>
 						</navigator>
 					</block>
@@ -31,7 +34,7 @@
 				classList:[],
 				themeList:[],
 				
-				showNum: 0,
+				scrollTop: 0
 			}
 		},
 		computed:{
@@ -44,24 +47,14 @@
 					}
 				}
 			},
-			allShowNum(){
-				return this.classList.length;
-			},
 		},
 		methods: {
-			showAdd(){
-				this.showNum += 1;
-			},
 			AllfirstRequest(){
 				return Promise.all([
 						this.firstRequest('/getSwiperPic','swiperList'), 
 						this.firstRequest('/getClassList','classList'), 
 						this.firstRequest('/getTheme','themeList')
-					]).then(res => {
-						res[1].forEach(item => {
-							item.show = false;
-						});
-					})
+					])
 			},
 			//二次封装request
 			firstRequest(u,d){
@@ -89,7 +82,6 @@
 					uni.stopPullDownRefresh();
 				})
 			},500)
-			
 		}
 	}
 </script>

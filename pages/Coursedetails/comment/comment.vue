@@ -25,7 +25,9 @@
 		<view class="comments"  v-for="(com,index) in commentsInfo.comments" :key="index">
 			<view class="comments-item">
 				<view class="comments-item-head">
-					<image :src="com.headimg">
+					<view class="comments-item-head-image">
+						<yun-image :src="com.headimg"></yun-image>
+					</view>
 				</view>
 				<view class="comments-item-main">
 					<!-- 评论者 信息 -->

@@ -12,7 +12,9 @@
 					color="#ff632a" class="course-checkbox"
 					/>
 					<view class="course-body">
-						<image :src="course.photoUrl" mode="scaleToFill" class="course-img"></image>
+						<view class="course-img">
+							<yun-image :src="course.photoUrl"></yun-image>
+						</view>
 						<view class="course-msg">
 							<text style="font-size: 14px;color: #3C4A55;">{{ course.productName }}</text>
 							<text style="margin: 6rpx 0;" v-if="course.deadlineTime === 0">永久有效</text>

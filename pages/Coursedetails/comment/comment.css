@@ -71,10 +71,11 @@
 	    padding: 40rpx 20rpx 20rpx;
 		display: inline-block;
 	}
-	.comments-item-head image {
+	.comments-item-head-image {
 		width: 72rpx;
 		height: 72rpx;
 		border-radius: 50%;
+		overflow: hidden;
 	}
 	.comments-item-main {
 		padding: 40rpx 20rpx 40rpx 0;

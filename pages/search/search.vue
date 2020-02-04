@@ -63,7 +63,7 @@
 						:style="[{'z-index': refShow ? '-1':''}]"
 						> <!-- {height: searchResultArr === '' ? '100vh':''}, -->
 							<block v-for="(item, index) in searchResultArr" :key="index"> <!-- :key="item.id" -->
-								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :fitImage="!item.vipprice">				
+								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :scrollTop="scrollTop">				
 									<view class="item-up">
 										<view class="item-up-u">
 											<uni-rate :value="item.star" size="10" disabled="true"></uni-rate>

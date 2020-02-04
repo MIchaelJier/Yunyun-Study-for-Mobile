@@ -147,9 +147,11 @@
 						console.log(this.initTop)
 					}
 				}).exec();
-				this.getLeft();
-			})
-			
+				//路由动画结束
+				setTimeout(() => {
+					this.getLeft();
+				},300)
+			});
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop

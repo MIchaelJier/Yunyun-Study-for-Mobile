@@ -9,6 +9,7 @@
 			<template v-slot:0>
 				<course-list reqUrl="/getPopularList" 
 							:providerId="providerId" 
+							:scrollTop="scrollTop" 
 							@afterReq="swiperHeight()"  
 							ref="popular">
 				</course-list>
@@ -18,6 +19,7 @@
 			<template v-slot:1>
 				<course-list reqUrl="/getPopularList" 
 							:providerId="providerId"
+							:scrollTop="scrollTop" 
 							 @afterReq="swiperHeight()"  
 							 ref="praised">
 				 </course-list>
@@ -27,6 +29,7 @@
 			<template v-slot:2>
 				<course-list reqUrl="/getPopularList" 
 							:providerId="providerId" 
+							:scrollTop="scrollTop" 
 							@afterReq="swiperHeight()"  
 							ref="newest">
 				</course-list>

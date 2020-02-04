@@ -17,6 +17,7 @@ export const request = (params) => {
 	// 正式接口
 	const formalUrl = "" ;
 
+	// params.showLoading = true
 	if (params.showLoading){
 	 	uni.showLoading({
 	 		title: '加载中',

@@ -8,7 +8,9 @@
 						<text style="margin-left: 20rpx;">订单号：{{ item.orderId }}</text>
 					</view>
 					<view class="item-middle">
-						<image :src="item.photoUrl" mode="scaleToFill" class="middle-img"></image>
+						<view class="middle-img">
+							<yun-image :src="item.photoUrl"></yun-image>
+						</view>
 						<view class="middle-msg">
 							<text class="msg-title">{{ item.courseName }}</text>
 							<text class="msg-limit" v-if="item.deadlineTime === 0">永久可看</text>
@@ -83,6 +85,7 @@
 			border-radius: 6px;
 			float: left;
 			background: #E6EAF2;
+			overflow: hidden;
 		}
 		.middle-msg {
 			display: flex;
