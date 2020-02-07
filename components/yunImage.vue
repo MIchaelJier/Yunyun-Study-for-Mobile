@@ -17,7 +17,7 @@
 		data() {
 			return {
 				show: false,
-				delay: 0.3
+				delay: 0.5,
 			};
 		},
 		props:{
@@ -29,34 +29,44 @@
 				type: String,
 				default: 'scaleToFill'
 			},
-			scrollTop: {
-				type: Number,
-				default: 0,
+			lazy: {
+				type: Boolean,
+				default: false
 			}
 		},
 		methods:{
 			showitem(){
-				if(this.scrollTop === 0){
-					this.show = true;
+				if(this.lazy){
+					this.lazyObserve();
+				}else{
+					this.show = true
 				}
+			},
+			//监控
+			lazyObserve(){
+				observer = uni.createIntersectionObserver(this);
+				observer.relativeToViewport({top: 0 , bottom: 0}).observe('.yun-image', (res) => {
+					// #ifdef H5 
+						const aProps = Object.getOwnPropertyNames(res.intersectionRect);
+						this.show = aProps.some(item => res.intersectionRect[item]>0);
+						// 会出现相交区域高度为0的情况 所得intersectionRect为0
+						// this.show = res.intersectionRect > 0 
+					// #endif
+					// #ifdef MP-WEIXIN || APP-PLUS
+						this.show = res.intersectionRatio > 0 
+					// #endif
+					
+				})
 			}
 		},
 		mounted() {
-			// uni.createSelectorQuery().in(this).select('.yun-image').boundingClientRect().exec((res) => {
-			// 	this.delay += res[0].top / 1000 > 0.5 ? 0.5 : res[0].top / 1000
+			// this.$nextTick( () => {
+				
 			// })
 		},
 		destroyed(){
 			 if (observer) {
 			    observer.disconnect()
-			}
-		},
-		watch:{
-			scrollTop(newVal){
-				observer = uni.createIntersectionObserver(this);
-				observer.relativeToViewport().observe('.yun-image', (res) => {
-					 this.show = res.intersectionRatio > 0 
-				})
 			}
 		}
 	}

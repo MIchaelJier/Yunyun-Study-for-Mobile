@@ -3,7 +3,7 @@
 		<view class="box__main"  @click="enter()">
 			<view  class="boxPost">
 				<view class="postimage" v-if="image">
-					<yun-image :src="image" :scrollTop="scrollTop" :mode="mode"></yun-image>
+					<yun-image :src="image" :mode="mode" :lazy="lazy"></yun-image>
 				</view>
 			</view>
 			<view class="boxRight"> <!-- :style="{ height: image&&fitImage ? '137rpx':'' }" -->
@@ -43,14 +43,14 @@
 			  type: [String,Number],
 			  default: 16	
 			},
-			scrollTop: { //图片懒加载
-			  type: Number,
-			  default: 0
-			},
 			mode: {
 				type: String,
 				default: 'scaleToFill'
 			},
+			lazy: {
+				type: Boolean,
+				default: false
+			}
 		},
 		methods: {
 			enter:function() {

@@ -99,7 +99,7 @@
 				 this.$nextTick(() => {
 					 uni.createSelectorQuery().in(this).selectAll('.swiperflag').boundingClientRect((res) => {
 						const slot = res[this.status],
-						      { windowHeight } = uni.getSystemInfoSync();	
+						      { windowHeight , statusBarHeight} = uni.getSystemInfoSync();	
 							  // console.log({slot,windowHeight})
 					 	if(slot.top + slot.height < windowHeight - this.bottomBarHeight && slot.top >= 0){
 							// slot长度小于屏幕高度
@@ -179,5 +179,11 @@
 
 	.tabBody {
 	  position: relative;
+	  .swiperflag {
+		  /* #ifdef APP-PLUS */
+		  // min-height: calc(100vh - 48px  - env(safe-area-inset-bottom) - var(--status-bar-height));
+		  // min-height: calc(100vh - 48px  - constant(safe-area-inset-bottom) - var(--status-bar-height))
+		  /* #endif */
+	  }
 	}
 </style>

@@ -150,8 +150,10 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "芸云课堂",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#f7f7f7",
+		"backgroundColor": "#f7f7f7",
+		"backgroundColorTop": "#f7f7f7",
+		"backgroundColorBottom": "#f7f7f7"
 	},
 	"tabBar": {
 		"color":"#bfbfbf",

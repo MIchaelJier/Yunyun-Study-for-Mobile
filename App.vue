@@ -29,7 +29,8 @@
 		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
 		/*刘海屏*/
 		/* #ifdef APP-PLUS */
-		padding-top:var(--status-bar-height)
+		min-height: calc(100% - var(--status-bar-height)) ;
+		padding-top:var(--status-bar-height);
 		/* #endif */
 	} 
 	.xBottom {

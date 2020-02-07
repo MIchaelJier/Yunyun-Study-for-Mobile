@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<yun-tab :tabs="tabs" :scrollTop="scrollTop" ref="tabs">
+		<yun-tab :tabs="tabs" :scrollTop="scrollTop" :bottomBarHeight="bottomBarHeight" ref="tabs">
 			<template v-slot:0>
 				<view class="none" v-if="my_courses.length < 1">
 				  <image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix"/>
@@ -51,11 +51,15 @@
 				 
 				 tabs:['我的课程','我的微专业'],
 				 scrollTop:0,
+				 bottomBarHeight:0,
 			}
 		},
 		onLoad() {
 			let that = this;
 			that.firstRequest('/getMyCourses','my_courses');
+			// #ifdef APP-PLUS
+				that.bottomBarHeight = 50
+			// #endif
 			// that.firstRequest(that,'/getMyCourses','my_microSpecialty');
 		},
 		methods: {		

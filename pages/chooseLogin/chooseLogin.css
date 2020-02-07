@@ -1,5 +1,8 @@
 .page{
 	height: 100%;
+	/* #ifdef APP-PLUS */
+	height: calc(100% - var(--status-bar-height))
+	/* #endif */
 }
 .pageBackground {
 	width: 100%;

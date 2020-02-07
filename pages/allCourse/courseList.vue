@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<block v-for="(item, index) in list" :key="index">
-			<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :titleFontSize="15" :scrollTop="scrollTop" >
+			<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :titleFontSize="15" lazy>
 				<view class="item-content">
 					<view class="item-content__num sb">
 						<text>共{{ item.chapterNum }}课时</text>
@@ -45,11 +45,7 @@
 			providerId:{
 				type: [Number,String],
 				default: '',
-			},
-			scrollTop: { //图片懒加载
-			  type: Number,
-			  default: 0
-			},
+			}
 		},
 		methods:{
 			listRequest(times){

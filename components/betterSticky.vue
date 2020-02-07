@@ -130,14 +130,18 @@
 	}
 </script>
 
-<style>
-	.tui-sticky-fixed {
-		width: 100%;
-		position: fixed;
-		top: 0;
-		/* #ifdef APP-PLUS */
-		top: var(--status-bar-height);
-		/* #endif */
-		z-index: 1;
+<style lang="scss">
+	.tui-sticky-class {
+		background: green;
+		.tui-sticky-fixed {
+			width: 100%;
+			position: fixed;
+			top: 0;
+			/* #ifdef APP-PLUS */
+			padding-top: var(--status-bar-height);
+			/* #endif */
+			z-index: 1;
+			background: #fff;
+		}
 	}
 </style>
