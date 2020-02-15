@@ -50,16 +50,7 @@
 			onConfirm() {
 				switch(this.type){
 					case 'default':
-						//退出登录
-						this.$store.commit('common/changeUserInfo',{});
-						//清空购物车和优惠券信息
-						this.$store.commit('cart/delCartAll');
-						this.$store.commit('cart/delCouponAll');
-						//删除缓存数据
-						uni.removeStorageSync('userInfo');
-						uni.switchTab({
-							url: '/pages/index/index'
-						});
+						this.User.$signout();
 						break;
 					case 'input':
 						//传给后台更改数据

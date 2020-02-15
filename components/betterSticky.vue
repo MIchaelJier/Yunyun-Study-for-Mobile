@@ -132,7 +132,6 @@
 
 <style lang="scss">
 	.tui-sticky-class {
-		background: green;
 		.tui-sticky-fixed {
 			width: 100%;
 			position: fixed;

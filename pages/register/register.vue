@@ -80,6 +80,9 @@
 				const all = allSituation.call(this);
 				//执行注册验证
 				registerProcess.get(condition(all)).apply(this,[1])
+			},
+			$register(params){
+				this.User.$register(params)
 			}
 		}
 	}

@@ -83,31 +83,17 @@ export const registerProcess = new Map([
 						    })
 					  }else if(type === 1){
 						   //提交后台注册
-						  this.$request({
-						     url: '/register',
-						     method: 'POST',
-						     data:{
-						  	   phone,
+						   this.$register({
+							   phone,
 							   password,
-							   vcode 
-						     }
-						    }).then(res => {
-						  	  if(res.data.status === '200' ? res.data.data.success: false){
-						  		  this.tipText = '';
-								 uni.showToast({
-								     title: '登录成功,跳转至登录页面',
-									 icon:'none'
-								 });
-								 setTimeout(function () {
-								     uni.hideToast();
-									 uni.navigateTo({
-									     url: '/pages/phoneLogin/phoneLogin'
-									 });
-								 }, 1000);
-						  	  }else{
-								  this.tipText = res.data.data.tip;
-							  }
-						    })
+							   vcode,
+							   correctBack: () => {
+								   this.tipText = ''
+							   },
+							   wrongBack: () => {
+								   this.tipText = res.data.data.tip
+							   }
+						   })
 					  }
 				  }],
 				])

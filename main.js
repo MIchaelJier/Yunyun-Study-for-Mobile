@@ -23,6 +23,7 @@ Vue.prototype.$store = store
 	import yunModal from "./components/yunModal.vue"
 	import betterSticky from "./components/betterSticky.vue"
 	import yunImage from "./components/yunImage.vue"
+	import yunRefresh from "./components/yunRefresh.vue"
 	Vue.component('yunBox',yunBox);
 	Vue.component('yunTab',yunTab);
 	Vue.component('yunSwiper',yunSwiper);
@@ -34,6 +35,7 @@ Vue.prototype.$store = store
 	Vue.component('yunModal',yunModal);
 	Vue.component('betterSticky',betterSticky);
 	Vue.component('yunImage',yunImage);
+	Vue.component('yunRefresh',yunRefresh);
 // uniUI组件
 	import uniRate from "./uniUI/components/uni-rate/uni-rate.vue"
 	import uniList from "./uniUI/components/uni-list/uni-list.vue"
@@ -55,8 +57,17 @@ Vue.prototype.$store = store
 Vue.config.productionTip = false;
 
 //uni.request $request
-import { request } from "./request/index.js"
+import { request } from "./common/request/index.js"
 Vue.prototype.$request = request;
+
+//定义用户类
+Vue.prototype.User = {};
+import { signout } from "./common/signOut.js"
+import { register } from "./common/register.js"
+import { login } from "./common/login/index.js"
+Vue.prototype.User.$signout = signout;
+Vue.prototype.User.$register = register;
+Vue.prototype.User.$login = login;
 
 //屏幕宽高 $ww $wh
 const { windowWidth, windowHeight } = uni.getSystemInfoSync();	

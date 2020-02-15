@@ -59,7 +59,6 @@
 </template>
 
 <script>
-	import { formatTime } from "../../utils/timeFormat.js"
 	import { loginProcess,allSituation } from './verifProcess.js'
 	import { condition } from "../../utils/myMath.js"
 	export default {
@@ -142,8 +141,8 @@
 				//执行登录验证
 				loginProcess.get(condition(all)).call(this)
 			},
-			formatTime(date){
-				return formatTime(date)
+			$login(params){
+				this.User.$login(params)
 			}
 		},
 	}

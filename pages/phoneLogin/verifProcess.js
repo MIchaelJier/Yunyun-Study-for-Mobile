@@ -64,50 +64,20 @@ export const loginProcess = new Map([
 			vcode = this.$refs.verifycodeInput ? this.$refs.verifycodeInput.text : '';
 		if(type === 1){
 			//输入正确 请求登录接口 判断账号密码是否正确
-			that.$request({
-			   url: '/login',
-			   method: 'GET',
-			   data:{
-				   phone,
-				   password,
-				   vcode,
-			   }
-			  }).then(res => {
-					if(res.data.status === '200'){
-						if(res.data.data['truepass']){
-							let userInfo = res.data.data;
-							that.tipText = ''
-							console.log('登录成功');
-							//获取当前时间,并写入
-							userInfo['loginTime'] = this.formatTime(new Date());
-							if(that.checkboxFlag){
-								//存入用户缓存
-								uni.setStorageSync('userInfo', userInfo);
-								//vuex获取缓存
-								that.$store.commit('common/getUserInfo');
-							}else{
-								//一次性登录
-								that.$store.commit('common/changeUserInfo',userInfo)
-							}
-							//登录成功提示
-							uni.showToast({
-							    title: '登录成功,跳转至登录页面',
-								icon:'none'
-							});
-							//获取 购物车和优惠券信息 
-							that.$store.dispatch('cart/request_cart').then(() => {
-								setTimeout( () => {
-								    uni.hideToast();
-									//跳转到首页
-									uni.switchTab({
-										url: '/pages/index/index'
-									});
-								}, 1000);
-							})
-						}else{
-							that.tipText = '账号或密码错误'
-						}
-					}
+			that.$login({
+				loginData: {
+					phone,
+					password,
+					vcode,
+				},
+				isStorage: that.checkboxFlag,
+				correctBack: () => {
+					that.tipText = ''
+					console.log('登录成功');
+				},
+				wrongBack: () => {
+					that.tipText = '账号或密码错误'
+				}
 			})
 		}else if(type === 0){
 			//提交手机号获取验证码

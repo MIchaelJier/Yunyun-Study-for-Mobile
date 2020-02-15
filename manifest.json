@@ -89,6 +89,11 @@
             "base" : ""
         },
         "template" : "index.html",
-        "title" : "芸云课堂"
+        "title" : "芸云课堂",
+		"optimization":{
+			"treeShaking":{
+				"enable":true 
+				} 
+			}
     }
 }

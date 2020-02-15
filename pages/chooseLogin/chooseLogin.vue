@@ -95,7 +95,7 @@
 						   data:{
 							   avatarUrl:userInfo.avatarUrl,
 							   nikename:userInfo.nikename,
-							   whichMP:loginToWhichMP
+							   whichMP:loginToWhichMP 
 						   }
 						  }).then(res => {
 								if(res.data.status === '200'){
@@ -129,7 +129,7 @@
 										    title: '登录失败',
 											icon:'none'
 										});
-										setTimeout(function () {
+										setTimeout( () => {
 										    uni.hideToast();
 										}, 1000);
 									}

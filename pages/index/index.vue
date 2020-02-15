@@ -1,28 +1,30 @@
 <template>
 	<view class="page">
-		<!-- header -->
-		<yun-header></yun-header>
-		<!-- swiper -->
-		<yun-swiper :list="swiperList"></yun-swiper>
-		<!-- classify -->
-		<view class="classify">
-			<view class="classify-content">
-					<block v-for="cl in classList" :key="cl.id">
-						 <navigator :url="navigatorUrl(cl.id, cl.url)" hover-class="none" class="class">
-							<!-- <image  :src="cl.picsrc"
-									:style="{opacity: cl.show ? '1': '0'}"
-									@load="showitem(cl.id)"
-							></image> -->
-							<view class="classimage">
-								<yun-image :src="cl.picsrc"></yun-image>
-							</view>
-							<text>{{ cl.titile }}</text>
-						</navigator>
-					</block>
+		<yun-refresh @isRefresh='isRefresh' ref="refresh">
+			<!-- header -->
+			<yun-header></yun-header>
+			<!-- swiper -->
+			<yun-swiper :list="swiperList"></yun-swiper>
+			<!-- classify -->
+			<view class="classify">
+				<view class="classify-content">
+						<block v-for="cl in classList" :key="cl.id">
+							 <navigator :url="navigatorUrl(cl.id, cl.url)" hover-class="none" class="class">
+								<!-- <image  :src="cl.picsrc"
+										:style="{opacity: cl.show ? '1': '0'}"
+										@load="showitem(cl.id)"
+								></image> -->
+								<view class="classimage">
+									<yun-image :src="cl.picsrc"></yun-image>
+								</view>
+								<text>{{ cl.titile }}</text>
+							</navigator>
+						</block>
+				</view>
 			</view>
-		</view>
-		<!-- theme -->
-		<yunThemes :themeList="themeList"></yunThemes>
+			<!-- theme -->
+			<yunThemes :themeList="themeList"></yunThemes>
+		</yun-refresh>
 	</view>
 </template>
 
@@ -71,6 +73,13 @@
 					});
 				})
 			},
+			isRefresh(){
+				setTimeout(() => {
+					this.AllfirstRequest().then( res => {
+						this.$refs.refresh.endAfter() 
+					})
+				}, 500)
+			}
 		},
 		onLoad() {
 			this.AllfirstRequest();
