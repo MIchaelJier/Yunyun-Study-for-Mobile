@@ -1,0 +1,23 @@
+{
+  "name": "Yunyun-Study-for-Mobile",
+  "version": "1.0.0",
+  "description": "芸云课堂移动端",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MIchaelJier/Yunyun-Study-for-Mobile.git"
+  },
+  "keywords": [],
+  "author": "MichaelJier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MIchaelJier/Yunyun-Study-for-Mobile/issues"
+  },
+  "homepage": "https://github.com/MIchaelJier/Yunyun-Study-for-Mobile#readme",
+  "dependencies": {
+    "verify5-vue": "^2.3.6"
+  }
+}
