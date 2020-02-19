@@ -82,7 +82,19 @@
     },
     "h5" : {
         "devServer" : {
-            "https" : false
+            "https" : false,
+            "port" : 8080, //端口号
+            "disableHostCheck" : true
+     //        "proxy" : {
+     //            "/test" : {
+     //                "target" : "https://zfroot.top:8081", //目标接口域名
+     //                "changeOrigin" : true, //是否跨域
+     //                "secure" : false,// 设置支持https协议的代理
+					// "pathRewrite":{
+					// 		"^/test":""
+					// 	}
+     //            }
+     //        }
         },
         "router" : {
             "mode" : "hash",
@@ -90,10 +102,11 @@
         },
         "template" : "index.html",
         "title" : "芸云课堂",
-		"optimization":{
-			"treeShaking":{
-				"enable":true 
-				} 
-			}
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        }
     }
 }
+

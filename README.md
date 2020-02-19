@@ -1,5 +1,5 @@
 # Yunyun-Study-for-Mobile（芸云课堂移动端）   
-![avatar](/static/headerIcon.png)   
+![avatar](/static/images/headerIcon.png)   
 ### 项目介绍  
 芸云课堂是一款在线技能学习的视频资源网站，本项目提供移动端web、微信小程序（进一步要求：iOS和AndroidApp），UI参考网易云课堂。  
 ### 项目目录  
@@ -86,7 +86,7 @@ express | 用于代理转发 | [http://www.expressjs.com.cn](http://www.expressj
 github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://github.com/MIchaelJier/Yunyun-Study-for-Mobile).  
 部署网址：[http://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/).  
 小程序：个人微信搜索“芸云学堂”.  
-后端接口文档：[接口文档](http://zfroot.top:8081/yun)  
+后端接口文档：[芸云课堂后端接口文档](https://zfroot.top:8081/yun/doc.html)  
 衍生插件：uni H5路由动画插件([路由动画 page-animation升级版](https://ext.dcloud.net.cn/plugin?id=1265))
 
 ### 目前完成进度  
@@ -97,7 +97,7 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
  5. 分类页  
  6. 详情页 (对已购买者的判断 x)
  7. 选择登录页（第三方登陆 x）
- 8. 账号密码登录页 (V5验证 x)
+ 8. 账号密码登录页 
  9. 用户信息页 (只有对昵称的修改)
  10. 我的订单
  11. 我的优惠券
@@ -107,5 +107,5 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
  15. 讲师/机构全部课程页
 
 ### 导入 
- 1. HBuilder 文件 -> 从Git导入
+ 1. 打开HBuilder X，文件 -> 从Git导入
  2. npm i

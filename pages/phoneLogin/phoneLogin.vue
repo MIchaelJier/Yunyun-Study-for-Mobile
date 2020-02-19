@@ -17,7 +17,9 @@
 				<!-- 验证码登录 -->
 				<view v-else>
 					<view class="inputoutside">
-						<yun-moveVerify @result='verifyResult' ref="verifyElement"></yun-moveVerify>
+						<!-- <yun-moveVerify @result='verifyResult' ref="verifyElement"></yun-moveVerify> -->
+						<V5Button name="v5" ref="v5buttom" :host="v5host" :token="v5token" @success="verifyResult"/>
+						<V5Dialog ref="v5dialog" :host="v5host" :token="v5token"/>
 					</view>
 					<view class="inputoutside">
 						<yun-input ref="verifycodeInput" inputType="number" inputPlaceholder="请输入短信验证码" inputWidth="61%" maxLen="6"></yun-input>
@@ -61,19 +63,29 @@
 <script>
 	import { loginProcess,allSituation } from './verifProcess.js'
 	import { condition } from "../../utils/myMath.js"
+	
+	import V5Dialog from '../../components/verify5-ui/V5Dialog'
+	import V5Button from '../../components/verify5-ui/V5Button'
 	export default {
 		data() {
 			return {
 				tipText: '',
 				checkboxFlag: true,
-				nowWay: 0,
+				nowWay: 0, //和实际相反
 				loginWay: [
 					{ id: 0, name: '使用短信验证登录',icon: 'email-filled',size: '23' },
 					{ id: 1, name: '使用密码验证登录',icon: 'locked',size: '23' }
 				],
-				resultData: {},
+				resultData: '',
+				v5host:'',
+				v5token:'',
+				
 				codeExpiration: 0,
 			}
+		},
+		components: {
+			V5Dialog,
+			V5Button
 		},
 		methods: {
 			//改变登录方式
@@ -84,16 +96,15 @@
 			changeFlag(e){
 				this.checkboxFlag = e.detail.value.length === 1
 			},
-			//滑动验证模块 校验结果回调函数
+			// 滑动验证模块 校验结果回调函数
 			verifyResult(res){
-			    this.resultData = res;
+			    // this.resultData = res;
+				this.$refs.v5dialog.verify( result => {
+				        if(result.success){
+				            this.resultData = result.verifyId;
+				        }
+				    });
 			},
-			// 校验插件重置 
-			/* verifyReset(){
-			    this.$refs.verifyElement.reset();
-			    //删除当前页面的数据 
-			    this.resultData = {};
-			}, */
 			//获取验证码
 			getVCode(){
 				console.log('用户点击获取验证码');
@@ -145,6 +156,17 @@
 				this.User.$login(params)
 			}
 		},
+		onLoad() {
+			this.$request({
+			   url: '/test/custom/getV5HostAndToken',
+			   method: 'GET',
+			  }).then(res => {
+					if(res.data.status){
+						this.v5host = res.data.data.host;
+						this.v5token = res.data.data.token
+					}
+			});
+		}
 	}
 </script>
 

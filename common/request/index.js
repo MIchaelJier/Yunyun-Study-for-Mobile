@@ -4,18 +4,22 @@ export const request = (params) => {
 	* url:'/my/...' 表示请求头携带token
 	* 其他参数参考uni.request
 	*/
-	let header = {...params.header};
+   // 个人服务器上的模拟接口
+   const mockUrl = "http://47.101.132.224:9000/mock/11"; 
+   // 测试接口
+   const testUrl = "https://zfroot.top:8081/yun" ;
+   // 正式接口
+   const formalUrl = "" ;
+   
+   let header = {...params.header},
+	   baseUrl = mockUrl;
+	   
 	// console.log(params.url);
-	if(params.url.includes("/my/")){
+	if(params.url.includes("/test/")){
 		header["Authorization"] = uni.getStorageSync("token");
-		params.url = params.url.substr(3,);
+		params.url = params.url.substr(5,);
+		baseUrl = testUrl;
 	}
-	// 个人服务器上的模拟接口
-	const baseUrl = "http://47.101.132.224:9000/mock/11"; 
-	// 测试接口
-	const testUrl = "" ;
-	// 正式接口
-	const formalUrl = "" ;
 
 	// params.showLoading = true
 	if (params.showLoading){

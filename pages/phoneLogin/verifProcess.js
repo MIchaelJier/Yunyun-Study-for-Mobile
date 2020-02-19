@@ -26,7 +26,7 @@ export const allSituation = function(){
 			pwd === '' ,
 			!pwdReg.test(pwd) ,
 			
-			this.resultData === '' || !this.resultData.flag ,
+			this.resultData === '',
 			vcode === '' ,
 			!vcodeReg.test(vcode)  ,
 		];
@@ -59,16 +59,20 @@ export const loginProcess = new Map([
 	}],
 	[0, function(type = 1){ 
 		let that = this,
-			phone = this.$refs.phoneInput.text,
+			username = this.$refs.phoneInput.text,
 		    password = this.$refs.passwordInput ? this.$refs.passwordInput.text : '',
-			vcode = this.$refs.verifycodeInput ? this.$refs.verifycodeInput.text : '';
+			code = this.$refs.verifycodeInput ? this.$refs.verifycodeInput.text : '',
+			verifyId = this.resultData,
+			grant_type = this.nowWay === 0 ? 'password' : 'sms';
 		if(type === 1){
 			//输入正确 请求登录接口 判断账号密码是否正确
 			that.$login({
 				loginData: {
-					phone,
+					username,
 					password,
-					vcode,
+					code,
+					verifyId,
+					grant_type
 				},
 				isStorage: that.checkboxFlag,
 				correctBack: () => {
@@ -85,7 +89,8 @@ export const loginProcess = new Map([
 			   url: '/getVCode',
 			   method: 'GET',
 			   data:{
-				   phone,
+				   op:0,
+				   phone:username
 			   }
 			  }).then(res => {
 				  if(res.data.status === '200' ? res.data.data.send : false){
