@@ -36,7 +36,7 @@
 				classList:[],
 				themeList:[],
 				
-				scrollTop: 0
+				scrollTop: 0 
 			}
 		},
 		computed:{

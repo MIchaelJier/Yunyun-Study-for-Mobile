@@ -1,10 +1,12 @@
 <template>
 	<view @touchstart="refreshStart" @touchmove="refreshMove" @touchend="refreshEnd">
 		<view class='refreshBox' :style="isTranform">
-			<view class='refresh' :style="isZoom" :class="isEnd==2?'animationSmall':''">
+			<view class='refresh' :style="isZoom" :class="isEnd == 2 ? 'animationSmall' : '' ">
 				<view class='refreshWord' v-if="isEnd == 0">松开刷新</view>
 				<view class='refreshCirle animation' v-if="isEnd == 1"></view>
-				<image class='iconYes' src='../static/icon/icon-yes.png' v-if="isEnd==2"></image>
+				<view v-if="isEnd == 2">
+					<uni-icons type="checkmarkempty" size="50r"></uni-icons>
+				</view>
 			</view>
 		</view>
 		<slot></slot>
@@ -12,6 +14,7 @@
 </template>
 
 <script>
+	import uniIcons from '../uniUI/components/uni-icons/uni-icons.vue'
 	export default {
 		name: 'refresh',
 		props: {
@@ -20,12 +23,16 @@
 				  default:1
 			  }
 		},
+		components:{
+			uniIcons
+		},
 		data() {
 			return {
 				isTranf: 0,
 				touchStart: '',
 				touchMove: '',
-				isEnd: 0
+				isEnd: 0,
+				isShow: false
 			};
 		},
 		
@@ -54,7 +61,7 @@
 			refreshEnd(e) {
 				var that = this
 				if (this.isEnd == 0 && this.isTop == 1) {
-					if (this.isTranf >= 90) {
+					if (this.isTranf >= 90 && this.isShow) {
 						this.isTranf = 125
 						this.isEnd = 1
 						this.$emit('isRefresh');
@@ -69,10 +76,11 @@
 					title: '刷新成功',
 					duration: 500
 				});
-				this.isEnd = 2
+				this.isEnd = this.isShow ? 2 : 0;
 				setTimeout(() => {
 					this.isTranf = 0
 					this.isEnd = 0
+					this.isShow = false
 				}, 600)
 			}
 		},
@@ -87,32 +95,85 @@
 				var isTemp = `zoom:${isTranf/125};`
 				return isTemp
 			}
+		},
+		mounted() {
+			uni.createIntersectionObserver(this)
+				.relativeToViewport({top: 0 , bottom: 0})
+				.observe('.refresh', (res) => {
+					if(this.change){
+						clearTimeout(this.change);
+					}
+					if(res.intersectionRatio > 0){
+						this.change = setTimeout(() => {
+							this.isShow = true
+						}, 100);
+					}else{
+						this.isShow = false
+					}
+				});
 		}
 
 	}
 </script>
 
 <style lang="scss">
+	@mixin flexCenter {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.refreshBox {
 		margin:0 auto;
 		width: 100%;
-		height: 100upx;
+		height: 100rpx;
 		overflow: hidden;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		max-height: 300upx;
+		max-height: 300rpx;
 		position: fixed;
 		z-index: 999;
 		top: 0;
 		left: 0;
-		transform: translateY(-100upx);
+		transform: translateY(-100rpx);
+		@include flexCenter;
+		.animationSmall {
+			animation: small 1.1s both;
+		}
+		.refresh {
+			min-width: 50rpx;
+			height: 50rpx;
+			background: #FFFFFF;
+			box-shadow: 0 0 16rpx 0 rgba(0, 0, 0, 0.10);
+			border-radius: 50rpx;
+			@include flexCenter;
+			.refreshWord{
+				width: 150rpx;
+				height: 26rpx;
+				font-size: 24rpx;
+				line-height: 26rpx;
+				text-align: center;
+				border-radius: 26rpx;
+			}
+			.refreshCirle {
+				width: 26rpx;
+				height: 26rpx;
+				border-radius: 50%;
+				display: inline-block;
+				position: relative;
+				border: 6rpx solid black;
+				border-bottom-color: transparent;
+				border-top-color: transparent;
+			}
+			.animation {
+				animation: rotate 1.1s infinite;
+				animation-timing-function: cubic-bezier(0.3, 1.65, 0.7, -0.65);
+			}
+			.true {
+				color: black;
+			}
+			.iconYes {
+				width: 34rpx;
+				height: 34rpx;
+			}
 	}
-
-	.animationSmall {
-		animation: small 1.1s both;
-	}
-
 	@keyframes small {
 		0% {
 			transform: scale(1)
@@ -124,40 +185,7 @@
 			transform: scale(0)
 		}
 	}
-	.refreshWord{
-		width: 150upx;
-		height: 26upx;
-		font-size: 24upx;
-		line-height: 26upx;
-		text-align: center;
-		border-radius: 26upx;
-	}
 
-	.refresh {
-		min-width: 50upx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 50upx;
-		background: #FFFFFF;
-		box-shadow: 0 0 16upx 0 rgba(0, 0, 0, 0.10);
-		border-radius: 50upx;
-	}
-
-	.refreshCirle {
-		width: 26upx;
-		height: 26upx;
-		border-radius: 50%;
-		display: inline-block;
-		position: relative;
-		border: 6upx solid black;
-		border-bottom-color: transparent;
-		border-top-color: transparent;
-	}
-
-	.animation {
-		animation: rotate 1.1s infinite;
-		animation-timing-function: cubic-bezier(0.3, 1.65, 0.7, -0.65);
 	}
 
 	@keyframes rotate {
@@ -170,13 +198,6 @@
 		}
 	}
 
-	.true {
-		color: black;
-	}
-
-	.iconYes {
-		width: 34upx;
-		height: 34upx;
-	}
+	
 </style>
 

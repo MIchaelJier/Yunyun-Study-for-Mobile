@@ -8,8 +8,10 @@
 				<yun-input ref="passwordInput" icon="locked" inputType="password" inputPlaceholder="8-16位密码,区分大小写"></yun-input>
 			</view>
 			<!-- 验证码 --> 
-			<view class="inputoutside">
-				<yun-moveVerify  ref="verifyElement" @result='verifyResult'></yun-moveVerify>
+			<view class="inputoutside" style="margin-bottom: -20px">
+				<!-- <yun-moveVerify  ref="verifyElement" @result='verifyResult'></yun-moveVerify> -->
+				<V5Dialog ref="v5dialog" :host="v5host" :token="v5token"/>
+				<V5Button name="v5" ref="v5buttom" :host="v5host" :token="v5token" @success="verifyResult"/>
 			</view>
 			<view class="inputoutside">
 				<yun-input ref="verifycodeInput" inputType="number" inputPlaceholder="请输入短信验证码" inputWidth="61%" maxLen="6"></yun-input>
@@ -47,30 +49,51 @@
 <script>
 	import { registerProcess,allSituation } from './verifProcess.js'
 	import { condition } from "../../utils/myMath.js"
+	
+	import V5Dialog from '../../components/verify5-ui/V5Dialog'
+	import V5Button from '../../components/verify5-ui/V5Button'
 	export default {
 		data() {
 			return {
 				checkboxFlag: false, //协议认证选择框
 				tipText:'',          //提示信息
-				resultData: {},      //滑动验证返回值
+				
+				v5host:'',           //v5参数
+				v5token:'',          //v5参数
+				resultData: '',      //滑动验证返回值
 				codeExpiration: 0,   //验证码时间
+				
 			}
+		},
+		components: {
+			V5Dialog,
+			V5Button
 		},
 		methods: {
 			//是否 同意协议
 			changeFlag(e){
 				this.checkboxFlag = e.detail.value.length === 1
 			},
-			//滑动验证 校验结果回调函数
+			// 滑动验证模块 校验结果回调函数
 			verifyResult(res){
-			    this.resultData = res;
+			    // this.resultData = res;
+				this.$refs.v5dialog.verify( result => {
+				    if(result.success){
+				       this.resultData = result.verifyId;
+				    }
+				});
+			},
+			// 滑动验证模块 重置
+			verifyInit(){
+				this.$refs.v5buttom.status="READY";
+				this.resultData = '';
 			},
 			//点击 获取验证码
 			getVCode(){
 				console.log('用户点击了获取验证码');
 				// this.$refs.phoneInput.emptyWarn();
 				//allSituation 的前五种情况
-				const all = allSituation.call(this).slice(0,4)
+				const all = allSituation.call(this).slice(0,5)
 				//执行注册验证
 				registerProcess.get(condition(all)).call(this)
 			},
@@ -84,6 +107,17 @@
 			$register(params){
 				this.User.$register(params)
 			}
+		},
+		onLoad() {
+			this.$request({
+			   url: '/test/custom/getV5HostAndToken',
+			   method: 'GET',
+			  }).then(res => {
+					if(res.data.status){
+						this.v5host = res.data.data.host;
+						this.v5token = res.data.data.token
+					}
+			});
 		}
 	}
 </script>

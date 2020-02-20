@@ -203,7 +203,7 @@
 							distance += arr.width;
 						});
 						//偏移量 = 节点到srcoll-view起点长度 - 屏幕宽度/2 + 节点长度/2
-					  that.scrollLeft = distance - that.$ww/2 + data[id].width/2;
+					  that.scrollLeft = distance - that.GlobalData.$windowWidth/2 + data[id].width/2;
 					  that.getLeft()
 					}).exec();
 				})

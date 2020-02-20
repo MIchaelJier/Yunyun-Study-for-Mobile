@@ -65,14 +65,15 @@ Vue.prototype.User = {};
 import { signout } from "./common/signOut.js"
 import { register } from "./common/register.js"
 import { login } from "./common/login/index.js"
+import { getSMScode } from "./common/getSMSCode.js"
 Vue.prototype.User.$signout = signout;
 Vue.prototype.User.$register = register;
 Vue.prototype.User.$login = login;
+Vue.prototype.User.$getSMScode = getSMScode;
 
-//屏幕宽高 $ww $wh
-const { windowWidth, windowHeight } = uni.getSystemInfoSync();	
-Vue.prototype.$ww = windowWidth;
-Vue.prototype.$wh = windowHeight;
+//全局变量
+import * as globalData from "./common/globalData/index.js"
+Vue.prototype.GlobalData = globalData.default
 
 //从缓存中获取用户信息,存入store中
 // store.commit('getUserInfo');

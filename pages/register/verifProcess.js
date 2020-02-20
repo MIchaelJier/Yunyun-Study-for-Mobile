@@ -22,7 +22,7 @@ export const allSituation = function(){
 			!phoneReg.test(phone) ,
 			pwd === '' ,
 			!pwdReg.test(pwd) ,
-			this.resultData === '' || !this.resultData.flag ,
+			this.resultData === '',
 			!vcode === '' ,
 			!vcodeReg.test(vcode)  ,
 			!this.checkboxFlag
@@ -56,35 +56,37 @@ export const registerProcess = new Map([
 				  }],
 				  [8, function(){this.tipText = '请阅读并勾选注册下方的协议'}],
 				  [0, function(type = 0){
-					  const phone = this.$refs.phoneInput.text,
+					  const userName = this.$refs.phoneInput.text,
 							password = this.$refs.passwordInput.text,
-							vcode =  this.$refs.verifycodeInput.text;
+							vcode =  this.$refs.verifycodeInput.text,
+							verifyId = this.resultData;
 					  if(type === 0) {
 						  //提交手机号获取验证码
-						  this.$request({
-						     url: '/getVCode',
-						     method: 'GET',
-						     data:{
-						  	   phone,
-						     }
-						    }).then(res => {
-						  	  if(res.data.status === '200' ? res.data.data.send : false){
-						  		  this.tipText = '';
-						  		  this.codeExpiration = 30;
-						  		  //再次能提交验证码 倒计时
-						  		  let interval = setInterval(() => {
-						  		    --this.codeExpiration;
-						  		  }, 1000)
-						  		  setTimeout(() => {
-						  		     clearInterval(interval)
-						  		     this.codeExpiration = 0
-						  		  }, 30000)
-						  	  }
-						    })
+						  this.User.$getSMScode({
+						  	op:1,
+						  	userName,
+						  	verifyId,
+						  	correctBack: () => {
+						  		this.tipText = '';
+						  		this.codeExpiration = 30;
+						  		//再次能提交验证码 倒计时
+						  		let interval = setInterval(() => {
+						  		  --this.codeExpiration;
+						  		}, 1000)
+						  		setTimeout(() => {
+						  		   clearInterval(interval)
+						  		   this.codeExpiration = 0
+						  		}, 30000)
+						  	},
+						  	wrongBack: () => {
+						  		this.tipText = '手机号或滑动验证错误';
+						  		this.verifyInit()
+						  	}
+						  })
 					  }else if(type === 1){
 						   //提交后台注册
 						   this.$register({
-							   phone,
+							   userName,
 							   password,
 							   vcode,
 							   correctBack: () => {

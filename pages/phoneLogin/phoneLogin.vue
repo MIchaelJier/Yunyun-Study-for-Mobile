@@ -79,7 +79,6 @@
 				resultData: '',
 				v5host:'',
 				v5token:'',
-				
 				codeExpiration: 0,
 			}
 		},
@@ -104,6 +103,11 @@
 				            this.resultData = result.verifyId;
 				        }
 				    });
+			},
+			// 滑动验证模块 重置
+			verifyInit(){
+				this.$refs.v5buttom.status="READY";
+				this.resultData = '';
 			},
 			//获取验证码
 			getVCode(){

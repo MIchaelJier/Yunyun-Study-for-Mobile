@@ -13,6 +13,7 @@
             "path" : "pages/phoneLogin/phoneLogin",
 			"navigationBarTitleText": "登录",
             "style" : {
+				"disableScroll":true,
             	"app-plus":{
             		"titleNView":false
             		}
@@ -21,6 +22,7 @@
 		    "path" : "pages/chooseLogin/chooseLogin",
 			"navigationBarTitleText": "选择登录",
 		    "style" : {
+				"disableScroll":true,
 		    	"app-plus":{
 		    		"titleNView":false
 		    		}
@@ -39,6 +41,7 @@
             "path" : "pages/center/center",
 			"navigationBarTitleText": "账号",
             "style" : {
+				"disableScroll":true,
 				"app-plus":{
 					"titleNView":false
 				}
@@ -140,6 +143,7 @@
             "path" : "pages/register/register",
             "navigationBarTitleText": "注册",
             "style" : {
+				"disableScroll":true,
             	"app-plus":{
             		"titleNView":false
             		}

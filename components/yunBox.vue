@@ -3,7 +3,7 @@
 		<view class="box__main"  @click="enter()">
 			<view  class="boxPost">
 				<view class="postimage" v-if="image">
-					<yun-image :src="image" :mode="mode" :lazy="lazy"></yun-image>
+					<yun-image :src="image" :mode="mode" :lazy="lazy" radius="5"></yun-image>
 				</view>
 			</view>
 			<view class="boxRight"> <!-- :style="{ height: image&&fitImage ? '137rpx':'' }" -->

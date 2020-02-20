@@ -6,14 +6,14 @@
 			circular 
 			indicator-color="rgba(255, 255, 255, 0.6)" 
 			indicator-active-color="#fff" 
-			interval="3000" 
+			interval="5000" 
 			duration="1000" 
 			class="swiperBox"
 			:style="{height:height,width:width}"
 		>
 			<swiper-item v-for="sw in list" :key="sw.id" class="swp">
 				<view class="img">
-					<yun-image :src="sw.picsrc"></yun-image>
+					<yun-image :src="sw.picsrc" :radius="radius"></yun-image>
 				</view>
 			</swiper-item>
 		</swiper>
@@ -42,6 +42,10 @@
 			width: {
 				type: String,
 				default: ''
+			},
+			radius: {
+				type: [String,Number],
+				default: 0
 			}
 		},
 		components: {

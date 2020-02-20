@@ -18,7 +18,7 @@
 			</view>
 			<view class="mainInfo-bottom">
 				<view class="bottom-warp">
-					<yun-swiper :list="swiperList" height="322rpx" width="702rpx"></yun-swiper>
+					<yun-swiper :list="swiperList" height="322rpx" width="702rpx" radius="10r"></yun-swiper>
 					<!-- <swiper indicator-dots autoplay indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#fff" 
 							interval="3000" duration="1000" class="warp-swiper">
 							<swiper-item v-for="item in swiperList" :key="item.id">

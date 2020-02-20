@@ -49,6 +49,8 @@
 				duration: 0.2,
 				lineStyle: {},
 				lineColor: '#2CC17B',
+				
+				afterRouterAni: false
 			};
 		},
 		props:{
@@ -87,12 +89,14 @@
 			 getLeft(){
 				uni.createSelectorQuery().in(this).select('.active').boundingClientRect().exec((res) => {
 					// console.log(res[0].left);
-					const left = res[0].left + res[0].width / 2
-					this.lineStyle = {
-						width: `${res[0].width}px`,
-						transform: `translateX(${left}px) translateX(-50%)`,
-						transitionDuration: `${this.duration}s`
-					};
+					if(this.afterRouterAni){
+						const left = res[0].left + res[0].width / 2
+						this.lineStyle = {
+							width: `${res[0].width}px`,
+							transform: `translateX(${left}px) translateX(-50%)`,
+							transitionDuration: `${this.duration}s`
+						}
+					}
 				});
 			 },
 			 swiperHeight(){
@@ -113,8 +117,9 @@
 		},
 		mounted() {
 			setTimeout( () => {
+				this.afterRouterAni = true;
 				this.getLeft();
-			},300)
+			},this.GlobalData.$RouterAniTime)
 			// 300是 路由动画时间
 		},
 		watch:{

@@ -59,16 +59,16 @@ export const loginProcess = new Map([
 	}],
 	[0, function(type = 1){ 
 		let that = this,
-			username = this.$refs.phoneInput.text,
+			userName = this.$refs.phoneInput.text,
 		    password = this.$refs.passwordInput ? this.$refs.passwordInput.text : '',
 			code = this.$refs.verifycodeInput ? this.$refs.verifycodeInput.text : '',
 			verifyId = this.resultData,
 			grant_type = this.nowWay === 0 ? 'password' : 'sms';
 		if(type === 1){
 			//输入正确 请求登录接口 判断账号密码是否正确
-			that.$login({
+			that.User.$login({
 				loginData: {
-					username,
+					userName,
 					password,
 					code,
 					verifyId,
@@ -85,27 +85,27 @@ export const loginProcess = new Map([
 			})
 		}else if(type === 0){
 			//提交手机号获取验证码
-			this.$request({
-			   url: '/getVCode',
-			   method: 'GET',
-			   data:{
-				   op:0,
-				   phone:username
-			   }
-			  }).then(res => {
-				  if(res.data.status === '200' ? res.data.data.send : false){
-					  this.tipText = '';
-					  this.codeExpiration = 30;
-					  //再次能提交验证码 倒计时
-					  let interval = setInterval(() => {
-					    --this.codeExpiration;
-					  }, 1000)
-					  setTimeout(() => {
-					     clearInterval(interval)
-					     this.codeExpiration = 0
-					  }, 30000)
-				  }
-			  })
+			that.User.$getSMScode({
+				op:0,
+				userName,
+				verifyId,
+				correctBack: () => {
+					this.tipText = '';
+					this.codeExpiration = 30;
+					//再次能提交验证码 倒计时
+					let interval = setInterval(() => {
+					  --this.codeExpiration;
+					}, 1000)
+					setTimeout(() => {
+					   clearInterval(interval)
+					   this.codeExpiration = 0
+					}, 30000)
+				},
+				wrongBack: () => {
+					that.tipText = '手机号或滑动验证错误';
+					that.verifyInit()
+				}
+			})
 		}
 	}]
 ])

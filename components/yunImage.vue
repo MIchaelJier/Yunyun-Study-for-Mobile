@@ -1,7 +1,7 @@
 <template>
 	<view class="yun-image">
 		<image  :src="src"
-				:style="{opacity: show ? '1': '0',transition:`opacity ${delay}s`}"
+				:style="{opacity: show ? '1': '0',transition:`opacity ${delay}s`,borderRadius:radius + 'px'}"
 				:mode="mode"
 				@load="showitem"
 				class="yun-image"
@@ -32,6 +32,10 @@
 			lazy: {
 				type: Boolean,
 				default: false
+			},
+			radius: {
+				type: [String,Number],
+				default: 0
 			}
 		},
 		methods:{

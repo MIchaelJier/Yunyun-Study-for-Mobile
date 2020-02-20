@@ -6,9 +6,8 @@
 ```JavaScript  
 ├─common                        // 公共组件
 │  ├─request                    // uni.request封装
-│  ├─login                      // 用户 登录 动作封装
-│  ├─register                   // 用户 注册 动作封装
-│  └─sighOut                    // 用户 注销 动作封装
+│  ├─User                       // 用户动作(登录、注册、获取验证码、注销)封装
+│  └─globalData                 // 全局函数封装
 │ 
 ├─components                    // 公共组件
 │  ├─page-animation             // H5路由动画
