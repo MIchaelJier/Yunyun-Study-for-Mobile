@@ -2,19 +2,30 @@
 	<view class="page">
 		<view class="editAccount-box">
 			<view class="box-acount">
-				<image :src="userInfo.haedImage" mode="" class="account-img"></image>
-				<text style="flex:1">{{ userInfo.nikename }}</text>
+				<text class="account-itemName">头像</text>
+				<view style="flex: 1;">
+					<image :src="userInfo.haedImage" mode="" class="account-img" style="float: right;"></image>
+				</view>
+				<text class="box-edit" @tap="editHead">选取</text>
+			</view>
+			<view class="box-acount">
+				<text class="account-itemName">昵称</text>
+				<text style="flex:1;text-align: right;">{{ userInfo.nikename }}</text>
 				<text class="box-edit" @tap="tapEdit('input')">编辑</text>
 			</view>
 		</view>
+			
 		<!-- 退出登录按钮 -->
 		<view class="quitBtn" @tap="tapEdit('default')">退出登录</view>
 		<!-- 拟态框 -->
 		<yun-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" ref="myModel"></yun-modal>
+		<!-- 图片剪裁 -->
+		<yun-image-cutter @ok="onok" @cancel="oncancle" :url="cutterUrl" :fixed="false"  :maxWidth="500" :maxHeight="500"></yun-image-cutter>
 	</view>
 </template>
 
 <script>
+	import yunImageCutter from "@/components/yunImageCutter.vue";
 	export default {
 		data() {
 			return {
@@ -29,10 +40,48 @@
 						{content:'',type:'text',placeholder:'请输入新昵称',borderColor:'#ddd',focus:true},
 					],
 					tip:{main:'',color:'red'}
-				}
+				},
+				
+				cutterUrl:''
 			}
 		},
+		components: {
+			yunImageCutter
+		},
 		methods: {
+			// 选择图片并剪裁
+			editHead(){
+				uni.chooseImage({
+				    count: 1, 
+				    sizeType: ['compressed'], 
+				    sourceType: ['album'], 
+				    success: (res) => {
+				        this.cutterUrl = res.tempFilePaths[0]
+				    }
+				});
+			},
+			onok(ev) {
+				this.userInfo.haedImage = ev.path;
+				this.cutterUrl = "";
+				this.httpHead(ev.path)
+			},
+			oncancle() {// cutterUrl设置为空，隐藏控件
+				this.cutterUrl = "";
+			},
+			httpHead(path){
+				this.$request({
+					isFile: true,
+					url: '/changeNike',
+					filePath: path,
+					name: 'file',
+					formData: {
+					    'user': 'test'
+					}
+				}).then(res => {
+					
+				})
+			},
+			// 编辑昵称
 			tapEdit(type) {
 				this.type = type
 				this.value = !this.value;

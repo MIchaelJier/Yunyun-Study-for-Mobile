@@ -19,7 +19,6 @@
 					<view class="inputoutside">
 						<!-- <yun-moveVerify @result='verifyResult' ref="verifyElement"></yun-moveVerify> -->
 						<V5Button name="v5" ref="v5buttom" :host="v5host" :token="v5token" @success="verifyResult"/>
-						<V5Dialog ref="v5dialog" :host="v5host" :token="v5token"/>
 					</view>
 					<view class="inputoutside">
 						<yun-input ref="verifycodeInput" inputType="number" inputPlaceholder="请输入短信验证码" inputWidth="61%" maxLen="6"></yun-input>
@@ -64,7 +63,6 @@
 	import { loginProcess,allSituation } from './verifProcess.js'
 	import { condition } from "../../utils/myMath.js"
 	
-	import V5Dialog from '../../components/verify5-ui/V5Dialog'
 	import V5Button from '../../components/verify5-ui/V5Button'
 	export default {
 		data() {
@@ -83,7 +81,6 @@
 			}
 		},
 		components: {
-			V5Dialog,
 			V5Button
 		},
 		methods: {
@@ -97,12 +94,7 @@
 			},
 			// 滑动验证模块 校验结果回调函数
 			verifyResult(res){
-			    // this.resultData = res;
-				this.$refs.v5dialog.verify( result => {
-				        if(result.success){
-				            this.resultData = result.verifyId;
-				        }
-				    });
+				this.resultData = res;
 			},
 			// 滑动验证模块 重置
 			verifyInit(){

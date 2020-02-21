@@ -11,15 +11,19 @@ import { request } from './request/index.js'
 export const register = params => {
 	//提交后台注册
 	return request({
-	   url: '/register',
+	   url: '/test/custom/register',
 	   method: 'POST',
+	   header: {
+	       "Content-Type": "application/x-www-form-urlencoded"
+	   }, 
 	   data:{
-		   phone : params.phone,
+		   userName : params.userName,
 		   password : params.password ,
-		   vcode : params.vcode
+		   code : params.vcode,
+		   verifyId : params.verifyId 
 	   }
 	  }).then(res => {
-		  if(res.data.status === '200' ? res.data.data.success: false){
+		  if(res.data.status){
 			params.correctBack();
 			// this.tipText = '';
 			uni.showToast({
@@ -33,7 +37,7 @@ export const register = params => {
 				});
 			}, 1000);
 		  }else{
-			params.wrongBack();
+			params.wrongBack(res.data.msg);
 			// this.tipText = res.data.data.tip;
 		}
 	  })

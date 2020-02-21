@@ -78,10 +78,10 @@ export const registerProcess = new Map([
 						  		   this.codeExpiration = 0
 						  		}, 30000)
 						  	},
-						  	wrongBack: () => {
-						  		this.tipText = '手机号或滑动验证错误';
-						  		this.verifyInit()
-						  	}
+							wrongBack: (msg) => {
+								this.tipText = msg;
+								this.verifyInit()
+							}
 						  })
 					  }else if(type === 1){
 						   //提交后台注册
@@ -89,11 +89,12 @@ export const registerProcess = new Map([
 							   userName,
 							   password,
 							   vcode,
+							   verifyId,
 							   correctBack: () => {
 								   this.tipText = ''
 							   },
-							   wrongBack: () => {
-								   this.tipText = res.data.data.tip
+							   wrongBack: (res) => {
+								   this.tipText = res
 							   }
 						   })
 					  }

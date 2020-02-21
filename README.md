@@ -5,7 +5,7 @@
 ### 项目目录  
 ```JavaScript  
 ├─common                        // 公共组件
-│  ├─request                    // uni.request封装
+│  ├─request                    // 请求封装
 │  ├─User                       // 用户动作(登录、注册、获取验证码、注销)封装
 │  └─globalData                 // 全局函数封装
 │ 
@@ -97,7 +97,7 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
  6. 详情页 (对已购买者的判断 x)
  7. 选择登录页（第三方登陆 x）
  8. 账号密码登录页 
- 9. 用户信息页 (只有对昵称的修改)
+ 9. 用户信息页
  10. 我的订单
  11. 我的优惠券
  12. 我的购物车

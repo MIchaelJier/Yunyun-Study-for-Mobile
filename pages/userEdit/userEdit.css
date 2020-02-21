@@ -1,9 +1,9 @@
 .page{
 	background: #f4f4f4;
 }
-.editAccount-box{
+/* .editAccount-box{
 	
-}
+} */
 .box-acount{
 	height: 80rpx;
 	padding: 40rpx 30rpx;
@@ -12,16 +12,25 @@
 	font-size: 16px;
 	color: #333740;
 	background: #fff;
+	border-bottom: 1px dashed #E8E9E9;
+}
+.box-acount:last-child  {
+	border-bottom: none;
+}
+.account-itemName {
+	margin-right: 30rpx;
+	font-size: 15px;
+	color: #999;
 }
 .account-img {
 	width: 100rpx;
 	height: 100rpx;
-	margin-right: 30rpx;
 	border-radius: 50%;
 }
 .box-edit {
 	font-size: 13px;
 	color: #36B378;
+	margin-left: 40rpx;
 }
 .quitBtn {
 	position: fixed;

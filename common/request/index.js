@@ -1,9 +1,12 @@
+/**
+ * 请求封装
+ * @param {Boolean} showLoading  loading遮罩层 
+ * @param {Boolean} isFile      是否上传文件
+ * @param {string}  url          '/test/...'表示请求头携带token
+ * @param 其他参数参考 uni.request 和 uni.uploadFile
+ * return Promise
+ */
 export const request = (params) => {
-	/*
-	* showLoading loading遮罩层 
-	* url:'/my/...' 表示请求头携带token
-	* 其他参数参考uni.request
-	*/
    // 个人服务器上的模拟接口
    const mockUrl = "http://47.101.132.224:9000/mock/11"; 
    // 测试接口
@@ -28,10 +31,10 @@ export const request = (params) => {
 	 		mask: true
 	 	})
 	 }
+	 
 	return new Promise((resolve,reject) => {
-		uni.request({
+		const sendParams= {
 			...params,
-			header:header,
 			url:baseUrl + params.url,
 			success:(res) => {
 				params.showLoading ? uni.hideLoading() : '' ;
@@ -41,6 +44,12 @@ export const request = (params) => {
 			fail:(err) => {
 				reject(err)
 			} 
-		})
+		}
+		
+		if(params.isFile){
+			uni.uploadFile(sendParams)
+		}else{
+			uni.request(sendParams)
+		}
 	})
 }

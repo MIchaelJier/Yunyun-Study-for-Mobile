@@ -101,8 +101,8 @@ export const loginProcess = new Map([
 					   this.codeExpiration = 0
 					}, 30000)
 				},
-				wrongBack: () => {
-					that.tipText = '手机号或滑动验证错误';
+				wrongBack: (msg) => {
+					that.tipText = msg;
 					that.verifyInit()
 				}
 			})

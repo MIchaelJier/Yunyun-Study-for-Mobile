@@ -1,4 +1,5 @@
-import { request } from './request/index.js'
+import { requestwithStatus } from './request/requestwithStatus.js'
+const request = requestwithStatus;
 /**
  * 发短信
  * @param {Number} op 操作 0：登录 1：注册 2 设置密码 3常规验证
@@ -35,19 +36,12 @@ export const getSMScode = params => {
 	  
 	  verifyisTrue
 	  .then(res => {
-		  if(res.data.status){	
-			 return sendSMS
-		  }
-		  else{
-		  	params.wrongBack();
-		  }
+		return sendSMS
 	  })
 	  .then(res => {
-		  if(res ? res.data.status : false){
-		  	 params.correctBack();
-		  }
-		  else{
-		  	params.wrongBack();
-		  }
+		 params.correctBack();
+	  })
+	  .catch(err => {
+		  params.wrongBack(err);
 	  })
 }
