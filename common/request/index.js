@@ -18,8 +18,10 @@ export const request = (params) => {
 	   baseUrl = mockUrl;
 	   
 	// console.log(params.url);
+	//
 	if(params.url.includes("/test/")){
-		header["Authorization"] = uni.getStorageSync("token");
+		header["Authorization"] = 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJxcSI6bnVsbCwidXNlcl9uYW1lIjoiMTg4NTg0ODY5NTkiLCJuaWNrTmFtZSI6IuWCqOW3suWJjSIsInVzZXJObyI6MTIzMDQ5NzU2NzI0MzExMjQ0OCwic2V4IjpudWxsLCJtb2JpbGUiOm51bGwsIndlY2hhdCI6bnVsbCwidXNlck5hbWUiOiIxODg1ODQ4Njk1OSIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiLmma7pgJrnlKjmiLcifV0sImNsaWVudF9pZCI6Inl1bi1jbGllbnQiLCJ1c2VyX2F2YXRhcl91cmwiOiIiLCJhY3R1YWxOYW1lIjpudWxsLCJhdWQiOlsieXVuLWNsaWVudCJdLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNTgyMzIxMjIxLCJqdGkiOiIxOGI3ZDU5My0wYjdmLTQ1M2EtYjk3NS1lMWUyMjY3NjVkZTEiLCJpbnRyb2R1Y3Rpb24iOm51bGwsImVtYWlsIjpudWxsfQ.LqTihj87wPGBlMW0vMboyqyAgZ10DjWEj7yq_XuRVp4lKRttzkYNUBiQszhOJeydmdYRIZwlp7qkDm0dHfEbwyKpuHJGSdUsVgrmVI8BM6csgSn2LF5ab-xKohIP9VjwGnHv_hhmutvjt1m32UcBxkgyw1cTP4p9-MgVfuqGtOwEzUqL_WV0pLFCcX5wiH4QI3M7t7yGsLrcfPez0WLlfi-tbmvyqgSSm8QveSJhPDQgq9L1xBgG12B-I39V1pmoGxeAg-U-u4e9klHQRP6iDfrTiDAxTmFWO_RDFfiOIwTqxp2icZAihmMa7aIiXDTXdWd7flDIVS_rUdfRGS_6mA'; 
+		//uni.getStorageSync("token");
 		params.url = params.url.substr(5,);
 		baseUrl = testUrl;
 	}
@@ -35,6 +37,7 @@ export const request = (params) => {
 	return new Promise((resolve,reject) => {
 		const sendParams= {
 			...params,
+			header,
 			url:baseUrl + params.url,
 			success:(res) => {
 				params.showLoading ? uni.hideLoading() : '' ;

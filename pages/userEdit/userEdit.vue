@@ -20,12 +20,13 @@
 		<!-- 拟态框 -->
 		<yun-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" ref="myModel"></yun-modal>
 		<!-- 图片剪裁 -->
-		<yun-image-cutter @ok="onok" @cancel="oncancle" :url="cutterUrl" :fixed="false"  :maxWidth="500" :maxHeight="500"></yun-image-cutter>
+		<yun-image-cutter @ok="onok" @cancel="oncancle" :blob="false" :url="cutterUrl" :fixed="false"  :maxWidth="500" :maxHeight="500"></yun-image-cutter>
 	</view>
 </template>
 
 <script>
 	import yunImageCutter from "@/components/yunImageCutter.vue";
+	import { wxBase64,appBase64 } from "@/utils/fileType.js"
 	export default {
 		data() {
 			return {
@@ -56,7 +57,8 @@
 				    sizeType: ['compressed'], 
 				    sourceType: ['album'], 
 				    success: (res) => {
-				        this.cutterUrl = res.tempFilePaths[0]
+				        this.cutterUrl = res.tempFilePaths[0];
+						console.log('cutterUrl:' + res.tempFilePaths[0])
 				    }
 				});
 			},
@@ -64,18 +66,31 @@
 				this.userInfo.haedImage = ev.path;
 				this.cutterUrl = "";
 				this.httpHead(ev.path)
+				// #ifdef APP-PLUS
+				appBase64(ev.path).then(res => {
+					console.log(res)
+				})
+				// #endif
+				// #ifdef MP-WEIXIN
+				wxBase64(ev.path).then(res => {
+					console.log(res)
+				})
+				// #endif
+				// this.httpHead(ev.path)
 			},
 			oncancle() {// cutterUrl设置为空，隐藏控件
 				this.cutterUrl = "";
 			},
 			httpHead(path){
 				this.$request({
-					isFile: true,
-					url: '/changeNike',
-					filePath: path,
-					name: 'file',
-					formData: {
-					    'user': 'test'
+					url: '/test/api/user/setUserProfile',
+					method: 'POST',
+					header: {
+					    "Content-Type": "application/x-www-form-urlencoded"
+					}, 
+					data:{
+						base64Url: path,
+						nikeName: 'Michael'
 					}
 				}).then(res => {
 					
