@@ -98,7 +98,7 @@
         //        }
         "router" : {
             "mode" : "hash",
-            "base" : "/yun/"
+            "base" : ""
         },
         "template" : "index.html",
         "title" : "芸云课堂",

@@ -31,18 +31,29 @@
  * */
  export const wxBase64 = path => {
 				  return new Promise((resolve, reject) => {
-					  uni.request({
-					       url:path,
-					       responseType: 'arraybuffer', 
-					       success: res => {
-					             let base64 = wx.arrayBufferToBase64(res.data); 
-					             base64　= 'data:image/jpeg;base64,' + base64　
-					             resolve(base64); 
-					           },
-							fail: err => {
-								 reject(err); 
-							}
-					     })
+					  // uni.request({ //真机上失效
+					  //      url:path,
+					  //      responseType: 'arraybuffer', 
+					  //      success: res => {
+					  //            let base64 = wx.arrayBufferToBase64(res.data); 
+					  //            base64　= 'data:image/png;base64,' + base64　
+					  //            resolve(base64); 
+					  //          },
+					  //        fail: err => {
+					  // 	        reject(err); 
+					  //          }
+					  //    })
+					  uni.getFileSystemManager().readFile({
+					      filePath: path, 
+					      encoding: 'base64',
+					      success: res => { 
+					          let base64 = 'data:image/jpeg;base64,' + res.data;
+					          resolve(base64); 
+					      },
+						  fail: err => {
+						  	 reject(err); 
+						  }
+					  })
 				  })
 			}
 				

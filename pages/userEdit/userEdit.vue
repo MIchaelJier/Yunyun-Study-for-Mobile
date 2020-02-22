@@ -20,7 +20,7 @@
 		<!-- 拟态框 -->
 		<yun-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" ref="myModel"></yun-modal>
 		<!-- 图片剪裁 -->
-		<yun-image-cutter @ok="onok" @cancel="oncancle" :blob="false" :url="cutterUrl" :fixed="false"  :maxWidth="500" :maxHeight="500"></yun-image-cutter>
+		<yun-image-cutter @ok="onok" @cancel="oncancle" :blob="false" :url="cutterUrl" :fixed="false"  :maxWidth="200" :maxHeight="200"></yun-image-cutter>
 	</view>
 </template>
 
@@ -58,43 +58,57 @@
 				    sourceType: ['album'], 
 				    success: (res) => {
 				        this.cutterUrl = res.tempFilePaths[0];
-						console.log('cutterUrl:' + res.tempFilePaths[0])
+						console.log('cutterUrl:' + res.tempFilePaths[0]);
 				    }
 				});
 			},
 			onok(ev) {
-				this.userInfo.haedImage = ev.path;
 				this.cutterUrl = "";
-				this.httpHead(ev.path)
+				uni.showToast({
+				    title: '修改中',
+					icon:'loading',
+					mask:true
+				});
+				// uni.showToast({title:'修改中',icon:'none',duration:1000});
+				// #ifdef H5
+				this.changeHead(
+					this.httpUserInfo('base64Url',ev.path)
+				)
+				// #endif
 				// #ifdef APP-PLUS
-				appBase64(ev.path).then(res => {
-					console.log(res)
-				})
+				this.changeHead(
+					appBase64(ev.path).then(res => {
+						this.httpUserInfo('base64Url',res)
+					})
+				)
 				// #endif
 				// #ifdef MP-WEIXIN
-				wxBase64(ev.path).then(res => {
-					console.log(res)
-				})
+				this.changeHead(
+					wxBase64(ev.path).then(res => {
+						return this.httpUserInfo('base64Url',res)
+					})
+				)
 				// #endif
-				// this.httpHead(ev.path)
+			},
+			changeHead(promise){
+				promise.then(res => {
+					//图片地址 加上时间戳，防止缓存
+					const userAvatarUrl= `${res.data.data.userAvatarUrl}?${new Date().getTime().toString()}`
+					this.userInfo.haedImage = userAvatarUrl;
+					this.changeStorage('haedImage', userAvatarUrl );
+					uni.hideToast();
+					uni.showToast({title:'修改成功',icon:'none',duration:1000});
+				}).catch(err => {
+					console.log(err)
+				})
+			},
+			//修改 vuex和localStorage的值
+			changeStorage(key,value){
+				this.$store.commit('common/changeUserInfoAttr',{value,key});
+				uni.setStorageSync('userInfo', this.$store.getters['common/allInfo']);
 			},
 			oncancle() {// cutterUrl设置为空，隐藏控件
 				this.cutterUrl = "";
-			},
-			httpHead(path){
-				this.$request({
-					url: '/test/api/user/setUserProfile',
-					method: 'POST',
-					header: {
-					    "Content-Type": "application/x-www-form-urlencoded"
-					}, 
-					data:{
-						base64Url: path,
-						nikeName: 'Michael'
-					}
-				}).then(res => {
-					
-				})
 			},
 			// 编辑昵称
 			tapEdit(type) {
@@ -121,19 +135,13 @@
 						if(this.$refs.myModel.mData.tip.main === ''){
 							let newNikename = this.$refs.myModel.mData.content[0].content;
 							console.log(newNikename);
-							this.$request({
-							   url: '/changeNike',
-							   method: 'POST',
-							   data:{
-								   newNikename,
-							   }
-							  }).then(res => {
+							this.httpUserInfo('nickName',newNikename)
+							  .then(res => {
 								  //更改页面 、缓存 和 vuex的保存值
 								  this.userInfo.nikename = newNikename;
-								  this.$store.commit('common/changeUserInfoAttr',{value:newNikename,key:'nikename'}); 
-								  uni.setStorageSync('userInfo', this.$store.getters['common/allInfo']);
+								  this.changeStorage('nickname',newNikename);
 								  //更改成功 toast提示
-								  uni.showToast({title:res.data.data.tip,icon:'none',duration:1000});
+								  uni.showToast({title:'修改成功',icon:'none',duration:1000});
 							  })
 						}
 						break;
@@ -141,6 +149,19 @@
 			},
 			cancel(){
 				console.log('用户点击取消');
+			},
+			// 单个 修改用户信息http请求
+			httpUserInfo(dataName,dataInner){
+				return this.$request({
+					url: '/test/api/user/setUserProfile',
+					method: 'POST',
+					header: {
+					    "Content-Type": "application/x-www-form-urlencoded"
+					}, 
+					data:{
+						[dataName]: dataInner,
+					}
+				})
 			},
 		},
 		onShow() {
