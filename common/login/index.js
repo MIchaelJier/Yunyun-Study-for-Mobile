@@ -11,12 +11,15 @@ import { formatTime } from '../../utils/timeFormat.js'
  */
 export const login = params => {
 	return request({
-	   url: '/login',
-	   method: 'GET',
-	   data:params.loginData
+	   url: '/loco/user/login',
+	   method: 'POST',
+	   data:JSON.stringify(params.loginData),
+	   header:{
+		   'Content-Type':'application/json'
+	   },
+	   showLoading:true,
 	  }).then(res => { 
-			if(res.data.status === '200'){
-				if(res.data.data['truepass']){
+			if(res.data.status ? res.data.data['truepass'] :false){
 					let userInfo = res.data.data;
 					params.correctBack();
 					// that.tipText = ''
@@ -49,9 +52,7 @@ export const login = params => {
 						}, 1000);
 					})
 				}else{
-					params.wrongBack();
-					// that.tipText = '账号或密码错误'
-				}
+				params.wrongBack();
 			}
 	})
 }

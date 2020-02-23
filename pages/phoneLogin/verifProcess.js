@@ -15,7 +15,7 @@ export const allSituation = function(){
 		  pwd = this.$refs.passwordInput 
 					? this.$refs.passwordInput.text 
 					: '',
-		  pwdReg = /^(\w){8,16}$/, //8-16位密码
+		  pwdReg = /^(\w){6,16}$/, //8-16位密码
 		  vcode = this.$refs.verifycodeInput 
 				    ? this.$refs.verifycodeInput.text
 					: '',
@@ -68,7 +68,7 @@ export const loginProcess = new Map([
 			//输入正确 请求登录接口 判断账号密码是否正确
 			that.User.$login({
 				loginData: {
-					userName,
+					username:userName,
 					password,
 					code,
 					verifyId,

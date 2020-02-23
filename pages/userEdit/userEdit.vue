@@ -64,11 +64,6 @@
 			},
 			onok(ev) {
 				this.cutterUrl = "";
-				uni.showToast({
-				    title: '修改中',
-					icon:'loading',
-					mask:true
-				});
 				// uni.showToast({title:'修改中',icon:'none',duration:1000});
 				// #ifdef H5
 				this.changeHead(
@@ -139,7 +134,7 @@
 							  .then(res => {
 								  //更改页面 、缓存 和 vuex的保存值
 								  this.userInfo.nikename = newNikename;
-								  this.changeStorage('nickname',newNikename);
+								  this.changeStorage('nikename',newNikename);
 								  //更改成功 toast提示
 								  uni.showToast({title:'修改成功',icon:'none',duration:1000});
 							  })
@@ -153,14 +148,15 @@
 			// 单个 修改用户信息http请求
 			httpUserInfo(dataName,dataInner){
 				return this.$request({
-					url: '/test/api/user/setUserProfile',
+					url: '/loco/user/setUserProfile',
 					method: 'POST',
 					header: {
 					    "Content-Type": "application/x-www-form-urlencoded"
 					}, 
 					data:{
 						[dataName]: dataInner,
-					}
+					},
+					showLoading:true
 				})
 			},
 		},

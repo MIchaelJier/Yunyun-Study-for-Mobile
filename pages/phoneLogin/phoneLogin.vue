@@ -154,7 +154,7 @@
 		},
 		onLoad() {
 			this.$request({
-			   url: '/test/custom/getV5HostAndToken',
+			   url: '/loco/user/getV5HostAndToken',
 			   method: 'GET',
 			  }).then(res => {
 					if(res.data.status){

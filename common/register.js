@@ -11,7 +11,7 @@ import { request } from './request/index.js'
 export const register = params => {
 	//提交后台注册
 	return request({
-	   url: '/test/custom/register',
+	   url: '/loco/user/register',
 	   method: 'POST',
 	   header: {
 	       "Content-Type": "application/x-www-form-urlencoded"
