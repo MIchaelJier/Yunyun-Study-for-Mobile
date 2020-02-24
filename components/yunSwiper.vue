@@ -13,7 +13,7 @@
 		>
 			<swiper-item v-for="sw in list" :key="sw.id" class="swp">
 				<view class="img">
-					<yun-image :src="sw.picsrc" :radius="radius"></yun-image>
+					<yun-image :src="sw.picsrc" :radius="radius" mode="scaleToFill"></yun-image>
 				</view>
 			</swiper-item>
 		</swiper>

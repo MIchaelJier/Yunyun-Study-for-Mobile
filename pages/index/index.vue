@@ -53,9 +53,9 @@
 		methods: {
 			AllfirstRequest(){
 				return Promise.all([
-						this.firstRequest('/getSwiperPic','swiperList'), 
+						this.firstRequest('/loco/index/advList','swiperList'), 
 						this.firstRequest('/getClassList','classList'), 
-						this.firstRequest('/getTheme','themeList')
+						this.firstRequest('/loco/index/list','themeList')
 					])
 			},
 			//二次封装request
@@ -65,8 +65,11 @@
 					that.$request({
 					   url: u,
 					   method: 'GET',
+					   data:{
+						   plat:1
+					   }
 					  }).then(res => {
-							if(res.data.status === '200'){
+							if(res.data.status){
 								that[d] = res.data.data;
 								resolve(res.data.data);
 							}

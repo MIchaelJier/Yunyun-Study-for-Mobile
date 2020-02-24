@@ -39,7 +39,7 @@
 									  </view>
 									  <view class="themes-item-content-price">
 									  	<text class="price-red" v-if="co.nprice">￥{{ co.nprice }}</text>
-									  	<text class="price-grey" v-if="co.oprice">￥{{ co.oprice }}</text>
+									  	<text :class="co.nprice && co.nprice !== '' ? 'price-grey' : 'price-red'" v-if="co.oprice">￥{{ co.oprice }}</text>
 									  </view>
 								</view>
 								<!-- co.size ===  2   一行一个-->
@@ -51,7 +51,7 @@
 											  <view>
 												  <view class="themes-item-content-num sb">
 													  <text>共{{ co.chapterNum }}课时</text>
-													  <text class="price-grey" v-if="co.oprice">￥{{ co.oprice }}</text>
+													  <text :class="co.nprice && co.nprice !== '' ? 'price-grey' : 'price-red'" v-if="co.oprice">￥{{ co.oprice }}</text>
 												  </view>
 												  <view class="themes-item-content-num sb">
 													  <view>

@@ -76,7 +76,7 @@
 											<view v-if="item.oprice == 0">免费</view>
 											<view v-else>¥{{ item.oprice }}</view>
 										</view>
-										<view class="item-down-n" v-if="item.oprice != 0">¥{{ item.nprice }}</view>
+										<view class="item-down-n" v-if="item.oprice != 0 && item.nprice != ''">¥{{ item.nprice }}</view>
 									</view>
 									<view class="item-vip" v-if="item.vipprice && item.vipprice != ''">
 										<view class="item-vip-icon">vip会员</view>
@@ -104,8 +104,8 @@
 				searchAssArr:'',
 				showResult:false,
 				searchText:'搜索',
-				selectItems:[{id:0,name:'全部'},{id:1,name:'免费'},{id:2,name:'付费'},{id:3,name:'只看VIP会员'}],
-				sortItems:[{id:0,name:'好评'},{id:1,name:'畅销'},{id:2,name:'全部'}],
+				selectItems:[{id:0,name:'全部'},{id:1,name:'免费'},{id:2,name:'付费'}], //,{id:3,name:'只看VIP会员'}
+				sortItems:[{id:0,name:'全部'},{id:1,name:'推荐'},{id:2,name:'畅销'},{id:3,name:'好课'}],
 				showSelect:false,
 				showSort:false,
 				searchSum:0,
@@ -116,7 +116,7 @@
 				// 加载更多
 				iconSize:18,
 				more:'more',
-				star:0,
+				star:0, //页数
 				add:7,
 			}
 		},
@@ -193,26 +193,29 @@
 			},
 			// 请求搜索结果
 			getSearchResult(){
-				const that = this,
-					  select = that.$refs['select'].nowSelect,
-					  sort =  that.$refs['sort'].nowSelect,
-					  input = that.inputValue,
-					  add = that.add,
-					  star = that.star;
+				const that = this, 
+					  priceType = that.$refs['select'].nowSelect,
+					  orderType =  that.$refs['sort'].nowSelect,
+					  key = that.inputValue,
+					  size = that.add,
+					  current = that.star + 1;
 				return that.$request({
-				   url: '/getSearchResult',
-				   method: 'GET',
-				   data: { select,sort,input,star,add }
+				   url: '/loco/search/getSearchResult',
+				   method: 'POST',
+				   header:{
+				   		   'Content-Type':'application/json'
+				   },
+				   data: JSON.stringify({ priceType,orderType,key,size,current })
 				  })
 			},
-			getSearchResultFrist(){
+			getSearchResultFrist(){ 
 				this.showSort = this.showSelect  = false;
 				this.star = 0;
 				this.more = 'more';
 				return this.getSearchResult().then(res => {
 					this.searchSum = res.data.data.searchsum;
 					let list = res.data.data.searchresult;
-					this.star += this.add;
+					this.star += 1;
 					list.length === this.add ? this.more = 'more' :  this.more = 'noMore';
 					this.searchResultArr = list;
 					this.initDone = true;
@@ -237,10 +240,10 @@
 			if(this.more !== 'noMore') {
 				this.more = 'loading';
 				this.getSearchResult().then(res => {
-							if(res.data.status === '200'){
+							if(res.data.status){
 								setTimeout(() => {
 									let addlist = res.data.data.searchresult;
-									this.star += this.add;
+									this.star += 1;
 									addlist.length === this.add ? this.more = 'more' :  this.more = 'noMore'
 									this.searchResultArr.push(...addlist);
 								}, 500)
