@@ -1,8 +1,8 @@
 const $RouterAniTime = 300;
-const { $windowWidth, $windowHeight } = uni.getSystemInfoSync();	
+const { windowWidth, windowHeight } = uni.getSystemInfoSync();	
 
 export default {  
     $RouterAniTime,
-	$windowWidth, 
-	$windowHeight
+	$windowWidth: windowWidth, 
+	$windowHeight: windowHeight
 }

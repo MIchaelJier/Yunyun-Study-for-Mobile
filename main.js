@@ -73,7 +73,7 @@ Vue.prototype.User.$getSMScode = getSMScode;
 
 //全局变量
 import * as globalData from "./common/globalData/index.js"
-Vue.prototype.GlobalData = globalData.default
+Vue.prototype.GlobalData = globalData.default 
 
 //从缓存中获取用户信息,存入store中
 // store.commit('getUserInfo');

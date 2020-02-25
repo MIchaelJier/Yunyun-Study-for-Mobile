@@ -45,18 +45,25 @@
 					if(id === 0){
 						
 					}else{
-						return `/pages/classification/classification?class=${url - 1}`
+						return `/pages/classification/classification?class=${url}`
 					}
 				}
 			},
 		},
 		methods: {
 			AllfirstRequest(){
+				uni.showLoading({
+					title: '加载中',
+					mask: true
+				})
 				return Promise.all([
 						this.firstRequest('/loco/index/advList','swiperList'), 
-						this.firstRequest('/getClassList','classList'), 
+						this.firstRequest('/loco/index/getClassList','classList'), 
 						this.firstRequest('/loco/index/list','themeList')
-					])
+					]).then(res => {
+						uni.hideLoading()
+						return res
+					})
 			},
 			//二次封装request
 			firstRequest(u,d){
