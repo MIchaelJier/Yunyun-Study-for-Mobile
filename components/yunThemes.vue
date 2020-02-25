@@ -15,7 +15,7 @@
 							<view class="themes-item-main">
 								<!-- co.size ===  0   一行只有大封面-->
 								<view class="themes-item-content" 
-									  @click="enter(co.name)"
+									  @click="enter(co.contentid)"
 									  style="width:calc(100vw - 60rpx)"
 									  v-if="co.size === 0"
 								>
@@ -25,7 +25,7 @@
 								</view>
 								<!-- co.size ===  1   一行两个-->
 								<view class="themes-item-content"
-									  @click="enter(co.name)"
+									  @click="enter(co.contentid)"
 									  :style="{marginBottom: co.name ? '50rpx':'',width:'calc(50vw - 40rpx)'}"
 									  v-if="co.size === 1">
 									  <view class="themes-item-content-small">
@@ -44,7 +44,7 @@
 								</view>
 								<!-- co.size ===  2   一行一个-->
 								<view class="themes-item-content"
-									  @click="enter(co.name)"
+									  @click="enter(co.contentid)"
 									  v-if="co.size === 2">
 									  <view class="boxPosition">
 										  <yun-box :image="co.picsrc" :title="co.name">

@@ -141,10 +141,14 @@
 			},
 			tabClick(status){
 				if(status == 1 && this.chapterList.length === 0){
-					this.firstRequest('/getChapterlist','chapterList');
+					this.firstRequest('/loco/detail/getChapterlist','chapterList');
 				}
 				if(status == 2 && Object.keys(this.commentsInfo).length === 0){
-					this.firstRequest('/getComments','commentsInfo');
+					this.firstRequest('/loco/detail/getComments','commentsInfo').then(() => {
+						if(this.commentsInfo.comments.length < this.add){
+							this.more = 'noMore'
+						}
+					})
 				}
 			},
 			firstRequest(u,d){
@@ -154,10 +158,11 @@
 					   url: u,
 					   method: 'GET',
 					   data:{
-						   courseId: that.courseId
+						   courseId: that.courseId,
+						   size: that.add
 					   }		   
 					  }).then(res => {
-							if(res.data.status === '200'){
+							if(res.data.status){
 								that.$data[d] = res.data.data;
 								that.$refs.tabs.swiperHeight();
 								resolve();
@@ -185,7 +190,7 @@
 			this.courseId = options.id;
 			this.getNodeHeight('.player','initTop');
 			this.getNodeHeight('.underBar','underBarHeight');
-			this.firstRequest('/getCoursedetail','courseInfo');
+			this.firstRequest('/loco/detail/getCoursedetail','courseInfo'); // /getCoursedetail
 		},
 		onShow() {
 			uni.pageScrollTo({
@@ -202,7 +207,7 @@
 			this.star = 0;
 			this.more = 'more';
 			setTimeout(() => {
-				this.firstRequest('/getCoursedetail','courseInfo').then(() => {
+				this.firstRequest('/loco/detail/getCoursedetail','courseInfo').then(() => {
 					uni.stopPullDownRefresh()
 				})
 			},500)
@@ -212,18 +217,18 @@
 			if(this.$refs.tabs.status == 2 && this.more !== 'noMore'){
 				this.more = 'loading';
 				this.$request({
-				   url: '/getCommentsMore',
+				   url: '/loco/detail/getCommentsMore',
 				   method: 'GET',
 				   data:{
 					   courseId: this.courseId,
-					   start: this.star,
+					   start: this.star + 2, //从第二页开始
 					   add: this.add,
 				   }
 				  }).then(res => {
-						if(res.data.status === '200'){
+						if(res.data.status){
 							setTimeout(() => {
 								let addcom = res.data.data.comments
-								this.star += this.add;
+								this.star += 1;
 								addcom.length === this.add ? this.more = 'more' :  this.more = 'noMore'
 								this.commentsInfo.comments.push(...addcom);
 								this.$refs.tabs.swiperHeight();

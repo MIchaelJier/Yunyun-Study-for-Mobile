@@ -42,7 +42,7 @@
 				<view class="courseintrobody-title">课程介绍</view>
 				<view class="courseintrobody-main text-grey">
 					<!-- 富文本 nnodes属性为String -->
-					<rich-text :nodes="courseInfo.description"></rich-text>
+					<rich-text :nodes="description"></rich-text>
 				</view>
 			</view>
 			<view class="courseprovider">
@@ -78,7 +78,8 @@
 </template>
 
 <script>
-	import { monthDayDiff,formatTime,TimeAdd } from "../../../utils/timeFormat.js"
+	import { monthDayDiff,formatTime,TimeAdd } from "@/utils/timeFormat.js"
+	import { richTextRule } from "@/common/richTextRule/index.js"
 	export default {
 		name: "Introduction",
 		data() {
@@ -91,6 +92,13 @@
 				if(this.courseInfo.discountTime && this.courseInfo.discountTime !== 0){
 					let { days, hours, minutes, seconds } = monthDayDiff(new Date(),this.courseInfo.discountTime)
 					return `特价仅剩${days}天${hours}小时${minutes}分钟`
+				}
+			},
+			description(){
+				if(this.courseInfo ? Object.keys(this.courseInfo).length !== 0 ? this.courseInfo.description : false : false){
+					return richTextRule(this.courseInfo.description)
+				}else{
+					return '暂无此课程介绍'
 				}
 			}
 		},
@@ -108,14 +116,13 @@
 				}else{
 					// this.$nextTick(() => {...})
 					this.$request({
-					   url: '/getCourseCoupon',
+					   url: '/loco/detail/getCourseCoupon', // /getCourseCoupon
 					   method: 'GET',
 					   data:{
-						   productId:this.courseInfo.productId,
-						   ownerId:this.courseInfo.ownerId
+						   courseId:this.courseInfo.productId,
 					   }
 					  }).then(res => {
-							if(res.data.status === '200'){
+							if(res.data.status){
 								if(this.couponList.length === 0){
 									let cou = res.data.data.coupons;
 									cou.forEach( out => {

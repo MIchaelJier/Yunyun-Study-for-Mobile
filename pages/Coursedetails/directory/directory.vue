@@ -7,6 +7,7 @@
 					<view class="dirList-content-icon" :style="{'border-color':inner.src === ''?'#ccc':'#333'}">
 						{{ inner.type === 0 ? '视频' : '' }}
 						{{ inner.type === 1 ? '音频' : '' }}
+						{{ inner.type === 2 ? '图文' : '' }}
 					</view>
 					<text class="dirList-content-title">{{ inner.name }}</text>
 					<text class="dirList-content-add" v-if="inner.tip&&inner.tip!==''">{{ inner.tip }}</text>
