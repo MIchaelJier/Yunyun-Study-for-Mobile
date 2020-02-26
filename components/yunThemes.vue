@@ -5,7 +5,8 @@
 					<text class="themes-item-title" 
 						 :style="{'font-weight':boldTitle ? 'bold':''}"
 					>{{th.title}}</text>
-					<view class="themes-item-contents">
+					<view v-if="th.content.length === 0" class="themes-item-none">暂无课程</view>
+					<view v-else class="themes-item-contents">
 						<block v-for="co in th.content" 
 							   :key="co.contentid"
 						>
@@ -138,6 +139,11 @@
 			
 			&-title {
 				font-size: 17px;
+			}
+			&-none {
+				padding: 20rpx 0;
+				font-size: 14px;
+				color: #999;
 			}
 			&-contents {
 				@include flexStyle($justify:space-between)

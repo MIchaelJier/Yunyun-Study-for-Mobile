@@ -104,7 +104,7 @@
 			},
 			cartInfo(){
 				let { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime } = this.courseInfo;
-				return { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice, deadlineTime }
+				return { ownerId, ownername, photoUrl, productId, productName, oldPrice, discountPrice: discountPrice === '' ? oldPrice : discountPrice, deadlineTime }
 			},
 			isLogin(){
 				return  this.$store.getters['common/IsLogin']
@@ -121,20 +121,34 @@
 					title = '';
 				if(this.isLogin){
 					this.$store.commit('cart/addCartOne', this.cartInfo);
-					this.cartNum !== oldNum
-						? title = '成功添加到购物车'
-						: title = '该课程已在购物车'
-					
-					uni.showToast({
-					    title,
-						icon:'none',
-					    duration: 1000
-					});
+					if(this.cartNum !== oldNum){
+						this.$request({
+						   url: `/loco/cart/addCartToUser?courseId=${this.courseId}`,
+						   method: 'POST',	   
+						   showLoading: true
+						  }).then(res => {
+							  res.data.status
+								? title = '成功添加到购物车'
+								: title = '同步失败'
+							  this.toast(title)
+						  })
+					}else{
+						title = '该课程已在购物车';
+						this.toast(title)
+					}
 				}else{
 					uni.navigateTo({
 						url:'/pages/chooseLogin/chooseLogin'
 					})
 				}
+			},
+			toast(title){
+				uni.showToast({
+				    title,
+					icon: 'none',
+					mask: true,
+					duration: 500
+				});
 			},
 			changeVedio(src){
 				this.nowVedio = src;
@@ -157,6 +171,7 @@
 					that.$request({
 					   url: u,
 					   method: 'GET',
+					   showLoading: true,
 					   data:{
 						   courseId: that.courseId,
 						   size: that.add

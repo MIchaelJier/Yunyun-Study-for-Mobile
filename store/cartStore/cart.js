@@ -10,11 +10,11 @@ const cart = {
 	   //重新获取购车车和优惠券数据
        request_cart({ commit }) {
 		   let a = request({
-				   url: '/getCoupon', //获取优惠券
+				   url: '/loco/cart//getCoupon', //获取优惠券
 				   method: 'GET',
 		   	   }),
 		       b = request({
-				   url: '/getCart', //获取购物车
+				   url: '/loco/cart/getCart', //获取购物车
 				   method: 'GET',
 		   	  });
 		   //清空原有的购物车和优惠券
@@ -22,7 +22,7 @@ const cart = {
 		   commit('delCouponAll');
 		   //返回赋值完成的pormise
 		   return Promise.all([a, b]).then(res => {
-		   	if(res[0].data.status === '200' && res[1].data.status === '200'){
+		   	if(res[0].data.status && res[1].data.status ){
 		   		//获取优惠券
 		   		 commit('changeCouponList',res[0].data.data);
 		   		//获取购物车

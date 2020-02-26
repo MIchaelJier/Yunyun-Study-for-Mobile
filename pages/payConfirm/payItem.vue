@@ -53,6 +53,7 @@
 			// 该机构合计
 			afterCouponPrice(){
 				let sum = parseFloat(this.allPrice) - parseFloat(this.coupon.length > 0 ? this.coupon[this.nowCoupon].amount : 0) ;
+				sum = sum > 0 ? sum : 0 ; 
 				return toDecimal(sum)
 			},
 			allPrice(){
@@ -74,6 +75,7 @@
 			},
 			// 单一课程优惠券
 			courseCoupon(){
+				console.log(this.$store.getters['cart/getCoupon'](5))
 				return this.$store.getters['cart/getCoupon'](5).filter( 
 					item => this.payList.some( 
 						course => item.targetId.includes(course.productId) 

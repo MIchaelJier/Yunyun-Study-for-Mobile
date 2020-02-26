@@ -25,7 +25,7 @@
 			<template v-slot:content>
 				<!-- 轮播图 -->
 				<view > <!-- :style="{height: bodyClass === '' ? '100000px':''}" -->
-					<yun-swiper :list="bodyClass.swipe"></yun-swiper>
+					<yun-swiper :list="swiperList"></yun-swiper>
 					<!-- tips-->
 					<view class="content-tips" v-if="tabClass.length > 0">
 							<block v-for="tip in tabClass[nowSelect - 1].children" :key="tip.id">
@@ -33,7 +33,7 @@
 							</block>
 					</view>
 					<!-- 分类 -->
-					<yunThemes :themeList="bodyClass.classList"></yunThemes>
+					<yunThemes :themeList="bodyClass"></yunThemes>
 				</view>
 				
 			</template>
@@ -46,7 +46,8 @@
 		data() {
 			return {
 				tabClass:[],
-				bodyClass:'',
+				swiperList:[],
+				bodyClass:[],
 				nowSelect:0,
 				duration: 0.3,
 				lineStyle: {},
@@ -69,7 +70,8 @@
 			}
 			Promise.all([
 				this.firstRequest('/loco/index/getClassList','tabClass'),
-				this.firstRequest('/getClassification','bodyClass')
+				this.firstRequest('/loco/index/advList','swiperList'),
+				this.firstRequest('/loco/index/list','bodyClass')
 			]).then(() => {
 				uni.hideLoading()
 				this.initDone = true
@@ -97,12 +99,13 @@
 			firstRequest(u,d){
 				let that = this;
 				return new Promise((resolve, reject) => {
-						let nowSelect = that.nowSelect;
+						let categoryId1 = that.nowSelect;
 						that.$request({
 						   url: u,
 						   method: 'GET',
 						   data:{
-							   select: nowSelect,
+							   categoryId1,
+							   plat: 1
 						   },
 						   // showLoading: true
 						  }).then(res => {
@@ -160,9 +163,19 @@
 		},
 		watch:{
 			'nowSelect'(){
-				if(this.tabClass.length + Object.keys(this.bodyClass).length > 0 ){
+				if(this.tabClass.length + this.bodyClass.length + this.swiperList.length > 0 ){
+					uni.showLoading({
+						title: '加载中',
+						mask: true
+					})
 					this.tabMid(this.nowSelect);
-					this.firstRequest('/getClassification','bodyClass');
+					Promise.all([
+						this.firstRequest('/loco/index/list','bodyClass'),
+						this.firstRequest('/loco/index/advList','swiperList')
+					]).then(res => {
+						uni.hideLoading()
+					})
+					
 				}
 			}
 		}

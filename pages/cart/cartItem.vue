@@ -97,12 +97,27 @@
 			cartDel(productId){
 				this.value = !this.value;
 				this.delProductId = productId;
+				
 			},
 			onConfirm() {
 				this.$store.commit('cart/delCartOne',{
 					ownerId:this.ownerMsg.ownerId,
 					productId:this.delProductId,
 				});
+				this.$request({
+				   url: `/loco/cart/delCartToUser?courseId=${this.delProductId}`,
+				   method: 'POST',   
+				   showLoading: true
+				}).then(res => {
+					let title = '';
+					res.data.status ? title = '删除成功' : title = '同步失败'
+					uni.showToast({
+					    title,
+						icon: 'none',
+						mask: true,
+						duration: 500
+					});
+				})
 				this.delProductId = '';
 			},
 			cancel(){

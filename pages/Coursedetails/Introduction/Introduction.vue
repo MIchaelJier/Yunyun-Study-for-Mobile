@@ -120,7 +120,8 @@
 					   method: 'GET',
 					   data:{
 						   courseId:this.courseInfo.productId,
-					   }
+					   },
+					   showLoading: true
 					  }).then(res => {
 							if(res.data.status){
 								if(this.couponList.length === 0){
@@ -156,7 +157,23 @@
 						add.endTime = coupon.endTime
 					}
 					// console.log(add)
-					this.$store.commit('cart/addCouponOne', add)
+					this.$request({
+					   url: `/loco/cart/addCouponToUser?id=${couponId}`,
+					   method: 'POST',	  
+					   showLoading: true
+					  }).then(res => {
+						  this.$store.commit('cart/addCouponOne', add)
+						  let title = '';
+						  res.data.status
+							? title = '领取成功'
+							: title = '领取失败';
+						  uni.showToast({
+						    title,
+						  	icon: 'none',
+						  	mask: true,
+						  	duration: 500
+						  });
+					  })
 				}
 			}
 		}
