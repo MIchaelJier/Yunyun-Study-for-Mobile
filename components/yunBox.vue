@@ -53,8 +53,12 @@
 			}
 		},
 		methods: {
-			enter:function() {
-				console.log(this.url)
+			enter() {
+				if(this.url && this.url !== ''){
+					uni.navigateTo({
+						url: this.url
+					})
+				}
 			}
 		}
 	}

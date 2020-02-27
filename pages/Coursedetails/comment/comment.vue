@@ -20,13 +20,18 @@
 				</view>
 			</view>
 		</view>
+		<view v-if="isOwn">
+			<navigator :url="'/pages/editComment/editComment?id=' + courseId" hover-class="none">
+				<view class="commentBtn">写评价</view>
+			</navigator>
+		</view>
 		<!-- 总评 结束 -->
 		<!-- 评论 开始 -->
 		<view class="comments"  v-for="(com,index) in commentsInfo.comments" :key="index">
 			<view class="comments-item">
 				<view class="comments-item-head">
 					<view class="comments-item-head-image">
-						<yun-image :src="com.headimg"></yun-image>
+						<yun-image :src="com.headimg" radius="50%"></yun-image>
 					</view>
 				</view>
 				<view class="comments-item-main">
@@ -84,9 +89,13 @@
 			},
 			progBarOver(){
 				return num => num / parseInt(this.commentsInfo.rate.allNum) * 191
-			}
+			},
 		},
 		props: {
+			courseId: {
+				type: [String,Number],
+				default: 0
+			},
 			commentsInfo: {
 				type: Object,
 				default: ()=>{}
@@ -94,6 +103,10 @@
 			more: {
 				type: String,
 				default: 'more'
+			},
+			isOwn: {
+				type: Boolean,
+				default: false
 			}
 		},
 	}

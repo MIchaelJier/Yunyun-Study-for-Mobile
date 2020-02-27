@@ -93,7 +93,7 @@ github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://g
  3. 个人中心页   
  4. 搜索页
  5. 分类页  
- 6. 详情页 (对已购买者的判断 x)
+ 6. 详情页 
  7. 选择登录页（第三方登陆 x）
  8. 账号密码登录页 
  9. 用户信息页

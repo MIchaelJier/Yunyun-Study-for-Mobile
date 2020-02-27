@@ -1,4 +1,4 @@
-import store from '../../store' 
+import store from '@/store' 
 /**
  * 请求封装
  * @param {Boolean} showLoading  loading遮罩层 
@@ -13,7 +13,7 @@ export const request = (params) => {
    // 测试接口
    const testUrl = "https://zfroot.top:8081/yun" ;
    // 本地转发层接口
-   const localUrl = "http://127.0.0.1:3333/yun"
+   const localUrl = "http://192.168.0.170:3333/yun"
    // 正式接口
    const formalUrl = "" ;
    

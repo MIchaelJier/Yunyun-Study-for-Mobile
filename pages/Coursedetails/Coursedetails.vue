@@ -23,24 +23,29 @@
 			<!-- 简介 结束-->
 			<!-- 目录 开始 -->			
 			<template v-slot:1>
-				<directory :chapterList="chapterList" @changeVedio="changeVedio"></directory>
+				<directory :chapterList="chapterList" :isOwn="courseInfo.isOwn"  @changeVedio="changeVedio"></directory>
 			</template>
 			<!-- 目录 结束 -->			
 			<!-- 评价 开始 -->			
 			<template v-slot:2>
-				<comment :commentsInfo="commentsInfo" :more="more"></comment>
+				<comment :commentsInfo="commentsInfo" :more="more" :isOwn="courseInfo.isOwn" :courseId="courseId"></comment>
 			</template>
 			<!-- 评价 结束 -->
 		</yun-tab>
-		<view class="underBar xBottom" style="background: none;border-top:none"></view>
-		<view class="underBar bottomFixed xBottom">
-			<view class="underBar-left text-balck" @click="addCart">
-				<view class="ux-icon ux-ykt-icon-new-cart"></view>
-				<text>加入购物车</text>
-			</view>
-			<view class="underBar-right">
-				<text>加入学习</text>
-			</view>
+		<view class="underBar xBottom" style="background: none;border-top:none"  v-if="!courseInfo.isOwn"></view>
+		<view class="underBar bottomFixed xBottom" v-if="!courseInfo.isOwn">
+			<block v-if="courseInfo.isFree === 1">
+				<view class="underBar-right" @click="addFreeCourse"><text>免费加入学习</text></view>
+			</block>
+			<block v-else>
+				<view class="underBar-left text-balck" @click="addCart">
+					<view class="ux-icon ux-ykt-icon-new-cart"></view>
+					<text>加入购物车</text>
+				</view>
+				<view class="underBar-right">
+					<text>加入学习</text>
+				</view>
+			</block>
 		</view>
 		<!-- 插屏弹窗 -->
 		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
@@ -140,6 +145,23 @@
 					uni.navigateTo({
 						url:'/pages/chooseLogin/chooseLogin'
 					})
+				}
+			},
+			addFreeCourse(){
+				if(this.courseInfo.isFree === 1 && !this.courseInfo.isOwn){
+					this.$request({
+					   url: `/loco/detail/addFreeCourse?courseId=${this.courseId}`,
+					   method: 'POST',	   
+					   showLoading: true
+					  }).then(res => {
+						  let title = '';
+						  res.data.status
+							? title = '加入成功'
+							: title = '加入失败';
+						  this.toast(title);
+						  this.courseInfo.isOwn = true;
+						  this.underBarHeight = 0;
+					  })
 				}
 			},
 			toast(title){

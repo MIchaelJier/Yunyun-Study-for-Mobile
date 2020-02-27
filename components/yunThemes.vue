@@ -39,8 +39,11 @@
 									  	<view style="color: #8B8F97">{{ co.learned }}人学过</view>
 									  </view>
 									  <view class="themes-item-content-price">
-									  	<text class="price-red" v-if="co.nprice">￥{{ co.nprice }}</text>
-									  	<text :class="co.nprice && co.nprice !== '' ? 'price-grey' : 'price-red'" v-if="co.oprice">￥{{ co.oprice }}</text>
+										<view class="price-red" v-if="co.nprice === '0.00'|| co.nprice === '0.00'">免费</view>
+										<view v-else>
+											<text class="price-red" v-if="co.nprice">￥{{ co.nprice }}</text>
+											<text :class="co.nprice && co.nprice !== '' ? 'price-grey' : 'price-red'" v-if="co.oprice">￥{{ co.oprice }}</text>
+										</view>
 									  </view>
 								</view>
 								<!-- co.size ===  2   一行一个-->
@@ -52,14 +55,20 @@
 											  <view>
 												  <view class="themes-item-content-num sb">
 													  <text>共{{ co.chapterNum }}课时</text>
-													  <text :class="co.nprice && co.nprice !== '' ? 'price-grey' : 'price-red'" v-if="co.oprice">￥{{ co.oprice }}</text>
+													  <text :class="co.nprice && co.nprice !== '' ? 'price-grey' : 'price-red'" 
+															v-if="co.oprice && co.oprice!=='0.00' && co.nprice!=='0.00' && co.oprice!==''">
+														  ￥{{ co.oprice }}
+													 </text>
 												  </view>
 												  <view class="themes-item-content-num sb">
 													  <view>
 														  <text class="num-star">{{ co.star }}星</text>
 														  <text style="color: #8B8F97">{{ co.learned }}人学过</text>
 													  </view>
-													  <view class="price-red">￥{{ co.nprice }}</view>
+													  <view class="price-red">
+														  <text v-if="co.oprice === '0.00' || co.nprice === '0.00' ">免费</text>
+														  <text v-else>￥{{ co.oprice && co.oprice!=='' ? co.nprice : co.oprice}}</text>
+													  </view>
 												  </view>
 											  </view>
 									  </yun-box>

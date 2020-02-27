@@ -57,6 +57,19 @@
 		border-radius: 1px;
 		background: #a4a9b2;   
 	}
+	/* 写 评论 */
+	.commentBtn {
+		width: 200rpx;
+		height: 60rpx;
+		border-radius: 60rpx;
+		font-size: 14px;
+		background-color: #36B378;
+		line-height: 60rpx;
+		text-align: center;
+		color: white;
+		float: right;
+		margin:10rpx 20rpx;
+	}
 	/* 评论区 */
 	.comments-item {
 		width: 100%;
@@ -64,6 +77,7 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: nowrap;
+		border-top: 1px dashed #f1f1f1;
 	}
 	.comments-item-head {
 	    width: 76rpx;

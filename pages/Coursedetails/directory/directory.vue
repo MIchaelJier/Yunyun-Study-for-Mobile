@@ -10,7 +10,7 @@
 						{{ inner.type === 2 ? '图文' : '' }}
 					</view>
 					<text class="dirList-content-title">{{ inner.name }}</text>
-					<text class="dirList-content-add" v-if="inner.tip&&inner.tip!==''">{{ inner.tip }}</text>
+					<text class="dirList-content-add" v-if="inner.tip&&inner.tip!==''&&!isOwn">{{ inner.tip }}</text>
 				</view> 
 			</view>
 		</block>
@@ -29,6 +29,10 @@
 			chapterList: {
 				type: Array,
 				default:()=>{}
+			},
+			isOwn: {
+				type: Boolean,
+				default: false
 			}
 		},
 		methods:{

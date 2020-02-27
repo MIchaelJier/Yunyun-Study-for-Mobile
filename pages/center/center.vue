@@ -22,7 +22,7 @@
 		</uni-list>
 		<view class="blackMargin"></view>
 		<uni-list>
-			<uni-list-item title="分享赚学费" font-icon="ux-ykt-icon-notice"></uni-list-item>
+			<uni-list-item title="分享赚学费" font-icon="ux-ykt-icon-notice"  @click="jumpto(5)"></uni-list-item>
 		</uni-list>
 	</view>
 </template>
@@ -43,15 +43,18 @@
 				  [1, ()=>{url='/pages/order/order'}],
 				  [2, ()=>{url='/pages/coupon/coupon'}],
 				  [3, ()=>{url='/pages/cart/cart'}],
-				  [4, ()=>{console.log('开发中')}],
+				  [4, ()=>{uni.showToast({title:'敬请期待',	icon:'none', duration:500})}],
+				  [5, ()=>{uni.showToast({title:'敬请期待',	icon:'none', duration:500})}],
 				  [false, ()=>{url='/pages/chooseLogin/chooseLogin'}],
 				]);
 				//执行
 				(actions.get(this.$store.getters['common/IsLogin'] && id) || actions.get('default')).call(this);
 				
-				uni.navigateTo({
-					url,
-				})
+				if(url !== ''){
+					uni.navigateTo({
+						url,
+					})
+				}
 			}
 		},
 		onShow() {

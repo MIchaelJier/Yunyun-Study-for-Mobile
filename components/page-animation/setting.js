@@ -4,6 +4,7 @@ export const pageIndexSetting = [
 	{path:'pages/center/center',index:3},
 	{path:'pages/classification/classification',index:4},
 	{path:'pages/Coursedetails/Coursedetails',index:5},
+	{path:'pages/editComment/editComment',index:5},
 	{path:'pages/provider/provider',index:5},
 	{path:'pages/allCourse/allCourse',index:5},
 	{path:'pages/chooseLogin/chooseLogin',index:8},

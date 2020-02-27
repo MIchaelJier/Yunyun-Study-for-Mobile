@@ -148,6 +148,14 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/editComment/editComment",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+					}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

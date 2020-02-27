@@ -19,12 +19,16 @@
 			<view class="courseintrohead-price">
 				<view class="priceMain">
 					<view class="nprice">
-						<text class="yuan">¥</text>
-						{{ courseInfo.discountPrice&&courseInfo.discountPrice!=='' ? courseInfo.discountPrice : courseInfo.oldPrice }}
+						<view v-if="courseInfo.discountPrice === '0.00' ||  courseInfo.oldPrice === '0.00'">免费</view>
+						<view v-else>
+							<text class="yuan">¥</text>
+							{{ courseInfo.discountPrice&&courseInfo.discountPrice!=='' ? courseInfo.discountPrice : courseInfo.oldPrice }}
+						</view>
 					</view>
 					<view class="nprice-tip" v-if="remainingTime">{{ remainingTime }}</view>
 				</view>
-				<view class="oprice text-grey" v-if="courseInfo.discountPrice&&courseInfo.discountPrice!==''">
+				<view class="oprice text-grey" 
+					  v-if="courseInfo.discountPrice&&courseInfo.discountPrice!==''&&courseInfo.oldPrice!=='0.00'">
 					¥{{ courseInfo.oldPrice }}
 				</view>
 			</view>
