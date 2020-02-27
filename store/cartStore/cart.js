@@ -1,5 +1,6 @@
 import { TimeDiff } from "../../utils/timeFormat.js"
 import { request } from "../../common/request/index.js"
+import { signout } from "../../common/signOut.js"
 const cart = {
     namespaced:true,//命名空间的开启
     state:{
@@ -8,7 +9,7 @@ const cart = {
     },
     actions:{
 	   //重新获取购车车和优惠券数据
-       request_cart({ commit }) {
+       request_cart({ commit,rootGetters }) {
 		   let a = request({
 				   url: '/loco/cart//getCoupon', //获取优惠券
 				   method: 'GET',
@@ -16,25 +17,42 @@ const cart = {
 		       b = request({
 				   url: '/loco/cart/getCart', //获取购物车
 				   method: 'GET',
-		   	  });
-		   //清空原有的购物车和优惠券
-		   commit('delCartAll');
-		   commit('delCouponAll');
+		   	   }),
+			   c = request({
+				   url: '/loco/user/checkToken',
+				   method: 'GET',
+				   data:{ token: rootGetters['common/allInfo'].token }
+			   })
 		   //返回赋值完成的pormise
-		   return Promise.all([a, b]).then(res => {
-		   	if(res[0].data.status && res[1].data.status ){
-		   		//获取优惠券
-		   		 commit('changeCouponList',res[0].data.data);
-		   		//获取购物车
-		   		let list = res[1].data.data.list;
-		   		list.forEach(item => {
-		   			item.checked = false;
-		   			item.list.forEach(course => {
-		   				course.checked = false;
-		   			})
-		   		});
-		   		 commit('changeCartList',list);
-		   	}
+		   return c.then(res => {
+			   if(res.data.status){
+				   //清空原有的购物车和优惠券
+				   commit('delCartAll');
+				   commit('delCouponAll');
+				   return Promise.all([a, b]).then(res => {
+				   	if(res[0].data.status && res[1].data.status ){
+				   		//获取优惠券
+				   		 commit('changeCouponList',res[0].data.data);
+				   		//获取购物车
+				   		let list = res[1].data.data.list;
+				   		list.forEach(item => {
+				   			item.checked = false;
+				   			item.list.forEach(course => {
+				   				course.checked = false;
+				   			})
+				   		});
+				   		 commit('changeCartList',list);
+				   	}
+				   })
+			   }else{
+				   signout();
+				   uni.showToast({
+						title:'登录失效',
+						icon:'none',
+						duration:500
+				   })
+				   return new Promise(resolve => {resolve('bad token')})
+			   }
 		   })
 	   }
     },
