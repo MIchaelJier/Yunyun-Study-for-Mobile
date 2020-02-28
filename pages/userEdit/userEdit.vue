@@ -26,7 +26,7 @@
 
 <script>
 	import yunImageCutter from "@/components/yunImageCutter.vue";
-	import { wxBase64,appBase64 } from "@/utils/fileType.js"
+	import { wxBase64,appBase64,getImgSize } from "@/utils/fileType.js"
 	export default {
 		data() {
 			return {
@@ -43,7 +43,8 @@
 					tip:{main:'',color:'red'}
 				},
 				
-				cutterUrl:''
+				cutterUrl:'',
+				picMaxSize:30
 			}
 		},
 		components: {
@@ -63,26 +64,27 @@
 				});
 			},
 			onok(ev) {
-				this.cutterUrl = "";
+				// console.log(getImgSize(ev.path));
+				this.cutterUrl = "";				
 				// uni.showToast({title:'修改中',icon:'none',duration:1000});
 				// #ifdef H5
 				this.changeHead(
 					this.httpUserInfo('base64Url',ev.path)
-				)
+				);
 				// #endif
 				// #ifdef APP-PLUS
 				this.changeHead(
 					appBase64(ev.path).then(res => {
 						this.httpUserInfo('base64Url',res)
 					})
-				)
+				);
 				// #endif
 				// #ifdef MP-WEIXIN
 				this.changeHead(
 					wxBase64(ev.path).then(res => {
-						return this.httpUserInfo('base64Url',res)
+						this.httpUserInfo('base64Url',res)
 					})
-				)
+				);
 				// #endif
 			},
 			changeHead(promise){
@@ -91,8 +93,7 @@
 					const userAvatarUrl= `${res.data.data.userAvatarUrl}?${new Date().getTime().toString()}`
 					this.userInfo.haedImage = userAvatarUrl;
 					this.changeStorage('haedImage', userAvatarUrl );
-					uni.hideToast();
-					uni.showToast({title:'修改成功',icon:'none',duration:1000});
+					uni.showToast({title:'修改成功',icon:'none',duration:500});
 				}).catch(err => {
 					console.log(err)
 				})
@@ -147,6 +148,14 @@
 			},
 			// 单个 修改用户信息http请求
 			httpUserInfo(dataName,dataInner){
+				if(dataName === 'base64Url' && getImgSize(dataInner) > this.picMaxSize){
+					uni.showToast({
+						title:`图片过大（超过${this.picMaxSize}KB）`,
+						icon:'none',
+						duration:500
+					})
+					return new Promise((resolve, reject) => {reject('image is too large')})
+				}
 				return this.$request({
 					url: '/loco/user/setUserProfile',
 					method: 'POST',

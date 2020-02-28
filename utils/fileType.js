@@ -56,5 +56,19 @@
 					  })
 				  })
 			}
-				
-	
+/*
+ *	获取base64字节流的图片的大小
+ *	@param {String} base64url 图片的Base64编码
+ * 	return Number 单位:KB
+ * */			
+ export const getImgSize = base64url => {
+					//获取base64图片大小，返回KB数字
+					let noheadStr = base64url.replace('data:image/jpeg;base64,', '');
+					
+					let strLength = noheadStr.length;
+					let fileLength = parseInt(strLength - (strLength / 8) * 2);
+					// 由字节转换为KB
+					let size = "";
+					size = (fileLength / 1024).toFixed(2);
+					return parseInt(size);
+				}
