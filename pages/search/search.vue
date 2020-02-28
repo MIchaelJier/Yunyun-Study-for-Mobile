@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page xBottom">
 		<!-- 搜索区域 -->
 		<view class="searchBar">
 			<view class="searchBar-searchIcon"></view>

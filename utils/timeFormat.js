@@ -54,7 +54,23 @@ export const formatTime = (date,type = '/') => {
 
   return [year, month, day].map(formatNumber).join(type) + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
+}
+
+/*
+*	秒 转化为 00:00:00
+*   @param t 秒数
+* */
+export const formatSeconds = t => {
+	  let NowtimeValue = parseInt(t);
+	  let nowH = parseInt(NowtimeValue / 3600);
+	  let nowM = parseInt(NowtimeValue % 3600 / 60);
+	  let nowS = parseInt(NowtimeValue % 60);
+	  nowH < 10 ? nowH = '0' + nowH : nowH = nowH;
+	  nowM < 10 ? nowM = '0' + nowM : nowM = nowM;
+	  nowS < 10 ? nowS = '0' + nowS : nowS = nowS;
+	  return `${nowH}:${nowM}:${nowS}`
 }

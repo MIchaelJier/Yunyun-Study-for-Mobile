@@ -8,8 +8,24 @@
 					"titleNView":false
 				}
 			}
-		},
-		{
+		},{
+		    "path" : "pages/Mycourse/Mycourse",
+			"navigationBarTitleText": "我的课程",
+		    "style" : {
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+		},{
+            "path" : "pages/center/center",
+			"navigationBarTitleText": "账号",
+            "style" : {
+				"disableScroll":true,
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+        },{
             "path" : "pages/phoneLogin/phoneLogin",
 			"navigationBarTitleText": "登录",
             "style" : {
@@ -26,27 +42,7 @@
 		    		"titleNView":false
 		    		}
 		    }
-		},
-		{
-            "path" : "pages/Mycourse/Mycourse",
-			"navigationBarTitleText": "我的课程",
-            "style" : {
-				"app-plus":{
-					"titleNView":false
-				}
-			}
-        }
-        ,{
-            "path" : "pages/center/center",
-			"navigationBarTitleText": "账号",
-            "style" : {
-				"disableScroll":true,
-				"app-plus":{
-					"titleNView":false
-				}
-			}
-        }
-        ,{
+		},{
             "path" : "pages/search/search",
 			"navigationBarTitleText": "搜索",
             "style" : {
@@ -150,6 +146,7 @@
         }
         ,{
             "path" : "pages/editComment/editComment",
+			"navigationBarTitleText": "评论",
             "style" : {
 				"app-plus":{
 					"titleNView":false

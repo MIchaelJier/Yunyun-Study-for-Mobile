@@ -1,12 +1,18 @@
 <template>
-	<view class="page">
+	<view class="page" :class="courseInfo.isOwn ? 'xBottom' : ''">
 		<!-- 视频 开始 -->
 		<view class="player">
-			<video 
+			<my-video 
+				:mySrc="nowVedio.src"
+				:myPoster="courseInfo.photoUrl"
+				:videoId="nowVedio.id"
+			>
+			</my-video>
+			<!-- <video 
 				:src="nowVedio" 
 				:poster="courseInfo.photoUrl"
 				controls
-				id="video"></video>
+				id="video"></video> -->
 		</view>
 		<!-- 视频 结束 -->
 		<yun-tab :tabs="tabs" 
@@ -81,6 +87,7 @@
 	import introduction from './Introduction/Introduction.vue';
 	import directory from './directory/directory.vue';
 	import comment from './comment/comment.vue';
+	import myVideo from './video/myVideo.vue';
 	export default {
 		data() {
 			return {
@@ -94,7 +101,10 @@
 				courseInfo:{},
 				chapterList:[],
 				couponList:[],
-				nowVedio:'',
+				nowVedio:{
+					id:'',
+					src:''
+				},
 				commentsInfo:{},
 				
 				//上拉加载参数
@@ -118,7 +128,8 @@
 		components: {
 			introduction,
 			directory,
-			comment
+			comment,
+			myVideo
 		},
 		methods: {
 			addCart(){
@@ -172,8 +183,9 @@
 					duration: 500
 				});
 			},
-			changeVedio(src){
-				this.nowVedio = src;
+			changeVedio(video){
+				// video ={id:'',src:''}
+				this.nowVedio = video;
 			},
 			tabClick(status){
 				if(status == 1 && this.chapterList.length === 0){
@@ -243,6 +255,7 @@
 			this.$refs.tabs.status = 0;
 			this.star = 0;
 			this.more = 'more';
+			this.nowVedio = { id:'', src:''},
 			setTimeout(() => {
 				this.firstRequest('/loco/detail/getCoursedetail','courseInfo').then(() => {
 					uni.stopPullDownRefresh()

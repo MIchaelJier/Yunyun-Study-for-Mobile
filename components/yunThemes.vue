@@ -30,7 +30,7 @@
 									  :style="{marginBottom: co.name ? '50rpx':'',width:'calc(50vw - 40rpx)'}"
 									  v-if="co.size === 1">
 									  <view class="themes-item-content-small">
-										  <yun-image :src="co.picsrc"></yun-image>
+										  <yun-image :src="co.picsrc" radius="5"></yun-image>
 									  </view>
 									  </image>
 									  <text class="themes-item-content-name" v-if="co.name">{{ co.name }}</text>

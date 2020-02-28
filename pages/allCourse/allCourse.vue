@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page xBottom">
 		<yun-tab :tabs="tabs"
 				 :scrollTop="scrollTop" 
 				 @tabClick="tabClick" 

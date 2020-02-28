@@ -1,13 +1,15 @@
 import store from '@/store' 
+import { signout } from '../signOut.js'
 /**
  * 请求封装
- * @param {Boolean} showLoading  loading遮罩层 
- * @param {Boolean} isFile      是否上传文件
- * @param {string}  url          "/test/..."表示请求头携带token
- * @param 其他参数参考 uni.request 和 uni.uploadFile
+ * @param {Boolean} isCheckToken  是否判断token并退出登录 
+ * @param {Boolean} params.showLoading  loading遮罩层 
+ * @param {Boolean} params.isFile      是否上传文件
+ * @param {string}  params.url          "/test/..."表示请求头携带token
+ * @param params.其他参数参考 uni.request 和 uni.uploadFile
  * return Promise
  */
-export const request = (params) => {
+export const request = (params, isCheckToken = true) => {
    // 个人服务器上的模拟接口
    const mockUrl = "http://47.101.132.224:9000/mock/11"; 
    // 测试接口
@@ -45,6 +47,17 @@ export const request = (params) => {
 			header,
 			url:baseUrl + params.url,
 			success:(res) => {
+				if(res.data.errmsg === 'Error: Request failed with status code 401' && isCheckToken){
+					signout();
+					uni.showToast({
+						title:'登录失效',
+						icon:'none',
+						duration:500
+					})
+					uni.redirectTo({
+						url:'/pages/chooseLogin/chooseLogin'
+					})
+				}
 				params.showLoading ? uni.hideLoading() : '' ;
 				console.log(res.data); 
 				resolve(res);

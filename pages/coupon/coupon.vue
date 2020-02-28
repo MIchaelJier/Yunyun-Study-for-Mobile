@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page xBottom">
 		<!-- 兑换框 -->
 		<view class="exchange">
 			<input type="text" placeholder="优惠券兑换码 / VIP会员兑换码" 

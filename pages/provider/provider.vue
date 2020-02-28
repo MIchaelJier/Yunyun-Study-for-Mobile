@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page xBottom">
 		<view class="mainInfo">
 			<view class="mainInfo-up">
 				<view class="up-left">

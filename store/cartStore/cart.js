@@ -13,16 +13,16 @@ const cart = {
 		   let a = request({
 				   url: '/loco/cart//getCoupon', //获取优惠券
 				   method: 'GET',
-		   	   }),
+		   	   },false),
 		       b = request({
 				   url: '/loco/cart/getCart', //获取购物车
 				   method: 'GET',
-		   	   }),
+		   	   },false),
 			   c = request({
-				   url: '/loco/user/checkToken',
+				   url: '/loco/user/checkToken', //判断token是否有效, 减少中间层的401报错
 				   method: 'GET',
 				   data:{ token: rootGetters['common/allInfo'].token }
-			   })
+			   },false)
 		   //返回赋值完成的pormise
 		   return c.then(res => {
 			   if(res.data.status){
@@ -51,6 +51,11 @@ const cart = {
 						icon:'none',
 						duration:500
 				   })
+				   setTimeout(() => {
+					   uni.navigateTo({
+					   		url:'/pages/chooseLogin/chooseLogin'
+					   })
+				   }, 500);
 				   return new Promise(resolve => {resolve('bad token')})
 			   }
 		   })

@@ -1,6 +1,6 @@
 <!-- classification -->
 <template>
-	<view class="page">
+	<view class="page xBottom">
 		<!-- header -->
 		<view class="header">
 			<yun-header></yun-header>
