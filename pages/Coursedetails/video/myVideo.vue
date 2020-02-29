@@ -32,6 +32,7 @@
 
 <script>
 	import { formatSeconds } from "@/utils/timeFormat.js"
+	import { queryParams } from "@/utils/myMath.js"
 	export default {
 		data() {
 			return {
@@ -39,7 +40,7 @@
 				videoContext: '',
 				controlShow: false,
 				rateShow: false,
-				currentRate: '1.0'
+				currentRate: 1.0
 			}
 		},
 		computed:{
@@ -47,7 +48,7 @@
 				return formatSeconds(this.currentTime)
 			},
 			trueVideo(){
-				return this.mySrc !== '' && this.videoId !== '' && this.currentTime !== ''
+				return this.mySrc !== '' && this.videoId !== '' && Object.keys(this.allId).length !== 0
 			}
 		},
 		props: {
@@ -59,9 +60,14 @@
 				type: String,
 				default:''
 			},
-			videoId:{
-				type: [String, Number],
-				default:''
+			allId: {
+				type: Object,
+				default: () => {},
+				/* {
+					courseId : 
+					videoId : 
+					chapterId : 
+				} */
 			}
 		},
 		methods:{
@@ -70,8 +76,14 @@
 			},
 			updateLearnTime(){
 				if(this.trueVideo){
-					this.$request({
-					   url: `/loco/detail/updateLearnTime?lastLearnTime=${this.currentString}&periodId=${parseInt(this.videoId)}`,
+					const data = {
+						lastLearnTime: this.currentString,
+						periodId: parseInt(this.allId.videoId),
+						courseId: parseInt(this.allId.courseId),
+						chapterId: parseInt(this.allId.chapterId),
+					}
+					this.$request({ 
+					   url: `/loco/detail/updateLearnTime${queryParams(data,true)}`,
 					   method: 'POST',	   
 					})
 				}

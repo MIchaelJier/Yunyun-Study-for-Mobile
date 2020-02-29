@@ -64,7 +64,7 @@
             "path" : "pages/Coursedetails/Coursedetails",
 			"navigationBarTitleText": "课程详情",
             "style" : {
-				"enablePullDownRefresh": true,
+				// "enablePullDownRefresh": true,
 				"app-plus":{
 					"titleNView":false
 					}

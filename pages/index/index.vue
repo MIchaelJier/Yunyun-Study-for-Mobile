@@ -15,7 +15,7 @@
 										@load="showitem(cl.id)"
 								></image> -->
 								<view class="classimage">
-									<yun-image :src="cl.picsrc"></yun-image>
+									<yun-image :src="cl.picsrc" radius="50%"></yun-image>
 								</view>
 								<text>{{ cl.titile }}</text>
 							</navigator>

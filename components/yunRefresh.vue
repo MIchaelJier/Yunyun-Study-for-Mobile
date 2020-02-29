@@ -9,7 +9,9 @@
 				</view>
 			</view>
 		</view>
-		<slot></slot>
+		<block v-show="isEnd === 0">
+			<slot></slot>
+		</block>
 	</view>
 </template>
 

@@ -9,7 +9,7 @@
 					</view>
 					<view class="item-middle">
 						<view class="middle-img">
-							<yun-image :src="item.photoUrl"></yun-image>
+							<yun-image :src="item.photoUrl" radius="20rpx"></yun-image>
 						</view>
 						<view class="middle-msg">
 							<text class="msg-title">{{ item.courseName }}</text>

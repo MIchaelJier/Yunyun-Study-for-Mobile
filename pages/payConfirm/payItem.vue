@@ -6,7 +6,7 @@
 				<block v-for="course in payList" :key="course.productId">
 					<view class="top-course">
 						<view class="course-img">
-							<yun-image :src="course.photoUrl"></yun-image>
+							<yun-image :src="course.photoUrl" radius="3"></yun-image>
 						</view>
 						<view class="course-msg">
 							<text style="font-size: 14px;color: #3C4A55;">{{ course.productName }}</text>

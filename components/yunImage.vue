@@ -1,7 +1,7 @@
 <template>
 	<view class="yun-image">
 		<image  :src="src"
-				:style="{opacity: show ? '1': '0',transition:`opacity ${delay}s`,borderRadius:radius + 'px'}"
+				:style="{opacity: show ? '1': '0',transition:`opacity ${delay}s`,borderRadius:trueRadius}"
 				:mode="mode"
 				@load="showitem"
 				class="yun-image"
@@ -19,6 +19,14 @@
 				show: false,
 				delay: 0.5,
 			};
+		},
+		computed:{
+			trueRadius(){
+				if(this.radius.toString().search(/px|%/g) >= 0) {
+					return this.radius
+				}
+				return (this.radius + 'px')
+			}
 		},
 		props:{
 			src:{

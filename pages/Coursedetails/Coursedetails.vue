@@ -1,58 +1,60 @@
 <template>
 	<view class="page" :class="courseInfo.isOwn ? 'xBottom' : ''">
-		<!-- 视频 开始 -->
-		<view class="player">
-			<my-video 
-				:mySrc="nowVedio.src"
-				:myPoster="courseInfo.photoUrl"
-				:videoId="nowVedio.id"
-			>
-			</my-video>
-			<!-- <video 
-				:src="nowVedio" 
-				:poster="courseInfo.photoUrl"
-				controls
-				id="video"></video> -->
-		</view>
-		<!-- 视频 结束 -->
-		<yun-tab :tabs="tabs" 
-				 :scrollTop="scrollTop" 
-				 :initTop="initTop" 
-				 :bottomBarHeight="underBarHeight"
-				 @tabClick="tabClick" 
-				 ref="tabs" 
-				 >
-			<!-- 简介 开始 -->
-			<template v-slot:0>
-				<introduction :courseInfo="courseInfo" ref="introduction" @open="open"></introduction>
-			</template>
-			<!-- 简介 结束-->
-			<!-- 目录 开始 -->			
-			<template v-slot:1>
-				<directory :chapterList="chapterList" :isOwn="courseInfo.isOwn"  @changeVedio="changeVedio"></directory>
-			</template>
-			<!-- 目录 结束 -->			
-			<!-- 评价 开始 -->			
-			<template v-slot:2>
-				<comment :commentsInfo="commentsInfo" :more="more" :isOwn="courseInfo.isOwn" :courseId="courseId"></comment>
-			</template>
-			<!-- 评价 结束 -->
-		</yun-tab>
-		<view class="underBar xBottom" style="background: none;border-top:none"  v-if="!courseInfo.isOwn"></view>
-		<view class="underBar bottomFixed xBottom" v-if="!courseInfo.isOwn">
-			<block v-if="courseInfo.isFree === 1">
-				<view class="underBar-right" @click="addFreeCourse"><text>免费加入学习</text></view>
-			</block>
-			<block v-else>
-				<view class="underBar-left text-balck" @click="addCart">
-					<view class="ux-icon ux-ykt-icon-new-cart"></view>
-					<text>加入购物车</text>
-				</view>
-				<view class="underBar-right">
-					<text>加入学习</text>
-				</view>
-			</block>
-		</view>
+		<yun-refresh @isRefresh='isRefresh' ref="refresh">
+			<!-- 视频 开始 -->
+			<view class="player">
+				<my-video 
+					:mySrc="nowVedio.src"
+					:myPoster="courseInfo.photoUrl"
+					:allId="allId"
+				>
+				</my-video>
+				<!-- <video 
+					:src="nowVedio" 
+					:poster="courseInfo.photoUrl"
+					controls
+					id="video"></video> -->
+			</view>
+			<!-- 视频 结束 -->
+			<yun-tab :tabs="tabs" 
+					 :scrollTop="scrollTop" 
+					 :initTop="initTop" 
+					 :bottomBarHeight="underBarHeight"
+					 @tabClick="tabClick" 
+					 ref="tabs" 
+					 >
+				<!-- 简介 开始 -->
+				<template v-slot:0>
+					<introduction :courseInfo="courseInfo" ref="introduction" @open="open"></introduction>
+				</template>
+				<!-- 简介 结束-->
+				<!-- 目录 开始 -->			
+				<template v-slot:1>
+					<directory :chapterList="chapterList" :isOwn="courseInfo.isOwn"  @changeVedio="changeVedio"></directory>
+				</template>
+				<!-- 目录 结束 -->			
+				<!-- 评价 开始 -->			
+				<template v-slot:2>
+					<comment :commentsInfo="commentsInfo" :more="more" :isOwn="courseInfo.isOwn" :courseId="courseId"></comment>
+				</template>
+				<!-- 评价 结束 -->
+			</yun-tab>
+			<view class="underBar xBottom" style="background: none;border-top:none"  v-if="!courseInfo.isOwn"></view>
+			<view class="underBar bottomFixed xBottom" v-if="!courseInfo.isOwn">
+				<block v-if="courseInfo.isFree === 1">
+					<view class="underBar-right" @click="addFreeCourse"><text>免费加入学习</text></view>
+				</block>
+				<block v-else>
+					<view class="underBar-left text-balck" @click="addCart">
+						<view class="ux-icon ux-ykt-icon-new-cart"></view>
+						<text>加入购物车</text>
+					</view>
+					<view class="underBar-right">
+						<text>加入学习</text>
+					</view>
+				</block>
+			</view>
+		</yun-refresh>
 		<!-- 插屏弹窗 -->
 		<uni-popup ref="showpopup" type="bottom">  <!-- @change="change" -->
 			<scroll-view class="couponsPopup xBottom" scroll-y>
@@ -88,6 +90,7 @@
 	import directory from './directory/directory.vue';
 	import comment from './comment/comment.vue';
 	import myVideo from './video/myVideo.vue';
+	let _initData = {};
 	export default {
 		data() {
 			return {
@@ -101,10 +104,7 @@
 				courseInfo:{},
 				chapterList:[],
 				couponList:[],
-				nowVedio:{
-					id:'',
-					src:''
-				},
+				nowVedio:{},
 				commentsInfo:{},
 				
 				//上拉加载参数
@@ -123,6 +123,14 @@
 			},
 			isLogin(){
 				return  this.$store.getters['common/IsLogin']
+			},
+			allId(){
+				if(Object.keys(this.nowVedio).length === 0){return {}}
+				return {
+						courseId : this.courseId ,
+						videoId : this.nowVedio.id ,
+						chapterId : this.nowVedio.chapterId
+					}
 			}
 		},
 		components: {
@@ -233,10 +241,19 @@
 					}).exec();
 				})
 			},
+			isRefresh(){
+				Object.assign(this.$data,_initData);
+				this.$refs.tabs.status = 0;
+				setTimeout(() => {
+					this.firstRequest('/loco/detail/getCoursedetail','courseInfo').then(() => {
+						this.$refs.refresh.endAfter() 
+					})
+				},500)
+			}
 		}, 
 		onLoad(options) {
-			console.log(options)
 			this.courseId = options.id;
+			_initData = JSON.parse(JSON.stringify(this.$data));
 			this.getNodeHeight('.player','initTop');
 			this.getNodeHeight('.underBar','underBarHeight');
 			this.firstRequest('/loco/detail/getCoursedetail','courseInfo'); // /getCoursedetail
@@ -247,21 +264,18 @@
 			    duration: 0
 			});
 		},
-		onPullDownRefresh() {
-			// this.courseInfo = {};
-			this.chapterList = [];
-			this.nowVedio = '';
-			this.commentsInfo = {};
-			this.$refs.tabs.status = 0;
-			this.star = 0;
-			this.more = 'more';
-			this.nowVedio = { id:'', src:''},
-			setTimeout(() => {
-				this.firstRequest('/loco/detail/getCoursedetail','courseInfo').then(() => {
-					uni.stopPullDownRefresh()
-				})
-			},500)
+		onBackPress() {
+			this.$refs['showpopup'].close()
 		},
+		// onPullDownRefresh() {
+		// 	Object.assign(this.$data,_initData);
+		// 	this.$refs.tabs.status = 0;
+		// 	setTimeout(() => {
+		// 		this.firstRequest('/loco/detail/getCoursedetail','courseInfo').then(() => {
+		// 			uni.stopPullDownRefresh()
+		// 		})
+		// 	},500)
+		// },
 		onReachBottom() {
 			if(this.$refs.tabs.status == 0) this.$refs.tabs.swiperHeight();
 			if(this.$refs.tabs.status == 2 && this.more !== 'noMore'){

@@ -23,7 +23,8 @@
 	@import url("./style/uxIcon.css");
 	.page {
 		width: 100%;
-		min-height: 100%;
+	    min-height: calc(100% - constant(safe-area-inset-bottom)); 
+	    min-height: calc(100% - env(safe-area-inset-bottom)); 
 		background: #f7f7f7;
 		position: absolute;
 		font-family: "微软雅黑", Helvetica Neue,Helvetica,Arial,Sans-serif;
@@ -34,6 +35,7 @@
 		/* #endif */
 	} 
 	.xBottom {
+		/*Bottombar用*/
 		/*iphone全面屏底部适配*/
 		padding-bottom: constant(safe-area-inset-bottom) !important;
 		padding-bottom: env(safe-area-inset-bottom) !important;

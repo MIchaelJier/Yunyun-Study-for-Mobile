@@ -3,7 +3,10 @@
 		<block v-for="(item,index) in chapterList" :key="index">
 			<view class="listTitile">{{ item.title }}</view>
 			<view class="dirList" v-for="inner in item.body" :key="inner.id">
-				<view class="dirList-content" :style="{color:inner.src === ''?'#ccc':'#333'}" @click="changeSrc({id:inner.id,src:inner.src})">
+				<view class="dirList-content" 
+					:style="{color:inner.src === ''?'#ccc':'#333'}" 
+					@click="changeSrc({id:inner.id,chapterId:item.chapterId,src:inner.src})"
+				>
 					<view class="dirList-content-icon" :style="{'border-color':inner.src === ''?'#ccc':'#333'}">
 						{{ inner.type === 0 ? '视频' : '' }}
 						{{ inner.type === 1 ? '音频' : '' }}

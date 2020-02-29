@@ -50,6 +50,7 @@
 
 <script>
 	import { queryParams } from "@/utils/myMath.js"
+	// let _initData = {};
 	export default {
 		data() {
 			return {
@@ -81,6 +82,7 @@
 			}
 		},
 		onLoad() {
+			 // _initData = JSON.parse(JSON.stringify(this.$data));
 			if(this.isLogin){
 				this.firstRequest('/loco/assets/getMyCourses','my_courses');
 			}else{
@@ -101,10 +103,7 @@
 			},
 			isRefresh(){
 				setTimeout(() => {
-					this.my_microSpecialty = [];
-					this.star_courses = 0;
-					this.star_microSpecialty = 0;
-					this.tabs_status = 0;
+					Object.assign(this.$data,this.$options.data());
 					this.$refs.tabs.status = 0;
 					this.firstRequest('/loco/assets/getMyCourses','my_courses').then( res => {
 						this.$refs.refresh.endAfter() 
