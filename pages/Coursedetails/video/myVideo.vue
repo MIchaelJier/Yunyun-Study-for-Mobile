@@ -11,7 +11,7 @@
 		>
 			<!-- 注意 App端不支持 cover-view的嵌套使用 -->
 			<!-- #ifndef APP-PLUS -->
-				<cover-view class="video-control" >
+				<cover-view class="video-control">
 					<cover-view class="multi rate" @tap="showSwitchRate">x {{ currentRate }}</cover-view>
 				</cover-view>
 				<cover-view class="multi-list rate" :class="{ active: rateShow }">
@@ -25,6 +25,12 @@
 					>
 						{{ item }}
 					</cover-view>
+				</cover-view>
+			<!-- #endif -->
+			
+			<!-- #ifdef APP-PLUS -->
+				<cover-view class="video-control multi rate"  @tap="showSubNvue">
+					x {{ currentRate }}
 				</cover-view>
 			<!-- #endif -->
 		</video>
@@ -104,7 +110,16 @@
 					that.rateShow = false;
 					console.log(rate)
 					this.videoContext.playbackRate(rate);
-				}
+				},
+			// #endif
+			// #ifdef APP-PLUS
+				showSubNvue() {
+					const subNvue=uni.getSubNVueById('Fast_forward');
+					subNvue.show('slide-in-right',200);
+					uni.$on('Fast_forward_rate', (data) => {
+						this.currentRate = data;
+					})  
+				},
 			// #endif
 		},
 		mounted() {

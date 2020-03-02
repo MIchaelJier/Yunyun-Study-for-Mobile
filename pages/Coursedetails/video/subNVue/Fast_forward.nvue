@@ -1,0 +1,68 @@
+<template>
+	<div class="content">
+		<div class="content-left">
+			<div
+				v-for="(item, index) in ['0.5', '0.8', '1.0', '1.25', '1.5']"
+				:key="index"
+				class="multi-item rate"
+				@click="switchRate(item)"
+				:class="{ active: item == currentRate }"
+			>
+				<text class="multi-item-text">
+					{{ item }}
+				</text>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			statusBarHeight:20,
+			currentRate: 1.0,
+			
+		};
+	},
+	methods:{
+		switchRate(rate) {
+			let that = this;
+			that.currentRate = rate;
+			console.log(rate)
+			uni.$emit('Fast_forward_rate', rate);
+		},
+	},
+	mounted() {
+		uni.getSystemInfo({
+			success: (res)=>{
+				this.statusBarHeight = res.statusBarHeight;
+			}
+		});
+	},
+};
+</script>
+<style>
+
+.content {
+	background-color: rgba(0, 0, 0, 0);
+	flex-direction: column;
+	height: 422rpx;
+	align-items: flex-end;
+}
+.content-left{
+	background-color: rgba(0, 0, 0, 0.65);
+	width: 250px;
+}
+.multi-item {
+	text-align: center;
+	height: 84.4rpx;
+	width: 250px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.multi-item-text {
+	color: #fff;
+	font-size: 25px;
+}
+</style>

@@ -66,8 +66,21 @@
             "style" : {
 				// "enablePullDownRefresh": true,
 				"app-plus":{
-					"titleNView":false
-					}
+					"titleNView":false,
+					"subNVues": [{
+					    "id": "Fast_forward", // 唯一标识 
+					    "path": "pages/Coursedetails/video/subNVue/Fast_forward", // 页面路径  
+					    "type":"popup",
+						"style": { 
+							"position":"absolute",
+							"dock":"left",
+							"height": "422rpx",
+							"width":"422rpx",
+							"top":"20px",
+							"background":"transparent"
+							} 
+					    }]	  	
+				}
 			}
         }
 

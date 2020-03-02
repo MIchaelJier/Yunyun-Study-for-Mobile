@@ -1,5 +1,6 @@
 <template>
 	<view class="page" :class="courseInfo.isOwn ? 'xBottom' : ''">
+	<!-- <view> -->
 		<yun-refresh @isRefresh='isRefresh' ref="refresh">
 			<!-- 视频 开始 -->
 			<view class="player">
