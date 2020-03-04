@@ -166,6 +166,15 @@
 					}
 			}
         }
+        ,{
+            "path" : "pages/payment/payment",
+            "navigationBarTitleText": "支付",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

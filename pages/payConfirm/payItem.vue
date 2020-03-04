@@ -100,6 +100,9 @@
 			 },
 			 sum(value){
 				 this.$emit('getSum',parseFloat(value))
+			 },
+			 usedConpon(now){
+				 this.$emit('addUsedConpon',parseInt(this.listKey),this.coupon.length > 0 ? this.coupon[parseInt(now)].couponId : '')
 			 }
 		},
 		props: {
@@ -115,13 +118,24 @@
 			    	return {};
 			    }
 			},
+			listKey: {
+				type: [Number,String],
+				default: 0
+			}
 		},
 		mounted() {
-			this.sum(this.afterCouponPrice);
+			this.$nextTick(function(){
+				this.sum(this.afterCouponPrice);
+				this.usedConpon(this.nowCoupon)
+			})
 		},
 		watch:{
 			afterCouponPrice(newVal,oldVal){
 				this.sum(newVal - oldVal)
+			},
+			nowCoupon(newVal,oldVal){
+				console.log(newVal)
+				this.usedConpon(newVal)
 			}
 		}
 	}

@@ -16,6 +16,7 @@ export const pageIndexSetting = [
 	{path:'pages/coupon/coupon',index:11},
 	{path:'pages/cart/cart',index:11},
 	{path:'pages/payConfirm/payConfirm',index:12},
+	{path:'pages/payment/payment',index:13},
 	// {path:'',index:},
 	// {path:'',index:},
 ]

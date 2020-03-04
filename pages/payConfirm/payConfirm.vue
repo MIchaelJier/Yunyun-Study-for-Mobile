@@ -24,8 +24,8 @@
 		<view class="content">
 			
 			<view class="payItem">
-				<block v-for="item in payList" :key="item.ownerDto.ownerId" >
-					<pay-item :payList="item.list" :ownerMsg="item.ownerDto" @getSum="countSum"></pay-item>
+				<block v-for="(item,index) in payList" :key="item.ownerDto.ownerId" >
+					<pay-item :payList="item.list" :ownerMsg="item.ownerDto" :listKey="index" @getSum="countSum" @addUsedConpon="addUsedConpon"></pay-item>
 				</block>
 				<view class="payItem-count">总计：￥{{ decimalAllPayPrice }}</view>
 				<view class="payItem-coupon" v-if="coupon.length > 0">
@@ -79,7 +79,7 @@
 					<text>实付金额：</text>
 					<text style="color: #ff4400">￥{{ payPrice }}</text>
 			</view>
-			<view class="submitArea-btn">提交订单</view>
+			<view class="submitArea-btn" @click="confirmToPay">提交订单</view>
 		</view>
 		<!-- 总金额和确认按钮 结束 -->
 		<!-- 拟态框 开始-->
@@ -90,7 +90,7 @@
 
 <script>
 	import payItem from './payItem.vue';
-	import { toDecimal } from '../../utils/myMath.js';
+	import { toDecimal, queryParams } from '../../utils/myMath.js';
 	export default {
 		data() {
 			return {
@@ -157,15 +157,57 @@
 							- 
 						parseFloat(this.coupon.length > 0 ? this.coupon[this.nowCoupon].amount : 0)
 					)
+			},
+			orderList(){
+				let list = [];
+				this.payList.forEach( item => {
+					item.list.forEach( (inner,index) => {
+						let obj = {
+							courseId: inner.productId ,
+							couponId: ''
+						}
+						index === 0 ? obj.couponId = item.couponId : ''
+						list.push(obj)
+					})
+				})
+				return list
 			}
 		},
 		components: {
 			payItem
 		},
 		methods: {
+			// 提交订单 后台确认信息
+			confirmToPay(){
+				// let data = 
+				// this.$request({
+				//    url: `/loco/pay/createOrder`,
+				//    method: 'POST',
+				//    header:{
+				//    		'Content-Type':'application/json'
+				//    },
+				//    data:JSON.stringify({
+				// 	orderList: this.orderList ,
+				// 	payType: this.nowmethods + 1
+				// 	})
+				//   }).then(res => {
+				// 		if(res.data.status){
+				// 			console.log(res.data.data)
+				// 		}
+				// });	
+				// 1235204764451737600
+				let OrderNo = '1235204764451737600';
+				uni.navigateTo({
+					url:`/pages/payment/payment?orderNo=${OrderNo}&pricePaid=${this.payPrice}&payType=${this.nowmethods + 1}`
+				})
+			},
 			//sum
 			countSum(value){
 			    this.allPayPrice += value;
+			},
+			//在payList中第一项加入使用的优惠券id
+			addUsedConpon(index,value){
+				this.payList[index].couponId = value
 			},
 			// 点击 选择支付方式 改变勾选
 			choosePayMethods(index){

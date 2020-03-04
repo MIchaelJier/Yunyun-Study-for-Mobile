@@ -54,7 +54,7 @@ export const request = (params, isCheckToken = true) => {
 						icon:'none',
 						duration:500
 					})
-					uni.redirectTo({
+					uni.navigateTo({
 						url:'/pages/chooseLogin/chooseLogin'
 					})
 				}
