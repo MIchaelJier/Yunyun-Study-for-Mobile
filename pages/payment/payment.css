@@ -1,0 +1,75 @@
+	.topBar{
+		height: 120rpx;
+		line-height: 120rpx;
+		border-bottom: 1px solid #ddd;
+		background: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+		.topBar-icon{
+			width: 60rpx;
+			height: 60rpx;
+		}
+	.mainInfo {
+		margin-top: 60rpx;
+		background: #fff;
+		border-top: 1px dashed #e5e5e5;
+		border-bottom: 1px dashed #e5e5e5;
+	}
+		.mainInfo-price {
+			font-size: 30px;
+			margin-top: 20rpx;
+			text-align: center;
+		}
+		.canvas {
+			margin-top: 50rpx;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-content: center;
+		}
+		.mainInfo-notice {
+			text-align: center;
+			font-size: 14px;
+			margin: 10rpx 0;
+			padding-bottom: 4rpx;
+			letter-spacing: 4rpx;
+			color: red;
+		}
+		.mainInfo-scan {
+			border-top: 1px dashed #e5e5e5;
+			height: 200rpx;
+			width: 100%;
+			padding: 20rpx 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+			.mainInfo-scan-text {
+				margin-left: 20rpx;
+				font-size: 18px;
+			}
+		.success-text {
+			text-align: center;
+			font-size: 20px;
+			color: #2CC17B;
+			margin-bottom: 60rpx;
+		}
+	.success-btn {
+		margin-top: 20rpx;
+		width: 80%;
+		margin-left: 10%;
+		height: 88rpx;
+		line-height: 88rpx;
+		background: #2CC17B;
+		text-align: center;
+		color: #fff;
+		border-radius: 3px;
+		font-size: 15px;
+	}
+	.middle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}

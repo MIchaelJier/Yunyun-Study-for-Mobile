@@ -130,7 +130,8 @@
 				return {
 						courseId : this.courseId ,
 						videoId : this.nowVedio.id ,
-						chapterId : this.nowVedio.chapterId
+						chapterId : this.nowVedio.chapterId,
+						isStudy: this.nowVedio.isStudy
 					}
 			}
 		},

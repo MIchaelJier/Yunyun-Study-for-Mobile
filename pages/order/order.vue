@@ -7,15 +7,15 @@
 			</template>
 			<template v-slot:1>
 				<!-- 待支付 -->
-				<order-item :orderList="type2list" :name="tabs[1]"></order-item>
+				<order-item :orderList="type0list" :name="tabs[1]"></order-item>
 			</template>
 			<template v-slot:2>
 				<!-- 交易成功 -->
-				<order-item :orderList="type0list" :name="tabs[2]"></order-item>
+				<order-item :orderList="type1list" :name="tabs[2]"></order-item>
 			</template>
 			<template v-slot:3>
 				<!-- 交易关闭 -->
-				<order-item :orderList="type1list" :name="tabs[3]"></order-item>
+				<order-item :orderList="type2list" :name="tabs[3]"></order-item>
 			</template>
 		</yun-tab>
 	</view>
@@ -34,7 +34,7 @@
 		computed:{
 			 type0list(){return this.orderList.filter((item) => item.orderType === 0 )},
 			 type1list(){return this.orderList.filter((item) => item.orderType === 1 )},
-			 type2list(){return this.orderList.filter((item) => item.orderType === 2 )},
+			 type2list(){return this.orderList.filter((item) => item.orderType === 2 || item.orderType === 3 )},
 		},
 		components: {
 			orderItem
@@ -45,10 +45,11 @@
 		onLoad() {
 			let that = this;
 			that.$request({
-			   url: '/getOrder',
+			   url: '/loco/assets/getOrder',
 			   method: 'GET',
+			   showLoading: true
 			  }).then(res => {
-					if(res.data.status === '200'){
+					if(res.data.status){
 						that.orderList = res.data.data;
 						this.$refs.tabs.swiperHeight();
 					}

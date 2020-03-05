@@ -37,7 +37,7 @@
 					   :haveBottom="false">
 			</yunThemes>
 		</view>
-		<navigator :url="'/pages/allCourse/allCourse?id=' + provider">
+		<navigator :url="'/pages/allCourse/allCourse?id=' + providerId">
 			<view class="moreCourse">查看全部课程</view>
 		</navigator>
 	</view>
@@ -47,7 +47,7 @@
 	export default {
 		data() {
 			return {
-				provider:'',
+				providerId:'',
 				providerInfo:{},
 				swiperList:[],
 				goodCourseList:[]
@@ -78,7 +78,7 @@
 			},
 		},
 		onLoad(options) {
-			this.providerId = options.id;
+			this.providerId = options.ownerId;
 			this.AllfirstRequest().then(res => {
 				uni.setNavigationBarTitle({
 				　　title: res[2].providername

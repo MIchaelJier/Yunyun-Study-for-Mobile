@@ -7,8 +7,9 @@
 				 >
 			<!-- 畅销 开始 -->
 			<template v-slot:0>
-				<course-list reqUrl="/getPopularList" 
+				<course-list reqUrl="/loco/search/getSearchResult" 
 							:providerId="providerId" 
+							reqType="2"
 							@afterReq="swiperHeight()"  
 							ref="popular">
 				</course-list>
@@ -16,8 +17,9 @@
 			<!-- 畅销 结束-->
 			<!-- 好评 开始 -->			
 			<template v-slot:1>
-				<course-list reqUrl="/getPopularList" 
+				<course-list reqUrl="/loco/search/getSearchResult" 
 							:providerId="providerId"
+							reqType="1"
 							 @afterReq="swiperHeight()"  
 							 ref="praised">
 				 </course-list>
@@ -25,8 +27,9 @@
 			<!-- 好评 结束 -->			
 			<!-- 最新 开始 -->			
 			<template v-slot:2>
-				<course-list reqUrl="/getPopularList" 
+				<course-list reqUrl="/loco/search/getSearchResult" 
 							:providerId="providerId" 
+							reqType="3"
 							@afterReq="swiperHeight()"  
 							ref="newest">
 				</course-list>

@@ -7,25 +7,32 @@
 						<text>{{ item.tradeTime }}</text>
 						<text style="margin-left: 20rpx;">订单号：{{ item.orderId }}</text>
 					</view>
-					<view class="item-middle">
-						<view class="middle-img">
-							<yun-image :src="item.photoUrl" radius="20rpx"></yun-image>
+					<block v-for="inner in item.paidList" :key="inner.productId">
+						<view class="item-middle">
+							<view class="middle-img">
+								<yun-image :src="inner.photoUrl" radius="20rpx"></yun-image>
+							</view>
+							<view class="middle-msg">
+								<text class="msg-title">{{ inner.courseName }}</text>
+								<text class="msg-limit" v-if="inner.deadlineTime === 0">永久可看</text>
+								<text class="msg-limit" v-else>有效期至 {{ inner.deadlineTime }}</text>
+								<view><text class="msg-price">￥{{ inner.nprice }}</text><text class="msg-oprice">￥{{ inner.oprice }}</text></view>
+							</view>
 						</view>
-						<view class="middle-msg">
-							<text class="msg-title">{{ item.courseName }}</text>
-							<text class="msg-limit" v-if="item.deadlineTime === 0">永久可看</text>
-							<text class="msg-limit" v-else>有效期至 {{ item.deadlineTime }}</text>
-							<view><text class="msg-price">￥{{ item.nprice }}</text><text class="msg-oprice">￥{{ item.oprice }}</text></view>
-						</view>
-					</view>
+					</block>
 					<view class="item-bottom">
-						<text>实付: </text>
-						<text class="bottom-actuallyPaid">￥{{ item.actuallyPaid }}</text>
+						<block v-if="item.actuallyPaid === '未支付'">
+							<text class="bottom-actuallyPaid">未支付</text>
+						</block>
+						<block v-else>
+							<text>实付: </text>
+							<text class="bottom-actuallyPaid">￥{{ item.actuallyPaid }}</text>
+						</block>
 					</view>
 					<view class="item-footer">
-						<text v-if="item.orderType === 0">交易成功</text>
-						<text v-else-if="item.orderType === 1">交易关闭</text>
-						<text v-else>待支付</text>
+						<text v-if="item.orderType === 1">交易成功</text>
+						<text v-else-if="item.orderType === 2 || item.orderType === 3">交易关闭</text>
+						<text v-else-if="item.orderType === 0 ">待支付</text>
 					</view>
 				</view>
 			</block>

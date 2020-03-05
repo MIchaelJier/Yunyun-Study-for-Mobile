@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<block v-for="(item, index) in list" :key="index">
-			<yun-box :image="item.picsrc" :title="item.title" :url="item.url" :titleFontSize="15" lazy>
+			<yun-box :image="item.picsrc" :title="item.title" :url="'/pages/Coursedetails/Coursedetails?id=' + item.url" :titleFontSize="15" lazy>
 				<view class="item-content">
 					<view class="item-content__num sb">
 						<text>共{{ item.chapterNum }}课时</text>
@@ -30,7 +30,7 @@
 				iconSize: 18,
 				more:'more',
 				start:0,
-				add:9,
+				add:7,
 			}
 		},
 		props:{
@@ -54,24 +54,29 @@
 				return new Promise((resolve, reject) => {
 					that.$request({
 					   url: that.reqUrl,
-					   method: 'GET',
-					   data:{
-						   providerId: that.providerId,
-						   type:that.reqType, 
-						   start:that.start,
-						   add:that.add,
-					   }		   
+					   method: 'POST',
+					   header:{
+					   	  'Content-Type':'application/json'
+					   },
+					   data:JSON.stringify({
+						   lecturerUserNo: that.providerId,
+						   orderType: parseInt(that.reqType), 
+						   priceType: 0,
+						   current:that.start + 1,
+						   size:that.add,
+					   })		    
 					  }).then(res => {
-							if(res.data.status === '200'){
-								let data = res.data.data;
+							if(res.data.status){
+								let data = res.data.data.searchresult;
 								if(times === 0){
 									that.list = data;
+									that.start += 1;
 									data.length === that.add ? that.more = 'more' :  that.more = 'noMore';
 									that.$emit('afterReq');
 								}else{
 									setTimeout(() => {
-										that.start += that.add;
-										data.length === that.add ? that.more = 'more' :  that.more = 'noMore'
+										that.start += 1;
+										data.length === that.add ? that.more = 'more' :  that.more = 'noMore';
 										that.list.push(...data);
 										that.$emit('afterReq');
 									},500)

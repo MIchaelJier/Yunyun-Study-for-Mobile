@@ -13,7 +13,7 @@
 		padding: 10rpx 0;
 		text-align: center;
 		transition: color ease 0.3s;
-		/* #ifdef */
+		/* #ifdef APP-PLUS */
 		/* background-color: rgba(0, 0, 0, 0.1); */
 		background-color: green;
 		/* #endif */

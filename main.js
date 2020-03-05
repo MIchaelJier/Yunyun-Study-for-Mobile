@@ -45,6 +45,7 @@ Vue.prototype.$store = store
 	import uniCollapseItem from './uniUI/components/uni-collapse-item/uni-collapse-item.vue'
 	import uniPopup from './uniUI/components/uni-popup/uni-popup.vue'
 	import uniLoadMore from './uniUI/components/uni-load-more/uni-load-more.vue'
+	import uniCountdown from './uniUI/components/uni-countdown/uni-countdown.vue'
 	Vue.component('uniList',uniList);
 	Vue.component('uniRate',uniRate);
 	Vue.component('uniListItem',uniListItem);
@@ -53,6 +54,7 @@ Vue.prototype.$store = store
 	Vue.component('uniCollapseItem',uniCollapseItem);
 	Vue.component('uniPopup',uniPopup);
 	Vue.component('uniLoadMore',uniLoadMore);
+	Vue.component('uniCountdown',uniCountdown);
 
 Vue.config.productionTip = false;
 

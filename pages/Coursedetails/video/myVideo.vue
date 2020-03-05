@@ -6,6 +6,7 @@
 			@pause="updateLearnTime"
 			@ended="updateLearnTime"
 			controls
+			enable-danmu danmu-btn :danmu-list="danmuList"
 			class="video"
 			id="myVideo"
 		>
@@ -46,7 +47,17 @@
 				videoContext: '',
 				controlShow: false,
 				rateShow: false,
-				currentRate: 1.0
+				currentRate: 1.0,
+				danmuList: [{
+                    text: '第 1s 出现的弹幕',
+                    color: '#ff0000',
+                    time: 1
+                },
+                {
+                    text: '第 3s 出现的弹幕',
+                    color: '#ff00ff',
+                    time: 3
+                }]
 			}
 		},
 		computed:{
@@ -88,8 +99,11 @@
 						courseId: parseInt(this.allId.courseId),
 						chapterId: parseInt(this.allId.chapterId),
 					}
+					const url = this.allId.isStudy 
+									? `/loco/detail/updateAlreadyLearnTime${queryParams(data,true)}` 
+									: `/loco/detail/updateLearnTime${queryParams(data,true)}`
 					this.$request({ 
-					   url: `/loco/detail/updateLearnTime${queryParams(data,true)}`,
+					   url,
 					   method: 'POST',	   
 					})
 				}
