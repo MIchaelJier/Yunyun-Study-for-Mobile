@@ -62,5 +62,7 @@
 </script>
 
 <style>
-	@import url("order.css");
+	.page {
+		background: #F6F6F6;
+	}
 </style>

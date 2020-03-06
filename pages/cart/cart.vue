@@ -73,6 +73,9 @@
 						})
 					}
 				});
+				// 再点击单一课程时候，vue的深度监视好像有点毛病
+				// 在这里再确认一遍，双保险
+				this.changeTotal(this.cartList);
 				this.allisCheck();
 			},
 			itemCheck(id){
@@ -97,6 +100,23 @@
 			},
 			allisCheck(){
 				this.allcheckedFlag = this.cartList.every(item => item.list.every(c => c.checked));
+			},
+			changeTotal(newVal){
+				let total = 0,
+					list = []
+				newVal.forEach( item => {
+						let itemTotal = 0; 
+						item.list.forEach( course => {
+							if(course.checked){
+								let price = parseFloat(course.discountPrice);
+								total += price;
+								itemTotal += price;
+							}
+						})
+						list.push(toDecimal(itemTotal))
+					})
+				this.totalCount = toDecimal(total)
+				this.itemsCount = list
 			}
 		},
 		watch:{
@@ -104,21 +124,7 @@
 				immediate:true,
 				deep:true,
 				handler(newVal,oldVal){
-					let total = 0,
-						list = []
-					newVal.forEach( item => {
-							let itemTotal = 0; 
-							item.list.forEach( course => {
-								if(course.checked){
-									let price = parseFloat(course.discountPrice);
-									total += price;
-									itemTotal += price;
-								}
-							})
-							list.push(toDecimal(itemTotal))
-						})
-					this.totalCount = toDecimal(total)
-					this.itemsCount = list
+					this.changeTotal(newVal)
 				}
 			},
 		}

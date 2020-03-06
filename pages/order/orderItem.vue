@@ -21,6 +21,7 @@
 						</view>
 					</block>
 					<view class="item-bottom">
+						<text>（{{ item.payType === 2 ? '支付宝':'微信'}}）</text>
 						<block v-if="item.actuallyPaid === '未支付'">
 							<text class="bottom-actuallyPaid">未支付</text>
 						</block>
@@ -30,9 +31,16 @@
 						</block>
 					</view>
 					<view class="item-footer">
-						<text v-if="item.orderType === 1">交易成功</text>
-						<text v-else-if="item.orderType === 2 || item.orderType === 3">交易关闭</text>
-						<text v-else-if="item.orderType === 0 ">待支付</text>
+						<view>
+							<text v-if="item.orderType === 1">交易成功</text>
+							<text v-else-if="item.orderType === 2 || item.orderType === 3">交易关闭</text>
+							<text v-else-if="item.orderType === 0 ">待支付</text>
+						</view>
+						
+						<view class="footer-btn" v-if="item.orderType !== 1 " :style="{borderColor: item.orderType === 0 ? '#ff4400' : ''}">
+							<text v-if="item.orderType === 2 || item.orderType === 3">删除订单</text>
+							<text v-else-if="item.orderType === 0" style="color: #ff4400;">取消订单</text>
+						</view>
 					</view>
 				</view>
 			</block>
@@ -69,100 +77,5 @@
 </script>
 
 <style>
-	.order-item {
-		background: #FFF;
-		margin-bottom: 16rpx;
-	}
-	.item-top {
-		display: flex;
-		align-items: center;
-		padding: 0 20rpx 0 20rpx;
-	    line-height: 68rpx;
-	    font-size: 12px;
-	    color: #3c4a55;
-	    background: #fff;
-	}
-	.item-middle {
-		padding: 31rpx 20rpx;
-		background: #FAFAFA;
-	}
-		.middle-img {
-			width: 200rpx;
-			height: 126rpx;
-			border-radius: 6px;
-			float: left;
-			background: #E6EAF2;
-			overflow: hidden;
-		}
-		.middle-msg {
-			display: flex;
-			flex-direction: column;
-			padding-left: 20rpx;
-		}
-			.msg-title {
-				height: 36rpx;
-				line-height: 36rpx;
-				font-size: 14px;
-				color: #3c4a55;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				text-decoration: none;
-			}
-			.msg-limit {
-				padding: 10rpx 0;
-				font-size: 12px;
-				color: #999;
-				line-height: 24rpx;
-			}
-			.msg-price {
-				font-size: 14px;
-			}
-			.msg-oprice {
-				font-size: 14px;
-				text-decoration: line-through;
-				color: #99a4bf;
-				margin-left: 5px;
-				font-size: 14px;
-				line-height: 12px;
-			}
-		.item-bottom {
-			padding: 44rpx 20rpx 16rpx 20rpx;
-			text-align: right;
-			color: #70788c;
-			border-bottom: 1px solid #f1f1f1;
-			font-size: 12px;
-		}
-			.bottom-actuallyPaid {
-				color: #ff4400;
-				font-size: 15px;
-			}
-		.item-footer {
-			padding: 14rpx 10px;
-			color: #70788c;
-			font-size: 12px;
-			height: 56rpx;
-			line-height: 56rpx;
-		}
-	.none {
-		height: 50vh;
-		width: 100%;
-		display: flex;
-		flex-direction:column;
-		justify-content: flex-end;
-		align-items: center;
-	}
-		.noimg {
-			width: 200rpx;
-			height: 136rpx;
-		}
-		.nodata {
-			width: 80%;
-			text-align: center;
-			line-height: 2;
-			font-size: 15px;
-			color: #99a4bf;
-			margin: 20rpx auto;
-			margin-bottom: 0;
-		}
+	@import url("orderItem.css");
 </style>

@@ -87,6 +87,7 @@
 				   method: 'GET'
 				  }).then(res => {
 					  const qr_code = res.data.alipay_trade_precreate_response.qr_code;
+					  const msg = res.data.alipay_trade_precreate_response.msg;
 					  // const qr_code = 'https://qr.alipay.com/bax07872wgqqczm9ouzx0088';
 						if(qr_code){
 							uQRCode.make({
@@ -100,6 +101,13 @@
 								complete: () => {
 									uni.hideLoading()
 								}
+							})
+						}else if(msg){
+							uni.showToast({
+								title: msg,
+								mask:true,
+								icon: 'none',
+								duration: 500
 							})
 						}
 				});	

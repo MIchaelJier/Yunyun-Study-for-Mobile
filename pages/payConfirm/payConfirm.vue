@@ -192,8 +192,8 @@
 					payType: this.nowmethods + 1
 					})
 				  }).then(res => {
-						if(res.data.status){
-							let OrderNo = res.data.data.OrderNo;
+						if(res.data.status ? res.data.data.orderNo : false){
+							let OrderNo = res.data.data.orderNo;
 							uni.navigateTo({
 								url:`/pages/payment/payment?orderNo=${OrderNo}&pricePaid=${this.payPrice}&payType=${this.nowmethods + 1}`
 							})
