@@ -14,7 +14,7 @@
 							<text>{{ item.createTime }}－ {{ item.endTime }}</text>
 						</view>
 					</view>
-					<navigator :url="item.creatorUrl" hover-class="none">
+					<navigator :url=" navigatorUrl(item.targetType,item.creatorUrl)" hover-class="none">
 						<view class="item-bottom">
 							<view class="bottom-msg">
 								<text>优惠提供：{{ item.creatorName }}</text>
@@ -39,6 +39,23 @@
 			return {
 			
 			};
+		},
+		computed:{
+			navigatorUrl(){
+				return (type,url) => {
+					switch (type){
+						case 2:
+							return `/pages/Coursedetails/Coursedetails?id=${url}`;
+							break;
+						case 1:
+							return `/pages/provider/provider?ownerId=${url}`;
+							break;
+						default:
+							return '/pages/index/index';
+							break;
+					}
+				}
+			}
 		},
 		props:{
 			couponList: {

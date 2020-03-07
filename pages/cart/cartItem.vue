@@ -3,7 +3,7 @@
 		<view class="cart-item">
 			<checkbox-group class="item-title" :data-id="ownerMsg.ownerId" @change="allCheck">
 				<checkbox :value="ownerMsg.ownerId" :checked="allChecked" color="#ff632a" style="transform:scale(0.6)"/>
-				<text>{{ ownerMsg.ownername }}</text>
+				<text @click.stop="enter('/pages/provider/provider?ownerId=' + ownerMsg.ownerId)">{{ ownerMsg.ownername }}</text>
 			</checkbox-group>
 			<checkbox-group class="item-courses" :data-id="ownerMsg.ownerId" @change="courseCheck">
 				<label class="course" v-for="course in cartList" :key="course.productId">
@@ -11,7 +11,7 @@
 					:checked="course.checked" 
 					color="#ff632a" class="course-checkbox"
 					/>
-					<view class="course-body">
+					<view class="course-body" @click.stop="enter('/pages/Coursedetails/Coursedetails?id=' + course.productId)">
 						<view class="course-img">
 							<yun-image :src="course.photoUrl"></yun-image>
 						</view>
@@ -123,6 +123,13 @@
 			cancel(){
 				this.delProductId = '';
 			},
+			enter(url) {
+				if(url && url !== ''){
+					uni.navigateTo({
+						url: url
+					})
+				}
+			}
 		},
 	}
 </script>

@@ -28,6 +28,9 @@
 			<view class="success-btn" @click="successPay">
 				我已完成支付
 			</view>
+			<view class="success-btn" style="background: #ff632a;" @click="cancelPay">
+				取消订单
+			</view>
 		</block>
 		<block v-else>
 			<view class="mainInfo">
@@ -63,7 +66,46 @@
 		},
 		methods: {
 			successPay(){
-				this.paySuccess = true
+				this.$request({
+				   url: '/loco/pay/getOrderStatus',
+				   method: 'GET',
+				   data:{
+					   orderId: this.info.orderNo
+				   },
+				   showLoading: true
+				  }).then(res => {
+					  if(res.data.data ? res.data.data.orderType === 1 : false){
+						  this.paySuccess = true
+					  }else{
+						  uni.showToast({
+						  	title: '您的订单尚未支付成功',
+						  	mask: true,
+						  	icon: 'none',
+						  	duration: 1000
+						  })
+					  }
+				  })
+			},
+			cancelPay(){
+				this.$request({
+				   url: `/loco/assets/cancelOrder?orderNo=${this.info.orderNo}`,  
+				   method: 'POST',
+				   showLoading: true
+				}).then(res => {
+					let title = res.data.status ? '取消成功' : '取消失败'
+					uni.showToast({
+						title,
+						icon:'none',
+						duration:1000
+					})
+					if(res.data.status){
+						setTimeout( () => {
+							uni.switchTab({
+								url: '/pages/index/index'
+							});
+						},1000)
+					}
+				})
 			},
 			backIndex(){
 				uni.switchTab({

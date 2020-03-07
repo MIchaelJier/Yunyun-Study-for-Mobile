@@ -12,7 +12,7 @@
 							<text class="item-content__num__star">{{ item.star }}星</text>
 							<text style="color: #8B8F97">{{ item.learned }}人学过</text>
 						</view>
-						<view class="item-content__num__price-red">￥{{ item.nprice }}</view>
+						<view class="item-content__num__price-red">{{ item.nprice === '0.00' ? '免费' : '￥' + item.nprice }}</view>
 					</view>
 				</view>
 			</yun-box>

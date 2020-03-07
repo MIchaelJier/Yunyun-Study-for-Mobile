@@ -63,7 +63,7 @@
 						:style="[{'z-index': refShow ? '-1':''}]"
 						> <!-- {height: searchResultArr === '' ? '100vh':''}, -->
 							<block v-for="(item, index) in searchResultArr" :key="index"> <!-- :key="item.id" -->
-								<yun-box :image="item.picsrc" :title="item.title" :url="item.url" lazy>				
+								<yun-box :image="item.picsrc" :title="item.title" :url="'/pages/Coursedetails/Coursedetails?id=' + item.url" lazy>				
 									<view class="item-up">
 										<view class="item-up-u">
 											<uni-rate :value="item.star" size="10" disabled="true"></uni-rate>
@@ -122,12 +122,12 @@
 		},
 		computed:{
 			refShow(){
-				const select = this.$refs['select'],
-					  sort = this.$refs['sort'];
-				if(select && sort)
-					return this.$refs['select'].vShow || this.$refs['sort'].vShow
+				const select = this.$refs['select'] || {vShow:false},
+					  sort = this.$refs['sort'] || {vShow:false};
+				if((this.showSelect || select.vShow) || (this.showSort || sort.vShow))
+					return select.vShow || sort.vShow
 				else 
-					return true
+					return false
 			}
 		},
 		onLoad() {

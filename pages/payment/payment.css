@@ -57,9 +57,8 @@
 			margin-bottom: 60rpx;
 		}
 	.success-btn {
-		margin-top: 20rpx;
 		width: 80%;
-		margin-left: 10%;
+		margin: 20rpx 10%;
 		height: 88rpx;
 		line-height: 88rpx;
 		background: #2CC17B;

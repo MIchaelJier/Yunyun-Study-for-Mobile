@@ -37,7 +37,13 @@
 							<text v-else-if="item.orderType === 0 ">待支付</text>
 						</view>
 						
-						<view class="footer-btn" v-if="item.orderType !== 1 " :style="{borderColor: item.orderType === 0 ? '#ff4400' : ''}">
+						<view class="footer-btn" 
+							  v-if="item.orderType !== 1 " 
+							  :style="{borderColor: item.orderType === 0 ? '#ff4400' : ''}"
+							  :data-ordertype="item.orderType"
+							  :data-orderid="item.orderId"
+							  @click="delOrder"
+						>
 							<text v-if="item.orderType === 2 || item.orderType === 3">删除订单</text>
 							<text v-else-if="item.orderType === 0" style="color: #ff4400;">取消订单</text>
 						</view>
@@ -71,6 +77,13 @@
 			name: {
 				type: String,
 				default: ''
+			}
+		},
+		methods:{
+			delOrder(e){
+				const type = e.currentTarget.dataset.ordertype,
+					  id = e.currentTarget.dataset.orderid;
+				this.$emit('modalShow',{type,id})
 			}
 		},
 	}

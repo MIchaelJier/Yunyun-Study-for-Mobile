@@ -180,7 +180,13 @@
 		methods: {
 			// 提交订单 后台确认信息
 			confirmToPay(){
-				let data = 
+				if(this.nowmethods === 0) {
+					uni.showToast({
+					    title: '抱歉，暂未支持微信支付',
+						icon:'none'
+					});
+					return;
+				}
 				this.$request({
 				   url: `/loco/pay/createOrder`,
 				   method: 'POST',
