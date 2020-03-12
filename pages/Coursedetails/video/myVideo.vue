@@ -2,10 +2,12 @@
 		<video
 			:src="mySrc" 
 			:poster="myPoster"
+			:direction="videoDirection"
 			@timeupdate="timecontrol"
 			@pause="updateLearnTime"
 			@ended="updateLearnTime"
 			controls
+			play-btn-position="center"
 			enable-danmu danmu-btn :danmu-list="danmuList"
 			class="video"
 			id="myVideo"
@@ -45,7 +47,8 @@
 			return {
 				currentTime:0,
 				videoContext: '',
-				controlShow: false,
+				controlShow: true,
+				videoDirection: -90,
 				rateShow: false,
 				currentRate: 1.0,
 				danmuList: [{
@@ -88,6 +91,10 @@
 			}
 		},
 		methods:{
+			// controlChange( {detail} ){
+			// 	console.log(detail)
+			// 	this.controlShow = !this.controlShow
+			// },
 			timecontrol({detail}){
 				this.currentTime = detail.currentTime
 			},
@@ -110,9 +117,6 @@
 			},
 			// 快进 设置
 			// #ifndef APP-PLUS
-				// videoclick(){
-				// 	this.controlShow = !this.controlShow
-				// },
 				showSwitchRate(rate) {
 					let that = this;
 					that.rateShow = true;
@@ -131,17 +135,23 @@
 					const subNvue=uni.getSubNVueById('Fast_forward');
 					subNvue.show('slide-in-right',200);
 					uni.$on('Fast_forward_rate', (data) => {
+						console.log(data)
 						this.currentRate = data;
+						this.videoContext.playbackRate(Number(data));
+						subNvue.hide();
 					})  
 				},
 			// #endif
 		},
 		mounted() {
+			// #ifdef H5
+			this.videoDirection = 90;
+			// #endif
 			this.videoContext = uni.createVideoContext('myVideo',this);		    
 		},
 		destroyed() {
 			this.updateLearnTime()
-		}
+		},
 	}
 </script>
 

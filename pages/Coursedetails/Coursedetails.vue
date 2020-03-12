@@ -224,7 +224,7 @@
 							if(res.data.status){
 								that.$data[d] = res.data.data;
 								that.$refs.tabs.swiperHeight();
-								resolve();
+								resolve(res.data.data);
 							}
 					});
 				})
@@ -258,7 +258,11 @@
 			_initData = JSON.parse(JSON.stringify(this.$data));
 			this.getNodeHeight('.player','initTop');
 			this.getNodeHeight('.underBar','underBarHeight');
-			this.firstRequest('/last/detail/getCoursedetail','courseInfo'); // /getCoursedetail
+			this.firstRequest('/last/detail/getCoursedetail','courseInfo').then( res => {
+				uni.setNavigationBarTitle({
+					title: res.productName
+				})
+			})
 		},
 		onShow() {
 			uni.pageScrollTo({

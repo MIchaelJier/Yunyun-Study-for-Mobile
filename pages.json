@@ -74,8 +74,8 @@
 						"style": { 
 							"position":"absolute",
 							"dock":"left",
-							"height": "422rpx",
-							"width":"422rpx",
+							// "height": "422rpx",
+							// "width":"422rpx",
 							"top":"20px",
 							"background":"transparent"
 							} 
