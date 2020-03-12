@@ -6,6 +6,8 @@
 ```JavaScript  
 ├─common                        // 公共组件
 │  ├─request                    // 请求封装
+│  ├─richTextRule               // 富文本规则
+│  ├─uqrcode                    // 数据转二维码
 │  ├─User                       // 用户动作(登录、注册、获取验证码、注销)封装
 │  └─globalData                 // 全局函数封装
 │ 
@@ -42,6 +44,7 @@
 │  ├─order                      // 订单页
 │  ├─phoneLogin                 // 账号密码登陆页
 │  ├─payConfirm                 // 确认支付页面
+│  ├─payment                    // 支付页面
 │  ├─provider                   // 机构/讲师 页面
 │  ├─register                   // 注册页
 │  ├─search                     // 搜索页
@@ -58,6 +61,7 @@
 │
 ├─utils                         // 公共函数
 │  ├─mymath.js                  // 计算函数
+│  ├─fileType.js                // 图片等文件类型转换函数
 │  └─timeFormat.js              // 时间格式转换函数
 │ 
 ├─.gitignore                    // git提交忽略设置文件
@@ -77,32 +81,37 @@ uni-app |  基于 Vue.js 的前端跨端开发框架 | [https://uniapp.dcloud.io
 uni-ui | 官方跨端ui库 | [https://uniapp.dcloud.io/component/README?id=uniui](https://uniapp.dcloud.io/component/README?id=uniui) |  
 sass | css处理器 | [https://www.sass.hk/guide/](https://www.sass.hk/guide/) |
 vuex | vue状态管理器 | [https://vuex.vuejs.org/zh/](https://vuex.vuejs.org/zh/) |  
-yapi | 可视化接口管理平台（模拟接口管理，已部署在个人服务器上） | [https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md](https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md) <br> 基于[mockjs](http://mockjs.com) | 
+yapi | 可视化接口管理平台 | [https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md](https://www.bookstack.cn/read/YApi-zh/docs-documents-api.md) <br> 基于[mockjs](http://mockjs.com) | 
 V5   | 客户端识别及验证控件 | [http://help.verify5.com](http://help.verify5.com/hc/kb/article/1332405/) | 
 
 ### 相关链接  
-github地址: [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://github.com/MIchaelJier/Yunyun-Study-for-Mobile).  
-部署网址：[http://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/).  
-小程序：个人微信搜索“芸云学堂”.  
-后端接口文档：[芸云课堂后端接口文档](https://zfroot.top:8081/yun/doc.html)  
-衍生插件：uni H5路由动画插件([路由动画 page-animation升级版](https://ext.dcloud.net.cn/plugin?id=1265))
+name | 链接地址  
+-|-  
+github地址 | [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://github.com/MIchaelJier/Yunyun-Study-for-Mobile) |   
+部署网址 | [http://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/) | 
+小程序和公众号 | 微信搜索“芸云课堂/芸云学堂” | 
+yapi | [转发接口参考文档](http://www.yingjiechen.cn:9000)
+后端接口文档 | [芸云课堂后端接口文档](https://zfroot.top:8081/yun/doc.html) | 
+api转发中间层 | [https://github.com/MIchaelJier/Yunyun-Study-Middle-Api](https://github.com/MIchaelJier/Yunyun-Study-Middle-Api) | 
+衍生插件 | uni H5路由动画插件([路由动画 page-animation升级版](https://ext.dcloud.net.cn/plugin?id=1265)) | 
 
 ### 目前完成进度  
- 1. 首页  
- 2. 我的课程页 (我的微专业 x)
- 3. 个人中心页   
- 4. 搜索页
- 5. 分类页  
- 6. 详情页 
- 7. 选择登录页（第三方登陆 x）
- 8. 账号密码登录页 
- 9. 用户信息页
- 10. 我的订单
- 11. 我的优惠券
- 12. 我的购物车
- 13. 支付页面( 微信/支付宝支付 x) 
- 14. 讲师/机构介绍和精选课程页
- 15. 讲师/机构全部课程页
+ - [x] 首页  
+ - [x] 我的课程页 (~~我的微专业~~)
+ - [x] 个人中心页   
+ - [x] 搜索页
+ - [x] 分类页  
+ - [x] 详情页 
+ - [x] 选择登录页（~~第三方登陆~~）
+ - [x] 账号密码登录页 
+ - [x] 用户信息页
+ - [x] 我的订单
+ - [x] 我的优惠券
+ - [x] 我的购物车
+ - [x] 支付确认页面（支付宝支付、~~微信支付~~）
+ - [x] 支付页
+ - [x] 讲师/机构介绍和精选课程页
+ - [x] 讲师/机构全部课程页
 
 ### 导入 
  1. 打开HBuilder X，文件 -> 从Git导入

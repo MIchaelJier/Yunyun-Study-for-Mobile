@@ -89,7 +89,7 @@
 			 getLeft(){
 				uni.createSelectorQuery().in(this).select('.active').boundingClientRect().exec((res) => {
 					// console.log(res[0].left);
-					if(this.afterRouterAni){
+					if(this.afterRouterAni && res){
 						const left = res[0].left + res[0].width / 2
 						this.lineStyle = {
 							width: `${res[0].width}px`,

@@ -100,8 +100,8 @@
 						chapterId: parseInt(this.allId.chapterId),
 					}
 					const url = this.allId.isStudy 
-									? `/loco/detail/updateAlreadyLearnTime${queryParams(data,true)}` 
-									: `/loco/detail/updateLearnTime${queryParams(data,true)}`
+									? `/last/detail/updateAlreadyLearnTime${queryParams(data,true)}` 
+									: `/last/detail/updateLearnTime${queryParams(data,true)}`
 					this.$request({ 
 					   url,
 					   method: 'POST',	   

@@ -131,7 +131,7 @@
 			}
 		},
 		onLoad() {
-			this.firstRequest('/getHotSearch','hotSearchArr');
+			this.firstRequest('/last/search/getHotSearch','hotSearchArr');
 		},
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
@@ -200,7 +200,7 @@
 					  size = that.add,
 					  current = that.star + 1;
 				return that.$request({
-				   url: '/loco/search/getSearchResult',
+				   url: '/last/search/getSearchResult',
 				   method: 'POST',
 				   header:{
 				   		   'Content-Type':'application/json'
@@ -260,7 +260,7 @@
 				// 用户输入停止0.5s进行联想
 				if(this.inputValue !== '') {
 					this.debounce(()=> {
-						this.firstRequest('/getHotSearch','searchAssArr');
+						this.firstRequest('/last/search/getSearchAss','searchAssArr');
 					},500)
 				}
 			}

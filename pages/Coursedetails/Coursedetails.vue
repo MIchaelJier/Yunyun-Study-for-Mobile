@@ -149,7 +149,7 @@
 					this.$store.commit('cart/addCartOne', this.cartInfo);
 					if(this.cartNum !== oldNum){
 						this.$request({
-						   url: `/loco/cart/addCartToUser?courseId=${this.courseId}`,
+						   url: `/last/cart/addCartToUser?courseId=${this.courseId}`,
 						   method: 'POST',	   
 						   showLoading: true
 						  }).then(res => {
@@ -171,7 +171,7 @@
 			addFreeCourse(){
 				if(this.courseInfo.isFree === 1 && !this.courseInfo.isOwn){
 					this.$request({
-					   url: `/loco/detail/addFreeCourse?courseId=${this.courseId}`,
+					   url: `/last/detail/addFreeCourse?courseId=${this.courseId}`,
 					   method: 'POST',	   
 					   showLoading: true
 					  }).then(res => {
@@ -199,10 +199,10 @@
 			},
 			tabClick(status){
 				if(status == 1 && this.chapterList.length === 0){
-					this.firstRequest('/loco/detail/getChapterlist','chapterList');
+					this.firstRequest('/last/detail/getChapterlist','chapterList');
 				}
 				if(status == 2 && Object.keys(this.commentsInfo).length === 0){
-					this.firstRequest('/loco/detail/getComments','commentsInfo').then(() => {
+					this.firstRequest('/last/detail/getComments','commentsInfo').then(() => {
 						if(this.commentsInfo.comments.length < this.add){
 							this.more = 'noMore'
 						}
@@ -247,7 +247,7 @@
 				Object.assign(this.$data,_initData);
 				this.$refs.tabs.status = 0;
 				setTimeout(() => {
-					this.firstRequest('/loco/detail/getCoursedetail','courseInfo').then(() => {
+					this.firstRequest('/last/detail/getCoursedetail','courseInfo').then(() => {
 						this.$refs.refresh.endAfter() 
 					})
 				},500)
@@ -258,7 +258,7 @@
 			_initData = JSON.parse(JSON.stringify(this.$data));
 			this.getNodeHeight('.player','initTop');
 			this.getNodeHeight('.underBar','underBarHeight');
-			this.firstRequest('/loco/detail/getCoursedetail','courseInfo'); // /getCoursedetail
+			this.firstRequest('/last/detail/getCoursedetail','courseInfo'); // /getCoursedetail
 		},
 		onShow() {
 			uni.pageScrollTo({
@@ -283,12 +283,12 @@
 			if(this.$refs.tabs.status == 2 && this.more !== 'noMore'){
 				this.more = 'loading';
 				this.$request({
-				   url: '/loco/detail/getCommentsMore',
+				   url: '/last/detail/getCommentsMore',
 				   method: 'GET',
 				   data:{
 					   courseId: this.courseId,
-					   start: this.star + 2, //从第二页开始
-					   add: this.add,
+					   current: this.star + 2, //从第二页开始
+					   size: this.add,
 				   }
 				  }).then(res => {
 						if(res.data.status){

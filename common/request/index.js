@@ -11,25 +11,27 @@ import { signout } from '../signOut.js'
  */
 export const request = (params, isCheckToken = true) => {
    // 个人服务器上的模拟接口
-   const mockUrl = "http://47.101.132.224:9000/mock/11"; 
+   const mockUrl = "https://www.yingjiechen.cn/yun-mock/mock/11"; 
    // 测试接口
    const testUrl = "https://zfroot.top:8081/yun" ;
    // 本地转发层接口
    const localUrl = "http://192.168.0.170:3333/yun"
+   // const localUrl = "https://www.yingjiechen.cn/yun-api/yun/"
    // 正式接口
-   const formalUrl = "" ;
+   const formalUrl = "https://www.yingjiechen.cn/yun-api/yun/" ;
    
    let header = {...params.header},
 	   baseUrl = mockUrl;
 	   
 	// console.log(params.url);
 	//
-	if(params.url.search(/test|loco/g) > 0){
+	if(params.url.search(/test|loco|last/g) > 0){
 		if(store.getters['common/IsLogin']) {
 			header["Authorization"] = `Bearer ${store.getters['common/allInfo'].token}`;
 		}
 		if(params.url.includes("/test/"))	baseUrl = testUrl;
 		if(params.url.includes("/loco/"))	baseUrl = localUrl;
+		if(params.url.includes("/last/"))	baseUrl = formalUrl;
 		params.url = params.url.substr(5,);
 	}
 

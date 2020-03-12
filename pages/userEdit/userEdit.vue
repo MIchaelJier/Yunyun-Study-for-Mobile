@@ -157,7 +157,7 @@
 					return new Promise((resolve, reject) => {reject('image is too large')})
 				}
 				return this.$request({
-					url: '/loco/user/setUserProfile',
+					url: '/last/user/setUserProfile',
 					method: 'POST',
 					header: {
 					    "Content-Type": "application/x-www-form-urlencoded"

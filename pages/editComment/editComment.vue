@@ -40,7 +40,7 @@
 					this.toast('评分和评价不能为空')
 				}else{
 					this.$request({
-					   url: `/loco/detail/addComment${queryParams({
+					   url: `/last/detail/addComment${queryParams({
 						   courseId: this.id,
 						   evaluationContent: infoReceive.textareaValue,
 						   evaluationRank: infoReceive.score
@@ -68,7 +68,7 @@
 			if(this.isLogin){
 				this.userInfo = this.$store.getters['common/basicInfo'];
 				this.$request({
-				   url: '/loco/detail/getUserComment',
+				   url: '/last/detail/getUserComment',
 				   method: 'GET',
 				   data:{
 					   courseId:options.id

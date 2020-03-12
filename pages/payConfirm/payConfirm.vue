@@ -188,7 +188,7 @@
 					return;
 				}
 				this.$request({
-				   url: `/loco/pay/createOrder`,
+				   url: `/last/pay/createOrder`,
 				   method: 'POST',
 				   header:{
 				   		'Content-Type':'application/json'

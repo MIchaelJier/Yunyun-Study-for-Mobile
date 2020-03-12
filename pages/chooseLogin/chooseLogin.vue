@@ -90,8 +90,8 @@
 							  loginToWhichMP = 1;
 						//code 给后端换取登录信息
 						that.$request({
-						   url: '/login',
-						   method: 'GET',  //这里包含注册 正式应该为POST
+						   url: '/last/user/wxLogin',
+						   method: 'POST',  //这里包含注册 
 						   data:{
 							   avatarUrl:userInfo.avatarUrl,
 							   nikename:userInfo.nikename,

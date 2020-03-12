@@ -1,30 +1,30 @@
 <template>
 	<view class="page">
-		<yun-refresh @isRefresh='isRefresh' ref="refresh">
-			<!-- header -->
-			<yun-header></yun-header>
-			<!-- swiper -->
-			<yun-swiper :list="swiperList"></yun-swiper>
-			<!-- classify -->
-			<view class="classify">
-				<view class="classify-content">
-						<block v-for="cl in classList" :key="cl.id">
-							 <navigator :url="navigatorUrl(cl.id, cl.url)" hover-class="none" class="class">
-								<!-- <image  :src="cl.picsrc"
-										:style="{opacity: cl.show ? '1': '0'}"
-										@load="showitem(cl.id)"
-								></image> -->
-								<view class="classimage">
-									<yun-image :src="cl.picsrc" radius="50%"></yun-image>
-								</view>
-								<text>{{ cl.titile }}</text>
-							</navigator>
-						</block>
+			<yun-refresh @isRefresh='isRefresh' ref="refresh">
+				<!-- header -->
+				<yun-header></yun-header>
+				<!-- swiper -->
+				<yun-swiper :list="swiperList"></yun-swiper>
+				<!-- classify -->
+				<view class="classify">
+					<view class="classify-content">
+							<block v-for="cl in classList" :key="cl.id">
+								 <navigator :url="navigatorUrl(cl.id, cl.url)" hover-class="none" class="class">
+									<!-- <image  :src="cl.picsrc"
+											:style="{opacity: cl.show ? '1': '0'}"
+											@load="showitem(cl.id)"
+									></image> -->
+									<view class="classimage">
+										<yun-image :src="cl.picsrc" radius="50%"></yun-image>
+									</view>
+									<text>{{ cl.titile }}</text>
+								</navigator>
+							</block>
+					</view>
 				</view>
-			</view>
-			<!-- theme -->
-			<yunThemes :themeList="themeList"></yunThemes>
-		</yun-refresh>
+				<!-- theme -->
+				<yunThemes :themeList="themeList"></yunThemes>
+			</yun-refresh>
 	</view>
 </template>
 
@@ -57,9 +57,9 @@
 					mask: true
 				})
 				return Promise.all([
-						this.firstRequest('/loco/index/advList','swiperList'), 
-						this.firstRequest('/loco/index/getClassList','classList'), 
-						this.firstRequest('/loco/index/list','themeList')
+						this.firstRequest('/last/index/advList','swiperList'), 
+						this.firstRequest('/last/index/getClassList','classList'), 
+						this.firstRequest('/last/index/list','themeList')
 					]).then(res => {
 						uni.hideLoading()
 						return res
@@ -92,16 +92,16 @@
 			}
 		},
 		onLoad() {
-			this.AllfirstRequest();
+			this.AllfirstRequest();		
 		},
-		onPullDownRefresh() {
-			// this.swiperList = this.classList = this.themeList = []
-			setTimeout(() => {
-				this.AllfirstRequest().then( res => {
-					uni.stopPullDownRefresh();
-				})
-			},500)
-		}
+		// onPullDownRefresh() {
+		// 	// this.swiperList = this.classList = this.themeList = []
+		// 	setTimeout(() => {
+		// 		this.AllfirstRequest().then( res => {
+		// 			uni.stopPullDownRefresh();
+		// 		})
+		// 	},500)
+		// }
 	}
 </script>
 

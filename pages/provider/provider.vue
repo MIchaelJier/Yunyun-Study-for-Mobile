@@ -56,9 +56,9 @@
 		methods: {
 			AllfirstRequest(){
 				return Promise.all([
-						this.firstRequest('/getGoodCourseList','goodCourseList'),
-						this.firstRequest('/getProviderSwiperList','swiperList'),
-						this.firstRequest('/getproviderInfo','providerInfo'),
+						this.firstRequest('/last/detail/getGoodCourseList','goodCourseList'),
+						this.firstRequest('/last/detail/getProviderSwiperList','swiperList'),
+						this.firstRequest('/last/detail/getproviderInfo','providerInfo'),
 					]);
 			},
 			//二次封装request

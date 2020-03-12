@@ -11,7 +11,7 @@ import { formatTime } from '../../utils/timeFormat.js'
  */
 export const login = params => {
 	return request({
-	   url: '/loco/user/login',
+	   url: '/last/user/login',
 	   method: 'POST',
 	   data:JSON.stringify(params.loginData),
 	   header:{
@@ -39,7 +39,8 @@ export const login = params => {
 					//登录成功提示
 					uni.showToast({
 					    title: '登录成功,跳转至登录页面',
-						icon:'none'
+						icon: 'none',
+						duration: 1000
 					});
 					//获取 购物车和优惠券信息 
 					store.dispatch('cart/request_cart').then(() => {

@@ -120,7 +120,7 @@
 				}else{
 					// this.$nextTick(() => {...})
 					this.$request({
-					   url: '/loco/detail/getCourseCoupon', // /getCourseCoupon
+					   url: '/last/detail/getCourseCoupon', // /getCourseCoupon
 					   method: 'GET',
 					   data:{
 						   courseId:this.courseInfo.productId,
@@ -162,7 +162,7 @@
 					}
 					// console.log(add)
 					this.$request({
-					   url: `/loco/cart/addCouponToUser?id=${couponId}`,
+					   url: `/last/cart/addCouponToUser?id=${couponId}`,
 					   method: 'POST',	  
 					   showLoading: true
 					  }).then(res => {

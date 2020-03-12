@@ -11,15 +11,15 @@ const cart = {
 	   //重新获取购车车和优惠券数据
        request_cart({ commit,rootGetters }) {
 		   let a = request({
-				   url: '/loco/cart//getCoupon', //获取优惠券
+				   url: '/last/cart//getCoupon', //获取优惠券
 				   method: 'GET',
 		   	   },false),
 		       b = request({
-				   url: '/loco/cart/getCart', //获取购物车
+				   url: '/last/cart/getCart', //获取购物车
 				   method: 'GET',
 		   	   },false),
 			   c = request({
-				   url: '/loco/user/checkToken', //判断token是否有效, 减少中间层的401报错
+				   url: '/last/user/checkToken', //判断token是否有效, 减少中间层的401报错
 				   method: 'GET',
 				   data:{ token: rootGetters['common/allInfo'].token }
 			   },false)

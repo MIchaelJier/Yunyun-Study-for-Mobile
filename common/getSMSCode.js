@@ -12,7 +12,7 @@ export const getSMScode = params => {
 	
 	// 判断V5id的正确性
 	let verifyisTrue = request({
-	   url: '/loco/user/sendSmsVerify',
+	   url: '/last/user/sendSmsVerify',
 	   method: 'POST',
 	   header: {
 	       "Content-Type": "application/x-www-form-urlencoded"
@@ -26,7 +26,7 @@ export const getSMScode = params => {
 	  // 发送 给手机验证码
 	  // 15657812729
 	  let sendSMS = request({
-	   url: '/loco/user/sms',
+	   url: '/last/user/sms',
 	   method: 'GET',
 	   data:{
 		   op: params.op,

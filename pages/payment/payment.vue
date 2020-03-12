@@ -67,7 +67,7 @@
 		methods: {
 			successPay(){
 				this.$request({
-				   url: '/loco/pay/getOrderStatus',
+				   url: '/last/pay/getOrderStatus',
 				   method: 'GET',
 				   data:{
 					   orderId: this.info.orderNo
@@ -88,7 +88,7 @@
 			},
 			cancelPay(){
 				this.$request({
-				   url: `/loco/assets/cancelOrder?orderNo=${this.info.orderNo}`,  
+				   url: `/last/assets/cancelOrder?orderNo=${this.info.orderNo}`,  
 				   method: 'POST',
 				   showLoading: true
 				}).then(res => {
@@ -125,7 +125,7 @@
 				console.log(option)
 				option.accessMode = 3;
 				this.$request({
-				   url: `/loco/pay/unifiedPay${queryParams(option,true)}`,
+				   url: `/last/pay/unifiedPay${queryParams(option,true)}`,
 				   method: 'GET'
 				  }).then(res => {
 					  const qr_code = res.data.alipay_trade_precreate_response.qr_code;

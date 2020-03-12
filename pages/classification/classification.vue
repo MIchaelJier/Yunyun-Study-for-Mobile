@@ -69,9 +69,9 @@
 				this.nowSelect = id;
 			}
 			Promise.all([
-				this.firstRequest('/loco/index/getClassList','tabClass'),
-				this.firstRequest('/loco/index/advList','swiperList'),
-				this.firstRequest('/loco/index/list','bodyClass')
+				this.firstRequest('/last/index/getClassList','tabClass'),
+				this.firstRequest('/last/index/advList','swiperList'),
+				this.firstRequest('/last/index/list','bodyClass')
 			]).then(() => {
 				uni.hideLoading()
 				this.initDone = true
@@ -170,8 +170,8 @@
 					})
 					this.tabMid(this.nowSelect);
 					Promise.all([
-						this.firstRequest('/loco/index/list','bodyClass'),
-						this.firstRequest('/loco/index/advList','swiperList')
+						this.firstRequest('/last/index/list','bodyClass'),
+						this.firstRequest('/last/index/advList','swiperList')
 					]).then(res => {
 						uni.hideLoading()
 					})

@@ -105,7 +105,7 @@
 					productId:this.delProductId,
 				});
 				this.$request({
-				   url: `/loco/cart/delCartToUser?courseId=${this.delProductId}`,
+				   url: `/last/cart/delCartToUser?courseId=${this.delProductId}`,
 				   method: 'POST',   
 				   showLoading: true
 				}).then(res => {

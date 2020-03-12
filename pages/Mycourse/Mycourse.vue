@@ -84,7 +84,7 @@
 		onLoad() {
 			 // _initData = JSON.parse(JSON.stringify(this.$data));
 			if(this.isLogin){
-				this.firstRequest('/loco/assets/getMyCourses','my_courses');
+				this.firstRequest('/last/assets/getMyCourses','my_courses');
 			}else{
 				this.$nextTick(() => {
 					this.$refs.tabs.swiperHeight();
@@ -105,7 +105,7 @@
 				setTimeout(() => {
 					Object.assign(this.$data,this.$options.data());
 					this.$refs.tabs.status = 0;
-					this.firstRequest('/loco/assets/getMyCourses','my_courses').then( res => {
+					this.firstRequest('/last/assets/getMyCourses','my_courses').then( res => {
 						this.$refs.refresh.endAfter() 
 					})
 				}, 500)
@@ -162,6 +162,17 @@
 		onPageScroll(e) {
 			this.scrollTop= e.scrollTop
 		},
+		watch:{
+			isLogin(newVal){
+				if(newVal){
+					this.firstRequest('/last/assets/getMyCourses','my_courses');
+				}else{
+					this.$nextTick(() => {
+						this.$refs.tabs.swiperHeight();
+					})
+				}
+			}
+		}
 	}
 </script>
 

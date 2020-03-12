@@ -7,7 +7,7 @@
 				 >
 			<!-- 畅销 开始 -->
 			<template v-slot:0>
-				<course-list reqUrl="/loco/search/getSearchResult" 
+				<course-list reqUrl="/last/search/getSearchResult" 
 							:providerId="providerId" 
 							reqType="2"
 							@afterReq="swiperHeight()"  
@@ -17,7 +17,7 @@
 			<!-- 畅销 结束-->
 			<!-- 好评 开始 -->			
 			<template v-slot:1>
-				<course-list reqUrl="/loco/search/getSearchResult" 
+				<course-list reqUrl="/last/search/getSearchResult" 
 							:providerId="providerId"
 							reqType="1"
 							 @afterReq="swiperHeight()"  
@@ -27,7 +27,7 @@
 			<!-- 好评 结束 -->			
 			<!-- 最新 开始 -->			
 			<template v-slot:2>
-				<course-list reqUrl="/loco/search/getSearchResult" 
+				<course-list reqUrl="/last/search/getSearchResult" 
 							:providerId="providerId" 
 							reqType="3"
 							@afterReq="swiperHeight()"  

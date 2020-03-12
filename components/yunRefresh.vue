@@ -99,22 +99,23 @@
 			}
 		},
 		mounted() {
-			uni.createIntersectionObserver(this)
-				.relativeToViewport({top: 0 , bottom: 0})
-				.observe('.refresh', (res) => {
-					if(this.change){
-						clearTimeout(this.change);
-					}
-					if(res.intersectionRatio > 0){
-						this.change = setTimeout(() => {
-							this.isShow = true
-						}, 100);
-					}else{
-						this.isShow = false
-					}
-				});
+			this.$nextTick( () => {
+				uni.createIntersectionObserver(this)
+					.relativeToViewport({top: 0 , bottom: 0})
+					.observe('.refresh', (res) => {
+						if(this.change){
+							clearTimeout(this.change);
+						}
+						if(res.intersectionRatio > 0){
+							this.change = setTimeout(() => {
+								this.isShow = true
+							}, 100);
+						}else{
+							this.isShow = false
+						}
+					});
+			})
 		}
-
 	}
 </script>
 

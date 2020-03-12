@@ -53,7 +53,7 @@
 				if(['2', '3'].includes(orderData.type)){
 					modelData.content = '确认删除该订单？'
 					modalFunc = () => {
-						this.firstRequest('/loco/assets/removeOrder',orderData.id).then( () => {
+						this.firstRequest('/last/assets/removeOrder',orderData.id).then( () => {
 							this.orderList = this.orderList.filter( item => item.orderId !== orderData.id);
 							this.$refs.tabs.swiperHeight();
 						})
@@ -61,7 +61,7 @@
 				}else if(orderData.type === '0'){
 					modelData.content = '确认取消该订单？'
 					modalFunc = () => { 
-						this.firstRequest('/loco/assets/cancelOrder',orderData.id).then( () => {
+						this.firstRequest('/last/assets/cancelOrder',orderData.id).then( () => {
 							this.orderList.forEach( item => { item.orderId === orderData.id ? item.orderType = 3 : ''})
 							this.$refs.tabs.swiperHeight();
 						})
@@ -99,7 +99,7 @@
 		onLoad() {
 			let that = this;
 			that.$request({
-			   url: '/loco/assets/getOrder',
+			   url: '/last/assets/getOrder',
 			   method: 'GET',
 			   showLoading: true
 			  }).then(res => {
