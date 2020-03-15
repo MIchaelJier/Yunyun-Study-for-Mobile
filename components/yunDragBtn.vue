@@ -12,11 +12,11 @@
 		>
 		
 			<view class="drag drag-under"
-			:style="{width: isShow ? '450rpx': '40px',transform:`translateX(calc(${left < windowWidth/2 ? '50% - 40rpx' : '40rpx - 50%'}))`}">
-				<view  v-show="isShow" class="drag-under-content" :style="{margin: left < windowWidth/2 ? '0 0 0 80rpx' : '0 80rpx 0 0'}">
-					<block v-for="(item, index) in btnItem" :key="index">
-						<view class="drag-under-content-item" @click="backLastPage">
-							<view class="icon-box"><view :class="item.font"></view></view>
+			:style="{width: isShow ? '480rpx': '80rpx',transform:`translateX(calc(${nearLeft ? '50% - 40rpx' : '40rpx - 50%'}))`}">
+				<view  v-show="showAfterAni" class="drag-under-content" :style="{margin: nearLeft ? '0 0 0 80rpx' : '0 80rpx 0 0'}">
+					<block v-for="(item, index) in realBtnItem" :key="index">
+						<view class="drag-under-content-item" @click="controlPage" :data-url="item.url">
+							<view class="icon-box" :style="{transform: item.rev&&!nearLeft ? 'rotateY(180deg)' : ''}"><view :class="item.font"></view></view>
 							<text>{{ item.name }}</text>
 						</view>
 					</block>
@@ -55,27 +55,32 @@
 				edge: 10,
 				text: '按钮',
 				isShow: false,
+				showAfterAni: false,
 				btnItem: [
-					{font:'ux-ykt-icon-right-arrow', name:'返回'},
-					{font:'ux-ykt-icon-cart2', name:'购物车'},
-					{font:'ux-ykt-icon-account-fill', name:'账号'}
+					{font:'ux-ykt-icon-right-arrow', name:'返回', url:'',rev:true},
+					{font:'ux-ykt-icon-cart2', name:'购物车', url:'/pages/cart/cart'},
+					{font:'ux-ykt-icon-account-fill', name:'账号', url:'/pages/center/center'},
+					{font:'ux-ykt-icon-home-fill', name:'首页', url:'/pages/index/index'}
 				]
 			}
+		},
+		computed:{
+			nearLeft(){
+				return this.left < this.windowWidth/2
+			},
+			realBtnItem(){
+				return this.nearLeft ? this.btnItem.slice().reverse() : this.btnItem
+			},
 		},
 		mounted() {
 			const sys = uni.getSystemInfoSync();
 			
 			this.windowWidth = sys.windowWidth;
 			this.windowHeight = sys.windowHeight;
-			
-			// #ifdef APP-PLUS
-				this.existTabBar && (this.windowHeight -= 50);
-			// #endif
+			this.existTabBar && (this.windowHeight -= 50 - ( sys.windowHeight - sys.safeArea.bottom ) );
 			if (sys.windowTop) {
 				this.windowHeight += sys.windowTop;
 			}
-			console.log(sys)
-			
 			const query = uni.createSelectorQuery().in(this);
 			query.select('#_drag_button').boundingClientRect(data => {
 				this.width = data.width;
@@ -87,10 +92,28 @@
 			}).exec();
 		},
 		methods: {
-			backLastPage() {
-				uni.navigateBack({
-				    delta: 2
-				});
+			controlPage(e) {
+				const url = e.currentTarget.dataset.url;
+				switch (url){
+					case '':
+						uni.navigateBack({
+							delta: 1
+						})
+						break;
+					case '/pages/index/index':
+					case '/pages/Mycourse/Mycourse':
+					case '/pages/center/center':	
+					console.log('switchTab')
+						uni.switchTab({
+							url,
+						});
+						break;
+					default:
+						uni.redirectTo({
+							url,
+						});
+						break;
+				}
 			},
 			click() {
 				this.isShow = !this.isShow;
@@ -140,17 +163,41 @@
 				this.isMove = false;
 				
 				this.$emit('btnTouchend');
-			},
-		}}
+			}
+		},
+		watch:{
+			'isShow'(newVal){
+				let timer = null;
+				if(newVal){
+					timer = setTimeout(() => {
+						this.showAfterAni = true;
+					},200)
+				}else{
+					clearTimeout(timer)
+					this.showAfterAni = false
+				}
+			}
+		}
+		}
 </script>
 
 <style lang="scss">
-	.drag {
+	@mixin flexCenter {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	@mixin circle {
+		position: absolute;
+		background-color: white;
+		transform: rotate(0deg);
+		transition: transform 0.3s;
+		z-index: 9999;
+	}
+	.drag {
+		@include flexCenter;
 		background-color: rgba(0, 0, 0, 0.5);
-		box-shadow: 0 0 6upx rgba(0, 0, 0, 0.4);
+		box-shadow: 0 0 6rpx rgba(0, 0, 0, 0.4);
 		color: $uni-text-color-inverse;
 		width: 80rpx;
 		height: 80rpx;
@@ -163,8 +210,7 @@
 			transition: left .3s ease,top .3s ease;
 		}
 		&-under {
-			transition-property: width, height;
-			transition-duration: 0.2s;
+			transition: all .2s;
 			border-radius:80rpx;
 			width: 80rpx;
 			height: 80rpx;
@@ -178,36 +224,26 @@
 					.icon-box{
 						width: 40rpx;
 						height: 40rpx;
-						display: flex;
-						justify-content: center;
-						align-items: center;
 						font-size: 14px;
+						@include flexCenter
 					}
 				}
 			}
 		}
 		&-circle-v {
-			position: absolute;
+			@include circle;
 			width: 4rpx;
 			height: 40rpx;
 			left: 38rpx;
 			top: 20rpx;
-			background-color: white;
-			transform: rotate(0deg);
-			transition: transform 0.3s;
-			z-index: 9999;
 		}
 		
 		&-circle-h {
-			position: absolute;
+			@include circle;
 			width: 40rpx;
 			height: 4rpx;
 			left: 20rpx;
 			top: 38rpx;
-			background-color: white;
-			transform: rotate(0deg);
-			transition: transform 0.3s;
-			z-index: 9999;
 		}
 		
 		&-circle-active {
