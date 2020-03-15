@@ -11,7 +11,7 @@
 						<view class="course-msg">
 							<text style="font-size: 14px;color: #3C4A55;">{{ course.productName }}</text>
 							<view class="msg-under">
-								<text style="margin: 6rpx 0;" v-if="course.deadlineTime === 0">永久有效</text>
+								<text style="margin: 6rpx 0;" v-if="course.deadlineTime == 0">永久有效</text>
 								<text style="margin: 6rpx 0;" v-else>有效期至{{ course.deadlineTime }}</text>
 								<text>￥{{ course.oldPrice }}</text>
 							</view>

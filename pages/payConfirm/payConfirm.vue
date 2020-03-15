@@ -262,8 +262,20 @@
 			    this.nowCoupon = e.target.value
 			}
 		},
-		onShow() {
-			this.payList = this.$store.getters['cart/getCartPay'];
+		onLoad(options) {
+			if(Object.keys(options).length === 0){
+				this.payList = this.$store.getters['cart/getCartPay'];
+			}else{
+				const { ownerId, ownername, ...list } = options
+				const payItem = {
+					list:[list],
+					ownerDto: {
+						ownerId,
+						ownername
+					}
+				}
+				this.payList = [payItem]
+			}
 			this.userInfo = this.$store.getters['common/basicInfo'];
 		}
 	}

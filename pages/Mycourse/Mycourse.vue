@@ -31,7 +31,9 @@
 					<view class="none" v-if="my_microSpecialty.length === 0">
 					  <image src="../../static/images/newBlank.png" alt="空结果" mode="widthFix"/>
 					  <text class="nodata">未学习微专业哦~</text>
-					  <button type="primary" class="none-btn" >去发现精彩微专业</button>
+					  <navigator url="/pages/index/index" hover-class="none" open-type="switchTab">
+						<button type="primary" class="none-btn" >去发现精彩微专业</button>
+					  </navigator>
 					</view>	  
 					<view v-else :style="{paddingBottom:bottomBarHeight + 'px'}">
 						<view v-for="my in my_microSpecialty" :key="my.id">

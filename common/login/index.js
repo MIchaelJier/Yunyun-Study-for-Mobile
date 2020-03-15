@@ -40,12 +40,11 @@ export const login = params => {
 					uni.showToast({
 					    title: '登录成功,跳转至登录页面',
 						icon: 'none',
-						duration: 1000
+						duration: 900
 					});
 					//获取 购物车和优惠券信息 
 					store.dispatch('cart/request_cart').then(() => {
 						setTimeout( () => {
-						    uni.hideToast();
 							//跳转到首页
 							uni.switchTab({
 								url: '/pages/index/index'

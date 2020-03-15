@@ -36,6 +36,9 @@
 				font-size: 12px;
 				padding-bottom: 10rpx;
 			}
+			.underBar-left-hover {
+				color: #70788C
+			}
 		.underBar-right {
 			height: 96rpx;
 			border-radius: 400rpx;
@@ -46,6 +49,9 @@
 			flex: 1;
 			justify-content: center;
 			align-items: center;
+		}
+		.underBar-right-hover {
+			background: #ea6d3f;
 		}
 /* 优惠券弹出层 开始 */
 	.couponsPopup {

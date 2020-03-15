@@ -1,6 +1,7 @@
 <template>
 	<view class="page" :class="courseInfo.isOwn ? 'xBottom' : ''">
 	<!-- <view> -->
+		<yun-drag-btn isDock :existTabBar="!courseInfo.isOwn"></yun-drag-btn>
 		<yun-refresh @isRefresh='isRefresh' ref="refresh">
 			<!-- 视频 开始 -->
 			<view class="player">
@@ -46,11 +47,11 @@
 					<view class="underBar-right" @click="addFreeCourse"><text>免费加入学习</text></view>
 				</block>
 				<block v-else>
-					<view class="underBar-left text-balck" @click="addCart">
+					<view class="underBar-left text-balck" @click="addCart" hover-class="underBar-left-hover">
 						<view class="ux-icon ux-ykt-icon-new-cart"></view>
 						<text>加入购物车</text>
 					</view>
-					<view class="underBar-right">
+					<view class="underBar-right" @click="addPay" hover-class="underBar-right-hover">
 						<text>加入学习</text>
 					</view>
 				</block>
@@ -91,6 +92,7 @@
 	import directory from './directory/directory.vue';
 	import comment from './comment/comment.vue';
 	import myVideo from './video/myVideo.vue';
+	import { queryParams } from '@/utils/myMath.js';
 	let _initData = {};
 	export default {
 		data() {
@@ -235,6 +237,11 @@
 			},
 			addCoupon(coupon){
 				 this.$refs.introduction.addCoupon(coupon)
+			},
+			addPay(){
+				uni.redirectTo({
+					url: `/pages/payConfirm/payConfirm${queryParams(this.cartInfo,true)}`
+				});
 			},
 			getNodeHeight(className,name){
 				this.$nextTick(() => {
