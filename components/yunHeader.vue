@@ -2,9 +2,11 @@
 	<view class="pageHead">
 		<view class="header-left">
 			<view class="header-logo"></view>
+			<!-- #ifndef H5 -->
 			<view class="header-span">
 				<text>App查看</text>
 			</view>
+			<!-- #endif -->
 		</view>
 		<navigator url="../../pages/search/search" hover-class="none">
 			<view class="header-search"></view>

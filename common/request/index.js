@@ -49,6 +49,7 @@ export const request = (params, isCheckToken = true) => {
 			header,
 			url:baseUrl + params.url,
 			success:(res) => {
+				params.showLoading ? uni.hideLoading() : '' ;
 				if(res.data.errmsg === 'Error: Request failed with status code 401' && isCheckToken){
 					signout();
 					uni.showToast({
@@ -60,11 +61,11 @@ export const request = (params, isCheckToken = true) => {
 						url:'/pages/chooseLogin/chooseLogin'
 					})
 				}
-				params.showLoading ? uni.hideLoading() : '' ;
 				console.log(res.data); 
 				resolve(res);
 			},
 			fail:(err) => {
+				params.showLoading ? uni.hideLoading() : '' ;
 				reject(err)
 			} 
 		}

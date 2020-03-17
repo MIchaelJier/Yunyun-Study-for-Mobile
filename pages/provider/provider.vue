@@ -1,5 +1,6 @@
 <template>
 	<view class="page xBottom">
+		<yun-drag-btn isDock></yun-drag-btn>
 		<view class="mainInfo">
 			<view class="mainInfo-up">
 				<view class="up-left">

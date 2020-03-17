@@ -103,11 +103,14 @@
 				 this.$nextTick(() => {
 					 uni.createSelectorQuery().in(this).selectAll('.swiperflag').boundingClientRect((res) => {
 						const slot = res[this.status],
-						      { windowHeight , statusBarHeight} = uni.getSystemInfoSync();	
+						      { windowHeight , statusBarHeight ,safeArea} = uni.getSystemInfoSync();	
 							  // console.log({slot,windowHeight})
 					 	if(slot.top + slot.height < windowHeight - this.bottomBarHeight && slot.top >= 0){
 							// slot长度小于屏幕高度
 							this.contentHeight = windowHeight - slot.top - this.bottomBarHeight;
+							// 去除全面屏底部安全非安全区域
+							this.contentHeight -= safeArea.bottom - safeArea.height;
+
 						}else{
 							this.contentHeight = res[this.status].height
 						}

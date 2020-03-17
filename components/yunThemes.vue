@@ -21,7 +21,7 @@
 									  v-if="co.size === 0"
 								>
 									<view class="themes-item-content-big">
-										<yun-image :src="co.picsrc"></yun-image>
+										<yun-image :src="co.picsrc" radius="5"></yun-image>
 									</view>
 								</view>
 								<!-- co.size ===  1   一行两个-->

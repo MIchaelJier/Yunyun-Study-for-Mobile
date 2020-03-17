@@ -39,6 +39,10 @@
 			existTabBar:{
 				type: Boolean,
 				default: false
+			},
+			tabBarHeight: {
+				type: [String,Number],
+				default: 50
 			}
 		},
 		data() {
@@ -74,10 +78,12 @@
 		},
 		mounted() {
 			const sys = uni.getSystemInfoSync();
-			
+			// console.log(sys)
 			this.windowWidth = sys.windowWidth;
 			this.windowHeight = sys.windowHeight;
-			this.existTabBar && (this.windowHeight -= 50 - ( sys.windowHeight - sys.safeArea.bottom ) );
+			// 是否有tabbar
+			this.existTabBar && (this.windowHeight -= this.tabBarHeight + (sys.safeArea.bottom - sys.safeArea.height));
+
 			if (sys.windowTop) {
 				this.windowHeight += sys.windowTop;
 			}

@@ -88,7 +88,7 @@
 					this.updateScrollChange();
 					uni.createSelectorQuery().in(this).select('.tui-sticky-header').boundingClientRect((res) => {
 						if (res) {
-							console.log(res,`tui-sticky-header's msg`)
+							// console.log(res,`tui-sticky-header's msg`)
 							this.holderHeight = res.height 
 						}
 					}).exec()

@@ -1,5 +1,6 @@
 <template>
 	<view class="pagex Bottom">
+		<yun-drag-btn isDock></yun-drag-btn>
 		<yun-tab :tabs="tabs"
 				 :scrollTop="scrollTop" 
 				 @tabClick="tabClick" 
