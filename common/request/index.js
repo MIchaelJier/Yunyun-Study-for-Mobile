@@ -34,7 +34,6 @@ export const request = (params, isCheckToken = true) => {
 		if(params.url.includes("/last/"))	baseUrl = formalUrl;
 		params.url = params.url.substr(5,);
 	}
-
 	// params.showLoading = true
 	if (params.showLoading){
 	 	uni.showLoading({

@@ -2,7 +2,7 @@
 	<view class="pageHead">
 		<view class="header-left">
 			<view class="header-logo"></view>
-			<!-- #ifndef H5 -->
+			<!-- #ifdef H5 -->
 			<view class="header-span">
 				<text>App查看</text>
 			</view>

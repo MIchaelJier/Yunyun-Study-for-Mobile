@@ -49,6 +49,9 @@
 					}
 				}
 			},
+			isLogin(){
+				return this.$store.getters['common/IsLogin']
+			}
 		},
 		methods: {
 			AllfirstRequest(){
@@ -102,6 +105,11 @@
 		// 		})
 		// 	},500)
 		// }
+		watch:{
+			isLogin(){
+				this.AllfirstRequest();		
+			}
+		}
 	}
 </script>
 

@@ -56,11 +56,18 @@
 		},
 		methods: {
 			AllfirstRequest(){
+				uni.showLoading({
+					title: '加载中',
+					mask: true
+				})
 				return Promise.all([
-						this.firstRequest('/last/detail/getGoodCourseList','goodCourseList'),
-						this.firstRequest('/last/detail/getProviderSwiperList','swiperList'),
-						this.firstRequest('/last/detail/getproviderInfo','providerInfo'),
-					]);
+						this.firstRequest('/last/provider/getGoodCourseList','goodCourseList'),
+						this.firstRequest('/last/provider/getProviderSwiperList','swiperList'),
+						this.firstRequest('/last/provider/getproviderInfo','providerInfo'),
+					]).then(res => {
+						uni.hideLoading();
+						return res 
+					})
 			},
 			//二次封装request
 			firstRequest(u,d){
@@ -69,8 +76,11 @@
 					that.$request({
 					   url: u,
 					   method: 'GET',
+					   data:{
+						   lecturerUserNo: this.providerId
+					   }
 					  }).then(res => {
-							if(res.data.status === '200'){
+							if(res.data.status){
 								that[d] = res.data.data;
 								resolve(res.data.data);
 							}

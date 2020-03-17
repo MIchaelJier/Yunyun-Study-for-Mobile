@@ -123,6 +123,7 @@
 				this.$emit('input',false)
 			},
 			tapCancel(){
+				console.log(this.mData.content)
 				this.$emit('cancel')
 				this.$emit('input',false)
 			},

@@ -199,7 +199,16 @@
 					})
 				  }).then(res => {
 						if(res.data.status ? res.data.data.orderNo : false){
-							
+							// 删除购物车数据
+							this.payList.forEach( item => {
+								item.list.forEach( inner => {
+									this.$store.commit('cart/delCartOne',{
+										ownerId: item.ownerDto.ownerId,
+										productId: inner.productId,
+									});
+								})
+							})
+							//带参数跳转至支付页面
 							let OrderNo = res.data.data.orderNo;
 							uni.navigateTo({
 								url:`/pages/payment/payment?orderNo=${OrderNo}&pricePaid=${this.payPrice}&payType=${this.nowmethods + 1}`

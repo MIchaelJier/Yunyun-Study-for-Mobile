@@ -49,8 +49,7 @@
 			modalShow(orderData){
 				let  modelData = {title:'提示',content:'',cancelText:'取消'},
 					 modalFunc = () => {};
-				this.value = !this.value;
-				if(['2', '3'].includes(orderData.type)){
+				if(['2', '3',2,3].includes(orderData.type)){
 					modelData.content = '确认删除该订单？'
 					modalFunc = () => {
 						this.firstRequest('/last/assets/removeOrder',orderData.id).then( () => {
@@ -58,7 +57,7 @@
 							this.$refs.tabs.swiperHeight();
 						})
 					}
-				}else if(orderData.type === '0'){
+				}else if(orderData.type === '0' || orderData.type === 0){
 					modelData.content = '确认取消该订单？'
 					modalFunc = () => { 
 						this.firstRequest('/last/assets/cancelOrder',orderData.id).then( () => {
@@ -70,6 +69,7 @@
 				this.modelData = modelData;
 				this.onConfirm = modalFunc;
 				this.cancel = () => {console.log('用户点击取消')}
+				this.value = !this.value;
 			},
 			// 二次封装请求
 			firstRequest(u,id){

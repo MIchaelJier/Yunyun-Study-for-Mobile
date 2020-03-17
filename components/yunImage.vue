@@ -56,6 +56,7 @@
 			},
 			//监控
 			lazyObserve(){
+			this.$nextTick( () => {
 				observer = uni.createIntersectionObserver(this);
 				observer.relativeToViewport({top: 0 , bottom: 0}).observe('.yun-image', (res) => {
 					// #ifdef H5 
@@ -68,6 +69,7 @@
 						this.show = res.intersectionRatio > 0 
 					// #endif
 					
+				})
 				})
 			}
 		},
