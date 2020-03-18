@@ -34,9 +34,9 @@
 									  </view>
 									  </image>
 									  <text class="themes-item-content-name" v-if="co.name">{{ co.name }}</text>
-									  <view class="themes-item-content-num" v-if="co.star&&co.learned">
-									  	<view class="num-star">{{ co.star }}星</view>
-									  	<view style="color: #8B8F97">{{ co.learned }}人学过</view>
+									  <view class="themes-item-content-num">
+									  	<view class="num-star" v-if="co.star !== null">{{ co.star }}星</view>
+									  	<view style="color: #8B8F97" v-if="co.learned !== null" >{{ co.learned }}人学过</view>
 									  </view>
 									  <view class="themes-item-content-price">
 										<view class="price-red" v-if="co.nprice === '0.00'|| co.nprice === '0.00'">免费</view>

@@ -3,9 +3,11 @@
 		<view class="header-left">
 			<view class="header-logo"></view>
 			<!-- #ifdef H5 -->
-			<view class="header-span">
-				<text>App查看</text>
-			</view>
+			<navigator url="/pages/appDownload/appDownload" hover-class="none">
+				<view class="header-span">
+					<text>App查看</text>
+				</view>
+			</navigator>
 			<!-- #endif -->
 		</view>
 		<navigator url="../../pages/search/search" hover-class="none">

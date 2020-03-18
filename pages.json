@@ -175,6 +175,14 @@
             		}
             }
         }
+        ,{
+            "path" : "pages/appDownload/appDownload",
+            "style" : {
+            	"app-plus":{
+            		"titleNView":false
+            		}
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
