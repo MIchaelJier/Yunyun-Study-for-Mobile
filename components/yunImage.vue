@@ -1,6 +1,6 @@
 <template>
 	<view class="yun-image">
-		<image  :src="src"
+		<image  :src="passSrc"
 				:style="{opacity: show ? '1': '0',transition:`opacity ${delay}s`,borderRadius:trueRadius}"
 				:mode="mode"
 				@load="showitem"
@@ -26,6 +26,12 @@
 					return this.radius
 				}
 				return (this.radius + 'px')
+			},
+			passSrc(){
+				if(this.src.includes('.jpg')){
+					return `${this.src}${ this.src.includes('.jpg?') ? '&' : '?' }x-oss-process=image/format,jpg`	
+				}
+				return this.src
 			}
 		},
 		props:{

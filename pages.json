@@ -29,6 +29,7 @@
             "path" : "pages/phoneLogin/phoneLogin",
 			"navigationBarTitleText": "登录",
             "style" : {
+				"disableScroll":true,
             	"app-plus":{
             		"titleNView":false
             		}
@@ -152,6 +153,7 @@
             "path" : "pages/register/register",
             "navigationBarTitleText": "注册",
             "style" : {
+				"disableScroll":true,
             	"app-plus":{
             		"titleNView":false
             		}

@@ -107,9 +107,11 @@
 				setTimeout(() => {
 					Object.assign(this.$data,this.$options.data());
 					this.$refs.tabs.status = 0;
-					this.firstRequest('/last/assets/getMyCourses','my_courses').then( res => {
+					if(this.isLogin){
+						this.firstRequest('/last/assets/getMyCourses','my_courses').then( res => {this.$refs.refresh.endAfter()})
+					}else{
 						this.$refs.refresh.endAfter() 
-					})
+					}
 				}, 500)
 			},
 			  //二次封装request
@@ -167,8 +169,12 @@
 		watch:{
 			isLogin(newVal){
 				if(newVal){
-					this.firstRequest('/last/assets/getMyCourses','my_courses');
+					setTimeout(() => {
+						this.firstRequest('/last/assets/getMyCourses','my_courses')
+						.catch(err => {this.$refs.tabs.swiperHeight();});
+					},1000)
 				}else{
+					Object.assign(this.$data,this.$options.data());
 					this.$nextTick(() => {
 						this.$refs.tabs.swiperHeight();
 					})

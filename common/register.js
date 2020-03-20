@@ -22,7 +22,7 @@ export const register = params => {
 		   code : params.vcode,
 		   verifyId : params.verifyId 
 	   }
-	  }).then(res => {
+	  },false).then(res => {
 		  if(res.data.status){
 			params.correctBack();
 			// this.tipText = '';

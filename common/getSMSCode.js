@@ -32,7 +32,7 @@ export const getSMScode = params => {
 		   op: params.op,
 		   phone : params.userName,
 	   }
-	  })
+	  },false)
 	  
 	  verifyisTrue
 	  .then(res => {

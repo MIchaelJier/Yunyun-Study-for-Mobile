@@ -18,7 +18,7 @@ export const request = (params, isCheckToken = true) => {
    const localUrl = "http://192.168.0.170:3333/yun"
    // const localUrl = "https://www.yingjiechen.cn/yun-api/yun/"
    // 正式接口
-   const formalUrl = "https://www.yingjiechen.cn/yun-api/yun/" ;
+   const formalUrl = "https://www.yingjiechen.cn/yun-api/yun" ;
    
    let header = {...params.header},
 	   baseUrl = mockUrl;
@@ -65,6 +65,11 @@ export const request = (params, isCheckToken = true) => {
 			},
 			fail:(err) => {
 				params.showLoading ? uni.hideLoading() : '' ;
+				uni.showToast({
+					title:'请求错误',
+					icon:'none',
+					duration:500
+				})
 				reject(err)
 			} 
 		}

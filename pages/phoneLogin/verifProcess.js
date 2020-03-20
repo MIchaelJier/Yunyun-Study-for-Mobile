@@ -80,7 +80,7 @@ export const loginProcess = new Map([
 					console.log('登录成功');
 				},
 				wrongBack: () => {
-					that.tipText = '账号或密码错误'
+					that.tipText = this.nowWay === 0 ? '账号或密码错误': '账号或验证码错误'
 				}
 			})
 		}else if(type === 0){

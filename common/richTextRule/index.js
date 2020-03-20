@@ -54,6 +54,12 @@ export const richTextRule = html => {
 	});
 	html = html.replace(/<pre/gi, '<p style="font-size:1em; margin:12px 0; line-height:1.2em; background:#F6F7F8; border-radius:5px; padding:8px 4%; width:92%;"');
 	html = html.replace(/<\/pre/gi,"</p");
+	html = html.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+		if(capture.includes('.jpg')){
+			return `<img src="${ capture }${ capture.includes('.jpg?') ? '&' : '?' }x-oss-process=image/format,jpg"> </img>`	
+		}
+		return `<img src="${capture}></img>`
+	});
 	for(let i = 0; i < GRT.length; i++){
 		graceRichTextReg = new RegExp('<'+GRT[i][0]+'>|<'+GRT[i][0]+' (.*?)>', 'gi');
 		html = html.replace(graceRichTextReg , function(word){

@@ -5,7 +5,7 @@
 					<text class="themes-item-title" 
 						 :style="{'font-weight':boldTitle ? 'bold':''}"
 					>{{th.title}}</text>
-					<view v-if="th.content.length === 0" class="themes-item-none">暂无课程</view>
+					<view v-if="mobileList(th.content).length === 0" class="themes-item-none">暂无课程</view>
 					<view v-else class="themes-item-contents">
 						<block v-for="co in th.content" 
 							   :key="co.contentid"
@@ -13,7 +13,7 @@
 							<!-- co.size ===  0   一行只有大封面-->
 							<!-- co.size ===  1   一行两个-->
 							<!-- co.size ===  2   一行一个-->
-							<view class="themes-item-main">
+							<view class="themes-item-main" v-if="co.isShowInapp === 1">
 								<!-- co.size ===  0   一行只有大封面-->
 								<view class="themes-item-content" 
 									  @click="enter(co.contentid)"
@@ -91,6 +91,11 @@
 
 			};
 		},
+		computed:{
+			mobileList(){
+				return list => list.filter( item => item.isShowInapp === 1)
+			}
+		},
 		components: {
 			yunBox,
 			yunImage
@@ -145,7 +150,7 @@
 			background: #fff;
 			margin: 30rpx 0 0 0 ;
 			overflow: hidden;
-			
+				
 			&-title {
 				font-size: 17px;
 			}
@@ -166,6 +171,11 @@
 						.boxPosition {
 							width: 100vw;
 							margin-left: -30rpx;
+						}
+						&:last-child {
+							.themes-item-content-big {
+								margin-bottom: 20rpx;
+							}
 						}
 						&-big {
 							width: calc(100vw - 60rpx);

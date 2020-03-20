@@ -72,11 +72,11 @@
 										<view class="item-up-l">{{ item.learned }}人学过</view>
 									</view>
 									<view class="item-down">
+										<view class="item-down-n" v-if="item.oprice != 0 && item.nprice != ''">¥{{ item.nprice }}</view>
 										<view class="item-down-o" v-if="item.oprice && item.oprice != ''">
 											<view v-if="item.oprice == 0">免费</view>
 											<view v-else>¥{{ item.oprice }}</view>
 										</view>
-										<view class="item-down-n" v-if="item.oprice != 0 && item.nprice != ''">¥{{ item.nprice }}</view>
 									</view>
 									<view class="item-vip" v-if="item.vipprice && item.vipprice != ''">
 										<view class="item-vip-icon">vip会员</view>

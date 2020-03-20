@@ -153,14 +153,14 @@
 	.item-up-s {
 		padding: 0 20rpx 0 10rpx;
 	}
-	.item-up-l{
+	/* .item-up-l{
 		
-	}
-	.item-down-o {
+	} */
+	.item-down-n {
 		color: #333;
 		font-size: 15px;
 	}
-	.item-down-n {
+	.item-down-o {
 		padding-left: 20rpx;
 		text-decoration:line-through;
 	}

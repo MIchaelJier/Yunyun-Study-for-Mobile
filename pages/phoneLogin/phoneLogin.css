@@ -1,3 +1,8 @@
+/* #ifdef H5 */
+.page {
+	overflow: hidden;
+}
+/* #endif */
 .login-form {
 	margin: 0 40rpx;
 	display: flex;

@@ -88,7 +88,7 @@ V5   | 客户端识别及验证控件 | [http://help.verify5.com](http://help.ve
 name | 链接地址  
 -|-  
 github地址 | [https://github.com/MIchaelJier/Yunyun-Study-for-Mobile](https://github.com/MIchaelJier/Yunyun-Study-for-Mobile) |   
-部署网址 | [http://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/) | 
+部署网址 | [https://www.yingjiechen.cn/yun/](http://www.yingjiechen.cn/yun/) | 
 小程序和公众号 | 微信搜索“芸云课堂/芸云学堂” | 
 yapi | [转发接口参考文档](http://www.yingjiechen.cn:9000)
 后端接口文档 | [芸云课堂后端接口文档](https://zfroot.top:8081/yun/doc.html) | 

@@ -107,7 +107,9 @@
 		// }
 		watch:{
 			isLogin(){
-				this.AllfirstRequest();		
+				setTimeout(() => {
+					this.AllfirstRequest();
+				}, 1000);
 			}
 		}
 	}

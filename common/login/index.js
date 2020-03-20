@@ -18,7 +18,7 @@ export const login = params => {
 		   'Content-Type':'application/json'
 	   },
 	   showLoading:true,
-	  }).then(res => { 
+	  },false).then(res => { 
 			if(res.data.status ? res.data.data['truepass'] :false){
 					let userInfo = res.data.data;
 					params.correctBack();

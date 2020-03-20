@@ -7,15 +7,15 @@
 			</template>
 			<template v-slot:1>
 				<!-- 待支付 -->
-				<order-item :orderList="type0list" :name="tabs[1]"></order-item>
+				<order-item :orderList="type0list" :name="tabs[1]" @modalShow="modalShow"></order-item>
 			</template>
 			<template v-slot:2>
 				<!-- 交易成功 -->
-				<order-item :orderList="type1list" :name="tabs[2]"></order-item>
+				<order-item :orderList="type1list" :name="tabs[2]" @modalShow="modalShow"></order-item>
 			</template>
 			<template v-slot:3>
 				<!-- 交易关闭 -->
-				<order-item :orderList="type2list" :name="tabs[3]"></order-item>
+				<order-item :orderList="type2list" :name="tabs[3]" @modalShow="modalShow"></order-item>
 			</template>
 		</yun-tab>
 		<!-- 拟态框 -->

@@ -147,8 +147,8 @@
 			addCoupon(coupon){
 				if(!coupon.isHave){
 					coupon.isHave = true;
-					let {amount,consumingThreshold,couponId,isVip,ownerId,creatorName,creatorUrl,targetId,targetName,targetType} = coupon;
-					let add = {amount,consumingThreshold,couponId,isVip,ownerId,targetId,creatorName,targetName,targetType};
+					let 	  {amount,consumingThreshold,couponId,isVip,ownerId,creatorName,creatorUrl,targetId,targetName,targetType} = coupon;
+					let add = {amount,consumingThreshold,couponId,isVip,ownerId,targetId,creatorName,targetName,targetType,creatorUrl};
 					add.used = false;
 					if(coupon.saveTime){
 						add.createTime = formatTime(new Date(),'.').substr(0, 16);
