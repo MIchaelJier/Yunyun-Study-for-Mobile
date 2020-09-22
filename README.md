@@ -94,6 +94,7 @@ yapi | [转发接口参考文档](http://www.yingjiechen.cn:9000)
 后端接口文档 | [芸云课堂后端接口文档](https://zfroot.top:8081/yun/doc.html) | 
 api转发中间层 | [https://github.com/MIchaelJier/Yunyun-Study-Middle-Api](https://github.com/MIchaelJier/Yunyun-Study-Middle-Api) | 
 衍生插件 | uni H5路由动画插件([路由动画 page-animation升级版](https://ext.dcloud.net.cn/plugin?id=1265)) | 
+演示视频 | [https://www.youtube.com/watch?v=tIwCVx5Bhmk](https://www.youtube.com/watch?v=tIwCVx5Bhmk) |
 
 ### 目前完成进度  
  - [x] 首页  
